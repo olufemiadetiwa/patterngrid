@@ -14,13 +14,10 @@
     return document.body.getAttribute('data-form-endpoint') || '';
   }
 
-  var SERVICE_NAMES = {
-    'data-ai-strategy': 'Data & AI Strategy',
-    'data-engineering': 'Data Engineering',
-    'business-intelligence': 'Business Intelligence',
-    'ai-automation': 'AI & Automation',
-    'capability-building': 'Capability Building'
-  };
+  /* One name per service, taken from the content model so the form can never
+     drift from the navigation. */
+  var SERVICE_NAMES = {};
+  (PG.services || []).forEach(function (s) { SERVICE_NAMES[s.slug] = s.title; });
 
   function summary() {
     try { return sessionStorage.getItem(KEY_SUMMARY) || ''; } catch (e) { return ''; }
@@ -92,16 +89,16 @@
           <div class="wrap" data-reveal="rise">
           <div class="contact-grid">
             <div class="contact-aside">
-              <h2 class="h2-sm" style="max-width:16ch">Tell us about your project.</h2>
+              <h2 class="h2-sm" style="max-width:16ch">Tell us what you want to improve.</h2>
               <div class="stack stack-16">
                 <span class="label-caps" style="color:rgba(255,255,255,.6)">WHAT HAPPENS NEXT</span>
                 <div class="steps">
-                  <span class="n">01</span><span>We read your enquiry and the reports or systems you mention.</span>
-                  <span class="n">02</span><span>We reply to arrange a conversation about the problem and a useful next step.</span>
-                  <span class="n">03</span><span>No sensitive company data is needed at this stage.</span>
+                  <span class="n">01</span><span>We read your enquiry.</span>
+                  <span class="n">02</span><span>We reply to arrange a short conversation about the problem.</span>
+                  <span class="n">03</span><span>We suggest a sensible next step, which may be nothing more than that conversation.</span>
                 </div>
               </div>
-              <p class="fine">Enquiries are read by the consultant who would work with you. You can also start with the readiness assessment and bring the result.</p>
+              <p class="fine">You do not need to share sensitive company data at this stage. If you prefer, take the readiness assessment first and send the result with your enquiry.</p>
             </div>
 
             <form class="form form-lined" novalidate aria-describedby="privacy-note" data-form>
@@ -120,7 +117,7 @@
                 })}
                 ${field('email', 'Email address', {
                   required: true,
-                  control: '<input id="f-email" name="email" type="email" autocomplete="email" aria-describedby="e-email">'
+                  control: '<input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" autocapitalize="off" aria-describedby="e-email">'
                 })}
                 ${field('organisation', 'Organisation', {
                   required: true,
@@ -131,7 +128,7 @@
                 })}
               </div>
 
-              ${field('service', 'Service interest', {
+              ${field('service', 'Service you are interested in', {
                 control:
                   '<select id="f-service" name="service">' +
                   '<option value="">Select an option</option>' +
@@ -145,25 +142,25 @@
               ${field('message', 'What would you like to improve?', {
                 required: true,
                 control:
-                  '<textarea id="f-message" name="message" rows="6" class="tall" aria-describedby="e-message" ' +
-                  'placeholder="Where does information break down, or which decision is hard to evaluate?">' +
+                  '<textarea id="f-message" name="message" rows="6" class="tall" autocomplete="off" aria-describedby="e-message" ' +
+                  'placeholder="For example: two reports give different revenue figures, or the weekly stock report takes a day to build.">' +
                   C.esc(initialMessage) + '</textarea>'
               })}
 
               ${field('process', 'How does this work today?', {
                 control:
-                  '<textarea id="f-process" name="process" rows="3" ' +
+                  '<textarea id="f-process" name="process" rows="3" autocomplete="off" ' +
                   'placeholder="e.g. Finance exports three reports on Monday and reconciles them by hand"></textarea>'
               })}
 
               ${field('time', 'Preferred meeting time', {
                 hint: timezone(),
-                control: '<input id="f-time" name="time" type="text" placeholder="e.g. weekday mornings">'
+                control: '<input id="f-time" name="time" type="text" autocomplete="off" placeholder="e.g. weekday mornings">'
               })}
 
               <label class="check">
                 <input type="checkbox" name="optin">
-                <span>Occasionally send me Pattern Grid Insights by email. Optional.</span>
+                <span>Send me occasional Pattern Grid articles by email (optional).</span>
               </label>
 
               <div class="hp" aria-hidden="true">
@@ -172,7 +169,7 @@
               </div>
 
               <div class="stack stack-12" style="margin-top:4px">
-                <button type="submit" class="btn" data-submit>Request a Consultation</button>
+                <button type="submit" class="btn" data-submit>Send my enquiry</button>
                 <p id="privacy-note" class="fine">We will use these details to respond to your enquiry. <a href="/privacy">Read our Privacy Notice.</a></p>
                 <p class="notice" role="status" data-status hidden></p>
               </div>
@@ -262,8 +259,8 @@
           // No destination configured yet — behave exactly as the prototype did.
           setTimeout(function () {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Request a Consultation';
-            say('This site is not yet connected to a form destination, so nothing was sent. Your details are kept in the form. Once the approved destination is configured, this message becomes: “Thank you. Your enquiry has been received. We will review the details and contact you about the next step.”');
+            submitBtn.textContent = 'Send my enquiry';
+            say('We could not send this yet: the enquiry form is not connected to a mailbox. Your details are still in the form. Please copy them into an email to the address in the footer, or try again later.');
           }, 700);
           return;
         }
@@ -278,7 +275,7 @@
           try { sessionStorage.removeItem(KEY_SUMMARY); } catch (err) { /* ignore */ }
           say('Thank you. Your enquiry has been received. We will review the details and contact you about the next step.');
         }).catch(function () {
-          say('Your enquiry could not be sent just now. Please try again, or email us directly and we will pick it up.');
+          say('Your enquiry could not be sent just now. Please try again, or use the email address in the footer.');
         }).finally(function () {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Request a Consultation';

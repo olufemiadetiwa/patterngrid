@@ -12,8 +12,8 @@
         <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
           <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">Have a similar question in your business?</h2>
           <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact">Book a Data &amp; AI Consultation</a>
-            <a class="arrow" href="/assessment">Check your readiness <span class="chev" aria-hidden="true">→</span></a>
+            <a class="btn" href="/contact">Book a consultation</a>
+            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
@@ -25,7 +25,7 @@
 
       <section style="padding:0 0 clamp(40px,5vw,72px)">
         <div class="wrap" data-reveal="rise">
-          <p class="small muted" style="max-width:52em">The items below are illustrative scenarios built to show our thinking. They are not client projects and carry no performance claims. Verified client work will be labelled separately when published.</p>
+          <p class="small muted" style="max-width:36em">Everything below is an illustrative scenario built with sample data to show how we think. None is a client project and none claims a result. Client work will be labelled as such when we publish it.</p>
         </div>
       </section>
 
@@ -40,7 +40,7 @@
                   <span class="label-caps">ILLUSTRATIVE SCENARIO · ${w.sector.toUpperCase()}</span>
                   <span style="font-size:clamp(24px,2.2vw,34px);font-weight:600;color:var(--navy);line-height:1.2">${w.title}</span>
                   <span class="body" style="color:var(--muted);font-size:17px;line-height:1.5">${w.summary}</span>
-                  <span class="arrow" style="font-size:15px;color:var(--teal);margin-top:4px">Explore the scenario <span class="chev" aria-hidden="true">→</span></span>
+                  <span class="arrow" style="font-size:15px;color:var(--teal);margin-top:4px">Read the scenario <span class="chev" aria-hidden="true">→</span></span>
                 </div>
               </a>`;
           })}
@@ -102,16 +102,16 @@
             </div>
             <div class="stack stack-10">
               <span class="eyebrow eyebrow-dark">Approach</span>
-              <span style="font-size:14px;line-height:1.6">${(item.approach || []).join(' → ')}</span>
+              <span style="font-size:14px;line-height:1.6">${(item.approach || []).join(' → ')} (the Business Intelligence approach)</span>
             </div>
             <div class="stack stack-10">
-              <span class="eyebrow eyebrow-dark">Information flow</span>
+              <span class="eyebrow eyebrow-dark">How the data moves</span>
               <span style="font-size:14px;line-height:1.6">${item.flow}</span>
             </div>
             <div class="stack stack-10">
               <span class="eyebrow eyebrow-dark">Technology used (illustrative)</span>
               ${each(item.tech, function (x) { return html`<span style="font-size:14px;line-height:1.45">${x}</span>`; })}
-              <span style="font-size:12px;color:rgba(255,255,255,.55)">Architecture options for an illustrative scenario, not a record of delivered client work.</span>
+              <span style="font-size:12px;color:rgba(255,255,255,.55)">Options for this scenario, not delivered client work.</span>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
             <ul class="ticks lg">
               ${each(item.enable, function (e) { return html`<li>${e}</li>`; })}
             </ul>
-            <p class="fine">These describe intended capability, not a measured outcome.</p>
+            <p class="fine">What the system is built to make possible, not a measured result.</p>
             <div class="stack stack-8" style="border-top:1px solid var(--line);padding-top:16px">
               <span class="label-caps">RELEVANT SERVICES</span>
               <div class="row" style="gap:8px">

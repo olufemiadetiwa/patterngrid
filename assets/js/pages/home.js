@@ -8,10 +8,10 @@
 
   var PREVIEW_KICKERS = [
     'Prioritisation matrix',
-    'Pipeline run · quality gate',
+    'Pipeline run with one held record',
     'Inspectable metric',
     'Review queue',
-    'Role-to-task matrix'
+    'Who can do which task'
   ];
 
   /* The signature four-stage sequence, one consistent sample dataset. */
@@ -40,7 +40,7 @@
     },
     {
       name: 'Question',
-      copy: 'The connected view identifies where to look next. Whether availability is limiting sales is a question for the team to investigate, not a conclusion.',
+      copy: 'The connected view shows where to look next. Whether low availability is causing low sales is for the team to investigate. It is not a conclusion.',
       caption: 'A question, not a conclusion'
     }
   ];
@@ -290,7 +290,7 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
         <div class="wrap autogrid start" data-reveal="rise" style="--min:440px;--gap:56px">
           <div class="stack stack-40">
             <div class="stack stack-16">
-              <span class="eyebrow">Five capabilities</span>
+              <span class="eyebrow">Five services</span>
               <h2 class="h2" id="cap-h2">Start with the problem. Build what solves it.</h2>
             </div>
             <div class="rows" data-caps>
@@ -335,10 +335,10 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(48px,6vw,80px)">
           <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
             <div class="stack stack-16">
-              <span class="eyebrow eyebrow-dark">A decision taking shape</span>
+              <span class="eyebrow eyebrow-dark">One question, followed through</span>
               <h2 class="h2" id="seq-h2">Where is performance slipping?</h2>
             </div>
-            <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.78);max-width:34em">One illustrative question, followed through four stages. Connected data does not prove a cause; it shows where a useful question is waiting.</p>
+            <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.78);max-width:34em">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
           </div>
 
           <div class="autogrid start" style="--min:400px;--gap:40px">
@@ -387,7 +387,7 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
               <span class="eyebrow">Industries in context</span>
               <h2 class="h2" id="ind-h2">Better questions begin with business context.</h2>
             </div>
-            <p style="font-size:18px;line-height:1.6;color:var(--muted);max-width:34em">A distribution business, an investment platform and a digital product measure success differently. We shape the data system around the decisions each organisation needs to make.</p>
+            <p style="font-size:18px;line-height:1.6;color:var(--muted);max-width:34em">A distribution business, an investment platform and a digital product measure success differently. We design the reporting around the decisions your sector actually makes.</p>
           </div>
           <div class="ind-grid">
             ${each(PG.industries, function (ind, i) {
@@ -416,8 +416,8 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(48px,6vw,96px)">
           <div class="row between end" style="gap:24px 48px">
             <div class="stack stack-16" style="max-width:720px">
-              <span class="eyebrow">Selected thinking and work</span>
-              <h2 class="h2" id="work-h2">See how the thinking becomes a working system.</h2>
+              <span class="eyebrow">Illustrative scenarios</span>
+              <h2 class="h2" id="work-h2">Three worked scenarios, built with sample data.</h2>
             </div>
             <a class="arrow" href="/work">Explore our work <span class="chev" aria-hidden="true">→</span></a>
           </div>
@@ -450,8 +450,8 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
                     <h3 style="font-size:clamp(26px,2.6vw,40px);font-weight:600;line-height:1.12;letter-spacing:-.02em">${w.title}</h3>
                     <div class="kv" style="--kv:110px;font-size:15px">
                       <span class="k">Question</span><span>${meta[0]}</span>
-                      <span class="k">Designed</span><span>${meta[1]}</span>
-                      <span class="k">Purpose</span><span>${meta[2]}</span>
+                      <span class="k">What it includes</span><span>${meta[1]}</span>
+                      <span class="k">What it shows</span><span>${meta[2]}</span>
                     </div>
                     <span class="arrow" style="font-size:15px;color:var(--teal)">Explore the scenario <span class="chev" aria-hidden="true">→</span></span>
                   </div>
@@ -469,12 +469,12 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
           ${when(!!(PG.team && PG.team.founder && PG.team.founder.photo), function () { return C.portrait(PG.team.founder); })}
           <div class="stack stack-28">
             <div class="stack stack-20">
-              <span class="eyebrow">Founder and perspective</span>
+              <span class="eyebrow">Founder</span>
               <h2 id="founder-h2" style="font-size:clamp(40px,5.2vw,84px);font-weight:650;line-height:.98;letter-spacing:-.035em;color:var(--ink);text-wrap:balance">Precious Chinenye Celestine</h2>
               <span style="font-size:17px;color:var(--muted)">Founder &amp; Lead Consultant · Known professionally as Ada Africa</span>
             </div>
             <div class="stack stack-24" style="border-top:1px solid var(--rule);padding-top:24px">
-              <p class="lede">Pattern Grid was founded to help organisations make better use of their data. Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.</p>
+              <p class="lede">Precious founded Pattern Grid to help organisations make better use of their data. Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.</p>
               <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
@@ -490,7 +490,7 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
           <p style="font-size:clamp(18px,1.4vw,22px);line-height:1.5;max-width:34em;color:var(--muted)">Start a conversation about your data, your decisions and what comes next.</p>
           <div class="row" style="gap:16px 32px;margin-top:8px">
             <a class="btn" href="/contact">Book a consultation</a>
-            <a class="arrow" href="/assessment">Check your readiness <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;

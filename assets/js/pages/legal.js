@@ -9,12 +9,12 @@
     privacy: {
       title: 'Privacy Notice',
       intro: 'This notice will explain what information the Pattern Grid website collects, why, and how it is used when you make an enquiry or take the readiness assessment.',
-      status: 'The approved privacy notice is being prepared to reflect the actual form destination, analytics and assessment data flow before launch. Until then: enquiry details are used only to respond to you, and readiness-assessment answers stay in your browser session unless you choose to include a summary in an enquiry.'
+      status: 'The full privacy notice is being finalised. Until it is published: we use enquiry details only to reply to you, and readiness-assessment answers stay in your browser unless you choose to include a summary in an enquiry.'
     },
     terms: {
       title: 'Website Terms',
       intro: 'These terms will set out the conditions for using the Pattern Grid website and its content.',
-      status: 'Approved website terms are being prepared for publication and will appear here before launch.'
+      status: 'The website terms are being finalised and will be published here.'
     }
   };
 
