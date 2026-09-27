@@ -6,11 +6,12 @@
   var C = PG.core;
   var html = C.html, each = C.each, when = C.when;
 
-  function closing() {
+  function closing(h) {
+    h = h || 'Start with the decision you need to improve.';
     return html`
       <section style="padding:clamp(64px,8vw,128px) 0 clamp(96px,10vw,160px)">
         <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
-          <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">Start with the decision you need to improve.</h2>
+          <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">${h}</h2>
           <div class="row" style="gap:16px 28px">
             <a class="btn" href="/contact">Book a consultation</a>
             <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
@@ -171,7 +172,7 @@
         </div>
       </section>
 
-      ${closing()}`;
+      ${closing('Bring your question to a first conversation.')}`;
   }
 
   function approach() {

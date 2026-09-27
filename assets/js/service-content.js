@@ -81,7 +81,7 @@
         { name: 'Design', activity: 'Choose the target architecture, models and access boundaries.', output: 'An agreed architecture and implementation plan.', preview: ['Architecture decision', 'Model design', 'Access boundaries'] },
         { name: 'Build', activity: 'Implement ingestion, transformation and reusable data structures.', output: 'Working pipelines and documented models.', preview: ['Ingestion pipelines', 'Transformations', 'Documented models'] },
         { name: 'Validate', activity: 'Test data quality, reconciliation, failure paths and representative workloads.', output: 'Test evidence and a prioritised issue list.', preview: ['Reconciliation results', 'Failure-path tests', 'Issue list'] },
-        { name: 'Operate', activity: 'Establish monitoring, runbooks and ownership.', output: 'An operational handover and agreed support responsibilities.', preview: ['Monitoring definitions', 'Runbooks', 'Support responsibilities'] }],
+        { name: 'Hand over', activity: 'Establish monitoring, runbooks and ownership.', output: 'An operational handover and agreed support responsibilities.', preview: ['Monitoring definitions', 'Runbooks', 'Support responsibilities'] }],
       feedback: { from: 3, to: 2, label: 'A failed test returns work to Build. Production readiness follows agreed acceptance checks.' },
       flow: { title: 'From disconnected sources to a trusted data foundation.',
         nodes: [
@@ -265,7 +265,7 @@
   PG.industries.forEach(i => { i.serviceNote = indNotes[i.slug]; });
   const workExt = {
     'executive-performance': { deliverables: ['Metric dictionary', 'Reconciled source model', 'Management view', 'Decision brief template'], approach: ['Define', 'Model', 'Design', 'Validate', 'Embed'], flow: 'Finance, sales and operations records → shared definitions → one management view → review → assigned action.', tech: ['SQL for reconciliation rules', 'Power BI semantic model and reporting', 'Excel for the working metric dictionary'] },
-    'distribution-intelligence': { deliverables: ['Stock and sales data model', 'Availability vs demand view', 'Exception queue with owners', 'Operating runbook'], approach: ['Discover', 'Design', 'Build', 'Validate', 'Operate'], flow: 'Sales, inventory and outlet sources → integration → quality gate → curated model → availability view → exception queue.', tech: ['SQL and a lakehouse-style curated model', 'Power BI for the investigation view', 'Scheduled pipelines with exception handling'] },
+    'distribution-intelligence': { deliverables: ['Stock and sales data model', 'Availability vs demand view', 'Exception queue with owners', 'Operating runbook'], approach: ['Discover', 'Design', 'Build', 'Validate', 'Hand over'], flow: 'Sales, inventory and outlet sources → integration → quality gate → curated model → availability view → exception queue.', tech: ['SQL and a lakehouse-style curated model', 'Power BI for the investigation view', 'Scheduled pipelines with exception handling'] },
     'reporting-workflow': { deliverables: ['Workflow blueprint', 'Deterministic check set', 'Labelled AI-assisted draft step', 'Review and release log'], approach: ['Select', 'Design', 'Prototype', 'Evaluate', 'Integrate'], flow: 'Scheduled trigger → approved metrics → checks → proposed draft → accountable review → approved release, recorded.', tech: ['Rule-based checks in SQL', 'An approved model service for the labelled drafting step (option)', 'Power Automate-style approval routing (option)'] }
   };
   PG.work.forEach(w => Object.assign(w, workExt[w.slug]));

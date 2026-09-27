@@ -1,80 +1,17 @@
 window.PG = {
   services: [
-    { slug: "data-ai-strategy", index: "01", title: "Data & AI Strategy", short: "Decide which data and AI projects to do first, and why.", outcome: "A practical roadmap.", link: "Read about Data & AI Strategy",
-      h1: "Know what to build. Know why it matters.", lead: "Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment.",
-      problem: "Data initiatives often begin with a tool purchase or an isolated request. We start by examining the business questions, existing systems and operating constraints so the roadmap has a clear purpose.",
-      heading: "A roadmap tied to business priorities.",
-      describe: "The work covers business and stakeholder discovery, maturity assessment, KPI architecture, governance responsibilities, AI opportunity screening and platform options. The final scope is defined during discovery.",
-      deliverables: ["Current-state assessment", "Prioritised use-case portfolio", "KPI dictionary", "Target architecture", "Phased roadmap"],
-      visual: { title: "From business questions to an ordered roadmap", steps: [
-        { label: "Business questions", detail: "Questions from finance, commercial and operations leaders are recorded with the decision each one supports." },
-        { label: "Prioritisation matrix", detail: "Each use case is assessed for business value, feasibility, data readiness and an accountable owner." },
-        { label: "Ordered roadmap", detail: "Selected use cases are sequenced into phases with the capability each phase depends on." }] },
-      faqs: [{ q: "Do we need a mature data team to start?", a: "No. The assessment should reflect your current people, systems and priorities, then identify the capability needed next." },
-        { q: "Will you recommend a specific platform immediately?", a: "Platform choices follow the requirements, existing environment and operating constraints." },
-        { q: "What should we bring to an initial discussion?", a: "A business problem, the reports you rely on and an outline of the systems involved are useful starting points." }],
-      cta: "Discuss Your Data Strategy", related: "executive-performance", starter: "We want a useful AI starting point" },
-    { slug: "data-engineering", index: "02", title: "Data Engineering & Platforms", short: "Connect systems and build the models and pipelines that make business data dependable.", outcome: "Data you can rely on.", link: "Read about Data Engineering & Platforms",
-      h1: "Give your business data a reliable foundation.", lead: "Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI.",
-      problem: "When information moves through disconnected exports and manual fixes, reporting becomes fragile. A well-designed data foundation makes the flow visible, repeatable and easier to maintain.",
+    { slug: "data-ai-strategy", index: "01", title: "Data & AI Strategy", short: "Decide which data and AI projects to do first, and why.", outcome: "A practical roadmap.", link: "Read about Data & AI Strategy", lead: "Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment.",
+      heading: "A roadmap tied to business priorities.", related: "executive-performance" },
+    { slug: "data-engineering", index: "02", title: "Data Engineering & Platforms", short: "Connect systems and build the models and pipelines that make business data dependable.", outcome: "Data you can rely on.", link: "Read about Data Engineering & Platforms", lead: "Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI.",
       heading: "Make the path from source to answer traceable.",
-      describe: "The work covers source discovery, API and ERP/CRM integration, pipeline design, warehouses or lakehouses, data modelling, quality checks, access controls, monitoring and handover.",
-      deliverables: ["Architecture diagrams", "Implemented pipelines", "Tested models", "Operating runbooks", "Ownership documentation"],
-      visual: { title: "Source to platform to consumption", steps: [
-        { label: "Source", detail: "Each connected system is documented with its owner, refresh method and the fields the business relies on." },
-        { label: "Quality", detail: "Checks run as data lands. A failed check routes the record into a visible exception path rather than disappearing." },
-        { label: "Model", detail: "Shared models give each business entity one definition that reporting and analysis can reuse." },
-        { label: "Access", detail: "Access rules describe who can see what, and monitoring shows whether each pipeline ran as expected." }] },
-      tools: "Microsoft Fabric, Azure and SQL are among the platforms used where they fit the requirements and existing environment.",
-      faqs: [{ q: "Can we work with our existing systems?", a: "The design starts with the systems and constraints you already have. Migration is considered when the business case supports it." },
-        { q: "Will everything update in real time?", a: "Refresh frequency should match the decision, source capabilities, cost and reliability requirements." },
-        { q: "Who maintains the platform?", a: "Operating responsibilities, monitoring and handover are agreed as part of the engagement." }],
-      cta: "Discuss Your Data Foundation", related: "distribution-intelligence", starter: "Our systems are disconnected" },
-    { slug: "business-intelligence", index: "03", title: "Business Intelligence", short: "Give leaders consistent metrics and useful views of performance.", outcome: "Clearer business visibility.", link: "Read about Business Intelligence",
-      h1: "Give every important metric a clear meaning.", lead: "Build consistent reporting and analytical views that help leaders understand performance and decide what needs attention.",
-      problem: "A dashboard is useful when people trust its definitions and know what to do with the information. We connect metric design, data models and reporting to the decisions each audience needs to make.",
-      heading: "Reporting that supports a useful conversation.",
-      describe: "The work covers executive reporting, shared KPI definitions, financial and commercial analysis, customer and operational views, semantic models, exception reporting and adoption.",
-      deliverables: ["KPI dictionary", "Analytical data model", "Decision-focused reporting suite", "Reporting ownership guide"],
-      visual: { title: "A metric opened to its meaning", steps: [
-        { label: "Definition", detail: "The metric states what is counted, what is excluded and the calculation used." },
-        { label: "Reporting period", detail: "Period boundaries and timing rules are explicit, so two teams report the same month." },
-        { label: "Owner", detail: "A named role is accountable for the definition and for changes to it." },
-        { label: "Source lineage", detail: "The metric can be traced back to the systems and fields it is built from." }] },
-      faqs: [{ q: "Can you improve reporting we already have?", a: "Yes. Begin by reviewing the questions, definitions, source data and existing reporting experience." },
-        { q: "Is this only Power BI development?", a: "The work includes metrics, data models, reporting design and adoption. Power BI is one possible delivery tool." },
-        { q: "How will we know whether the reporting is useful?", a: "Agree the users, decisions and success measures at the outset, then evaluate use and reporting effort after implementation." }],
-      cta: "Discuss Your Reporting", related: "executive-performance", starter: "Our numbers disagree" },
-    { slug: "ai-automation", index: "04", title: "AI & Automation", short: "Automate one repetitive task at a time, with checks and a person signing off.", outcome: "Less repetitive work.", link: "Read about AI & Automation",
-      h1: "Put AI to work on a problem worth solving.", lead: "Identify practical opportunities, test them against real requirements and introduce automation with appropriate controls.",
-      problem: "AI becomes useful when the task is clear, the information is suitable and the result can be evaluated. We help teams choose a starting point and design how the output will be checked and used.",
+      tools: "Microsoft Fabric, Azure and SQL are among the platforms used where they fit the requirements and existing environment.", related: "distribution-intelligence" },
+    { slug: "business-intelligence", index: "03", title: "Business Intelligence", short: "Give leaders consistent metrics and useful views of performance.", outcome: "Clearer business visibility.", link: "Read about Business Intelligence", lead: "Build consistent reporting and analytical views that help leaders understand performance and decide what needs attention.",
+      heading: "Reporting that supports a useful conversation.", related: "executive-performance" },
+    { slug: "ai-automation", index: "04", title: "AI & Automation", short: "Automate one repetitive task at a time, with checks and a person signing off.", outcome: "Less repetitive work.", link: "Read about AI & Automation", lead: "Identify practical opportunities, test them against real requirements and introduce automation with appropriate controls.",
       heading: "A useful workflow has a clear owner.",
-      describe: "The work covers reporting automation, document and information workflows, assisted analysis, internal knowledge tools, human review, evaluation criteria, exception handling and operating controls. Deterministic automation and AI-assisted steps are kept distinct in the architecture.",
-      deliverables: ["Prioritised opportunity assessment", "Bounded prototype", "Evaluation results", "Workflow integration", "Operating guidance"],
-      visual: { title: "An assisted step with a review state", steps: [
-        { label: "Input", detail: "Information enters the workflow from named sources with references retained." },
-        { label: "Assisted step", detail: "An AI-assisted step proposes an output. It is labelled as assisted and never the final authority." },
-        { label: "Evaluation check", detail: "Agreed criteria decide whether the output proceeds or is routed to review." },
-        { label: "Review queue", detail: "A named reviewer approves, edits or rejects. Exceptions stay visible until resolved." }] },
-      faqs: [{ q: "Do we need AI for every automation problem?", a: "No. Many tasks are better served by a reliable rule-based workflow." },
-        { q: "How are sensitive information and errors handled?", a: "The design needs agreed access, data handling, evaluation and review controls appropriate to the use case." },
-        { q: "Where should an AI pilot begin?", a: "Choose a bounded task with available information, a clear owner and a measurable way to judge the result." }],
-      cta: "Explore an AI Use Case", related: "reporting-workflow", starter: "Reporting takes too long" },
-    { slug: "capability-building", index: "05", title: "Capability Building", short: "Help your people understand, use and maintain the systems you invest in.", outcome: "Skills that stay with your team.", link: "Read about Capability Building",
-      h1: "Build capability that stays with your team.", lead: "Help people understand the data, use the systems and maintain the working practices behind reliable decisions.",
-      problem: "A new platform creates lasting value when the people using it know how it works and where they are accountable. Learning should connect directly to the team's daily tasks.",
-      heading: "Learning built around the work.",
-      describe: "Programmes cover role-based data literacy, KPI interpretation, Power BI, SQL, Excel, Microsoft Fabric, data engineering and AI for business. This is enterprise enablement and engagement handover, not a public course marketplace.",
-      deliverables: ["Skills assessment", "Tailored sessions", "Guided practice", "Operating documentation", "Adoption plan"],
-      visual: { title: "A view that becomes understandable", steps: [
-        { label: "The view", detail: "A report as a team first sees it: numbers without context." },
-        { label: "Definitions", detail: "Each metric gains its definition and period, so the numbers can be read the same way by everyone." },
-        { label: "Explanations", detail: "Drivers and exceptions are explained in the language of the team's work." },
-        { label: "Ownership", detail: "Roles know which parts of the system they maintain and whom to ask." }] },
-      faqs: [{ q: "Can the learning use our own business context?", a: "The programme can be shaped around agreed tasks and suitable, approved examples." },
-        { q: "Is this only for technical teams?", a: "No. Leaders, analysts, business users and technical teams need different forms of capability." },
-        { q: "Can capability building accompany implementation?", a: "Yes. Training and handover can be designed alongside the delivery work." }],
-      cta: "Discuss Team Capability", related: "executive-performance", starter: null }
+      cta: "Explore an AI Use Case", related: "reporting-workflow" },
+    { slug: "capability-building", index: "05", title: "Capability Building", short: "Help your people understand, use and maintain the systems you invest in.", outcome: "Skills that stay with your team.", link: "Read about Capability Building", lead: "Help people understand the data, use the systems and maintain the working practices behind reliable decisions.",
+      heading: "Learning built around the work.", related: "executive-performance", starter: null }
   ],
   engagements: [
     { title: "Diagnose and prioritise", copy: "Understand the current position, agree the important questions and define a practical roadmap." },
@@ -315,37 +252,3 @@ window.PG.team = {
 window.PG.icons = window.PG.icons || {};
 window.PG.icon = window.PG.icon || function (id) { return (window.PG.icons && window.PG.icons[id]) || 'M4 4h6v6H4Z M14 4h6v6h-6Z M4 14h6v6H4Z M14 14h6v6h-6Z'; };
 
-// Data layer shown over each hero (illustrative sample figures, consistent with the home sequence)
-window.PG.heroData = {
-  default: { sources: ['Sales', 'Finance', 'Stock'], cards: [
-    { label: 'Net sales · W36', value: '9.6m', delta: '−4% vs plan', tone: 'warn', def: 'Gross 10.0m − returns 0.4m', src: 'Finance ledger · invoice date' },
-    { label: 'Availability · Surulere', value: '41%', delta: 'Lowest of 4 locations', tone: 'warn', def: 'Available units ÷ demand', src: 'Stock model · daily' },
-    { label: 'Open exceptions', value: '1', delta: 'Missing product ID', tone: 'neutral', def: 'Held until an owner corrects it', src: 'Quality gate · Tue 06:22' }],
-    ticker: ['Net sales 9.6m · −4% vs plan', 'Availability 41% · Surulere', 'Loads 3 / 3 on schedule', '1 exception · owner assigned', 'Definitions agreed 12 / 14', 'Review actions open 3'] },
-  'services/data-ai-strategy': { sources: ['Objectives', 'Evidence', 'Portfolio'], cards: [
-    { label: 'Opportunities assessed', value: '11', delta: '4 ready to sequence', tone: 'good', def: 'Value · feasibility · readiness · effort', src: 'Opportunity portfolio' },
-    { label: 'Metrics with an owner', value: '12 / 14', delta: '2 unresolved', tone: 'warn', def: 'Definition, period and owner recorded', src: 'Decision and KPI map' },
-    { label: 'Decision gates', value: '3', delta: 'Phase 1 → 3', tone: 'neutral', def: 'Review points before delivery commitments', src: 'Delivery roadmap' }],
-    ticker: ['11 opportunities assessed', '4 ready to sequence', '2 need a foundation first', '12 / 14 metrics owned', '3 decision gates'] },
-  'services/data-engineering': { sources: ['ERP', 'CRM', 'Files'], cards: [
-    { label: 'Loads on schedule', value: '3 / 3', delta: 'Freshness within window', tone: 'good', def: 'Completed before 07:00', src: 'Pipeline monitor · Tue' },
-    { label: 'Checks passed', value: '26 / 27', delta: '1 held record', tone: 'warn', def: 'Completeness · validity · reconciliation', src: 'Quality gate' },
-    { label: 'Reconciliation variance', value: '0.0', delta: 'Ledger ↔ curated model', tone: 'good', def: 'Sum of invoices vs model', src: 'Validation pack' }],
-    ticker: ['3 / 3 loads on schedule', '26 / 27 checks passed', '1 record held · Missing product ID', 'Reconciliation variance 0.0', 'Runbooks 5 / 5 complete'] },
-  'services/business-intelligence': { sources: ['Curated data', 'KPI dictionary', 'Semantic model'], cards: [
-    { label: 'Net sales · W36', value: '9.6m', delta: '−4% vs plan 10.0m', tone: 'warn', def: 'Gross − returns · excl. VAT, transfers', src: 'Semantic model · one definition' },
-    { label: 'Returns · Snacks', value: '−0.3m', delta: '75% of the variance', tone: 'warn', def: 'Credit notes by product line', src: 'Drill path · product' },
-    { label: 'Follow-up actions', value: '3', delta: '1 due this week', tone: 'neutral', def: 'Owner, date and outcome recorded', src: 'Review log' }],
-    ticker: ['Net sales 9.6m · −4%', 'Returns Snacks −0.3m', 'One definition · two audiences', '3 follow-up actions', 'Reconciled to ledger'] },
-  'services/ai-automation': { sources: ['Trigger', 'Approved records', 'Reviewer'], cards: [
-    { label: 'Draft briefing', value: 'Proposed', delta: 'Not verified', tone: 'neutral', def: 'Each statement linked to a measure', src: 'AI-assisted step · labelled' },
-    { label: 'Checks', value: '3 / 3', delta: 'Period · references · rules', tone: 'good', def: 'Deterministic, before review', src: 'Validation step' },
-    { label: 'Review', value: 'Pending', delta: 'Commercial finance lead', tone: 'warn', def: 'Approve or return for correction', src: 'Accountable review' }],
-    ticker: ['Proposed · not verified', 'Checks 3 / 3', 'Review pending · finance lead', 'Exceptions stop at review', 'Every release recorded'] },
-  'services/capability-building': { sources: ['Roles', 'Tasks', 'Evidence'], cards: [
-    { label: 'Tasks demonstrated', value: '7 / 9', delta: 'Analyst track', tone: 'good', def: 'Work sample reviewed against rubric', src: 'Assessment pack' },
-    { label: 'Remaining gaps', value: '2', delta: 'Returned to practice', tone: 'warn', def: 'Named task, targeted session', src: 'Role-to-task matrix' },
-    { label: 'Playbook issues resolved', value: '4', delta: 'Without external help', tone: 'good', def: 'Observed over the agreed period', src: 'Adoption plan' }],
-    ticker: ['7 / 9 tasks demonstrated', '2 gaps → targeted practice', '4 issues resolved via playbook', 'Baseline set for 3 roles'] }
-};
-window.PG.heroDataFor = function (key) { const d = window.PG.heroData; return d[key] || d.default; };
