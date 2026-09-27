@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div data-screen-label="Insights" style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <dc-import name="Hero" page="insights" hint-size="100%,100vh"></dc-import>
+  <section style="padding: 0 0 clamp(40px, 5vw, 64px);"><div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px);"><p style="font-size: 15px; line-height: 1.5; color: #646B70; max-width: 52em;">The titles below are editorial commissions in preparation. Each will open as a full article once written and approved.</p></div></section>
+  <section style="padding: 0 0 clamp(64px, 8vw, 128px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px);">
+      <div role="group" aria-label="Categories" style="display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 32px; border-bottom: 1px solid #E2E2DC;">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+          <button onClick="{{ c.select }}" aria-pressed="{{ c.selected }}" style="height: 40px; padding: 0 16px; border-radius: 3px; border: 1px solid {{ c.border }}; background: {{ c.bg }}; color: {{ c.color }}; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 200ms;">{{ c.name }}</button>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 48px 40px; padding-top: 48px;">
+        <sc-if value="{{ hasFeature }}" hint-placeholder-val="{{ true }}">
+          <article style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px 64px; align-items: center;">
+            <div aria-hidden="true" style="aspect-ratio: 16 / 9; border-radius: 3px; background: #02203D; position: relative; overflow: hidden;">
+              <span style="position: absolute; left: 12.5%; top: 25%; width: 25%; height: 2px; background: #38A0C3;"></span>
+              <span style="position: absolute; left: 37.5%; top: 25%; width: 2px; height: 50%; background: #38A0C3;"></span>
+              <span style="position: absolute; left: 37.5%; top: 75%; width: 50%; height: 2px; background: #38A0C3;"></span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">{{ feature.categoryUpper }} · IN PREPARATION</span>
+              <h2 style="font-size: clamp(26px, 2.6vw, 40px); font-weight: 600; color: #02203D; line-height: 1.15;">{{ feature.title }}</h2>
+              <p style="font-size: 17px; color: #646B70; line-height: 1.55; max-width: 36em;">{{ feature.summary }}</p>
+            </div>
+          </article>
+        </sc-if>
+        <sc-for list="{{ rest }}" as="a" hint-placeholder-count="5">
+          <article style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #E2E2DC; padding-top: 20px;">
+            <div aria-hidden="true" style="aspect-ratio: 16 / 9; border-radius: 3px; background: #F5F5F1; position: relative; overflow: hidden;">
+              <span style="position: absolute; left: {{ a.x }}; top: {{ a.y }}; width: 30%; height: 2px; background: #38A0C3;"></span>
+              <span style="position: absolute; left: {{ a.x2 }}; top: {{ a.y }}; width: 2px; height: 40%; background: #02203D;"></span>
+            </div>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">{{ a.categoryUpper }} · IN PREPARATION</span>
+            <h2 style="font-size: 22px; font-weight: 600; color: #02203D; line-height: 1.25;">{{ a.title }}</h2>
+            <p style="font-size: 15px; color: #646B70; line-height: 1.5;">{{ a.summary }}</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid rgba(7,19,28,0.1); padding-top: 12px; font-size: 13px;"><span style="color: #646B70;">Next question: {{ a.next }}</span><a href="{{ a.serviceHref }}" style="font-weight: 600;">Related: {{ a.serviceTitle }} →</a></div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <section style="padding: 0 0 clamp(96px, 10vw, 160px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); border-top: 1px solid #E2E2DC; padding-top: clamp(56px, 7vw, 96px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 64px; align-items: center;">
+      <h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 500; line-height: 1.08; letter-spacing: -0.03em; color: #02203D; max-width: 18ch; text-wrap: balance;">Not sure where your data practices stand?</h2>
+      <a href="#/assessment" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px;" style-hover="background: #0B3556;">Assess Your Readiness</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() { this.onContent = () => this.forceUpdate(); window.addEventListener('pg-content', this.onContent); }
+  componentWillUnmount() { window.removeEventListener('pg-content', this.onContent); }
+  state = { cat: 'All' };
+  renderVals() {
+    const PG = window.PG || { articles: [] };
+    const names = ['All', ...Array.from(new Set(PG.articles.map(a => a.category)))];
+    const sel = this.state.cat;
+    const svcOf = (slug) => (PG.services || []).find(s => s.slug === slug) || {};
+    const list = PG.articles.filter(a => sel === 'All' || a.category === sel).map((a, i) => ({ ...a, categoryUpper: a.category.toUpperCase(), serviceTitle: svcOf(a.service).title || '', serviceHref: '#/services/' + a.service, x: (15 + (i * 17) % 40) + '%', x2: (45 + (i * 13) % 35) + '%', y: (25 + (i * 19) % 40) + '%' }));
+    return {
+      cats: names.map(n => ({ name: n, selected: sel === n, bg: sel === n ? '#02203D' : '#FFFFFF', color: sel === n ? '#FFFFFF' : '#02203D', border: sel === n ? '#02203D' : '#E2E2DC', select: () => this.setState({ cat: n }) })),
+      hasFeature: list.length > 0, feature: list[0] || {}, rest: list.slice(1)
+    };
+  }
+}
+</script>
+</body>
+</html>

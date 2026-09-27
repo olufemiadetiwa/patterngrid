@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div data-screen-label="Home" style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <dc-import name="Hero" page="home" hint-size="100%,100vh"></dc-import>
+
+  <section aria-labelledby="cap-h2" style="background: #FFFFFF; padding: clamp(80px, 10vw, 160px) 0;">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 56px clamp(48px, 6vw, 96px); align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #17647D;">Five capabilities</span>
+          <h2 id="cap-h2" style="font-size: clamp(32px, 4.4vw, 68px); font-weight: 600; line-height: 1.04; letter-spacing: -0.03em; color: #07131C; text-wrap: balance; max-width: 16ch;">Start with the problem. Build what solves it.</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; border-top: 1px solid rgba(7,19,28,0.12);">
+          <sc-for list="{{ serviceRows }}" as="s" hint-placeholder-count="5">
+            <a href="{{ s.href }}" onMouseEnter="{{ s.hover }}" onFocus="{{ s.hover }}" onClick="{{ s.hover }}" aria-current="{{ s.current }}" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 8px 16px; padding: 26px 0; border-bottom: 1px solid rgba(7,19,28,0.12); color: #07131C; align-items: start; transition: color 200ms;" style-hover="color: #17647D;">
+              <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="{{ s.numColor }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke 300ms; margin-top: 2px;"><path d="{{ s.iconPath }}"></path></svg>
+              <span style="display: flex; flex-direction: column; gap: 8px;">
+                <span style="font-size: clamp(22px, 2vw, 30px); font-weight: 600; line-height: 1.15; letter-spacing: -0.015em; color: {{ s.titleColor }}; transition: color 300ms;">{{ s.title }}</span>
+                <span style="font-size: 17px; line-height: 1.55; color: #646B70; max-width: 36em;">{{ s.explain }}</span>
+                <span style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px;"><sc-for list="{{ s.outputs }}" as="o" hint-placeholder-count="3"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #07131C; border: 1px solid rgba(7,19,28,0.18); border-radius: 3px; padding: 4px 8px;">{{ o }}</span></sc-for></span>
+              </span>
+              <span aria-hidden="true" style="font-size: 20px; color: {{ s.arrowColor }}; transition: transform 250ms, color 300ms; transform: {{ s.arrowShift }};">→</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div aria-hidden="true" style="position: sticky; top: 104px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="position: relative; min-height: 520px; border-radius: 3px; background: #07131C; color: #FFFFFF; padding: 28px; display: flex; flex-direction: column; gap: 16px; transition: opacity 300ms; opacity: {{ previewFade }};">
+            <div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.6);"><span>{{ previewKicker }}</span><span>Sample data</span></div>
+            <sc-if value="{{ pv0 }}" hint-placeholder-val="{{ true }}">
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+                <sc-for list="{{ pvMatrix }}" as="q" hint-placeholder-count="4"><div style="border: 1px solid {{ q.border }}; background: {{ q.bg }}; border-radius: 3px; padding: 14px; min-height: 120px; display: flex; flex-direction: column; gap: 8px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.6);">{{ q.quad }}</span><sc-for list="{{ q.items }}" as="it" hint-placeholder-count="1"><span style="font-size: 13px; font-weight: 500; line-height: 1.3;">{{ it }}</span></sc-for></div></sc-for>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.7);"><span>Phase 1 · Definitions</span><span>Phase 2 · Reporting</span><span>Phase 3 · Assisted work</span></div>
+            </sc-if>
+            <sc-if value="{{ pv1 }}" hint-placeholder-val="{{ false }}">
+              <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 6px 10px; font-size: 12px; font-family: 'IBM Plex Mono', monospace;">
+                <span style="color: rgba(255,255,255,0.55);">source</span><span style="color: rgba(255,255,255,0.55);">last load</span><span style="color: rgba(255,255,255,0.55);">checks</span><span style="color: rgba(255,255,255,0.55);">status</span>
+                <sc-for list="{{ pvRuns }}" as="r" hint-placeholder-count="3"><span style="padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.12);">{{ r.s }}</span><span style="padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.12);">{{ r.l }}</span><span style="padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.12);">{{ r.c }}</span><span style="padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.12);"><span style="border: 1px solid {{ r.color }}; color: {{ r.color }}; border-radius: 3px; padding: 2px 6px;">{{ r.st }}</span></span></sc-for>
+              </div>
+              <pre style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.6; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; padding: 14px; white-space: pre-wrap;">-- quality gate: hold records without a product key
+SELECT s.*, CASE WHEN p.product_id IS NULL
+  THEN 'HELD: missing product ID' ELSE 'OK' END AS check_status
+FROM stg.stock_weekly s
+LEFT JOIN dim.product p ON p.product_id = s.product_id;</pre>
+            </sc-if>
+            <sc-if value="{{ pv2 }}" hint-placeholder-val="{{ false }}">
+              <div style="border: 1px solid rgba(255,255,255,0.18); border-left: 2px solid #FFD08A; border-radius: 3px; padding: 16px; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.65);">Net sales · W36 · sample units (m)</span><span style="font-size: 44px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums;">9.6</span><span style="font-size: 13px; color: rgba(255,255,255,0.8);">Plan 10.0 · Variance −0.4 (−4%) · Gross 10.0 − Returns 0.4</span></div>
+              <div style="display: flex; flex-direction: column; gap: 8px;"><sc-for list="{{ pvBars }}" as="b" hint-placeholder-count="4"><div style="display: grid; grid-template-columns: 110px minmax(0, 1fr) 44px; gap: 10px; align-items: center; font-size: 13px;"><span>{{ b.n }}</span><span style="height: 8px; background: rgba(255,255,255,0.08); border-radius: 2px; position: relative;"><span style="position: absolute; right: 0; top: 0; height: 100%; width: {{ b.w }}; background: {{ b.c }}; border-radius: 2px;"></span></span><span style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">{{ b.v }}</span></div></sc-for></div>
+              <pre style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.6; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; padding: 14px; white-space: pre-wrap;">Net Sales = [Gross Sales] - [Returns]
+Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>
+            </sc-if>
+            <sc-if value="{{ pv3 }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <sc-for list="{{ pvQueue }}" as="q" hint-placeholder-count="4"><div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,0.14); border-radius: 3px; padding: 12px 14px;"><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 13px; font-weight: 500;">{{ q.item }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.6);">{{ q.meta }}</span></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; border: 1px solid {{ q.c }}; color: {{ q.c }}; border-radius: 3px; padding: 3px 8px; white-space: nowrap;">{{ q.st }}</span></div></sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ pv4 }}" hint-placeholder-val="{{ false }}">
+              <div style="display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 6px 10px; font-size: 12px; align-items: center;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.55);">task · analyst</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.55);">baseline</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.55);">practised</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.55);">independent</span>
+                <sc-for list="{{ pvTasks }}" as="k" hint-placeholder-count="3"><span style="padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.12);">{{ k.n }}</span><span style="padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.12);"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #FFFFFF; background: #FFFFFF;"></span></span><span style="padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.12);"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #FFFFFF; background: {{ k.p }};"></span></span><span style="padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.12);"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #38A0C3; background: {{ k.i }};"></span></span></sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 14px; color: #646B70;"><span>{{ previewTitle }}</span><span style="font-weight: 500; color: #07131C;">{{ previewOutcome }}</span></div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section aria-labelledby="seq-h2" style="background: #07131C; color: #FFFFFF; padding: clamp(80px, 10vw, 160px) 0;">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(48px, 6vw, 80px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px 64px; align-items: end;">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #38A0C3;">A decision taking shape</span>
+          <h2 id="seq-h2" style="font-size: clamp(32px, 4.4vw, 68px); font-weight: 600; line-height: 1.04; letter-spacing: -0.03em; text-wrap: balance; max-width: 16ch;">Where is performance slipping?</h2>
+        </div>
+        <p style="font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 34em;">One illustrative question, followed through four stages. Connected data does not prove a cause; it shows where a useful question is waiting.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 40px clamp(48px, 6vw, 96px); align-items: start;">
+        <div style="position: {{ panelPos }}; top: 104px; order: {{ panelOrder }};">
+          <div style="border: 1px solid rgba(255,255,255,0.14); border-radius: 4px; padding: clamp(20px, 2.4vw, 32px); display: flex; flex-direction: column; gap: 20px; min-height: {{ panelMinH }}; background: rgba(255,255,255,0.02);">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <div role="tablist" aria-label="Stages" style="display: flex; flex-wrap: wrap; gap: 4px;">
+                <sc-for list="{{ stageTabs }}" as="t" hint-placeholder-count="4">
+                  <button role="tab" aria-selected="{{ t.selected }}" onClick="{{ t.select }}" style="height: 36px; padding: 0 12px; border-radius: 3px; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.color }}; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 200ms, color 200ms;">{{ t.name }}</button>
+                </sc-for>
+              </div>
+              <button onClick="{{ replay }}" style="height: 36px; padding: 0 12px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer;" style-hover="border-color: #38A0C3;">Replay</button>
+            </div>
+            <div role="tabpanel" style="display: flex; flex-direction: column; gap: 16px; transition: opacity 400ms ease; opacity: {{ panelOpacity }};">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: rgba(255,255,255,0.55);">Illustrative scenario · Sample data · {{ panel.caption }}</span>
+              <sc-if value="{{ panel.hasGroups }}" hint-placeholder-val="{{ true }}">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px;">
+                  <sc-for list="{{ panel.groups }}" as="g" hint-placeholder-count="3">
+                    <div style="border: 1px solid {{ g.border }}; border-radius: 3px; padding: 12px; display: flex; flex-direction: column; gap: 8px; transition: border-color 400ms;">
+                      <span style="font-size: 13px; font-weight: 600; color: {{ g.titleColor }};">{{ g.title }}</span>
+                      <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="4"><span style="font-size: 12px; line-height: 1.4; color: {{ r.color }}; font-variant-numeric: tabular-nums; padding: 4px 6px; border-radius: 2px; background: {{ r.bg }};">{{ r.text }}</span></sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ panel.hasCode }}" hint-placeholder-val="{{ false }}">
+                <pre style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.6; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; padding: 14px; white-space: pre-wrap;">-- one location key across three systems
+SELECT l.location, s.units AS sales, k.avail_pct, d.deliveries
+FROM dim.location l
+JOIN sales.sell_out s ON s.outlet_code = l.outlet_code
+JOIN stock.availability k ON k.loc_code = l.stock_code
+JOIN dist.drops d ON d.drop_code = l.drop_code
+WHERE s.week = 36 AND k.week = 36 AND d.week = 36;</pre>
+              </sc-if>
+              <sc-if value="{{ panel.hasBars }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr); gap: 12px; font-size: 12px; color: rgba(255,255,255,0.55);"><span>Location</span><span>Sales index</span><span>Availability</span></div>
+                  <sc-for list="{{ panel.bars }}" as="b" hint-placeholder-count="4">
+                    <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: center; font-size: 13px; padding: 6px 8px; margin: 0 -8px; border-radius: 3px; background: {{ b.bg }}; transition: background 400ms;">
+                      <span style="font-weight: {{ b.weight }};">{{ b.name }}</span>
+                      <span style="display: flex; align-items: center; gap: 8px;"><span style="height: 10px; border-radius: 2px; background: {{ b.color }}; width: {{ b.salesW }}; transition: width 600ms cubic-bezier(0.22,1,0.36,1);"></span><span style="font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.8);">{{ b.sales }}</span></span>
+                      <span style="display: flex; align-items: center; gap: 8px;"><span style="height: 10px; border-radius: 2px; background: {{ b.color }}; width: {{ b.availW }}; transition: width 600ms cubic-bezier(0.22,1,0.36,1);"></span><span style="font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.8);">{{ b.avail }}</span></span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ panel.hasQuestion }}" hint-placeholder-val="{{ false }}">
+                <div style="background: #FFFFFF; color: #07131C; border-radius: 3px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px;">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #17647D;">Question to investigate</span>
+                  <p style="font-size: clamp(20px, 1.6vw, 24px); font-weight: 600; line-height: 1.25;">Is availability limiting sales here?</p>
+                  <p style="font-size: 14px; line-height: 1.5; color: #646B70;">Surulere shows both the lowest sales index (61) and the lowest availability (41%). The connected view raises the question; it does not prove the cause or claim a result.</p>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ stageBlocks }}" as="st" hint-placeholder-count="4">
+            <div data-pg-seq="{{ st.i }}" style="min-height: {{ st.minH }}; display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 28px 0; border-top: 1px solid rgba(255,255,255,0.12); transition: opacity 400ms; opacity: {{ st.opacity }};">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #38A0C3;">{{ st.num }}</span>
+              <h3 style="font-size: clamp(22px, 2vw, 30px); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em;">{{ st.name }}</h3>
+              <p style="font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.8); max-width: 32em;">{{ st.copy }}</p>
+            </div>
+          </sc-for>
+          <a href="#/approach" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; color: #FFFFFF; padding: 24px 0;" style-hover="color: #38A0C3;">How we work, in five stages <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="ind-h2" style="background: #F5F5F1; padding: clamp(80px, 10vw, 160px) 0;">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px 64px; align-items: end;">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #17647D;">Industries in context</span>
+          <h2 id="ind-h2" style="font-size: clamp(32px, 4.4vw, 68px); font-weight: 600; line-height: 1.04; letter-spacing: -0.03em; color: #07131C; text-wrap: balance; max-width: 16ch;">Better questions begin with business context.</h2>
+        </div>
+        <p style="font-size: 18px; line-height: 1.6; color: #646B70; max-width: 34em;">A distribution business, an investment platform and a digital product measure success differently. We shape the data system around the decisions each organisation needs to make.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px);">
+        <sc-for list="{{ industryPanels }}" as="i" hint-placeholder-count="4">
+          <a href="{{ i.href }}" style="grid-column: span {{ i.span }}; display: flex; flex-direction: column; gap: 16px; color: #07131C;">
+            <div data-pg-reveal="clip" style="aspect-ratio: {{ i.ratio }}; overflow: hidden; border-radius: 3px; background: #07131C;">
+              <img src="{{ i.src }}" srcSet="{{ i.srcSet }}" sizes="(min-width: 960px) 66vw, 100vw" alt="{{ i.alt }}" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: {{ i.focal }}; transition: transform 350ms ease;" style-hover="transform: scale(1.03);">
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 16px; align-items: baseline;">
+              <span style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-size: clamp(20px, 1.7vw, 26px); font-weight: 600; letter-spacing: -0.01em;">{{ i.title }}</span>
+                <span style="font-size: 15px; line-height: 1.5; color: #646B70; max-width: 40em;">{{ i.question }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #17647D; margin-top: 4px;">{{ i.metricLine }}</span>
+              </span>
+              <span aria-hidden="true" style="font-size: 20px; color: #17647D;">→</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="work-h2" style="background: #FFFFFF; padding: clamp(80px, 10vw, 160px) 0;">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(48px, 6vw, 96px);">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px 48px; align-items: end;">
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 720px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #17647D;">Selected thinking and work</span>
+          <h2 id="work-h2" style="font-size: clamp(32px, 4.4vw, 68px); font-weight: 600; line-height: 1.04; letter-spacing: -0.03em; color: #07131C; text-wrap: balance; max-width: 16ch;">See how the thinking becomes a working system.</h2>
+        </div>
+        <a href="#/work" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Explore our work <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: clamp(48px, 6vw, 96px);">
+        <sc-for list="{{ works }}" as="w" hint-placeholder-count="3">
+          <a href="{{ w.href }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 32px clamp(40px, 5vw, 80px); align-items: center; color: #07131C;">
+            <div data-pg-reveal="clip" aria-hidden="true" style="order: {{ w.imgOrder }}; border-radius: 3px; background: #07131C; color: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-height: 300px;">
+              <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.6);"><span>{{ w.gridTitle }}</span><span>Sample data</span></div>
+              <div style="display: grid; grid-template-columns: {{ w.cols }}; gap: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;">
+                <sc-for list="{{ w.head }}" as="hd" hint-placeholder-count="4"><span style="color: rgba(255,255,255,0.55); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">{{ hd }}</span></sc-for>
+                <sc-for list="{{ w.cells }}" as="cl" hint-placeholder-count="12"><span style="padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: {{ cl.c }}; font-weight: {{ cl.fw }};">{{ cl.t }}</span></sc-for>
+              </div>
+              <span style="margin-top: auto; font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.5;">{{ w.gridNote }}</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 18px; max-width: 560px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #646B70;">Illustrative demonstration · {{ w.sector }}</span>
+              <h3 style="font-size: clamp(26px, 2.6vw, 40px); font-weight: 600; line-height: 1.12; letter-spacing: -0.02em;">{{ w.title }}</h3>
+              <div style="display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px 16px; font-size: 15px; line-height: 1.5;">
+                <span style="color: #646B70;">Question</span><span>{{ w.question }}</span>
+                <span style="color: #646B70;">Designed</span><span>{{ w.designed }}</span>
+                <span style="color: #646B70;">Purpose</span><span>{{ w.purpose }}</span>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: #17647D;">Explore the scenario <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="founder-h2" style="background: #F5F5F1; padding: clamp(80px, 10vw, 160px) 0;">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px clamp(48px, 6vw, 96px); align-items: end;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #17647D;">Founder and perspective</span>
+        <h2 id="founder-h2" style="font-size: clamp(40px, 6vw, 96px); font-weight: 650; line-height: 0.98; letter-spacing: -0.035em; color: #07131C; text-wrap: balance;">Precious Chinenye Celestine</h2>
+        <span style="font-size: 17px; color: #646B70;">Founder &amp; Lead Consultant · Known professionally as Ada Africa</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 24px; border-top: 1px solid rgba(7,19,28,0.12); padding-top: 24px;">
+        <p style="font-size: clamp(18px, 1.4vw, 21px); line-height: 1.55; max-width: 34em;">Pattern Grid was founded to help organisations make better use of their data. Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.</p>
+        <a href="#/about/precious-celestine" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Meet the founder <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="close-h2" style="background: #FFFFFF; padding: clamp(96px, 12vw, 192px) 0;">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 28px; align-items: flex-start;">
+      <h2 id="close-h2" style="font-size: clamp(40px, 6.4vw, 104px); font-weight: 650; line-height: 0.98; letter-spacing: -0.035em; color: #07131C; max-width: 14ch; text-wrap: balance;">What would you like to understand?</h2>
+      <p style="font-size: clamp(18px, 1.4vw, 22px); line-height: 1.5; max-width: 34em; color: #646B70;">Start a conversation about your data, your decisions and what comes next.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; margin-top: 8px;">
+        <a href="#/contact" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px;" style-hover="background: #0B3556;">Book a consultation</a>
+        <a href="#/assessment" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Check your readiness <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;reduceMotion&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot;}, &quot;isMobile&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { preview: 0, stage: 0, fade: 1 };
+  componentDidMount() {
+    this.onContent = () => this.forceUpdate(); window.addEventListener('pg-content', this.onContent);
+    this.observers = [];
+    const setup = () => {
+      const els = document.querySelectorAll('[data-pg-seq]');
+      if (!els.length) { this.retry = setTimeout(setup, 250); return; }
+      const so = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting && !this.replaying) this.setStage(Number(e.target.getAttribute('data-pg-seq'))); }); }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+      els.forEach(el => so.observe(el)); this.observers.push(so);
+    };
+    setup();
+  }
+  componentWillUnmount() { window.removeEventListener('pg-content', this.onContent); clearTimeout(this.retry); clearTimeout(this.replayT); (this.observers || []).forEach(o => o.disconnect()); }
+  setStage(i) { if (i === this.state.stage) return; if (this.props.reduceMotion) { this.setState({ stage: i }); return; } this.setState({ fade: 0 }); clearTimeout(this.fadeT); this.fadeT = setTimeout(() => this.setState({ stage: i, fade: 1 }), 220); }
+  renderVals() {
+    const PG = window.PG || { services: [], industries: [], work: [] };
+    const isMobile = !!this.props.isMobile; const s = this.state;
+    const services = PG.services;
+    const ov = PG.servicesOverview || { features: {} };
+    const serviceRows = services.map((sv, i) => ({ ...sv, href: '#/services/' + sv.slug, iconPath: PG.icon ? PG.icon(sv.icon) : '', explain: (ov.features[sv.slug] || {}).text || sv.short, outputs: (ov.features[sv.slug] || {}).outputs || [], current: s.preview === i ? 'true' : 'false', hover: () => { if (s.preview !== i) this.setState({ preview: i }); }, numColor: s.preview === i ? '#17647D' : '#646B70', titleColor: s.preview === i ? '#17647D' : '#07131C', arrowColor: s.preview === i ? '#17647D' : 'rgba(7,19,28,0.3)', arrowShift: s.preview === i ? 'translateX(4px)' : 'translateX(0)' }));
+    const previewImages = services.map((sv, i) => ({ ...PG.img.get(sv.photo), opacity: s.preview === i ? 1 : 0 }));
+    // Signature sequence — one consistent sample dataset
+    const locs = [{ name: 'Ikeja', sales: 100, avail: 92 }, { name: 'Lekki', sales: 96, avail: 88 }, { name: 'Surulere', sales: 61, avail: 41, hl: true }, { name: 'Ikorodu', sales: 89, avail: 85 }];
+    const stages = [
+      { name: 'Sources', copy: 'Three systems describe the same business in three different ways. Sales counts units by outlet code, Stock reports availability by location, Distribution logs deliveries by route.', caption: 'Three separate sources' },
+      { name: 'Align', copy: 'Each record is mapped to a common product and location. Outlet 0118, location E-0118 and drop 0118 become one place: Surulere.', caption: 'Aligned to product and location' },
+      { name: 'Compare', copy: 'With one model, sales and availability can sit side by side. One location has both lower sales and lower availability.', caption: 'Sales index against availability, week 36' },
+      { name: 'Question', copy: 'The connected view identifies where to look next. Whether availability is limiting sales is a question for the team to investigate, not a conclusion.', caption: 'A question, not a conclusion' }
+    ];
+    const st = s.stage;
+    const hlBg = 'rgba(56,160,195,0.18)';
+    const groupsFor = (stage) => {
+      if (stage === 0) return [
+        { title: 'Sales', rows: ['Outlet 0031 · SKU 4471 · 312 units', 'Outlet 0118 · SKU 4471 · 190 units', 'Outlet 0207 · SKU 4471 · 299 units', 'Outlet 0342 · SKU 4471 · 278 units'], c: 'rgba(255,255,255,0.3)' },
+        { title: 'Stock', rows: ['Loc E-0031 · Item 4471 · 92% avail', 'Loc E-0118 · Item 4471 · 41% avail', 'Loc E-0207 · Item 4471 · 88% avail', 'Loc E-0342 · Item 4471 · 85% avail'], c: 'rgba(255,255,255,0.3)' },
+        { title: 'Distribution', rows: ['Route E-1 · Drop 0031 · 3 deliveries', 'Route E-4 · Drop 0118 · 1 delivery', 'Route E-2 · Drop 0207 · 3 deliveries', 'Route E-3 · Drop 0342 · 3 deliveries'], c: 'rgba(255,255,255,0.3)' }
+      ].map(g => ({ title: g.title, border: g.c, titleColor: '#FFFFFF', rows: g.rows.map(r => ({ text: r, color: 'rgba(255,255,255,0.8)', bg: 'transparent' })) }));
+      if (stage === 1) return [
+        { title: 'Product 4471 · Location', rows: ['Ikeja ← 0031 / E-0031 / Drop 0031', 'Surulere ← 0118 / E-0118 / Drop 0118', 'Lekki ← 0207 / E-0207 / Drop 0207', 'Ikorodu ← 0342 / E-0342 / Drop 0342'], hl: 1 },
+        { title: 'Sales · Availability · Deliveries', rows: ['312 · 92% · 3', '190 · 41% · 1', '299 · 88% · 3', '278 · 85% · 3'], hl: 1 }
+      ].map(g => ({ title: g.title, border: '#38A0C3', titleColor: '#38A0C3', rows: g.rows.map((r, i) => ({ text: r, color: '#FFFFFF', bg: i === g.hl ? hlBg : 'transparent' })) }));
+      return [];
+    };
+    const panel = {
+      caption: stages[st].caption, groups: groupsFor(st), hasGroups: st <= 1, hasCode: st === 1, hasBars: st >= 2, hasQuestion: st === 3,
+      bars: locs.map(l => ({ name: l.name, sales: l.sales, avail: l.avail + '%', salesW: (l.sales * 0.9) + '%', availW: (l.avail * 0.9) + '%', color: l.hl ? '#38A0C3' : 'rgba(255,255,255,0.55)', bg: l.hl && st >= 2 ? hlBg : 'transparent', weight: l.hl ? 600 : 400 }))
+    };
+    const stageTabs = stages.map((x, i) => ({ name: x.name, selected: st === i, bg: st === i ? '#38A0C3' : 'transparent', color: st === i ? '#07131C' : '#FFFFFF', border: st === i ? '#38A0C3' : 'rgba(255,255,255,0.25)', select: () => { this.replaying = false; this.setStage(i); } }));
+    const stageBlocks = stages.map((x, i) => ({ ...x, i, num: '0' + (i + 1), opacity: st === i ? 1 : 0.5, minH: isMobile ? '0' : '48vh' }));
+    const industries = PG.industries;
+    const spans = isMobile ? [12, 12, 12, 12] : [8, 4, 4, 8];
+    const ratios = isMobile ? ['16 / 10', '16 / 10', '16 / 10', '16 / 10'] : ['16 / 9', '4 / 5', '1 / 1', '21 / 9'];
+    const industryPanels = industries.map((ind, i) => ({ ...ind, ...PG.img.get(ind.photo), href: '#/industries/' + ind.slug, span: spans[i], ratio: ratios[i], metricLine: (ind.metrics || []).slice(0, 3).join(' · ') }));
+    const wq = { 'executive-performance': ['Which numbers can leadership take into the meeting?', 'Source reconciliation, a metric dictionary, one management view and a decision brief.', 'Show how three functions can agree on one traceable figure.'], 'distribution-intelligence': ['Where is outlet demand outpacing available stock?', 'A shared stock and sales model with an exception queue and named owners.', 'Show how availability gaps can be seen earlier by outlet.'], 'reporting-workflow': ['Can a recurring report be prepared with less manual effort and a person still in control?', 'Deterministic checks, a labelled AI-assisted summary and a human review state.', 'Show the separation of automated, assisted and human steps.'] };
+    const grids = {
+      'executive-performance': { title: 'metric_dictionary · reconciled', cols: '1.4fr 1fr 1fr 0.8fr', head: ['metric', 'finance', 'sales', 'status'], rows: [['Net sales W36', '9.6m', '9.6m', 'agreed'], ['Gross sales', '10.0m', '10.4m', 'definition'], ['Returns', '0.4m', '—', 'owner: FIN'], ['Active outlets', '412', '418', 'period']], note: 'Two definitions of gross sales surfaced and resolved to one owner and one period rule.' },
+      'distribution-intelligence': { title: 'availability_vs_demand · W36', cols: '1.2fr 0.8fr 0.9fr 1fr', head: ['location', 'sales idx', 'avail', 'exception'], rows: [['Ikeja', '100', '92%', '—'], ['Lekki', '96', '88%', '—'], ['Surulere', '61', '41%', 'review alloc.'], ['Ikorodu', '89', '85%', '—']], note: 'One location shows both lower sales and lower availability; an exception is raised with an owner.' },
+      'reporting-workflow': { title: 'review_log · weekly briefing', cols: '0.7fr 1.2fr 1fr 1fr', head: ['week', 'checks', 'reviewer', 'status'], rows: [['W36', '3/3 passed', 'finance lead', 'pending'], ['W35', '3/3 passed', 'finance lead', 'approved'], ['W34', 'ledger missing', 'finance lead', 'returned'], ['W33', '3/3 passed', 'finance lead', 'approved']], note: 'Every draft is proposed, checked and reviewed by a named person before release. W34 stopped at review.' } };
+    const works = PG.work.map((w, i) => { const g = grids[w.slug]; const cells = []; g.rows.forEach(r => r.forEach((c, ci) => { const warn = /definition|period|review|returned|pending|missing/.test(c); cells.push({ t: c, c: ci === r.length - 1 ? (warn ? '#FFD08A' : (c === '—' ? 'rgba(255,255,255,0.4)' : '#38A0C3')) : 'rgba(255,255,255,0.88)', fw: ci === 0 ? 500 : 400 }); })); return { ...w, href: '#/work/' + w.slug, imgOrder: i % 2 === 0 ? 0 : 1, question: wq[w.slug][0], designed: wq[w.slug][1], purpose: wq[w.slug][2], gridTitle: g.title, cols: g.cols, head: g.head, cells, gridNote: g.note }; });
+    return {
+      isDesktop: !isMobile, serviceRows, previewImages, previewFade: 1, previewKicker: ['Prioritisation matrix', 'Pipeline run · quality gate', 'Inspectable metric', 'Review queue', 'Role-to-task matrix'][s.preview],
+      pv0: s.preview === 0, pv1: s.preview === 1, pv2: s.preview === 2, pv3: s.preview === 3, pv4: s.preview === 4,
+      pvMatrix: [{ quad: 'high value · ready', items: ['Weekly commercial reporting'], border: '#38A0C3', bg: 'rgba(56,160,195,0.18)' }, { quad: 'high value · foundation needed', items: ['AI reporting assistant'], border: 'rgba(255,208,138,0.7)', bg: 'transparent' }, { quad: 'foundation', items: ['Metric definitions', 'Source integration'], border: 'rgba(255,255,255,0.3)', bg: 'transparent' }, { quad: 'later', items: ['Customer churn model'], border: 'rgba(255,255,255,0.18)', bg: 'transparent' }],
+      pvRuns: [{ s: 'erp_orders', l: 'Tue 06:10', c: '12/12', st: 'loaded', color: '#38A0C3' }, { s: 'crm_outlets', l: 'Tue 06:14', c: '8/8', st: 'loaded', color: '#38A0C3' }, { s: 'stock_weekly', l: 'Tue 06:22', c: '6/7', st: '1 held', color: '#FFD08A' }],
+      pvBars: [['Beverages', -0.1], ['Snacks', -0.3], ['Personal care', 0.0], ['Household', 0.0]].map(b => ({ n: b[0], v: (b[1] > 0 ? '+' : '') + b[1].toFixed(1), w: (Math.abs(b[1]) / 0.4 * 100) + '%', c: b[1] <= -0.3 ? '#FFD08A' : 'rgba(255,255,255,0.6)' })),
+      pvQueue: [{ item: 'Weekly briefing · W36', meta: 'proposed · 3/3 checks · linked to 6 measures', st: 'awaiting review', c: '#FFD08A' }, { item: 'Weekly briefing · W35', meta: 'approved by finance lead · released Mon 09:12', st: 'approved', c: '#38A0C3' }, { item: 'Stock alert · Territory East', meta: 'rule: demand > available for 3+ outlets', st: 'sent · owner assigned', c: '#38A0C3' }, { item: 'Briefing · W34', meta: 'finance ledger missing → stopped at review', st: 'returned', c: '#FFD08A' }],
+      pvTasks: [{ n: 'Update a measure', p: '#FFFFFF', i: '#38A0C3' }, { n: 'Reconcile a report to source', p: '#FFFFFF', i: '#38A0C3' }, { n: 'Add a drill path', p: '#FFFFFF', i: 'transparent' }],
+      previewTitle: services[s.preview] ? services[s.preview].title : '', previewOutcome: services[s.preview] ? services[s.preview].outcome : '',
+      panel, panelOpacity: s.fade, stageTabs, stageBlocks, panelPos: isMobile ? 'static' : 'sticky', panelOrder: isMobile ? 0 : 1, panelMinH: isMobile ? '0' : '520px',
+      replay: () => { this.replaying = true; clearTimeout(this.replayT); this.setStage(0); let i = 0; const step = () => { i++; if (i > 3) { this.replaying = false; return; } this.setStage(i); this.replayT = setTimeout(step, 1800); }; this.replayT = setTimeout(step, 1800); },
+      industryPanels, works
+    };
+  }
+}
+</script>
+</body>
+</html>

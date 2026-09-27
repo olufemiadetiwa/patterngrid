@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div data-screen-label="Legal" style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <dc-import name="Hero" page="{{ heroKey }}" hint-size="100%,60vh"></dc-import>
+  <section style="padding: 24px 0 clamp(96px, 10vw, 160px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 24px;">
+      <nav aria-label="Breadcrumb" style="display: flex; gap: 10px; font-size: 14px; color: #646B70; flex-wrap: wrap;"><a href="#/" style="color: #646B70;">Home</a><span aria-hidden="true">/</span><span style="color: #07131C;">{{ title }}</span></nav>
+      <div style="max-width: 40em; display: flex; flex-direction: column; gap: 14px; padding: 20px 24px; background: #F5F5F1; border-radius: 3px; font-size: 16px; line-height: 1.6;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #646B70;">Status</span>
+        <p>{{ status }}</p>
+      </div>
+      <a href="#/contact" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; margin-top: 8px;">Questions about this page? Contact us <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;privacy&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;privacy&quot;, &quot;terms&quot;]}}">
+class Component extends DCLogic {
+  renderVals() {
+    const privacy = (this.props.view || 'privacy') === 'privacy';
+    return {
+      title: privacy ? 'Privacy Notice' : 'Website Terms', heroKey: privacy ? 'privacy' : 'terms',
+      intro: privacy ? 'This notice will explain what information the Pattern Grid website collects, why, and how it is used when you make an enquiry or take the readiness assessment.' : 'These terms will set out the conditions for using the Pattern Grid website and its content.',
+      status: privacy ? 'The approved privacy notice is being prepared to reflect the actual form destination, analytics and assessment data flow before launch. Until then: enquiry details are used only to respond to you, and readiness-assessment answers stay in your browser session unless you choose to include a summary in an enquiry.' : 'Approved website terms are being prepared for publication and will appear here before launch.'
+    };
+  }
+}
+</script>
+</body>
+</html>

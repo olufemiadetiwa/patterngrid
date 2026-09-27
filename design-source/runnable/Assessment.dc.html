@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div data-screen-label="Readiness Assessment" style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+    <dc-import name="Hero" page="assessment" hint-size="100%,80vh"></dc-import>
+    <section style="background: #F5F5F1; padding: 0 0 clamp(72px, 9vw, 128px);">
+      <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+        <button onClick="{{ start }}" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; border: 0; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px; font-family: inherit; cursor: pointer;" style-hover="background: #0B3556;">{{ startLabel }}</button>
+        <span style="font-size: 14px; color: #646B70; max-width: 44em; line-height: 1.5;">Eight questions. This is an indicative self-assessment, not an audit or a validated industry benchmark. Your answers stay in this browser session unless you choose to share them, and you can view your result without an email address.</span>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isQuestions }}" hint-placeholder-val="{{ false }}">
+    <section style="padding: calc(80px + clamp(40px, 5vw, 72px)) 0 clamp(80px, 9vw, 144px); min-height: 70vh;">
+      <div style="max-width: 880px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 32px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.06em; color: #646B70;">Question {{ qNum }} of 8 · {{ q.name }}</span>
+          <a href="#/" style="font-size: 14px; color: #646B70;">Exit assessment</a>
+        </div>
+        <div role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="{{ answeredCount }}" aria-label="Questions answered" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px;">
+          <sc-for list="{{ progress }}" as="p" hint-placeholder-count="8"><span style="height: 4px; border-radius: 2px; background: {{ p.bg }}; transition: background 300ms;"></span></sc-for>
+        </div>
+        <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 24px;">
+          <legend id="pg-q" tabindex="-1" style="padding: 0; font-size: clamp(26px, 3vw, 40px); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; color: #02203D; outline: none; text-wrap: balance;">{{ q.question }}</legend>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ options }}" as="o" hint-placeholder-count="5">
+              <label style="display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 14px; align-items: start; padding: 16px 18px; border-radius: 3px; border: 1px solid {{ o.border }}; background: {{ o.bg }}; cursor: pointer; font-size: 17px; line-height: 1.5; color: #07131C; transition: border-color 160ms, background 160ms;" style-hover="border-color: #38A0C3;">
+                <input type="radio" name="{{ qName }}" value="{{ o.value }}" checked="{{ o.checked }}" onChange="{{ o.pick }}" style="width: 20px; height: 20px; margin: 4px 0 0; accent-color: #02203D;">
+                <span>{{ o.text }}</span>
+              </label>
+            </sc-for>
+          </div>
+        </fieldset>
+        <div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid #E2E2DC; padding-top: 24px;">
+          <button onClick="{{ back }}" style="height: 48px; padding: 0 20px; border-radius: 3px; border: 1px solid #E2E2DC; background: #FFFFFF; color: #02203D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;" style-hover="border-color: #02203D;">Back</button>
+          <button onClick="{{ next }}" disabled="{{ nextDisabled }}" style="height: 48px; padding: 0 24px; border-radius: 3px; border: 0; background: {{ nextBg }}; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; cursor: {{ nextCursor }};">{{ nextLabel }}</button>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+    <section aria-live="polite" style="padding: calc(80px + clamp(40px, 5vw, 72px)) 0 clamp(80px, 9vw, 144px);">
+      <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 48px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px 96px; align-items: end;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">YOUR INDICATIVE RESULT</p>
+            <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+              <span style="font-size: clamp(64px, 8vw, 128px); font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #02203D; font-variant-numeric: tabular-nums;">{{ score }}</span>
+              <span style="font-size: clamp(24px, 2.4vw, 36px); font-weight: 500; color: #02203D;">{{ bandLabel }}</span>
+            </div>
+            <p style="font-size: 19px; line-height: 1.5; max-width: 34em;">{{ bandText }}</p>
+            <sc-if value="{{ hasFoundationNote }}" hint-placeholder-val="{{ false }}"><p style="font-size: 15px; line-height: 1.55; color: #02203D; padding: 12px 16px; background: #F5F5F1; border-radius: 4px; max-width: 44em;">{{ foundationNote }}</p></sc-if>
+            <p style="font-size: 14px; color: #646B70; max-width: 44em;">A low score in a dimension points to the service that usually addresses it; the outputs shown are typical, not a complete solution or commercial scope. Score out of 100 from eight self-reported answers. Indicative only; “AI ready” does not certify security, compliance or suitability for a particular use case.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+            <button onClick="{{ discuss }}" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; border: 0; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px; font-family: inherit; cursor: pointer;" style-hover="background: #0B3556;">Discuss My Priorities</button>
+            <sc-if value="{{ askInclude }}" hint-placeholder-val="{{ false }}">
+              <div role="group" aria-label="Include your result" style="border: 1px solid #E2E2DC; border-radius: 3px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; max-width: 420px;">
+                <span style="font-size: 15px; line-height: 1.5;">Include your result and priorities in the enquiry? Only the summary is shared; nothing is sent until you submit the form.</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button onClick="{{ includeYes }}" style="height: 44px; padding: 0 18px; border-radius: 3px; border: 0; background: #02203D; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Include result</button>
+                  <button onClick="{{ includeNo }}" style="height: 44px; padding: 0 18px; border-radius: 3px; border: 1px solid #E2E2DC; background: #FFFFFF; color: #02203D; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Continue without it</button>
+                </div>
+              </div>
+            </sc-if>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+              <button onClick="{{ print }}" style="background: none; border: 0; padding: 0; color: #17647D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Print or save result</button>
+              <button onClick="{{ restart }}" style="background: none; border: 0; padding: 0; color: #646B70; font-family: inherit; font-size: 15px; cursor: pointer;">Change answers</button>
+            </div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 48px 96px; align-items: start; border-top: 1px solid #E2E2DC; padding-top: 48px;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <h2 style="font-size: 22px; font-weight: 600; color: #02203D;">Eight dimensions</h2>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <sc-for list="{{ dims }}" as="d" hint-placeholder-count="8">
+                <div style="display: grid; grid-template-columns: minmax(120px, 160px) minmax(0, 1fr) 40px; gap: 12px; align-items: center; font-size: 15px;">
+                  <span style="color: #02203D;">{{ d.name }}</span>
+                  <span style="height: 10px; background: #F5F5F1; border-radius: 2px; overflow: hidden; display: block;"><span style="display: block; height: 100%; width: {{ d.width }}; background: {{ d.color }}; border-radius: 2px;"></span></span>
+                  <span style="font-weight: 500; font-size: 12px; color: #646B70; text-align: right;">{{ d.value }}/4</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <h2 style="font-size: 22px; font-weight: 600; color: #02203D;">{{ prioritiesHeading }}</h2>
+            <div style="display: flex; flex-direction: column; border-top: 1px solid #E2E2DC;">
+              <sc-for list="{{ priorities }}" as="p" hint-placeholder-count="3">
+                <div style="display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-bottom: 1px solid #E2E2DC;">
+                  <span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 4px;">{{ p.num }}</span>
+                  <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <span style="font-weight: 600; font-size: 17px; color: #02203D;">{{ p.title }}</span>
+                    <span style="font-size: 15px; line-height: 1.5;">{{ p.text }}</span>
+                    <span style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;"><sc-for list="{{ p.outputs }}" as="o" hint-placeholder-count="3"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; border: 1px solid rgba(7,19,28,0.18); border-radius: 3px; padding: 4px 8px;">{{ o }}</span></sc-for></span>
+                    <a href="{{ p.href }}" style="font-size: 14px; font-weight: 600; margin-top: 2px;">{{ p.link }} →</a>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { phase: 'intro', idx: 0, answers: this.restore(), askInclude: false };
+  restore() {
+    try { const a = JSON.parse(sessionStorage.getItem('pg-assessment-answers') || 'null'); if (Array.isArray(a) && a.length === 8) return a; } catch (e) {}
+    return Array(8).fill(null);
+  }
+  persist(a) { try { sessionStorage.setItem('pg-assessment-answers', JSON.stringify(a)); } catch (e) {} }
+  componentDidMount() { this.onContent = () => this.forceUpdate(); window.addEventListener('pg-content', this.onContent); this.onStart = () => { const answered = this.state.answers.filter(v => v != null).length; const first = this.state.answers.findIndex(v => v == null); this.setState({ phase: answered === 8 ? 'result' : 'questions', idx: first < 0 ? 0 : first }); this.focusQ(); }; window.addEventListener('pg-start-assessment', this.onStart); }
+  componentWillUnmount() { window.removeEventListener('pg-content', this.onContent); window.removeEventListener('pg-start-assessment', this.onStart); }
+  focusQ() { setTimeout(() => { const el = document.getElementById('pg-q'); if (el) el.focus({ preventScroll: true }); window.scrollTo(0, 0); }, 30); }
+  compute(PG) {
+    const a = this.state.answers.map(v => v == null ? 0 : v);
+    const sum = a.reduce((x, y) => x + y, 0), raw = sum / 32 * 100, score = Math.round(raw);
+    let band = PG.bands.slice().reverse().find(b => raw >= b.min) || PG.bands[0];
+    const byKey = {}; PG.assessment.forEach((d, i) => byKey[d.key] = a[i]);
+    let foundationNote = '';
+    if (band.label === 'AI ready') {
+      const fails = [];
+      if (byKey.quality < 3) fails.push('data quality (needs at least 3 of 4)');
+      if (byKey.governance < 3) fails.push('governance (needs at least 3 of 4)');
+      if (byKey.infrastructure < 2) fails.push('data infrastructure (needs at least 2 of 4)');
+      if (fails.length) { band = PG.bands.find(b => b.label === 'Intelligent'); foundationNote = 'Your score is in the top band, but the label is held at Intelligent because a foundation needs attention: ' + fails.join('; ') + '.'; }
+    }
+    const order = PG.tieOrder;
+    const sorted = PG.assessment.map((d, i) => ({ ...d, v: a[i] })).sort((x, y) => x.v - y.v || order.indexOf(x.key) - order.indexOf(y.key));
+    const svcTitle = (slug) => (PG.services.find(s => s.slug === slug) || {}).title || '';
+    let priorities, heading;
+    if (a.every(v => v === 4)) {
+      heading = 'Maintenance and reassessment';
+      priorities = [
+        { title: 'Keep definitions and ownership under review', text: 'Strong self-reported foundations still drift. Schedule a regular review of metric definitions, owners and access rules.', href: '#/services/data-ai-strategy', link: 'Explore data strategy' },
+        { title: 'Evaluate established use cases', text: 'Reassess automated and AI-assisted workflows against agreed quality and value measures.', href: '#/services/ai-automation', link: 'Explore AI and automation' },
+        { title: 'Reassess in six to twelve months', text: 'Repeat this self-assessment with the same respondents to check whether practices are holding.', href: '#/assessment', link: 'Return to the assessment' }
+      ];
+    } else {
+      heading = 'Recommended priorities';
+      const picks = sorted.filter(d => d.v < 4).slice(0, 3);
+      priorities = picks.map(d => { const m = PG.priorityMap[d.key]; return { title: d.name + ' · ' + svcTitle(m.service), text: m.text, href: '#/services/' + m.service, link: 'Explore ' + svcTitle(m.service).toLowerCase() }; });
+      const adoption = (byKey.reporting >= 3 || byKey.infrastructure >= 3) && (byKey.decisions <= 1 || byKey.analytics <= 1);
+      if (adoption && priorities.length < 3) priorities.push({ title: 'Adoption · Capability Building', text: 'Systems appear ahead of daily use. Capability building can help teams interpret and act on the reporting they already have.', href: '#/services/capability-building', link: 'Explore capability building' });
+    }
+    return { score, band, foundationNote, a, priorities, heading };
+  }
+  renderVals() {
+    const PG = window.PG || { assessment: [], bands: [], services: [], priorityMap: {}, tieOrder: [] };
+    const { phase, idx, answers } = this.state;
+    const q = PG.assessment[idx] || { options: [] };
+    const cur = answers[idx];
+    const answered = answers.filter(v => v != null).length;
+    const res = phase === 'result' ? this.compute(PG) : null;
+    const colorFor = v => v >= 3 ? '#38A0C3' : (v >= 2 ? '#17647D' : '#02203D');
+    return {
+      isIntro: phase === 'intro', isQuestions: phase === 'questions', isResult: phase === 'result',
+      startLabel: answered ? 'Continue the Assessment' : 'Start the Assessment',
+      start: () => { const first = answers.findIndex(v => v == null); this.setState({ phase: answered === 8 ? 'result' : 'questions', idx: first < 0 ? 0 : first }); this.focusQ(); },
+      introCells: PG.assessment.map((d, i) => ({ num: '0' + (i + 1), name: d.name, bg: i % 3 === 0 ? 'rgba(56,160,195,0.85)' : 'rgba(255,255,255,0.06)', color: i % 3 === 0 ? '#02203D' : 'rgba(255,255,255,0.85)' })),
+      qNum: idx + 1, q, qName: 'q' + idx, answeredCount: answered,
+      progress: answers.map(v => ({ bg: v != null ? '#38A0C3' : '#E2E2DC' })),
+      options: q.options.map((t, i) => ({ text: t, value: i, checked: cur === i, border: cur === i ? '#02203D' : '#E2E2DC', bg: cur === i ? '#F5F5F1' : '#FFFFFF', pick: () => { const a = answers.slice(); a[i === a[idx] ? idx : idx] = i; this.persist(a); this.setState({ answers: a }); } })),
+      back: () => { if (idx === 0) this.setState({ phase: 'intro' }); else this.setState({ idx: idx - 1 }); this.focusQ(); },
+      next: () => { if (cur == null) return; if (idx === 7) this.setState({ phase: 'result' }); else this.setState({ idx: idx + 1 }); this.focusQ(); },
+      nextDisabled: cur == null, nextBg: cur == null ? '#9DB0BF' : '#02203D', nextCursor: cur == null ? 'not-allowed' : 'pointer', nextLabel: idx === 7 ? 'See my result' : 'Continue',
+      score: res ? res.score : 0, bandLabel: res ? res.band.label : '', bandText: res ? res.band.text : '', hasFoundationNote: !!(res && res.foundationNote), foundationNote: res ? res.foundationNote : '',
+      dims: res ? PG.assessment.map((d, i) => ({ name: d.name, value: res.a[i], width: (res.a[i] / 4 * 100) + '%', color: colorFor(res.a[i]) })) : [],
+      priorities: res ? res.priorities.map((p, i) => { const slug = (p.href.match(/services\/([a-z-]+)/) || [])[1]; const sv = PG.services.find(x => x.slug === slug); return { ...p, num: '0' + (i + 1), outputs: sv && sv.deliverables ? sv.deliverables.slice(0, 3).map(d => d.title) : [] }; }) : [], prioritiesHeading: res ? res.heading : '',
+      askInclude: this.state.askInclude,
+      discuss: () => this.setState({ askInclude: true }),
+      includeYes: () => { if (res) { try { sessionStorage.setItem('pg-assessment-summary', `Readiness assessment: ${res.score}/100 (${res.band.label}). Priorities: ${res.priorities.map(p => p.title).join('; ')}.`); } catch (e) {} } location.hash = '#/contact'; },
+      includeNo: () => { try { sessionStorage.removeItem('pg-assessment-summary'); } catch (e) {} location.hash = '#/contact'; },
+      print: () => window.print(),
+      restart: () => { this.setState({ phase: 'questions', idx: 0, askInclude: false }); this.focusQ(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

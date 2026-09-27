@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Pattern Grid — Data, AI and Business Intelligence Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>
+    html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    *, *::before, *::after { box-sizing: border-box; }
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: #17647D; text-decoration: none; }
+    a:hover { color: #02203D; }
+    button { font-family: inherit; }
+    :focus-visible { outline: 2px solid #38A0C3; outline-offset: 3px; }
+    @keyframes pgTileIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pgTrace { to { stroke-dashoffset: 0; } }
+    @keyframes pgFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pgGlow { from { opacity: 0; } to { opacity: 0.9; } }
+  </style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #FFFFFF;">
+  <a href="#pg-main" style="position: absolute; left: 16px; top: 16px; z-index: 100; background: #02203D; color: #FFFFFF; padding: 12px 16px; border-radius: 4px; font-weight: 600; line-height: 1.2; transform: translateY(-200%); opacity: 0;" style-focus="transform: translateY(0); opacity: 1;">Skip to content</a>
+
+  <header onMouseLeave="{{ closeMenu }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; transition: background 240ms cubic-bezier(0.22,1,0.36,1), color 240ms, box-shadow 240ms; background: {{ headerBg }}; color: {{ headerFg }}; height: 80px; box-shadow: {{ headerRule }}; backdrop-filter: {{ headerBlur }};">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 4.4vw, 64px); height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="#/" aria-label="Pattern Grid home" style="display: flex; align-items: center; gap: 12px; color: inherit; font-weight: 600; font-size: 19px; letter-spacing: -0.01em;">
+        <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(3, 6px); gap: 2px;">
+          <span style="width: 6px; height: 6px; background: currentColor;"></span><span style="width: 6px; height: 6px; background: currentColor;"></span><span style="width: 6px; height: 6px; background: currentColor;"></span>
+          <span style="width: 6px; height: 6px; background: currentColor;"></span><span style="width: 6px; height: 6px; background: #38A0C3;"></span><span style="width: 6px; height: 6px; background: currentColor;"></span>
+          <span style="width: 6px; height: 6px; background: currentColor;"></span><span style="width: 6px; height: 6px; background: currentColor;"></span><span style="width: 6px; height: 6px; background: currentColor;"></span>
+        </span>
+        <span>Pattern Grid</span>
+      </a>
+
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Primary" style="display: flex; align-items: center; gap: 4px;">
+          <button onClick="{{ toggleServices }}" onMouseEnter="{{ openServices }}" aria-expanded="{{ servicesOpen }}" aria-haspopup="true" style="background: none; border: 0; color: inherit; font-size: 15px; font-weight: 500; padding: 10px 14px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px;" style-hover="background: rgba(56,160,195,0.12);">Services <span aria-hidden="true" style="font-size: 10px; opacity: 0.7;">▾</span></button>
+          <button onClick="{{ toggleIndustries }}" onMouseEnter="{{ openIndustries }}" aria-expanded="{{ industriesOpen }}" aria-haspopup="true" style="background: none; border: 0; color: inherit; font-size: 15px; font-weight: 500; padding: 10px 14px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px;" style-hover="background: rgba(56,160,195,0.12);">Industries <span aria-hidden="true" style="font-size: 10px; opacity: 0.7;">▾</span></button>
+          <a href="#/work" onMouseEnter="{{ closeMenu }}" style="color: inherit; font-size: 15px; font-weight: 500; padding: 10px 14px; border-radius: 4px;" style-hover="background: rgba(56,160,195,0.12);">Our Work</a>
+          <a href="#/insights" onMouseEnter="{{ closeMenu }}" style="color: inherit; font-size: 15px; font-weight: 500; padding: 10px 14px; border-radius: 4px;" style-hover="background: rgba(56,160,195,0.12);">Insights</a>
+          <button onClick="{{ toggleAbout }}" onMouseEnter="{{ openAbout }}" aria-expanded="{{ aboutOpen }}" aria-haspopup="true" style="background: none; border: 0; color: inherit; font-size: 15px; font-weight: 500; padding: 10px 14px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px;" style-hover="background: rgba(56,160,195,0.12);">About <span aria-hidden="true" style="font-size: 10px; opacity: 0.7;">▾</span></button>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <a href="#/assessment" style="color: inherit; font-size: 15px; font-weight: 500; opacity: 0.85;" style-hover="opacity: 1;">Readiness Assessment</a>
+          <a href="#/contact" style="display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border-radius: 3px; font-size: 15px; font-weight: 600; background: {{ ctaBg }}; color: {{ ctaFg }}; transition: background 300ms, color 300ms;" style-hover="filter: brightness(1.08);">Book a Consultation</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <a href="#/contact" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 3px; font-size: 14px; font-weight: 600; background: {{ ctaBg }}; color: {{ ctaFg }};">Book</a>
+          <button onClick="{{ openMobile }}" aria-label="Open menu" aria-expanded="{{ mobileOpen }}" style="background: none; border: 1px solid currentColor; color: inherit; min-width: 44px; height: 44px; padding: 0 12px; border-radius: 3px; cursor: pointer; display: grid; place-items: center; font-size: 15px; font-weight: 600;">Menu</button>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ servicesOpen }}" hint-placeholder-val="{{ false }}">
+      <div role="region" aria-label="Services menu" style="position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; color: #07131C; border-top: 1px solid #E2E2DC; border-bottom: 1px solid #E2E2DC; box-shadow: 0 24px 48px -24px rgba(2,32,61,0.25);">
+        <div style="max-width: 1440px; margin: 0 auto; padding: 32px clamp(20px, 4.4vw, 64px) 36px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 48px;">
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 32px;">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="5">
+              <a href="{{ s.href }}" onClick="{{ closeMenu }}" style="display: grid; grid-template-columns: 32px 1fr; gap: 8px; padding: 12px 12px 12px 8px; border-radius: 3px; color: #07131C;" style-hover="background: #F5F5F1;">
+                <span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 4px;">{{ s.index }}</span>
+                <span><span style="display: block; font-weight: 600; font-size: 16px; color: #02203D;">{{ s.title }}</span><span style="display: block; font-size: 14px; color: #646B70; line-height: 1.45; margin-top: 2px;">{{ s.short }}</span></span>
+              </a>
+            </sc-for>
+            <a href="#/services" onClick="{{ closeMenu }}" style="display: grid; grid-template-columns: 32px 1fr; gap: 8px; padding: 12px 12px 12px 8px; border-radius: 3px; color: #17647D; font-weight: 600; font-size: 15px;" style-hover="background: #F5F5F1;"><span></span><span>All services →</span></a>
+          </div>
+          <div style="background: #F5F5F1; border-radius: 4px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+            <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; align-items: center;">
+              <span style="height: 40px; background: #02203D; border-radius: 4px;"></span><span style="height: 40px; background: #02203D; border-radius: 4px;"></span><span style="height: 40px; background: #38A0C3; border-radius: 4px;"></span><span style="height: 40px; background: #02203D; border-radius: 4px;"></span><span style="height: 40px; background: #02203D; border-radius: 4px;"></span>
+              <span style="font-weight: 500; font-size: 10px; color: #646B70;">Strategy</span><span style="font-weight: 500; font-size: 10px; color: #646B70;">Engineering</span><span style="font-weight: 500; font-size: 10px; color: #646B70;">BI</span><span style="font-weight: 500; font-size: 10px; color: #646B70;">AI</span><span style="font-weight: 500; font-size: 10px; color: #646B70;">Capability</span>
+            </div>
+            <p style="font-size: 14px; color: #646B70; line-height: 1.5;">Five connected capabilities. Start with the business problem and build the capability needed to solve it.</p>
+            <a href="#/assessment" onClick="{{ closeMenu }}" style="font-weight: 600; font-size: 15px;">Not sure where to start? Take the readiness assessment →</a>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ industriesOpen }}" hint-placeholder-val="{{ false }}">
+      <div role="region" aria-label="Industries menu" style="position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; color: #07131C; border-top: 1px solid #E2E2DC; border-bottom: 1px solid #E2E2DC; box-shadow: 0 24px 48px -24px rgba(2,32,61,0.25);">
+        <div style="max-width: 1440px; margin: 0 auto; padding: 24px clamp(20px, 4.4vw, 64px) 28px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <sc-for list="{{ industries }}" as="i" hint-placeholder-count="4">
+            <a href="{{ i.href }}" onClick="{{ closeMenu }}" style="padding: 12px 16px; border-radius: 3px; color: #02203D; font-weight: 600; font-size: 15px;" style-hover="background: #F5F5F1;">{{ i.title }}</a>
+          </sc-for>
+          <a href="#/industries" onClick="{{ closeMenu }}" style="padding: 12px 16px; border-radius: 3px; color: #17647D; font-weight: 600; font-size: 15px;" style-hover="background: #F5F5F1;">All industries →</a>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ aboutOpen }}" hint-placeholder-val="{{ false }}">
+      <div role="region" aria-label="About menu" style="position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; color: #07131C; border-top: 1px solid #E2E2DC; border-bottom: 1px solid #E2E2DC; box-shadow: 0 24px 48px -24px rgba(2,32,61,0.25);">
+        <div style="max-width: 1440px; margin: 0 auto; padding: 24px clamp(20px, 4.4vw, 64px) 28px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="#/about" onClick="{{ closeMenu }}" style="padding: 12px 16px; border-radius: 3px; color: #02203D; font-weight: 600; font-size: 15px;" style-hover="background: #F5F5F1;">About Pattern Grid</a>
+          <a href="#/approach" onClick="{{ closeMenu }}" style="padding: 12px 16px; border-radius: 3px; color: #02203D; font-weight: 600; font-size: 15px;" style-hover="background: #F5F5F1;">Our Approach</a>
+          <a href="#/about/precious-celestine" onClick="{{ closeMenu }}" style="padding: 12px 16px; border-radius: 3px; color: #02203D; font-weight: 600; font-size: 15px;" style-hover="background: #F5F5F1;">Founder</a>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="Menu" style="position: fixed; inset: 0; z-index: 80; background: #02203D; color: #FFFFFF; overflow-y: auto; padding: 0 20px 40px; display: flex; flex-direction: column;">
+      <div style="height: 64px; display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-weight: 600; font-size: 18px;">Pattern Grid</span>
+        <button onClick="{{ closeMobile }}" style="background: none; border: 1px solid rgba(255,255,255,0.4); color: #FFFFFF; height: 44px; padding: 0 16px; border-radius: 3px; cursor: pointer; font-size: 15px; font-weight: 600;">Close</button>
+      </div>
+      <nav aria-label="Mobile" style="display: flex; flex-direction: column; gap: 4px; margin-top: 16px; font-size: 18px;">
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.15);">
+          <summary style="padding: 16px 0; font-weight: 600; cursor: pointer; list-style: none;">Services</summary>
+          <div style="display: flex; flex-direction: column; padding-bottom: 12px;">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="5"><a href="{{ s.href }}" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 12px 0 12px 16px; font-size: 16px; opacity: 0.9;">{{ s.title }}</a></sc-for>
+            <a href="#/services" onClick="{{ closeMobile }}" style="color: #38A0C3; padding: 12px 0 12px 16px; font-size: 16px; font-weight: 600;">All services</a>
+          </div>
+        </details>
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.15);">
+          <summary style="padding: 16px 0; font-weight: 600; cursor: pointer; list-style: none;">Industries</summary>
+          <div style="display: flex; flex-direction: column; padding-bottom: 12px;">
+            <sc-for list="{{ industries }}" as="i" hint-placeholder-count="4"><a href="{{ i.href }}" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 12px 0 12px 16px; font-size: 16px; opacity: 0.9;">{{ i.title }}</a></sc-for>
+            <a href="#/industries" onClick="{{ closeMobile }}" style="color: #38A0C3; padding: 12px 0 12px 16px; font-size: 16px; font-weight: 600;">All industries</a>
+          </div>
+        </details>
+        <a href="#/work" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 16px 0; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.15);">Our Work</a>
+        <a href="#/insights" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 16px 0; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.15);">Insights</a>
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.15);">
+          <summary style="padding: 16px 0; font-weight: 600; cursor: pointer; list-style: none;">About</summary>
+          <div style="display: flex; flex-direction: column; padding-bottom: 12px;">
+            <a href="#/about" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 12px 0 12px 16px; font-size: 16px; opacity: 0.9;">About Pattern Grid</a>
+            <a href="#/approach" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 12px 0 12px 16px; font-size: 16px; opacity: 0.9;">Our Approach</a>
+            <a href="#/about/precious-celestine" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 12px 0 12px 16px; font-size: 16px; opacity: 0.9;">Founder</a>
+          </div>
+        </details>
+        <a href="#/assessment" onClick="{{ closeMobile }}" style="color: #FFFFFF; padding: 16px 0; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.15);">Readiness Assessment</a>
+      </nav>
+      <a href="#/contact" onClick="{{ closeMobile }}" style="margin-top: 32px; display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 3px; background: #38A0C3; color: #02203D; font-weight: 600; font-size: 16px;">Book a Data &amp; AI Consultation</a>
+    </div>
+  </sc-if>
+
+  <main id="pg-main" tabindex="-1" style="flex: 1; outline: none;">
+    <div style="transition: opacity 200ms ease; opacity: {{ pageOpacity }};">
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}"><dc-import name="Home" reduce-motion="{{ reduceMotion }}" is-mobile="{{ isMobile }}" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}"><dc-import name="Services" slug="{{ slug }}" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isIndustries }}" hint-placeholder-val="{{ false }}"><dc-import name="Industries" slug="{{ slug }}" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isWork }}" hint-placeholder-val="{{ false }}"><dc-import name="Work" slug="{{ slug }}" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isInsights }}" hint-placeholder-val="{{ false }}"><dc-import name="Insights" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}"><dc-import name="About" view="{{ aboutView }}" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isAssessment }}" hint-placeholder-val="{{ false }}"><dc-import name="Assessment" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}"><dc-import name="Contact" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{ isLegal }}" hint-placeholder-val="{{ false }}"><dc-import name="Legal" view="{{ slug }}" hint-size="100%,60vh"></dc-import></sc-if>
+    <sc-if value="{{ isNotFound }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="Hero" page="notfound" hint-size="100%,60vh"></dc-import>
+      <section style="max-width: 1440px; margin: 0 auto; padding: 64px clamp(20px, 5vw, 80px) 128px;">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #646B70; margin-bottom: 20px;">404 · Page not found</p>
+        <p style="font-size: clamp(22px, 2vw, 30px); color: #07131C; max-width: 32ch; line-height: 1.3; font-weight: 500;">The address may have changed. The home page and services are good places to continue.</p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px;">
+          <a href="#/" style="display: inline-flex; align-items: center; height: 48px; padding: 0 24px; border-radius: 3px; background: #02203D; color: #FFFFFF; font-weight: 600;">Go to the home page</a>
+          <a href="#/services" style="display: inline-flex; align-items: center; height: 48px; padding: 0 8px; font-weight: 600;">Explore services →</a>
+        </div>
+      </section>
+    </sc-if>
+    </div>
+  </main>
+
+  <footer style="background: #02203D; color: #FFFFFF;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 80px clamp(20px, 4.4vw, 64px) 40px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 40px 32px;">
+        <div style="grid-column: span 1;">
+          <div style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 19px;">
+            <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(3, 6px); gap: 2px;">
+              <span style="width: 6px; height: 6px; background: #FFFFFF;"></span><span style="width: 6px; height: 6px; background: #FFFFFF;"></span><span style="width: 6px; height: 6px; background: #FFFFFF;"></span>
+              <span style="width: 6px; height: 6px; background: #FFFFFF;"></span><span style="width: 6px; height: 6px; background: #38A0C3;"></span><span style="width: 6px; height: 6px; background: #FFFFFF;"></span>
+              <span style="width: 6px; height: 6px; background: #FFFFFF;"></span><span style="width: 6px; height: 6px; background: #FFFFFF;"></span><span style="width: 6px; height: 6px; background: #FFFFFF;"></span>
+            </span>
+            <span>Pattern Grid</span>
+          </div>
+          <p style="margin-top: 16px; font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.5; max-width: 30ch;">The data systems behind better business decisions.</p>
+          <p style="margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.6); max-width: 32ch;">Data and AI consulting for African and international organisations.</p>
+        </div>
+        <div>
+          <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.06em; color: #38A0C3; margin-bottom: 16px;">SERVICES</p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="5"><a href="{{ s.href }}" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">{{ s.title }}</a></sc-for>
+          </div>
+        </div>
+        <div>
+          <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.06em; color: #38A0C3; margin-bottom: 16px;">INDUSTRIES</p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ industries }}" as="i" hint-placeholder-count="4"><a href="{{ i.href }}" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">{{ i.title }}</a></sc-for>
+          </div>
+        </div>
+        <div>
+          <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.06em; color: #38A0C3; margin-bottom: 16px;">COMPANY</p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="#/about" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">About</a>
+            <a href="#/approach" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">Our Approach</a>
+            <a href="#/work" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">Our Work</a>
+            <a href="#/insights" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">Insights</a>
+            <a href="#/assessment" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">Readiness Assessment</a>
+            <a href="#/contact" style="color: rgba(255,255,255,0.85); font-size: 15px;" style-hover="color: #FFFFFF;">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; font-size: 14px; color: rgba(255,255,255,0.6);">
+        <span>© {{ year }} Pattern Grid</span>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: center;">
+          <a href="#/privacy" style="color: rgba(255,255,255,0.7);" style-hover="color: #FFFFFF;">Privacy</a>
+          <a href="#/terms" style="color: rgba(255,255,255,0.7);" style-hover="color: #FFFFFF;">Terms</a>
+          <button onClick="{{ toggleMotion }}" aria-pressed="{{ reduceMotion }}" style="background: none; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); height: 36px; padding: 0 14px; border-radius: 4px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 8px;">
+            <span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: {{ motionDot }};"></span>Reduce motion: {{ motionLabel }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { route: this.parse(), menu: null, mobileOpen: false, scrolled: false, pageOpacity: 1, hasHero: true, width: typeof window !== 'undefined' ? window.innerWidth : 1440, reduceMotion: this.initialMotion() };
+  initialMotion() {
+    try { const s = localStorage.getItem('pg-reduce-motion'); if (s !== null) return s === '1'; } catch (e) {}
+    return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  parse() {
+    const h = (typeof location !== 'undefined' ? location.hash : '').split('?')[0].replace(/^#\/?/, '').replace(/\/+$/, '');
+    const parts = h.split('/').filter(Boolean);
+    return { page: parts[0] || 'home', slug: parts[1] || '' };
+  }
+  componentDidMount() {
+    this.onHash = () => { this.setState({ pageOpacity: 0, menu: null, mobileOpen: false }); clearTimeout(this.fadeT); this.fadeT = setTimeout(() => { this.setState({ route: this.parse(), pageOpacity: 1 }, () => { window.scrollTo(0, 0); const m = document.getElementById('pg-main'); if (m) m.focus({ preventScroll: true }); }); }, 180); };
+    this.onScroll = () => { const s = window.scrollY > 24; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this.onResize = () => this.setState({ width: window.innerWidth });
+    this.onKey = (e) => { if (e.key === 'Escape' && (this.state.menu || this.state.mobileOpen)) { const m = this.state.menu; this.setState({ menu: null, mobileOpen: false }); const btn = document.querySelector('header button[aria-expanded="true"]'); if (btn) btn.focus(); } };
+    window.addEventListener('hashchange', this.onHash);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('keydown', this.onKey);
+    this.onHero = (e) => { if (this.state.hasHero !== !!e.detail) this.setState({ hasHero: !!e.detail }); };
+    window.addEventListener('pg-hero', this.onHero);
+    this.onScroll();
+    this.setupReveal();
+  }
+  setupReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    this.pending = new Set();
+    this.show = (el) => { el.style.transition = 'opacity 620ms ' + ease + ', transform 820ms ' + ease + ', clip-path 820ms ' + ease; el.style.opacity = '1'; el.style.transform = 'none'; el.style.clipPath = 'inset(0 0 0 0)'; this.pending.delete(el); if (this.revealIO) this.revealIO.unobserve(el); clearTimeout(el._pgT); };
+    this.revealIO = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) this.show(e.target); }), { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
+    this.revealScroll = () => { if (this.revRaf) return; this.revRaf = requestAnimationFrame(() => { this.revRaf = null; const vh = window.innerHeight; this.pending.forEach(el => { const b = el.getBoundingClientRect(); if (b.top < vh * 0.96 && b.bottom > 0) this.show(el); }); }); };
+    window.addEventListener('scroll', this.revealScroll, { passive: true }); window.addEventListener('resize', this.revealScroll);
+    this.scanReveal = () => {
+      const rm = this.state.reduceMotion;
+      document.querySelectorAll('[data-pg-reveal]:not([data-pg-armed])').forEach(el => {
+        el.setAttribute('data-pg-armed', '1'); if (rm) return;
+        const rect = el.getBoundingClientRect(); if (rect.top < window.innerHeight * 0.85) return;
+        const kind = el.getAttribute('data-pg-reveal');
+        el.style.opacity = kind === 'clip' ? '1' : '0';
+        el.style.transform = kind === 'clip' ? 'translateY(12px)' : 'translateY(20px)';
+        if (kind === 'clip') el.style.clipPath = 'inset(6% 0 6% 0)';
+        this.pending.add(el); this.revealIO.observe(el);
+        el._pgT = setTimeout(() => this.show(el), 2500);
+      });
+    };
+    this.mo = new MutationObserver(() => { clearTimeout(this.scanT); this.scanT = setTimeout(this.scanReveal, 120); });
+    const main = document.getElementById('pg-main'); if (main) this.mo.observe(main, { childList: true, subtree: true });
+    this.scanReveal();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.onHash); window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); window.removeEventListener('pg-hero', this.onHero); if (this.revealIO) this.revealIO.disconnect(); if (this.mo) this.mo.disconnect(); window.removeEventListener('scroll', this.revealScroll); window.removeEventListener('resize', this.revealScroll);
+  }
+  renderVals() {
+    const PG = window.PG || { services: [], industries: [] };
+    const { route, menu, mobileOpen, scrolled, width, reduceMotion } = this.state;
+    const isMobile = width < 960;
+    const services = PG.services.map(s => ({ ...s, href: '#/services/' + s.slug }));
+    const industries = PG.industries.map(i => ({ ...i, href: '#/industries/' + i.slug }));
+    const validSlug = (list, slug) => !slug || list.some(x => x.slug === slug);
+    const p = route.page, slug = route.slug;
+    const isHome = p === 'home';
+    const isServices = p === 'services' && validSlug(PG.services, slug);
+    const isIndustries = p === 'industries' && validSlug(PG.industries, slug);
+    const isWork = p === 'work' && validSlug(PG.work || [], slug);
+    const isInsights = p === 'insights' && !slug;
+    const isAbout = (p === 'about' && (!slug || slug === 'precious-celestine')) || (p === 'approach' && !slug);
+    const isAssessment = p === 'assessment' && !slug;
+    const isContact = p === 'contact' && !slug;
+    const isLegal = (p === 'privacy' || p === 'terms') && !slug;
+    const isNotFound = !(isHome || isServices || isIndustries || isWork || isInsights || isAbout || isAssessment || isContact || isLegal);
+    const onDark = this.state.hasHero && !scrolled && !menu;
+    const toggle = (m) => () => this.setState(s => ({ menu: s.menu === m ? null : m }));
+    const open = (m) => () => this.setState({ menu: m });
+    return {
+      services, industries, slug, isMobile, isDesktop: !isMobile, reduceMotion,
+      isHome, notHome: !isHome, isServices, isIndustries, isWork, isInsights, isAbout, isAssessment, isContact, isLegal, isNotFound,
+      aboutView: p === 'approach' ? 'approach' : (slug === 'precious-celestine' ? 'founder' : 'about'),
+      headerBg: onDark ? 'transparent' : 'rgba(255,255,255,0.92)', headerFg: onDark ? '#FFFFFF' : '#02203D', headerBlur: onDark ? 'none' : 'blur(10px)',
+      headerRule: onDark ? 'none' : 'inset 0 -1px 0 rgba(7,19,28,0.1)', pageOpacity: this.state.pageOpacity,
+      ctaBg: onDark ? '#38A0C3' : '#02203D', ctaFg: onDark ? '#02203D' : '#FFFFFF',
+      servicesOpen: menu === 'services', industriesOpen: menu === 'industries', aboutOpen: menu === 'about', mobileOpen,
+      toggleServices: toggle('services'), toggleIndustries: toggle('industries'), toggleAbout: toggle('about'),
+      openServices: open('services'), openIndustries: open('industries'), openAbout: open('about'),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: null }); },
+      openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
+      toggleMotion: () => { const v = !reduceMotion; try { localStorage.setItem('pg-reduce-motion', v ? '1' : '0'); } catch (e) {} this.setState({ reduceMotion: v }); window.dispatchEvent(new Event('pg-motion')); },
+      motionLabel: reduceMotion ? 'on' : 'off', motionDot: reduceMotion ? '#38A0C3' : 'rgba(255,255,255,0.3)',
+      year: new Date().getFullYear()
+    };
+  }
+}
+</script>
+</body>
+</html>

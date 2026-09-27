@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div data-screen-label="Consultation" style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <dc-import name="Hero" page="contact" hint-size="100%,80vh"></dc-import>
+  <section style="padding: 0 0 clamp(80px, 9vw, 144px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 56px 96px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <h2 style="font-size: clamp(28px, 3vw, 44px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; color: #07131C; max-width: 16ch;">Tell us about your project.</h2>
+        <div style="border-top: 1px solid #E2E2DC; padding-top: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">WHAT HAPPENS NEXT</span>
+          <div style="display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px 12px; font-size: 16px; line-height: 1.5;">
+            <span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 4px;">01</span><span>We read your enquiry and the reports or systems you mention.</span>
+            <span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 4px;">02</span><span>We reply to arrange a conversation about the problem and a useful next step.</span>
+            <span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 4px;">03</span><span>No sensitive company data is needed at this stage.</span>
+          </div>
+        </div>
+      </div>
+
+      <form noValidate="{{ true }}" onSubmit="{{ submit }}" aria-describedby="privacy-note" style="display: flex; flex-direction: column; gap: 20px; background: #F5F5F1; border-radius: 4px; padding: clamp(24px, 3vw, 40px);">
+        <sc-if value="{{ hasSummary }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 14px; color: #02203D; background: #FFFFFF; border: 1px solid #E2E2DC; border-radius: 3px; padding: 10px 14px;"><span>Your assessment summary is included below.</span><button type="button" onClick="{{ removeSummary }}" style="background: none; border: 0; color: #17647D; font-family: inherit; font-weight: 600; font-size: 14px; cursor: pointer;">Remove</button></div>
+        </sc-if>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 20px;">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label for="f-name" style="font-size: 14px; font-weight: 600; color: #02203D;">Name <span aria-hidden="true" style="color: #17647D;">*</span></label>
+            <input id="f-name" name="name" type="text" required="{{ true }}" autoComplete="name" value="{{ v.name }}" onChange="{{ set.name }}" aria-invalid="{{ inv.name }}" aria-describedby="e-name" style="height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid {{ bd.name }}; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #07131C;">
+            <span id="e-name" role="alert" style="font-size: 13px; color: #9B2C2C; min-height: 0;">{{ err.name }}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label for="f-email" style="font-size: 14px; font-weight: 600; color: #02203D;">Email address <span aria-hidden="true" style="color: #17647D;">*</span></label>
+            <input id="f-email" name="email" type="email" required="{{ true }}" autoComplete="email" value="{{ v.email }}" onChange="{{ set.email }}" aria-invalid="{{ inv.email }}" aria-describedby="e-email" style="height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid {{ bd.email }}; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #07131C;">
+            <span id="e-email" role="alert" style="font-size: 13px; color: #9B2C2C;">{{ err.email }}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label for="f-org" style="font-size: 14px; font-weight: 600; color: #02203D;">Organisation <span aria-hidden="true" style="color: #17647D;">*</span></label>
+            <input id="f-org" name="organisation" type="text" required="{{ true }}" autoComplete="organization" value="{{ v.org }}" onChange="{{ set.org }}" aria-invalid="{{ inv.org }}" aria-describedby="e-org" style="height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid {{ bd.org }}; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #07131C;">
+            <span id="e-org" role="alert" style="font-size: 13px; color: #9B2C2C;">{{ err.org }}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label for="f-role" style="font-size: 14px; font-weight: 600; color: #02203D;">Role <span style="font-weight: 400; color: #646B70;">(optional)</span></label>
+            <input id="f-role" name="role" type="text" autoComplete="organization-title" value="{{ v.role }}" onChange="{{ set.role }}" style="height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid #E2E2DC; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #07131C;">
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="f-service" style="font-size: 14px; font-weight: 600; color: #02203D;">Service interest <span style="font-weight: 400; color: #646B70;">(optional)</span></label>
+          <select id="f-service" name="service" value="{{ v.service }}" onChange="{{ set.service }}" style="height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid #E2E2DC; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #07131C;">
+            <option value="">Select an option</option>
+            <option value="Data & AI Strategy">Data &amp; AI Strategy</option>
+            <option value="Data Engineering">Data Engineering</option>
+            <option value="Business Intelligence">Business Intelligence</option>
+            <option value="AI & Automation">AI &amp; Automation</option>
+            <option value="Capability Building">Capability Building</option>
+            <option value="Not Sure Yet">Not Sure Yet</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="f-msg" style="font-size: 14px; font-weight: 600; color: #02203D;">What would you like to improve? <span aria-hidden="true" style="color: #17647D;">*</span></label>
+          <textarea id="f-msg" name="message" required="{{ true }}" rows="{{ 6 }}" value="{{ v.msg }}" onChange="{{ set.msg }}" aria-invalid="{{ inv.msg }}" aria-describedby="e-msg" placeholder="Where does information break down, or which decision is hard to evaluate?" style="padding: 12px 14px; border-radius: 3px; border: 1px solid {{ bd.msg }}; background: #FFFFFF; font-family: inherit; font-size: 16px; line-height: 1.5; color: #07131C; resize: vertical; min-height: 140px;"></textarea>
+          <span id="e-msg" role="alert" style="font-size: 13px; color: #9B2C2C;">{{ err.msg }}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="f-process" style="font-size: 14px; font-weight: 600; color: #02203D;">How does this work today? <span style="font-weight: 400; color: #646B70;">(optional)</span></label>
+          <textarea id="f-process" name="process" rows="{{ 3 }}" value="{{ v.process }}" onChange="{{ set.process }}" placeholder="e.g. Finance exports three reports on Monday and reconciles them by hand" style="padding: 12px 14px; border-radius: 3px; border: 1px solid #E2E2DC; background: #FFFFFF; font-family: inherit; font-size: 16px; line-height: 1.5; color: #07131C; resize: vertical; min-height: 84px;"></textarea>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="f-time" style="font-size: 14px; font-weight: 600; color: #02203D;">Preferred meeting time <span style="font-weight: 400; color: #646B70;">(optional, {{ tz }})</span></label>
+          <input id="f-time" name="time" type="text" value="{{ v.time }}" onChange="{{ set.time }}" placeholder="e.g. weekday mornings" style="height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid #E2E2DC; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #07131C;">
+        </div>
+        <label style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 14px; line-height: 1.5; color: #646B70; cursor: pointer;">
+          <input type="checkbox" name="optin" checked="{{ v.optin }}" onChange="{{ set.optin }}" style="width: 18px; height: 18px; margin: 3px 0 0; accent-color: #02203D;">
+          <span>Occasionally send me Pattern Grid Insights by email. Optional.</span>
+        </label>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 4px;">
+          <button type="submit" disabled="{{ submitting }}" style="height: 52px; padding: 0 26px; border-radius: 3px; border: 0; background: #02203D; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px;" style-hover="background: #0B3556;">{{ submitLabel }}</button>
+          <p id="privacy-note" style="font-size: 13px; color: #646B70; line-height: 1.5;">We will use these details to respond to your enquiry. <a href="#/privacy">Read our Privacy Notice.</a></p>
+          <sc-if value="{{ showStatus }}" hint-placeholder-val="{{ false }}">
+            <p role="status" style="font-size: 14px; line-height: 1.5; color: #02203D; background: #FFFFFF; border: 1px solid #E2E2DC; border-radius: 3px; padding: 12px 14px;">{{ statusText }}</p>
+          </sc-if>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { v: { name: '', email: '', org: '', role: '', service: this.initialService(), msg: this.initialMsg(), process: '', time: '', optin: false }, err: {}, submitting: false, status: '', hasSummary: this.hasSummary() };
+  componentDidMount() { this.onFocusForm = () => { const el = document.getElementById('f-name'); if (el) el.focus(); }; window.addEventListener('pg-focus-form', this.onFocusForm); }
+  componentWillUnmount() { window.removeEventListener('pg-focus-form', this.onFocusForm); }
+  initialService() { try { const q = (location.hash.split('?')[1] || ''); const slug = new URLSearchParams(q).get('service'); const map = { 'data-ai-strategy': 'Data & AI Strategy', 'data-engineering': 'Data Engineering', 'business-intelligence': 'Business Intelligence', 'ai-automation': 'AI & Automation', 'capability-building': 'Capability Building' }; return map[slug] || ''; } catch (e) { return ''; } }
+  hasSummary() { try { return !!sessionStorage.getItem('pg-assessment-summary'); } catch (e) { return false; } }
+  initialMsg() { try { const s = sessionStorage.getItem('pg-assessment-summary'); return s ? '\n\n— ' + s : ''; } catch (e) { return ''; } }
+  validate(v) {
+    const e = {};
+    if (!v.name.trim()) e.name = 'Please enter your name.';
+    if (!v.email.trim()) e.email = 'Please enter your email address.'; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.email = 'Please check the email address format.';
+    if (!v.org.trim()) e.org = 'Please enter your organisation.';
+    if (!v.msg.trim()) e.msg = 'Tell us briefly what you would like to improve.';
+    return e;
+  }
+  renderVals() {
+    const { v, err, submitting, status } = this.state;
+    const set = {}; ['name', 'email', 'org', 'role', 'service', 'msg', 'process', 'time'].forEach(k => { set[k] = (ev) => this.setState(s => ({ v: { ...s.v, [k]: ev.target.value }, err: { ...s.err, [k]: undefined } })); });
+    set.optin = (ev) => this.setState(s => ({ v: { ...s.v, optin: ev.target.checked } }));
+    const inv = {}, bd = {}; ['name', 'email', 'org', 'msg'].forEach(k => { inv[k] = !!err[k]; bd[k] = err[k] ? '#9B2C2C' : '#E2E2DC'; });
+    let tz = 'your timezone'; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || tz; } catch (e) {}
+    return {
+      v, set, inv, bd, err: { name: err.name || '', email: err.email || '', org: err.org || '', msg: err.msg || '' }, tz,
+      hasSummary: this.state.hasSummary,
+      removeSummary: () => { try { sessionStorage.removeItem('pg-assessment-summary'); } catch (e) {} this.setState(s => ({ hasSummary: false, v: { ...s.v, msg: s.v.msg.replace(/\n\n— Readiness assessment[^]*$/, '') } })); },
+      submitting, submitLabel: submitting ? 'Sending…' : 'Request a Consultation', showStatus: !!status, statusText: status,
+      submit: (ev) => {
+        ev.preventDefault();
+        const e = this.validate(v);
+        if (Object.keys(e).length) { this.setState({ err: e, status: '' }); const first = document.getElementById('f-' + Object.keys(e)[0]); if (first) first.focus(); return; }
+        this.setState({ submitting: true, status: '' });
+        setTimeout(() => this.setState({ submitting: false, status: 'This prototype is not yet connected to a form destination, so nothing was sent. Your details are kept in the form. Once the approved destination is configured, this message becomes: “Thank you. Your enquiry has been received. We will review the details and contact you about the next step.”' }), 700);
+      },
+      dots: Array.from({ length: 18 }, (_, i) => ({ bg: [4, 9, 13].includes(i) ? '#38A0C3' : (i % 5 === 0 ? '#02203D' : '#E2E2DC') }))
+    };
+  }
+}
+</script>
+</body>
+</html>

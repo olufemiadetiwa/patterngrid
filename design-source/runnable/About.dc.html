@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="About">
+      <dc-import name="Hero" page="about" hint-size="100%,100vh"></dc-import>
+      <section style="padding: 0 0 clamp(56px, 7vw, 96px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px 64px; align-items: start;">
+          <p style="font-size: clamp(18px, 1.4vw, 21px); line-height: 1.55; max-width: 34em;">Businesses collect information across finance, sales, operations and customer systems. The difficulty is making that information consistent, connected and useful. Pattern Grid exists to help organisations build the systems and working practices that make this possible.</p>
+          <p style="font-size: 17px; line-height: 1.6; color: #646B70; max-width: 34em;">We bring business questions, data architecture, analytics and practical AI into the same conversation. The work begins with what the organisation needs to understand and continues through the foundations required to support it.</p>
+        </div>
+      </section>
+      <section style="padding: 0 0 clamp(64px, 8vw, 128px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px);">
+          <div data-pg-reveal="clip" style="aspect-ratio: 21 / 9; overflow: hidden; border-radius: 3px; background: #07131C;"><img src="{{ aboutPhoto.src }}" srcSet="{{ aboutPhoto.srcSet }}" sizes="100vw" alt="{{ aboutPhoto.alt }}" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: {{ aboutPhoto.focal }};"></div>
+        </div>
+      </section>
+      <section style="background: #F5F5F1; padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 48px 64px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">OPERATING BELIEFS</p>
+            <h2 style="font-size: clamp(30px, 3.4vw, 52px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; color: #02203D; text-wrap: balance;">How we work, in four commitments.</h2>
+            <p style="font-size: 16px; color: #646B70; max-width: 32em;">African-founded, with an international outlook. The work is shaped around the organisation in front of us.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; border-top: 1px solid #E2E2DC;">
+            <sc-for list="{{ beliefs }}" as="b" hint-placeholder-count="4">
+              <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 24px 0; border-bottom: 1px solid #E2E2DC;">
+                <span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 6px;">{{ b.num }}</span>
+                <div style="display: flex; flex-direction: column; gap: 6px;"><h3 style="font-size: 22px; font-weight: 600; color: #02203D; line-height: 1.25;">{{ b.title }}</h3><p style="font-size: 16px; line-height: 1.55;">{{ b.copy }}</p></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 48px 64px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">THE DECISION PATH</p>
+            <h2 style="font-size: clamp(30px, 3.4vw, 52px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; color: #02203D; text-wrap: balance;">Five stages from question to action.</h2>
+            <a href="#/approach" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Explore Our Approach <span aria-hidden="true">→</span></a>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 12px;">
+            <sc-for list="{{ stages }}" as="s" hint-placeholder-count="5">
+              <div style="border: 1px solid #E2E2DC; border-radius: 3px; padding: 16px; display: flex; flex-direction: column; gap: 8px; min-height: 140px;"><span style="font-weight: 500; font-size: 11px; color: #646B70;">{{ s.num }}</span><span style="font-weight: 600; font-size: 17px; color: #02203D;">{{ s.name }}</span><span style="font-size: 13px; line-height: 1.45; color: #646B70;">{{ s.output }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="padding: 0 0 clamp(64px, 8vw, 128px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 48px 96px; align-items: center; border-top: 1px solid #E2E2DC; padding-top: clamp(56px, 7vw, 96px);">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">LEADERSHIP</p>
+            <h2 style="font-size: clamp(28px, 3vw, 44px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; color: #02203D;">Precious Chinenye Celestine</h2>
+            <p style="font-size: 16px; color: #646B70;">Founder &amp; Lead Consultant · Known professionally as Ada Africa</p>
+            <p style="font-size: 17px; line-height: 1.6; max-width: 34em;">Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.</p>
+            <a href="#/about/precious-celestine" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Meet the Founder <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isFounder }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Founder">
+      <dc-import name="Hero" page="founder" hint-size="100%,100vh"></dc-import>
+      <section style="padding: 24px 0 clamp(64px, 8vw, 128px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 40px;">
+          <nav aria-label="Breadcrumb" style="display: flex; gap: 10px; font-size: 14px; color: #646B70; flex-wrap: wrap;"><a href="#/" style="color: #646B70;">Home</a><span aria-hidden="true">/</span><a href="#/about" style="color: #646B70;">About</a><span aria-hidden="true">/</span><span style="color: #07131C;">Founder</span></nav>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 48px 96px; align-items: start;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <p style="font-size: clamp(22px, 2vw, 30px); font-weight: 600; color: #07131C; line-height: 1.2;">Founder &amp; Lead Consultant, Pattern Grid</p>
+              <p style="font-size: 17px; color: #646B70;">Known professionally as Ada Africa.</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <p style="font-size: clamp(17px, 1.3vw, 19px); line-height: 1.6; max-width: 34em;">Precious Chinenye Celestine is a Data and AI professional and Business Intelligence consultant. Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution. At Pattern Grid, she brings these disciplines together around the business questions clients need to answer.</p>
+              <div style="border-top: 1px solid rgba(7,19,28,0.12); padding-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #646B70;">Selected experience</span>
+                <p style="font-size: 16px; line-height: 1.6; color: #07131C; max-width: 34em;">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses. Previous roles and personal projects are attributed to their organisations, not to Pattern Grid.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isApproach }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Our Approach">
+      <dc-import name="Hero" page="approach" hint-size="100%,100vh"></dc-import>
+      <section style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 40px;">
+          <div aria-label="Decision Path, fully labelled" style="background: #02203D; color: #FFFFFF; border-radius: 4px; padding: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 12px;">
+            <sc-for list="{{ stages }}" as="s" hint-placeholder-count="5">
+              <div style="display: flex; flex-direction: column; gap: 10px; border: 1px solid {{ s.border }}; background: {{ s.bg }}; color: {{ s.color }}; border-radius: 3px; padding: 18px; min-height: 200px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 10px; letter-spacing: 0.08em; opacity: 0.8;">STAGE {{ s.num }}</span>
+                <span style="font-weight: 600; font-size: 18px;">{{ s.name }}</span>
+                <span style="font-size: 13px; line-height: 1.5; opacity: 0.9;">{{ s.change }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; margin-top: auto; font-weight: 500; font-size: 10px; letter-spacing: 0.04em; opacity: 0.75;">OUTPUT · {{ s.output }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; border-top: 1px solid #E2E2DC;">
+            <sc-for list="{{ stages }}" as="s" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px 64px; padding: 28px 0; border-bottom: 1px solid #E2E2DC;">
+                <div style="display: flex; gap: 16px;"><span style="font-weight: 500; font-size: 12px; color: #646B70; padding-top: 6px;">{{ s.num }}</span><h2 style="font-size: clamp(22px, 2vw, 30px); font-weight: 600; color: #02203D; line-height: 1.2;">{{ s.name }}</h2></div>
+                <p style="font-size: 17px; line-height: 1.6;">{{ s.copy }}</p>
+                <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">OUTPUT</span><span style="font-size: 16px; color: #02203D; font-weight: 600;">{{ s.output }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="padding: 0 0 clamp(64px, 8vw, 128px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 10px; max-width: 720px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Each capability has its own approach</span><p style="font-size: 17px; line-height: 1.6; color: #3A4750;">The Decision Path is the shared shape. Each service applies it differently, with its own outputs and decision points. Capability Building supports ownership throughout.</p></div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px;">
+            <sc-for list="{{ serviceApproaches }}" as="s" hint-placeholder-count="5">
+              <a href="{{ s.href }}" style="display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; color: #07131C;" style-hover="border-color: #07131C;">
+                <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.iconPath }}"></path></svg>
+                <span style="font-weight: 600; font-size: 16px;">{{ s.title }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70; line-height: 1.6;">{{ s.stagesText }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="background: #F5F5F1; padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 48px 64px;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">THREE PRINCIPLES</p>
+            <div style="display: flex; flex-direction: column; border-top: 1px solid #E2E2DC;">
+              <div style="padding: 18px 0; border-bottom: 1px solid #E2E2DC; font-size: 19px; font-weight: 600; color: #02203D;">Agree success measures before delivery.</div>
+              <div style="padding: 18px 0; border-bottom: 1px solid #E2E2DC; font-size: 19px; font-weight: 600; color: #02203D;">Make ownership explicit.</div>
+              <div style="padding: 18px 0; border-bottom: 1px solid #E2E2DC; font-size: 19px; font-weight: 600; color: #02203D;">Evaluate the system with the people using it.</div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">PROPOSED ENGAGEMENT FORMATS</p>
+            <div style="display: flex; flex-direction: column; border-top: 1px solid #E2E2DC;">
+              <sc-for list="{{ engagements }}" as="e" hint-placeholder-count="3">
+                <div style="padding: 18px 0; border-bottom: 1px solid #E2E2DC; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 18px; font-weight: 600; color: #02203D;">{{ e.title }}</span><span style="font-size: 15px; line-height: 1.5; color: #646B70;">{{ e.copy }}</span></div>
+              </sc-for>
+            </div>
+            <a href="#/assessment" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Find your starting point with the readiness assessment <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <section style="padding: clamp(64px, 8vw, 128px) 0 clamp(96px, 10vw, 160px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); border-top: 1px solid #E2E2DC; padding-top: clamp(56px, 7vw, 96px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 64px; align-items: center;">
+      <h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 500; line-height: 1.08; letter-spacing: -0.03em; color: #02203D; max-width: 18ch; text-wrap: balance;">Start with the decision you need to improve.</h2>
+      <a href="#/contact" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px;" style-hover="background: #0B3556;">Book a Data &amp; AI Consultation</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;about&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;about&quot;, &quot;founder&quot;, &quot;approach&quot;]}}">
+class Component extends DCLogic {
+  componentDidMount() { this.onContent = () => this.forceUpdate(); window.addEventListener('pg-content', this.onContent); }
+  componentWillUnmount() { window.removeEventListener('pg-content', this.onContent); }
+  renderVals() {
+    const PG = window.PG || { stages: [], beliefs: [], engagements: [] };
+    const view = this.props.view || 'about';
+    return {
+      isAbout: view === 'about', isFounder: view === 'founder', isApproach: view === 'approach',
+      beliefs: PG.beliefs.map((b, i) => ({ ...b, num: '0' + (i + 1) })),
+      stages: PG.stages.map((s, i, arr) => ({ ...s, num: '0' + (i + 1), border: i === arr.length - 1 ? '#FFFFFF' : (i === 2 ? '#38A0C3' : 'rgba(255,255,255,0.3)'), bg: i === arr.length - 1 ? '#FFFFFF' : 'transparent', color: i === arr.length - 1 ? '#02203D' : '#FFFFFF' })),
+      engagements: PG.engagements, aboutPhoto: PG.img.get('arch-concrete'), serviceApproaches: PG.services.map(s => ({ title: s.title, href: '#/services/' + s.slug, iconPath: PG.icon ? PG.icon(s.icon) : '', stagesText: (s.approach || []).map(a => a.name).join(' → ') }))
+    };
+  }
+}
+</script>
+</body>
+</html>

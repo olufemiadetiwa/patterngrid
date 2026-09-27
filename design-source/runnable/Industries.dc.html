@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }</style>
+</helmet>
+<div style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+  <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Industries">
+      <dc-import name="Hero" page="industries" hint-size="100%,100vh"></dc-import>
+      <section style="padding: clamp(48px, 6vw, 96px) 0 clamp(64px, 8vw, 128px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(56px, 6vw, 96px);">
+          <sc-for list="{{ industries }}" as="i" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 32px 64px; align-items: center; border-top: 1px solid #E2E2DC; padding-top: clamp(40px, 5vw, 64px);">
+              <div data-pg-reveal="clip" style="order: {{ i.imgOrder }}; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; background: #07131C;"><img src="{{ i.ph.src }}" srcSet="{{ i.ph.srcSet }}" sizes="(min-width: 960px) 50vw, 100vw" alt="{{ i.ph.alt }}" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: {{ i.ph.focal }};"></div>
+              <div style="display: flex; flex-direction: column; gap: 18px;">
+                <span style="font-weight: 500; font-size: 12px; color: #646B70;">{{ i.num }}</span>
+                <h2 style="font-size: clamp(26px, 2.6vw, 40px); font-weight: 600; line-height: 1.15; color: #02203D;">{{ i.title }}</h2>
+                <p style="font-size: 19px; line-height: 1.45; color: #02203D; font-weight: 500;">{{ i.question }}</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;"><sc-for list="{{ i.metricsShort }}" as="m" hint-placeholder-count="4"><span style="font-size: 13px; color: #646B70; border: 1px solid #E2E2DC; border-radius: 3px; padding: 5px 12px;">{{ m }}</span></sc-for></div>
+                <a href="{{ i.href }}" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Explore {{ i.title }} <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Industry detail">
+      <dc-import name="Hero" page="{{ heroKey }}" hint-size="100%,100vh"></dc-import>
+      <section style="padding: 24px 0 0;"><div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px);"><nav aria-label="Breadcrumb" style="display: flex; gap: 10px; font-size: 14px; color: #646B70; flex-wrap: wrap;"><a href="#/" style="color: #646B70;">Home</a><span aria-hidden="true">/</span><a href="#/industries" style="color: #646B70;">Industries</a><span aria-hidden="true">/</span><span style="color: #07131C;">{{ ind.title }}</span></nav></div></section>
+
+      <section style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 48px 96px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">THE EXECUTIVE QUESTION</span>
+            <h2 style="font-size: clamp(28px, 3.2vw, 48px); font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; color: #02203D; text-wrap: balance;">{{ ind.question }}</h2>
+            <p style="font-size: 17px; line-height: 1.6; max-width: 34em; color: #646B70;">{{ ind.note }}</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">METRICS WORTH DEFINING</span>
+            <div role="list" style="display: flex; flex-direction: column; border-top: 1px solid #E2E2DC;">
+              <sc-for list="{{ metrics }}" as="m" hint-placeholder-count="6">
+                <button role="listitem" onClick="{{ m.select }}" aria-expanded="{{ m.selected }}" style="text-align: left; background: {{ m.bg }}; border: 0; border-bottom: 1px solid #E2E2DC; padding: 14px 12px; font-family: inherit; font-size: 16px; color: #02203D; font-weight: 600; cursor: pointer; display: flex; flex-direction: column; gap: 6px; transition: background 200ms;" style-hover="background: #F5F5F1;">
+                  <span style="display: flex; justify-content: space-between; gap: 12px;"><span>{{ m.name }}</span><span aria-hidden="true" style="color: #17647D; font-weight: 400;">{{ m.icon }}</span></span>
+                  <sc-if value="{{ m.selected }}" hint-placeholder-val="{{ false }}"><span style="font-weight: 400; font-size: 14px; line-height: 1.5; color: #646B70;">Definition, reporting period, owner and source lineage are agreed with the organisation before this metric appears in reporting.</span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background: #F5F5F1; padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 48px 64px; align-items: center;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">DATA LANDSCAPE</p>
+            <h2 style="font-size: clamp(28px, 3vw, 44px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; color: #02203D;">How the information relates.</h2>
+            <p style="font-size: 17px; line-height: 1.6; max-width: 34em;">Each source keeps its own identity. A shared model connects them around the entities the business measures, so a single figure can be traced back to the system it came from.</p>
+            <p style="font-size: 15px; line-height: 1.6; color: #3A4750; max-width: 36em; border-top: 1px solid rgba(7,19,28,0.12); padding-top: 16px;">{{ ind.serviceNote }}</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+              <sc-for list="{{ capabilities }}" as="c" hint-placeholder-count="3"><a href="{{ c.href }}" style="font-size: 14px; font-weight: 600; color: #17647D; border: 1px solid #E2E2DC; background: #FFFFFF; border-radius: 3px; padding: 8px 14px;" style-hover="border-color: #38A0C3;">{{ c.title }} →</a></sc-for>
+            </div>
+          </div>
+          <div aria-label="Source systems connected to a shared model" style="background: #02203D; color: #FFFFFF; border-radius: 4px; padding: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); gap: 12px; align-items: center; min-height: 320px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <sc-for list="{{ ind.sources }}" as="s" hint-placeholder-count="5"><span style="border: 1px solid rgba(255,255,255,0.35); border-radius: 4px; padding: 10px 12px; font-size: 13px;">{{ s }}</span></sc-for>
+            </div>
+            <svg viewBox="0 0 40 200" preserveAspectRatio="none" aria-hidden="true" style="width: 40px; height: 100%; display: block;"><path d="M0 20 C 20 20, 20 100, 40 100 M0 60 C 20 60, 20 100, 40 100 M0 100 L 40 100 M0 140 C 20 140, 20 100, 40 100 M0 180 C 20 180, 20 100, 40 100" fill="none" stroke="#38A0C3" stroke-width="1.2" vector-effect="non-scaling-stroke"></path></svg>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="border: 1px solid #38A0C3; border-radius: 3px; padding: 14px;"><span style="font-family: 'IBM Plex Mono', monospace; display: block; font-weight: 500; font-size: 10px; letter-spacing: 0.08em; color: #38A0C3; margin-bottom: 4px;">SHARED MODEL</span><span style="font-size: 14px; font-weight: 600;">{{ ind.title }} entities and agreed definitions</span></div>
+              <div style="background: #FFFFFF; color: #02203D; border-radius: 3px; padding: 14px;"><span style="font-family: 'IBM Plex Mono', monospace; display: block; font-weight: 500; font-size: 10px; letter-spacing: 0.08em; color: #17647D; margin-bottom: 4px;">TRACEABLE VIEW</span><span style="font-size: 14px; font-weight: 600;">{{ ind.question }}</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding: clamp(64px, 8vw, 128px) 0 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px 64px; align-items: center;">
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">A view worth building</span>
+            <h2 style="font-size: clamp(28px, 3vw, 44px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em;">One record grid, shared definitions, visible exceptions.</h2>
+            <p style="font-size: 17px; line-height: 1.6; max-width: 34em; color: #3A4750;">{{ grid.note }}</p>
+          </div>
+          <div aria-label="Illustrative record grid" style="border-radius: 3px; background: #07131C; color: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.6);"><span>{{ grid.title }}</span><span>Sample data · illustrative</span></div>
+            <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">
+              <sc-for list="{{ grid.head }}" as="hd" hint-placeholder-count="4"><span style="color: rgba(255,255,255,0.55); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">{{ hd }}</span></sc-for>
+              <sc-for list="{{ gridCells }}" as="cl" hint-placeholder-count="16"><span style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: {{ cl.c }}; font-weight: {{ cl.fw }};">{{ cl.t }}</span></sc-for>
+            </div>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.55);">lineage ← {{ lineage }}</span>
+          </div>
+        </div>
+      </section>
+      <section style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px 64px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div data-pg-reveal="clip" style="aspect-ratio: 16 / 10; overflow: hidden; border-radius: 3px; background: #07131C;"><img src="{{ ph2.src }}" srcSet="{{ ph2.srcSet }}" sizes="(min-width: 960px) 50vw, 100vw" alt="{{ ph2.alt }}" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: {{ ph2.focal }};"></div>
+            
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; color: #17647D;">RELATED WORK</p>
+            <a href="{{ related.href }}" style="display: flex; flex-direction: column; gap: 10px; color: #07131C; border: 1px solid #E2E2DC; border-radius: 3px; padding: 24px;" style-hover="border-color: #38A0C3;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; color: #646B70;">ILLUSTRATIVE SCENARIO</span>
+              <span style="font-size: 22px; font-weight: 600; color: #02203D; line-height: 1.25;">{{ related.title }}</span>
+              <span style="font-size: 15px; color: #646B70; line-height: 1.5;">{{ related.summary }}</span>
+              <span style="font-weight: 600; font-size: 15px; color: #17647D; margin-top: 6px;">Explore the scenario →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <section style="background: #FFFFFF; padding: 0 0 clamp(96px, 10vw, 160px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); border-top: 1px solid #E2E2DC; padding-top: clamp(56px, 7vw, 96px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 64px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 500; line-height: 1.08; letter-spacing: -0.03em; color: #02203D; max-width: 18ch; text-wrap: balance;">Another data-intensive sector?</h2>
+        <p style="font-size: 17px; color: #646B70; max-width: 34em;">The decisions matter more than the label. Tell us what you need to improve.</p>
+      </div>
+      <a href="#/contact" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px;" style-hover="background: #0B3556;">{{ ctaLabel }}</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slug&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;&quot;, &quot;financial-services&quot;, &quot;fmcg-distribution&quot;, &quot;retail-ecommerce&quot;, &quot;technology&quot;]}}">
+class Component extends DCLogic {
+  componentDidMount() { this.onContent = () => this.forceUpdate(); window.addEventListener('pg-content', this.onContent); }
+  componentWillUnmount() { window.removeEventListener('pg-content', this.onContent); }
+  state = { metric: -1, lastSlug: null };
+  renderVals() {
+    const PG = window.PG || { industries: [], services: [], work: [] };
+    const slug = this.props.slug || '';
+    if (slug !== this.state.lastSlug) { this.state.lastSlug = slug; this.state.metric = -1; }
+    const industries = PG.industries.map((i, k) => ({ ...i, href: '#/industries/' + i.slug, num: '0' + (k + 1), ph: PG.img.get(i.photo), imgOrder: k % 2 === 0 ? 0 : 1, metricsShort: i.metrics.slice(0, 4) }));
+    const ind = industries.find(i => i.slug === slug);
+    const relatedRaw = ind ? (PG.work || []).find(w => w.slug === ind.related) : null;
+    return {
+      isOverview: !ind, isDetail: !!ind, industries,
+      ind: ind ? { ...ind, titleUpper: ind.title.toUpperCase() } : { sources: [] },
+      metrics: ind ? ind.metrics.map((m, i) => ({ name: m, selected: this.state.metric === i, icon: this.state.metric === i ? '−' : '+', bg: this.state.metric === i ? '#F5F5F1' : 'transparent', select: () => this.setState({ metric: this.state.metric === i ? -1 : i }) })) : [],
+      capabilities: ind ? ind.capabilities.map(c => PG.services.find(s => s.slug === c)).filter(Boolean).map(s => ({ title: s.title, href: '#/services/' + s.slug })) : [],
+      heroKey: 'industries/' + slug, ph2: ind ? PG.img.get(ind.photo2) : {},
+      grid: (ind && ind.grid) || { head: [], rows: [] }, lineage: ind ? ind.sources.join(' · ') : '',
+      gridCells: (ind && ind.grid ? ind.grid.rows : []).flatMap(r => r.map((c, ci) => { const last = ci === r.length - 1; const warn = /exception|41%|9\.8%|11\.2%|212/.test(c); return { t: c, c: last ? (warn ? '#FFD08A' : '#38A0C3') : (warn ? '#FFD08A' : 'rgba(255,255,255,0.88)'), fw: ci === 0 ? 500 : 400 }; })),
+      related: relatedRaw ? { ...relatedRaw, href: '#/work/' + relatedRaw.slug } : {},
+      ctaLabel: ind ? ind.cta : 'Book a Data & AI Consultation'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./content.js"></script>
+  <script src="./service-content.js"></script>
+  <style>
+    body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #07131C; }
+    @keyframes pgTrace { to { stroke-dashoffset: 0; } }
+    @keyframes pgFade { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</helmet>
+<div style="background: #FFFFFF; color: #07131C; font-family: 'Hanken Grotesk', system-ui, sans-serif;">
+
+  <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Services">
+      <dc-import name="Hero" page="services" hint-size="100%,100vh"></dc-import>
+
+      <section style="padding: 0 0 clamp(72px, 9vw, 144px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px clamp(48px, 6vw, 96px); align-items: start;">
+          <p style="font-size: clamp(18px, 1.4vw, 21px); line-height: 1.55; max-width: 34em;">{{ ov.intro }}</p>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <h2 style="font-size: clamp(26px, 2.6vw, 40px); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em;">{{ ov.situationsHeading }}</h2>
+            <div style="display: flex; flex-direction: column; border-top: 1px solid rgba(7,19,28,0.12);">
+              <sc-for list="{{ situations }}" as="s" hint-placeholder-count="5">
+                <a href="{{ s.href }}" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 24px; padding: 18px 0; border-bottom: 1px solid rgba(7,19,28,0.12); color: #07131C; align-items: start;" style-hover="color: #17647D;">
+                  <span style="font-weight: 600; font-size: 17px; line-height: 1.3;">“{{ s.situation }}”</span>
+                  <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #17647D;">{{ s.title }} →</span><span style="font-size: 14px; line-height: 1.5; color: #646B70;">{{ s.expect }}</span></span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding: 0 0 clamp(72px, 9vw, 144px);">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(56px, 7vw, 112px);">
+          <sc-for list="{{ features }}" as="f" hint-placeholder-count="5">
+            <article style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 32px clamp(40px, 6vw, 96px); align-items: center; border-top: 1px solid rgba(7,19,28,0.12); padding-top: clamp(32px, 4vw, 56px);">
+              <div style="display: flex; flex-direction: column; gap: 18px; order: {{ f.textOrder }};">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="{{ f.iconPath }}"></path></svg>
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #646B70;">{{ f.index }}</span>
+                </div>
+                <h2 style="font-size: clamp(28px, 3vw, 46px); font-weight: 600; line-height: 1.08; letter-spacing: -0.025em;">{{ f.title }}</h2>
+                <p style="font-size: 17px; line-height: 1.6; max-width: 34em;">{{ f.text }}</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <sc-for list="{{ f.outputs }}" as="o" hint-placeholder-count="3"><span style="font-size: 13px; font-weight: 500; color: #07131C; border: 1px solid rgba(7,19,28,0.18); border-radius: 3px; padding: 6px 10px;">{{ o }}</span></sc-for>
+                </div>
+                <a href="{{ f.href }}" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">{{ f.link }} <span aria-hidden="true">→</span></a>
+              </div>
+              <div aria-hidden="true" style="background: {{ f.miniBg }}; border-radius: 3px; padding: clamp(24px, 3vw, 40px); min-height: 280px; display: flex; align-items: center; justify-content: center; color: {{ f.miniInk }};">
+                <sc-if value="{{ f.isStrategy }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: grid; grid-template-columns: 24px repeat(2, 120px); grid-template-rows: repeat(2, 96px) 24px; gap: 8px; align-items: center;">
+                    <span style="grid-row: 1 / 3; writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-align: center; opacity: 0.7;">Value</span>
+                    <div style="border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; height: 100%; padding: 8px; font-size: 12px; display: flex; align-items: flex-start; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4);"></span>Later</div>
+                    <div style="border: 1px solid #38A0C3; background: rgba(56,160,195,0.2); border-radius: 3px; height: 100%; padding: 8px; font-size: 12px; display: flex; align-items: flex-start; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #38A0C3;"></span>Sequence first</div>
+                    <div style="border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; height: 100%; padding: 8px; font-size: 12px; opacity: 0.7;">Avoid</div>
+                    <div style="border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; height: 100%; padding: 8px; font-size: 12px; display: flex; align-items: flex-start; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; border: 1px dashed #FFD08A;"></span>Foundation needed</div>
+                    <span></span><span style="grid-column: 2 / 4; font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-align: center; opacity: 0.7;">Feasibility · Readiness</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ f.isEngineering }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 360 160" width="100%" style="max-width: 420px; display: block; font-family: 'Hanken Grotesk', sans-serif;" aria-hidden="true">
+                    <rect x="8" y="60" width="72" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"></rect><text x="44" y="84" text-anchor="middle" font-size="12" fill="#02203D">Sources</text>
+                    <rect x="120" y="60" width="88" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"></rect><text x="164" y="84" text-anchor="middle" font-size="12" fill="#02203D">Quality gate</text>
+                    <rect x="260" y="20" width="92" height="40" rx="3" fill="#02203D"></rect><text x="306" y="44" text-anchor="middle" font-size="12" fill="#FFFFFF">Curated model</text>
+                    <rect x="260" y="104" width="92" height="40" rx="3" fill="none" stroke="#C9821A" stroke-width="1.5"></rect><text x="306" y="128" text-anchor="middle" font-size="12" fill="#07131C">Exception queue</text>
+                    <path d="M80 80H120 M208 72C230 72 236 40 260 40 M208 88C230 88 236 124 260 124" fill="none" stroke="#02203D" stroke-width="1.5"></path>
+                    <path d="M260 134C220 150 170 150 164 100" fill="none" stroke="#17647D" stroke-width="1.5" stroke-dasharray="4 4"></path>
+                    <text x="200" y="158" text-anchor="middle" font-size="11" fill="#17647D">corrected → revalidated</text>
+                  </svg>
+                </sc-if>
+                <sc-if value="{{ f.isBI }}" hint-placeholder-val="{{ false }}">
+                  <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); border-radius: 3px; padding: 20px; width: min(100%, 320px); display: flex; flex-direction: column; gap: 10px;">
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; opacity: 0.7;">Net sales · sample units</span>
+                    <span style="font-size: 40px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums;">9.6m</span>
+                    <span style="font-size: 13px; opacity: 0.85;">Plan 10.0m · Variance −0.4m (−4%)</span>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;"><span style="font-size: 11px; border: 1px solid #38A0C3; color: #38A0C3; border-radius: 3px; padding: 3px 8px;">Definition</span><span style="font-size: 11px; border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; padding: 3px 8px;">Period</span><span style="font-size: 11px; border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; padding: 3px 8px;">Source</span><span style="font-size: 11px; border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; padding: 3px 8px;">Owner</span></div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ f.isAI }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 360 160" width="100%" style="max-width: 420px; display: block; font-family: 'Hanken Grotesk', sans-serif;" aria-hidden="true">
+                    <rect x="8" y="60" width="80" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"></rect><text x="48" y="84" text-anchor="middle" font-size="12" fill="#02203D">Proposed</text>
+                    <rect x="128" y="60" width="80" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"></rect><text x="168" y="84" text-anchor="middle" font-size="12" fill="#02203D">Checks</text>
+                    <rect x="248" y="20" width="104" height="40" rx="3" fill="#02203D"></rect><text x="300" y="44" text-anchor="middle" font-size="12" fill="#FFFFFF">Human review</text>
+                    <rect x="248" y="104" width="104" height="40" rx="3" fill="none" stroke="#C9821A" stroke-width="1.5"></rect><text x="300" y="128" text-anchor="middle" font-size="12" fill="#07131C">Returned</text>
+                    <path d="M88 80H128 M208 72C226 72 232 40 248 40 M208 88C226 88 232 124 248 124" fill="none" stroke="#02203D" stroke-width="1.5"></path>
+                    <path d="M248 134C160 156 60 150 48 100" fill="none" stroke="#17647D" stroke-width="1.5" stroke-dasharray="4 4"></path>
+                  </svg>
+                </sc-if>
+                <sc-if value="{{ f.isCapability }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 360 180" width="100%" style="max-width: 400px; display: block; font-family: 'Hanken Grotesk', sans-serif;" aria-hidden="true">
+                    <circle cx="180" cy="90" r="64" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"></circle>
+                    <rect x="130" y="8" width="100" height="30" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)"></rect><text x="180" y="28" text-anchor="middle" font-size="12" fill="#FFFFFF">Guided practice</text>
+                    <rect x="248" y="75" width="104" height="30" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)"></rect><text x="300" y="95" text-anchor="middle" font-size="12" fill="#FFFFFF">Work sample</text>
+                    <rect x="120" y="142" width="120" height="30" rx="3" fill="#38A0C3"></rect><text x="180" y="162" text-anchor="middle" font-size="12" fill="#07131C">Independent use</text>
+                    <rect x="8" y="75" width="104" height="30" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)"></rect><text x="60" y="95" text-anchor="middle" font-size="12" fill="#FFFFFF">Review</text>
+                  </svg>
+                </sc-if>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="background: #F5F5F1; padding: clamp(72px, 9vw, 144px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px clamp(48px, 6vw, 96px); align-items: center;">
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <h2 style="font-size: clamp(28px, 3.4vw, 52px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance;">{{ ov.mapHeading }}</h2>
+            <p style="font-size: 18px; line-height: 1.6; max-width: 32em;">{{ ov.mapText }}</p>
+            <p style="font-size: 15px; line-height: 1.55; color: #646B70; max-width: 36em;">Strategy informs Engineering, Business Intelligence and Automation. Engineering supports both BI and Automation. Capability Building supports the people operating all three.</p>
+          </div>
+          <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch;">
+            <a href="#/services/data-ai-strategy" style="grid-column: 1 / -1; background: #02203D; color: #FFFFFF; border-radius: 3px; padding: 16px 18px; font-weight: 600; font-size: 15px; display: flex; justify-content: space-between;"><span>Data &amp; AI Strategy</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; opacity: 0.7;">informs ↓</span></a>
+            <a href="#/services/data-engineering" style="background: #FFFFFF; border: 1px solid rgba(7,19,28,0.15); color: #07131C; border-radius: 3px; padding: 16px 14px; font-weight: 600; font-size: 14px; line-height: 1.3;">Data Engineering<span style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #646B70; margin-top: 6px; font-weight: 400;">supports → BI, Automation</span></a>
+            <a href="#/services/business-intelligence" style="background: #FFFFFF; border: 1px solid rgba(7,19,28,0.15); color: #07131C; border-radius: 3px; padding: 16px 14px; font-weight: 600; font-size: 14px; line-height: 1.3;">Business Intelligence</a>
+            <a href="#/services/ai-automation" style="background: #FFFFFF; border: 1px solid rgba(7,19,28,0.15); color: #07131C; border-radius: 3px; padding: 16px 14px; font-weight: 600; font-size: 14px; line-height: 1.3;">AI &amp; Automation</a>
+            <a href="#/services/capability-building" style="grid-column: 1 / -1; background: rgba(56,160,195,0.18); border: 1px solid #38A0C3; color: #07131C; border-radius: 3px; padding: 16px 18px; font-weight: 600; font-size: 15px; display: flex; justify-content: space-between;"><span>Capability Building</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #17647D;">↑ supports the people operating all three</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Service detail">
+      <dc-import name="Hero" page="{{ heroKey }}" hint-size="100%,100vh"></dc-import>
+
+      <nav aria-label="On this page" style="position: sticky; top: 80px; z-index: 5; background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(7,19,28,0.1);">
+        <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; overflow-x: auto;">
+          <div style="display: flex; gap: 10px; font-size: 14px; color: #646B70; white-space: nowrap;"><a href="#/" style="color: #646B70;">Home</a><span aria-hidden="true">/</span><a href="#/services" style="color: #646B70;">Services</a><span aria-hidden="true">/</span><span style="color: #07131C;">{{ svc.title }}</span></div>
+          <div style="display: flex; gap: 4px; white-space: nowrap;">
+            <sc-for list="{{ jumps }}" as="j" hint-placeholder-count="5"><button onClick="{{ j.go }}" style="height: 36px; padding: 0 12px; border: 0; background: transparent; color: #07131C; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 3px;" style-hover="background: #F5F5F1;">{{ j.label }}</button></sc-for>
+          </div>
+        </div>
+      </nav>
+
+      <section id="svc-overview" style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 40px clamp(48px, 6vw, 96px); align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Overview · {{ svc.index }}</span>
+            <h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -0.03em; text-wrap: balance;">{{ svc.heading }}</h2>
+            <sc-for list="{{ svc.intro }}" as="p" hint-placeholder-count="2"><p style="font-size: 17px; line-height: 1.6; max-width: 34em;">{{ p }}</p></sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 28px; border-top: 1px solid rgba(7,19,28,0.12); padding-top: 24px;">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #646B70;">This is useful when</span>
+              <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                <sc-for list="{{ svc.situations }}" as="s" hint-placeholder-count="4"><li style="display: grid; grid-template-columns: 10px minmax(0, 1fr); gap: 12px; font-size: 16px; line-height: 1.5;"><span aria-hidden="true" style="width: 10px; height: 10px; margin-top: 7px; border-radius: 2px; background: #38A0C3;"></span>{{ s }}</li></sc-for>
+              </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; background: #F5F5F1; border-radius: 3px; padding: 20px 22px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #646B70;">Outcome to work towards</span>
+              <p style="font-size: 18px; line-height: 1.45; font-weight: 500;">{{ svc.outcomeText }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-deliverables" style="background: #F5F5F1; padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px);">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px 64px; align-items: end;">
+            <div style="display: flex; flex-direction: column; gap: 14px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">What you receive</span><h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -0.03em;">Six concrete deliverables.</h2></div>
+            <p style="font-size: 16px; line-height: 1.55; color: #646B70; max-width: 36em;">{{ deliverablesLine }}</p>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1px; background: rgba(7,19,28,0.12); border: 1px solid rgba(7,19,28,0.12);">
+            <sc-for list="{{ svc.deliverables }}" as="d" hint-placeholder-count="6">
+              <div style="background: #F5F5F1; padding: 28px 24px 32px; display: flex; flex-direction: column; gap: 16px; outline: 1px solid rgba(7,19,28,0.12);">
+                <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ d.iconPath }}"></path></svg>
+                <h3 style="font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em;">{{ d.title }}</h3>
+                <p style="font-size: 15px; line-height: 1.55; color: #3A4750;">{{ d.desc }}</p>
+              </div>
+            </sc-for>
+          </div>
+          <button onClick="{{ goArtifact }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border: 1px solid rgba(7,19,28,0.2); border-radius: 3px; background: #FFFFFF; color: #07131C; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;" style-hover="border-color: #07131C;">View an example artifact <span aria-hidden="true">↓</span></button>
+        </div>
+      </section>
+
+      <section id="svc-approach" style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(36px, 4vw, 56px);">
+          <div style="display: flex; flex-direction: column; gap: 14px; max-width: 720px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">How we work</span><h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -0.03em;">Five stages, each with an output and a decision.</h2></div>
+          <div role="tablist" aria-label="Approach stages" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 8px;">
+            <sc-for list="{{ stages }}" as="st" hint-placeholder-count="5">
+              <button role="tab" aria-selected="{{ st.selected }}" onClick="{{ st.select }}" style="text-align: left; display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 3px; border: 1px solid {{ st.border }}; background: {{ st.bg }}; color: {{ st.color }}; font-family: inherit; cursor: pointer; transition: background 200ms, color 200ms; min-height: 96px;">
+                <span style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; opacity: 0.75;"><span>{{ st.num }}</span><span>{{ st.marker }}</span></span>
+                <span style="font-weight: 600; font-size: 17px;">{{ st.name }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <div role="tabpanel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 32px clamp(40px, 5vw, 80px); border-top: 1px solid rgba(7,19,28,0.12); padding-top: 32px;">
+            <div style="display: flex; flex-direction: column; gap: 18px;">
+              <h3 style="font-size: clamp(22px, 2vw, 30px); font-weight: 600; line-height: 1.2;">{{ stage.name }}</h3>
+              <p style="font-size: 17px; line-height: 1.6; max-width: 34em;">{{ stage.activity }}</p>
+              <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #646B70;">Output</span><p style="font-size: 17px; font-weight: 500; line-height: 1.45;">{{ stage.output }}</p></div>
+              <sc-if value="{{ hasFeedback }}" hint-placeholder-val="{{ false }}"><p style="font-size: 14px; line-height: 1.5; color: #17647D; border-left: 2px dashed #38A0C3; padding-left: 12px;">{{ svc.feedback.label }}</p></sc-if>
+            </div>
+            <div aria-label="Stage output preview" style="background: #F5F5F1; border-radius: 3px; padding: 24px; display: flex; flex-direction: column; gap: 12px; align-self: start;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70;">Illustrative preview · {{ stage.name }}</span>
+              <div style="background: #FFFFFF; border: 1px solid rgba(7,19,28,0.12); border-radius: 3px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+                <sc-for list="{{ stage.preview }}" as="p" hint-placeholder-count="3"><div style="display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 12px; align-items: center; font-size: 15px;"><span aria-hidden="true" style="width: 8px; height: 8px; background: #02203D; border-radius: 1px;"></span><span>{{ p }}</span></div></sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background: #07131C; color: #FFFFFF; padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; gap: clamp(36px, 4vw, 56px);">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 48px; align-items: end;">
+            <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #38A0C3;">How information moves</span><h2 style="font-size: clamp(30px, 3.6vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -0.03em; text-wrap: balance;">{{ svc.flow.title }}</h2></div>
+            <button onClick="{{ replayFlow }}" style="height: 40px; padding: 0 14px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer;" style-hover="border-color: #38A0C3;">Replay</button>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 280px); gap: 32px; align-items: start;">
+            <div data-pg-flow="true" style="position: relative; grid-column: {{ flowSpan }};">
+              <svg aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none;" viewBox="{{ flowViewBox }}" preserveAspectRatio="none">
+                <defs>
+                  <marker id="pg-arr-n" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="rgba(255,255,255,0.7)"></path></marker>
+                  <marker id="pg-arr-e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#FFD08A"></path></marker>
+                  <marker id="pg-arr-f" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#38A0C3"></path></marker>
+                </defs>
+                <sc-for list="{{ edgePaths }}" as="e" hint-placeholder-count="6">
+                  <path d="{{ e.d }}" fill="none" stroke="{{ e.stroke }}" stroke-width="{{ e.width }}" stroke-dasharray="{{ e.dash }}" stroke-dashoffset="{{ e.offset }}" marker-end="{{ e.marker }}" style="opacity: {{ e.opacity }}; animation: {{ e.anim }}; transition: opacity 300ms, stroke-width 300ms;"></path>
+                  <text x="{{ e.lx }}" y="{{ e.ly }}" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="{{ e.labelFill }}" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity: {{ e.opacity }};">{{ e.label }}</text>
+                </sc-for>
+              </svg>
+              <div style="display: grid; grid-template-columns: {{ flowCols }}; gap: 28px 56px; position: relative;">
+                <sc-for list="{{ flowNodes }}" as="n" hint-placeholder-count="6">
+                  <button data-flow-node="{{ n.id }}" onClick="{{ n.select }}" aria-pressed="{{ n.selected }}" style="grid-column: {{ n.gc }}; grid-row: {{ n.gr }}; align-self: center; text-align: left; border-radius: 3px; padding: 12px 14px; border: {{ n.border }}; background: {{ n.bg }}; color: {{ n.color }}; font-family: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 4px; min-height: 56px; position: relative; z-index: 1; transition: background 250ms, border-color 250ms; opacity: {{ n.opacity }};">
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; opacity: 0.7;">{{ n.kindLabel }}</span>
+                    <span style="font-weight: 600; font-size: 14px; line-height: 1.3;">{{ n.label }}</span>
+                    <sc-if value="{{ n.hasSub }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; line-height: 1.4; opacity: 0.8;">{{ n.sub }}</span></sc-if>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <aside aria-live="polite" style="grid-column: {{ asideSpan }}; border: 1px solid rgba(255,255,255,0.18); border-radius: 3px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-height: 140px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #38A0C3;">{{ nodeKind }}</span>
+              <span style="font-weight: 600; font-size: 17px;">{{ nodeLabel }}</span>
+              <p style="font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.8);">{{ nodeNote }}</p>
+            </aside>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.6);">{{ svc.flow.bandTitle }}</span>
+            <sc-for list="{{ svc.flow.band }}" as="b" hint-placeholder-count="3"><span style="font-size: 14px; font-weight: 500; border: 1px solid rgba(255,255,255,0.25); border-radius: 3px; padding: 6px 12px;">{{ b }}</span></sc-for>
+            <span style="margin-left: auto; display: flex; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.6);"><span>— forward</span><span style="color: #FFD08A;">— exception</span><span style="color: #38A0C3;">- - feedback</span></span>
+          </div>
+          <ol style="margin: 0; padding: 0 0 0 18px; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); columns: 2; column-gap: 48px; max-width: 1100px;">
+            <sc-for list="{{ flowSteps }}" as="s" hint-placeholder-count="6"><li style="break-inside: avoid; padding-right: 8px;">{{ s }}</li></sc-for>
+          </ol>
+        </div>
+      </section>
+
+      <section id="svc-artifact" style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px clamp(48px, 6vw, 96px); align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Worked example</span>
+            <h2 style="font-size: clamp(28px, 3.2vw, 48px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance;">{{ svc.example.question }}</h2>
+            <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(7,19,28,0.12); padding-top: 20px;">
+              <sc-for list="{{ exampleSteps }}" as="s" hint-placeholder-count="3"><li style="display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; font-size: 16px; line-height: 1.55;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #646B70; padding-top: 4px;">{{ s.num }}</span><span>{{ s.text }}</span></li></sc-for>
+            </ol>
+            <p style="font-size: 13px; color: #646B70;">Illustrative example with sample figures. It is not an assessment of your organisation or a client result.</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #646B70;">Sample artifact · {{ artifactTitle }}</span>
+
+            <sc-if value="{{ isStrategy }}" hint-placeholder-val="{{ false }}">
+              <div style="border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; padding: 22px; display: flex; flex-direction: column; gap: 18px; background: #FFFFFF;">
+                <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center;">
+                  <span style="font-weight: 600; font-size: 17px;">Phased delivery roadmap</span>
+                  <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #646B70; cursor: pointer;"><input type="checkbox" checked="{{ rmReady }}" onChange="{{ toggleReady }}" style="width: 18px; height: 18px; accent-color: #02203D;">Illustrative readiness: source integration complete</label>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr)); gap: 10px;">
+                  <sc-for list="{{ rmPhases }}" as="ph" hint-placeholder-count="4">
+                    <div style="display: flex; flex-direction: column; gap: 8px; border-top: 2px solid {{ ph.rule }}; padding-top: 10px; min-height: 120px;">
+                      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {{ ph.labelColor }};">{{ ph.name }}</span>
+                      <sc-for list="{{ ph.items }}" as="it" hint-placeholder-count="2"><button onClick="{{ it.select }}" aria-pressed="{{ it.selected }}" style="text-align: left; border-radius: 3px; padding: 8px 10px; border: 1px solid {{ it.border }}; background: {{ it.bg }}; color: #07131C; font-family: inherit; font-size: 13px; font-weight: 500; line-height: 1.3; cursor: pointer;">{{ it.name }}<span style="display: block; font-size: 11px; color: #646B70; font-weight: 400; margin-top: 3px;">{{ it.owner }}</span></button></sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background: #F5F5F1; border-radius: 3px; padding: 16px 18px; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 8px 16px; font-size: 14px; line-height: 1.5;">
+                  <span style="color: #646B70;">Initiative</span><span style="font-weight: 600;">{{ rmSel.name }}</span>
+                  <span style="color: #646B70;">Business question</span><span>{{ rmSel.question }}</span>
+                  <span style="color: #646B70;">Prerequisites</span><span>{{ rmSel.prereq }}</span>
+                  <span style="color: #646B70;">Acceptance</span><span>{{ rmSel.accept }}</span>
+                  <span style="color: #646B70;">Status</span><span style="font-weight: 500; color: {{ rmSel.statusColor }};">{{ rmSel.status }}</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isEngineering }}" hint-placeholder-val="{{ false }}">
+              <div style="border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; padding: 22px; display: flex; flex-direction: column; gap: 16px; background: #FFFFFF;">
+                <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center;"><span style="font-weight: 600; font-size: 17px;">Pipeline run · week 36 (sample)</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70;">Fixed illustrative timestamps</span></div>
+                <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70; padding: 0 10px;"><span>Source</span><span>Last completed load</span><span>Checks</span><span>Status</span></div>
+                <sc-for list="{{ runs }}" as="r" hint-placeholder-count="3">
+                  <button onClick="{{ r.select }}" aria-pressed="{{ r.selected }}" style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; font-size: 14px; padding: 12px 10px; border-radius: 3px; text-align: left; border: 1px solid {{ r.border }}; background: {{ r.bg }}; color: #07131C; font-family: inherit; cursor: {{ r.cursor }}; align-items: center;"><span style="font-weight: 500;">{{ r.source }}</span><span style="font-variant-numeric: tabular-nums;">{{ r.load }}</span><span>{{ r.checks }}</span><span style="font-weight: 500; color: {{ r.statusColor }};">{{ r.status }}</span></button>
+                </sc-for>
+                <sc-if value="{{ traceOpen }}" hint-placeholder-val="{{ false }}">
+                  <div style="background: #F5F5F1; border-radius: 3px; padding: 16px 18px; display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 8px 16px; font-size: 14px; line-height: 1.5;">
+                    <span style="color: #646B70;">Held record</span><span>Stock file row 412 · Item 4471 · Outlet code E-0118</span>
+                    <span style="color: #646B70;">Why it was held</span><span>Product ID is missing, so the record cannot join the product master. It is held rather than loaded as an unknown product.</span>
+                    <span style="color: #646B70;">Owner</span><span>Supply chain data owner</span>
+                    <span style="color: #646B70;">Return path</span><span>Once the product ID is supplied, the record is revalidated against the same checks and, if it passes, loaded into the curated stock model.</span>
+                  </div>
+                  <button onClick="{{ closeTrace }}" style="align-self: flex-start; height: 40px; padding: 0 14px; border: 1px solid rgba(7,19,28,0.2); border-radius: 3px; background: #FFFFFF; color: #07131C; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer;">Back to the normal path</button>
+                </sc-if>
+                <sc-if value="{{ traceClosed }}" hint-placeholder-val="{{ true }}"><p style="font-size: 13px; color: #646B70;">Select the run with an exception to trace the held record.</p></sc-if>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isBI }}" hint-placeholder-val="{{ false }}">
+              <div style="border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; padding: 22px; display: flex; flex-direction: column; gap: 18px; background: #FFFFFF;">
+                <div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: end;">
+                  <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70;">Net sales · week 36 · sample units (m)</span><span style="font-size: clamp(40px, 4vw, 56px); font-weight: 600; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums;">9.6</span></div>
+                  <div style="display: grid; grid-template-columns: auto auto; gap: 4px 16px; font-size: 14px; font-variant-numeric: tabular-nums; text-align: right;"><span style="color: #646B70;">Gross sales</span><span>10.0</span><span style="color: #646B70;">Returns</span><span>−0.4</span><span style="color: #646B70;">Plan</span><span>10.0</span><span style="color: #646B70;">Variance</span><span style="font-weight: 600;">−0.4 (−4%)</span></div>
+                </div>
+                <div role="group" aria-label="Inspect the measure" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <sc-for list="{{ metricTabs }}" as="m" hint-placeholder-count="5"><button onClick="{{ m.select }}" aria-pressed="{{ m.selected }}" style="height: 36px; padding: 0 12px; border-radius: 3px; border: 1px solid {{ m.border }}; background: {{ m.bg }}; color: {{ m.color }}; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">{{ m.name }}</button></sc-for>
+                </div>
+                <p style="font-size: 15px; line-height: 1.55; background: #F5F5F1; border-radius: 3px; padding: 14px 16px;">{{ metricText }}</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70;">Variance by product line (sums to −0.4)</span>
+                  <sc-for list="{{ biRows }}" as="b" hint-placeholder-count="4"><div style="display: grid; grid-template-columns: 120px minmax(0, 1fr) 56px; gap: 12px; align-items: center; font-size: 14px;"><span>{{ b.name }}</span><span style="height: 8px; background: rgba(7,19,28,0.06); border-radius: 2px; position: relative;"><span style="position: absolute; right: 0; top: 0; height: 100%; width: {{ b.w }}; background: {{ b.color }}; border-radius: 2px;"></span></span><span style="text-align: right; font-variant-numeric: tabular-nums; font-weight: {{ b.weight }};">{{ b.v }}</span></div></sc-for>
+                </div>
+                <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 6px 16px; font-size: 14px; line-height: 1.5; border-top: 1px solid rgba(7,19,28,0.12); padding-top: 14px;"><span style="color: #646B70;">Next question</span><span>Are returns concentrated in Snacks, and since which week?</span><span style="color: #646B70;">Follow-up</span><span>Commercial finance lead</span></div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isAI }}" hint-placeholder-val="{{ false }}">
+              <div style="border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; padding: 22px; display: flex; flex-direction: column; gap: 18px; background: #FFFFFF;">
+                <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center;">
+                  <span style="font-weight: 600; font-size: 17px;">Work item · weekly performance briefing</span>
+                  <div role="group" aria-label="Sample" style="display: flex; gap: 4px;"><button onClick="{{ aiNormal }}" aria-pressed="{{ aiIsNormal }}" style="height: 34px; padding: 0 12px; border-radius: 3px; border: 1px solid {{ aiNormalBorder }}; background: {{ aiNormalBg }}; color: {{ aiNormalColor }}; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Normal sample</button><button onClick="{{ aiMissing }}" aria-pressed="{{ aiIsMissing }}" style="height: 34px; padding: 0 12px; border-radius: 3px; border: 1px solid {{ aiMissingBorder }}; background: {{ aiMissingBg }}; color: {{ aiMissingColor }}; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Missing source</button></div>
+                </div>
+                <div style="display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 10px 16px; font-size: 14px; line-height: 1.5;">
+                  <span style="color: #646B70;">Input</span><span>Scheduled trigger · Monday 07:00 · Reporting period W36</span>
+                  <span style="color: #646B70;">Supporting sources</span><span>{{ aiSources }}</span>
+                  <span style="color: #646B70;">Proposed output</span><span style="border-left: 2px solid #38A0C3; padding-left: 10px;">{{ aiProposed }}<span style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #17647D; margin-top: 4px;">Labelled: Proposed · not verified</span></span>
+                  <span style="color: #646B70;">Checks</span><span style="color: {{ aiChecksColor }}; font-weight: 500;">{{ aiChecks }}</span>
+                  <span style="color: #646B70;">Review</span><span style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;"><button onClick="{{ aiApprove }}" disabled="{{ aiApproveDisabled }}" style="height: 36px; padding: 0 14px; border-radius: 3px; border: 0; background: {{ aiApproveBg }}; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: {{ aiApproveCursor }};">Approve release</button><button onClick="{{ aiReturn }}" style="height: 36px; padding: 0 14px; border-radius: 3px; border: 1px solid rgba(7,19,28,0.2); background: #FFFFFF; color: #07131C; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Return for correction</button><span style="font-size: 13px; color: #646B70;">Reviewer: Commercial finance lead</span></span>
+                  <span style="color: #646B70;">Final status</span><span style="font-weight: 600; color: {{ aiStatusColor }};">{{ aiStatus }}</span>
+                </div>
+                <p style="font-size: 13px; color: #646B70;">This is an illustration on the page. It does not connect to a live assistant or submit anything to an external system.</p>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isCapability }}" hint-placeholder-val="{{ false }}">
+              <div style="border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; padding: 22px; display: flex; flex-direction: column; gap: 18px; background: #FFFFFF;">
+                <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center;">
+                  <span style="font-weight: 600; font-size: 17px;">Role-to-task matrix (illustrative)</span>
+                  <div role="group" aria-label="Role" style="display: flex; gap: 4px;"><sc-for list="{{ roles }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.select }}" aria-pressed="{{ r.selected }}" style="height: 34px; padding: 0 12px; border-radius: 3px; border: 1px solid {{ r.border }}; background: {{ r.bg }}; color: {{ r.color }}; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">{{ r.name }}</button></sc-for></div>
+                </div>
+                <div style="display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: 8px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70; padding: 0 10px;"><span>Task</span><span>Baseline</span><span>Guided practice</span><span>Independent demonstration</span></div>
+                <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="3">
+                  <div style="display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: 8px 12px; align-items: center; font-size: 14px; padding: 12px 10px; border-top: 1px solid rgba(7,19,28,0.1);">
+                    <span style="font-weight: 500;">{{ t.name }}</span>
+                    <span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #07131C; background: {{ t.b1 }};"></span><span style="font-size: 12px; color: #646B70;">{{ t.l1 }}</span></span>
+                    <span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #07131C; background: {{ t.b2 }};"></span><span style="font-size: 12px; color: #646B70;">{{ t.l2 }}</span></span>
+                    <span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #17647D; background: {{ t.b3 }};"></span><span style="font-size: 12px; color: #646B70;">{{ t.l3 }}</span></span>
+                  </div>
+                </sc-for>
+                <p style="font-size: 13px; color: #646B70;">Evidence: {{ roleEvidence }}. Illustrative roles and tasks; individual results are never published.</p>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-technology" style="background: #F5F5F1; padding: clamp(56px, 7vw, 112px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 32px clamp(48px, 6vw, 96px); align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Technology</span>
+            <h2 style="font-size: clamp(26px, 3vw, 44px); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance;">{{ techHeading }}</h2>
+            <p style="font-size: 16px; line-height: 1.6; color: #3A4750; max-width: 32em;">{{ techIntro }}</p>
+            <sc-if value="{{ hasMethods }}" hint-placeholder-val="{{ false }}"><p style="font-size: 14px; line-height: 1.5; color: #646B70;">Working methods, not software: {{ methodsText }}.</p></sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; border-top: 1px solid rgba(7,19,28,0.15);">
+            <sc-for list="{{ tech }}" as="t" hint-placeholder-count="4">
+              <div style="display: grid; grid-template-columns: 28px minmax(0, 0.8fr) minmax(0, 1.6fr); gap: 8px 16px; padding: 16px 0; border-bottom: 1px solid rgba(7,19,28,0.15); align-items: start;">
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="{{ t.iconPath }}"></path></svg>
+                <span style="font-weight: 600; font-size: 16px; line-height: 1.35;">{{ t.name }}</span>
+                <span style="font-size: 15px; line-height: 1.5; color: #3A4750;">{{ t.role }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-questions" style="padding: clamp(64px, 8vw, 128px) 0;">
+        <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 48px clamp(40px, 5vw, 80px); align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Measures to agree</span>
+            <p style="font-size: 15px; line-height: 1.5; color: #646B70;">Measurement categories to agree at the outset — not achieved results.</p>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid rgba(7,19,28,0.12);">
+              <sc-for list="{{ svc.measures }}" as="m" hint-placeholder-count="4"><li style="padding: 12px 0; border-bottom: 1px solid rgba(7,19,28,0.12); font-size: 16px;">{{ m }}</li></sc-for>
+            </ul>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Questions</span>
+            <div style="display: flex; flex-direction: column; border-top: 1px solid rgba(7,19,28,0.12);">
+              <sc-for list="{{ svc.faqs }}" as="f" hint-placeholder-count="3">
+                <details style="border-bottom: 1px solid rgba(7,19,28,0.12);">
+                  <summary style="padding: 18px 0; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px;">{{ f.q }}<span aria-hidden="true" style="color: #17647D;">+</span></summary>
+                  <p style="padding: 0 0 18px; font-size: 16px; line-height: 1.6; max-width: 36em;">{{ f.a }}</p>
+                </details>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #17647D;">Related expertise</span>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <sc-for list="{{ related }}" as="r" hint-placeholder-count="2">
+                <a href="{{ r.href }}" style="display: grid; grid-template-columns: 28px minmax(0, 1fr) 20px; gap: 14px; align-items: center; padding: 16px 18px; border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; color: #07131C;" style-hover="border-color: #07131C;">
+                  <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.iconPath }}"></path></svg>
+                  <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-weight: 600; font-size: 16px;">{{ r.title }}</span><span style="font-size: 13px; color: #646B70;">{{ r.outcome }}</span></span>
+                  <span aria-hidden="true" style="color: #17647D;">→</span>
+                </a>
+              </sc-for>
+              <a href="{{ relatedWork.href }}" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border: 1px solid rgba(7,19,28,0.15); border-radius: 3px; color: #07131C;" style-hover="border-color: #07131C;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #646B70;">Illustrative scenario</span><span style="font-weight: 600; font-size: 16px;">{{ relatedWork.title }}</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <section style="padding: 0 0 clamp(96px, 10vw, 160px);">
+    <div data-pg-reveal="rise" style="max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 80px) 0; border-top: 1px solid rgba(7,19,28,0.12); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 64px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 640px;">
+        <h2 style="font-size: clamp(32px, 4.4vw, 68px); font-weight: 650; line-height: 1.0; letter-spacing: -0.035em; text-wrap: balance;">{{ closingH }}</h2>
+        <sc-if value="{{ hasClosingP }}" hint-placeholder-val="{{ true }}"><p style="font-size: 17px; line-height: 1.55; color: #646B70; max-width: 34em;">{{ closingP }}</p></sc-if>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center;">
+        <a href="{{ ctaHref }}" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 3px; background: #02203D; color: #FFFFFF; font-weight: 600; font-size: 16px;" style-hover="background: #0B3556;">{{ ctaLabel }}</a>
+        <a href="#/assessment" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px;">Check your readiness <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slug&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;&quot;, &quot;data-ai-strategy&quot;, &quot;data-engineering&quot;, &quot;business-intelligence&quot;, &quot;ai-automation&quot;, &quot;capability-building&quot;]}}">
+class Component extends DCLogic {
+  state = { lastSlug: null, stage: 0, node: null, geo: null, anim: false, played: false, rm: this.readRm(), narrow: false,
+    rmInit: 0, rmReady: false, trace: false, metric: 0, aiMode: 'normal', aiDecision: null, role: 0 };
+  readRm() { try { const s = localStorage.getItem('pg-reduce-motion'); if (s !== null) return s === '1'; } catch (e) {} return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  componentDidMount() {
+    this.onMotion = () => this.setState({ rm: this.readRm() }); window.addEventListener('pg-motion', this.onMotion);
+    this.onResize = () => { clearTimeout(this.rt); this.rt = setTimeout(() => this.measureFlow(), 80); }; window.addEventListener('resize', this.onResize);
+    this.armFlow();
+  }
+  componentWillUnmount() { window.removeEventListener('pg-motion', this.onMotion); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.playScroll); clearTimeout(this.playT); if (this.io) this.io.disconnect(); if (this.ro) this.ro.disconnect(); clearTimeout(this.rt); clearTimeout(this.armT); }
+  componentDidUpdate() { const slug = this.props.slug || ''; if (slug !== this.armedFor) this.armFlow(); }
+  armFlow() {
+    clearTimeout(this.armT);
+    this.armT = setTimeout(() => {
+      const el = document.querySelector('[data-pg-flow]');
+      if (!el) { if (this.props.slug) this.armT = setTimeout(() => this.armFlow(), 250); return; }
+      this.armedFor = this.props.slug || '';
+      if (this.io) this.io.disconnect(); if (this.ro) this.ro.disconnect();
+      const play = () => { if (!this.state.played) this.setState({ played: true, anim: true }); if (this.io) this.io.disconnect(); window.removeEventListener('scroll', this.playScroll); clearTimeout(this.playT); };
+      this.io = new IntersectionObserver((es) => { if (es[0].isIntersecting) play(); }, { threshold: 0.2 });
+      this.io.observe(el);
+      window.removeEventListener('scroll', this.playScroll);
+      this.playScroll = () => { const b = el.getBoundingClientRect(); if (b.top < window.innerHeight * 0.9 && b.bottom > 0) play(); };
+      window.addEventListener('scroll', this.playScroll, { passive: true }); this.playScroll();
+      clearTimeout(this.playT); this.playT = setTimeout(() => { const b = el.getBoundingClientRect(); if (b.top < window.innerHeight * 1.5) play(); }, 3000);
+      if ('ResizeObserver' in window) { this.ro = new ResizeObserver(() => this.onResize()); this.ro.observe(el); }
+      this.measureFlow(); setTimeout(() => this.measureFlow(), 900);
+    }, 120);
+  }
+  measureFlow() {
+    const el = document.querySelector('[data-pg-flow]'); if (!el) return;
+    const base = el.getBoundingClientRect(); const rects = {};
+    el.querySelectorAll('[data-flow-node]').forEach(n => { const r = n.getBoundingClientRect(); rects[n.getAttribute('data-flow-node')] = { l: r.left - base.left, t: r.top - base.top, w: r.width, h: r.height }; });
+    const narrow = window.innerWidth < 960;
+    const changed = narrow !== this.state.narrow;
+    this.setState({ geo: { w: base.width, h: base.height, rects }, narrow });
+    if (changed || !this.state.geo) requestAnimationFrame(() => requestAnimationFrame(() => { const el2 = document.querySelector('[data-pg-flow]'); if (!el2) return; const b2 = el2.getBoundingClientRect(); const r2 = {}; el2.querySelectorAll('[data-flow-node]').forEach(n => { const r = n.getBoundingClientRect(); r2[n.getAttribute('data-flow-node')] = { l: r.left - b2.left, t: r.top - b2.top, w: r.width, h: r.height }; }); this.setState({ geo: { w: b2.width, h: b2.height, rects: r2 } }); }));
+  }
+  renderVals() {
+    const PG = window.PG || { services: [], work: [] }; const slug = this.props.slug || '';
+    const s = this.state;
+    if (slug !== s.lastSlug) { Object.assign(s, { lastSlug: slug, stage: 0, node: null, geo: null, anim: false, played: false, trace: false, metric: 0, aiMode: 'normal', aiDecision: null, role: 0, rmInit: 0, rmReady: false }); }
+    const services = PG.services.map(x => ({ ...x, href: '#/services/' + x.slug, iconPath: PG.icon(x.icon) }));
+    const svc = services.find(x => x.slug === slug);
+    const ov = PG.servicesOverview || { situations: [], features: {} };
+    const scrollTo = (id) => () => { const el = document.getElementById(id); if (!el) return; window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 140, behavior: s.rm ? 'auto' : 'smooth' }); };
+    const out = {
+      isOverview: !svc, isDetail: !!svc, ov,
+      situations: (ov.situations || []).map(x => { const t = services.find(y => y.slug === x.slug) || {}; return { ...x, title: t.title, href: t.href }; }),
+      features: services.map((x, i) => ({ ...x, index: x.index, text: (ov.features[x.slug] || {}).text, outputs: (ov.features[x.slug] || {}).outputs || [], textOrder: i % 2 === 0 ? 0 : 1, isStrategy: x.slug === 'data-ai-strategy', isEngineering: x.slug === 'data-engineering', isBI: x.slug === 'business-intelligence', isAI: x.slug === 'ai-automation', isCapability: x.slug === 'capability-building', miniBg: (i % 2 === 0) ? '#07131C' : '#F5F5F1', miniInk: (i % 2 === 0) ? '#FFFFFF' : '#07131C' })),
+      deliverablesLine: PG.deliverablesLine, closingH: svc ? svc.closing : (ov.closing || {}).h, closingP: svc ? '' : (ov.closing || {}).p, hasClosingP: !svc,
+      ctaLabel: svc ? svc.cta : 'Discuss your priorities', ctaHref: '#/contact' + (svc ? '?service=' + svc.slug : '')
+    };
+    if (!svc) return { ...out, svc: {}, jumps: [], stages: [], stage: {}, flowNodes: [], edgePaths: [], flowSteps: [], exampleSteps: [], tech: [], related: [], relatedWork: {} };
+    // ---- detail ----
+    const stage = svc.approach[s.stage] || svc.approach[0];
+    const nodes = svc.flow.nodes; const maxCol = Math.max(...nodes.map(n => n.col)); const maxRow = Math.max(...nodes.map(n => n.row));
+    const narrow = s.narrow;
+    const kindLabel = { input: 'Input', process: 'Process', gate: 'Decision', output: 'Output', exception: 'Exception', use: 'Use' };
+    const incident = (id) => svc.flow.edges.filter(e => e.from === id || e.to === id);
+    const selNode = nodes.find(n => n.id === s.node);
+    const order = nodes.slice().sort((a, b) => a.col - b.col || a.row - b.row);
+    const flowNodes = nodes.map(n => { const sel = s.node === n.id; const dim = s.node && !sel && !incident(s.node).some(e => e.from === n.id || e.to === n.id); const exc = n.kind === 'exception', gate = n.kind === 'gate', use = n.kind === 'use' || n.kind === 'output';
+      return { ...n, kindLabel: kindLabel[n.kind] || '', hasSub: !!n.sub, selected: sel, gc: narrow ? '1' : String(n.col), gr: narrow ? String(order.indexOf(n) + 1) : String(n.row),
+        border: sel ? '1px solid #38A0C3' : (exc ? '1px dashed #FFD08A' : (gate ? '1px solid rgba(255,255,255,0.55)' : '1px solid rgba(255,255,255,0.22)')),
+        bg: sel ? 'rgba(56,160,195,0.22)' : (use ? '#FFFFFF' : (exc ? 'rgba(255,208,138,0.08)' : 'rgba(255,255,255,0.03)')), color: use && !sel ? '#07131C' : '#FFFFFF', opacity: dim ? 0.45 : 1,
+        select: () => this.setState({ node: s.node === n.id ? null : n.id }) }; });
+    // edges
+    const g = s.geo; const edgePaths = [];
+    if (g) svc.flow.edges.forEach((e, i) => {
+      const A = g.rects[e.from], B = g.rects[e.to]; if (!A || !B) return;
+      let d, lx, ly, len;
+      const acx = A.l + A.w / 2, acy = A.t + A.h / 2, bcx = B.l + B.w / 2, bcy = B.t + B.h / 2;
+      if (e.type === 'feedback') {
+        if (narrow) { const x1 = A.l + A.w, y1 = acy, x2 = B.l + B.w, y2 = bcy, off = 34; d = `M${x1} ${y1} C${x1 + off} ${y1} ${x2 + off} ${y2} ${x2} ${y2}`; lx = Math.max(x1, x2) + off - 4; ly = (y1 + y2) / 2; len = Math.abs(y2 - y1) + 2 * off; }
+        else { const x1 = A.l, y1 = A.t + A.h, x2 = B.l + B.w, y2 = B.t + B.h, dy = 44; d = `M${acx} ${y1} C${acx} ${y1 + dy} ${bcx} ${y2 + dy} ${bcx} ${y2}`; lx = (acx + bcx) / 2; ly = Math.max(y1, y2) + dy - 6; len = Math.abs(acx - bcx) + 2 * dy; }
+      } else if (narrow) { const x1 = acx, y1 = A.t + A.h, x2 = bcx, y2 = B.t; d = `M${x1} ${y1} C${x1} ${(y1 + y2) / 2} ${x2} ${(y1 + y2) / 2} ${x2} ${y2}`; lx = (x1 + x2) / 2 + 60; ly = (y1 + y2) / 2 + 4; len = Math.abs(y2 - y1) + 20; }
+      else { const x1 = A.l + A.w, y1 = acy, x2 = B.l, y2 = bcy, mx = (x1 + x2) / 2; d = `M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}`; lx = mx; ly = (y1 + y2) / 2 - 8; len = Math.hypot(x2 - x1, y2 - y1) * 1.15; }
+      const hi = s.node && (e.from === s.node || e.to === s.node); const dimmed = s.node && !hi;
+      const stroke = e.type === 'exception' ? '#FFD08A' : (e.type === 'feedback' ? '#38A0C3' : 'rgba(255,255,255,0.7)');
+      const marker = e.type === 'exception' ? 'url(#pg-arr-e)' : (e.type === 'feedback' ? 'url(#pg-arr-f)' : 'url(#pg-arr-n)');
+      const animate = s.anim && !s.rm; const fb = e.type === 'feedback';
+      edgePaths.push({ d, lx, ly, label: e.label || '', stroke, marker, width: hi ? 2.5 : 1.5, dash: fb ? '5 5' : (animate ? String(Math.round(len)) : 'none'), offset: fb ? 0 : (animate ? Math.round(len) : 0),
+        anim: animate ? (fb ? `pgFade 500ms ease ${i * 220 + 200}ms both` : `pgTrace 750ms cubic-bezier(0.22,1,0.36,1) ${i * 220}ms forwards`) : 'none', opacity: dimmed ? 0.25 : ((!s.played && !s.rm) ? 0 : 1), labelFill: e.type === 'exception' ? '#FFD08A' : (fb ? '#38A0C3' : 'rgba(255,255,255,0.8)') });
+    });
+    const flowSteps = svc.flow.edges.map(e => { const a = nodes.find(n => n.id === e.from), b = nodes.find(n => n.id === e.to); return `${a.label} → ${b.label}${e.label ? ' (' + e.label + ')' : ''}${e.type === 'exception' ? ' — exception route' : (e.type === 'feedback' ? ' — feedback' : '')}.`; });
+    // ---- artifacts ----
+    const inits = [
+      { name: 'Metric definitions', owner: 'Finance lead', phase: 0, question: 'Which definition of net sales do we report?', prereq: 'None — this is the first foundation.', accept: 'One agreed definition, period rule and owner recorded in the KPI dictionary.', ready: true },
+      { name: 'Source integration', owner: 'Data owner', phase: 0, question: 'Can sales and finance data be joined without manual reconciliation?', prereq: 'Metric definitions agreed.', accept: 'Both sources load on schedule with reconciliation checks passing.', ready: true },
+      { name: 'Weekly commercial reporting', owner: 'Commercial finance lead', phase: 1, question: 'Where is performance slipping this week?', prereq: 'Source integration complete; net sales definition agreed.', accept: 'Report reconciles to the ledger; used in the weekly review for four consecutive weeks.', ready: s.rmReady },
+      { name: 'AI reporting assistant', owner: 'Process owner', phase: 2, question: 'Can the weekly briefing be drafted with less manual preparation?', prereq: 'Weekly commercial reporting in use; checked figures available.', accept: 'Draft passes agreed checks; reviewer approval recorded for every release.', ready: false }];
+    const phaseNames = ['Phase 1 · Foundations', 'Phase 2 · Reporting', 'Phase 3 · Assisted work', 'Foundation needed'];
+    const rmPhases = phaseNames.map((name, pi) => ({ name, rule: pi === 3 ? '#FFD08A' : '#02203D', labelColor: pi === 3 ? '#8A5A12' : '#646B70', items: inits.map((it, ii) => ({ ...it, ii })).filter(it => pi === 3 ? !it.ready : (it.ready && it.phase === pi)).map(it => ({ name: it.name, owner: it.owner, selected: s.rmInit === it.ii, border: s.rmInit === it.ii ? '#02203D' : 'rgba(7,19,28,0.18)', bg: s.rmInit === it.ii ? '#F5F5F1' : '#FFFFFF', select: () => this.setState({ rmInit: it.ii }) })) }));
+    const sel = inits[s.rmInit];
+    const rmSel = { ...sel, status: sel.ready ? 'Ready to sequence' : 'Foundation needed — ' + (s.rmInit === 2 ? 'source integration not yet complete' : 'depends on earlier phases'), statusColor: sel.ready ? '#17647D' : '#8A5A12' };
+    const runsRaw = [{ source: 'ERP orders', load: 'Tue 06:10', checks: '12 / 12 passed', status: 'Loaded', ok: true }, { source: 'CRM outlets', load: 'Tue 06:14', checks: '8 / 8 passed', status: 'Loaded', ok: true }, { source: 'Stock file (weekly)', load: 'Tue 06:22', checks: '6 / 7 passed', status: '1 exception · Missing product ID', ok: false }];
+    const runs = runsRaw.map(r => ({ ...r, selected: !r.ok && s.trace, border: !r.ok ? (s.trace ? '#8A5A12' : '#FFD08A') : 'rgba(7,19,28,0.1)', bg: !r.ok && s.trace ? 'rgba(255,208,138,0.18)' : '#FFFFFF', statusColor: r.ok ? '#17647D' : '#8A5A12', cursor: r.ok ? 'default' : 'pointer', select: () => { if (!r.ok) this.setState({ trace: true }); } }));
+    const metricDefs = [['Definition', 'Net sales = gross invoiced sales less credited returns, excluding VAT and internal transfers.'], ['Period', 'Reporting week 36, Monday to Sunday, based on invoice date.'], ['Source', 'Finance ledger (invoices, credit notes) joined to the product master through the curated sales model.'], ['Owner', 'Commercial finance lead owns the definition; changes are agreed at the monthly metric review.'], ['Exclusions', 'Samples, staff sales and intercompany transfers are excluded from both gross sales and returns.']];
+    const metricTabs = metricDefs.map((m, i) => ({ name: m[0], selected: s.metric === i, border: s.metric === i ? '#02203D' : 'rgba(7,19,28,0.18)', bg: s.metric === i ? '#02203D' : '#FFFFFF', color: s.metric === i ? '#FFFFFF' : '#07131C', select: () => this.setState({ metric: i }) }));
+    const biRows = [['Beverages', -0.1], ['Snacks', -0.3], ['Personal care', 0.0], ['Household', 0.0]].map(r => ({ name: r[0], v: (r[1] > 0 ? '+' : '') + r[1].toFixed(1), w: (Math.abs(r[1]) / 0.4 * 100) + '%', color: r[1] <= -0.3 ? '#C9821A' : '#02203D', weight: r[1] <= -0.3 ? 600 : 400 }));
+    const missing = s.aiMode === 'missing'; const dec = s.aiDecision;
+    const aiStatus = missing ? 'Stopped at review · missing evidence (Finance ledger, W36)' : (dec === 'approve' ? 'Approved for release · recorded' : (dec === 'return' ? 'Returned for correction · recorded' : 'Awaiting reviewer decision'));
+    const roleDefs = [
+      { name: 'Leader', evidence: 'a written explanation of one KPI variance reviewed against the rubric', tasks: [['Explain a KPI variance', 1, 2, 3], ['Challenge a definition in review', 1, 2, 2], ['Assign and track a follow-up action', 2, 3, 3]] },
+      { name: 'Analyst', evidence: 'an updated measure and a reconciled report checked by a reviewer', tasks: [['Update a measure', 1, 3, 3], ['Reconcile a report to source', 1, 2, 3], ['Add a drill path', 1, 2, 2]] },
+      { name: 'Engineer', evidence: 'a failed load investigated and resolved using the runbook', tasks: [['Investigate a failed load', 1, 3, 3], ['Resolve an exception queue item', 2, 3, 3], ['Deploy a model change', 1, 2, 2]] }];
+    const role = roleDefs[s.role]; const lvl = ['', 'Observed', 'Practised', 'Demonstrated'];
+    const tasks = role.tasks.map(t => ({ name: t[0], b1: t[1] >= 1 ? '#07131C' : 'transparent', l1: t[1] >= 1 ? 'Baseline set' : '—', b2: t[2] >= 2 ? '#07131C' : 'transparent', l2: t[2] >= 2 ? 'Practised' : 'Planned', b3: t[3] >= 3 ? '#17647D' : 'transparent', l3: t[3] >= 3 ? 'Demonstrated' : 'Not yet' }));
+    const isCap = svc.slug === 'capability-building';
+    const relatedWork = (PG.work || []).find(w => w.slug === svc.related) || {};
+    return { ...out,
+      svc, heroKey: 'services/' + slug, artifactTitle: ({ 'data-ai-strategy': 'Phased delivery roadmap', 'data-engineering': 'Pipeline run and exception queue', 'business-intelligence': 'Inspectable metric card', 'ai-automation': 'Work item with review', 'capability-building': 'Role-to-task matrix' })[svc.slug],
+      jumps: [['Overview', 'svc-overview'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']].map(j => ({ label: j[0], go: scrollTo(j[1]) })),
+      goArtifact: scrollTo('svc-artifact'),
+      stages: svc.approach.map((st, i) => ({ ...st, num: '0' + (i + 1), marker: svc.feedback && i === svc.feedback.from ? '↺ ' + svc.approach[svc.feedback.to].name : (i < svc.approach.length - 1 ? '→' : '■'), selected: s.stage === i, border: s.stage === i ? '#02203D' : 'rgba(7,19,28,0.15)', bg: s.stage === i ? '#02203D' : '#FFFFFF', color: s.stage === i ? '#FFFFFF' : '#07131C', select: () => this.setState({ stage: i }) })),
+      stage, hasFeedback: !!(svc.feedback && s.stage === svc.feedback.from),
+      flowNodes, edgePaths, flowSteps, flowCols: narrow ? '1fr' : `repeat(${maxCol}, minmax(0, 1fr))`, flowViewBox: g ? `0 0 ${g.w} ${g.h}` : '0 0 100 100', flowSpan: narrow ? '1 / -1' : 'auto', asideSpan: narrow ? '1 / -1' : 'auto',
+      nodeKind: selNode ? (kindLabel[selNode.kind] || '') : 'Select a node', nodeLabel: selNode ? selNode.label : svc.flow.title, nodeNote: selNode ? selNode.note : 'Each node explains its role here. Solid lines carry information forward, amber lines mark exceptions and dashed teal lines show feedback.',
+      replayFlow: () => { this.setState({ anim: false, node: null }); setTimeout(() => this.setState({ anim: true, played: true }), 40); },
+      exampleSteps: svc.example.steps.map((t, i) => ({ num: '0' + (i + 1), text: t })),
+      isStrategy: svc.slug === 'data-ai-strategy', isEngineering: svc.slug === 'data-engineering', isBI: svc.slug === 'business-intelligence', isAI: svc.slug === 'ai-automation', isCapability: isCap,
+      rmReady: s.rmReady, toggleReady: (e) => this.setState({ rmReady: e.target.checked, rmInit: 2 }), rmPhases, rmSel,
+      runs, traceOpen: s.trace, traceClosed: !s.trace, closeTrace: () => this.setState({ trace: false }),
+      metricTabs, metricText: metricDefs[s.metric][1], biRows,
+      aiIsNormal: !missing, aiIsMissing: missing, aiNormal: () => this.setState({ aiMode: 'normal', aiDecision: null }), aiMissing: () => this.setState({ aiMode: 'missing', aiDecision: null }),
+      aiNormalBorder: !missing ? '#02203D' : 'rgba(7,19,28,0.18)', aiNormalBg: !missing ? '#02203D' : '#FFFFFF', aiNormalColor: !missing ? '#FFFFFF' : '#07131C', aiMissingBorder: missing ? '#02203D' : 'rgba(7,19,28,0.18)', aiMissingBg: missing ? '#02203D' : '#FFFFFF', aiMissingColor: missing ? '#FFFFFF' : '#07131C',
+      aiSources: missing ? 'Sales model (W36) · Stock model (W36) · Finance ledger — not available for W36' : 'Sales model (W36) · Stock model (W36) · Finance ledger (W36)', aiProposed: missing ? 'Draft briefing with the net sales statement flagged: “Figure unavailable — finance ledger for W36 not yet loaded.”' : 'Draft briefing: “Net sales 9.6m against plan 10.0m (−4%). Snacks returns account for −0.3m.” Each statement links to its measure.',
+      aiChecks: missing ? 'Failed · required source missing · period check not possible' : 'Passed · all figures W36 · references resolve', aiChecksColor: missing ? '#8A5A12' : '#17647D',
+      aiApprove: () => { if (!missing) this.setState({ aiDecision: 'approve' }); }, aiReturn: () => this.setState({ aiDecision: 'return' }), aiApproveDisabled: missing, aiApproveBg: missing ? '#9DB0BF' : '#02203D', aiApproveCursor: missing ? 'not-allowed' : 'pointer', aiStatus, aiStatusColor: missing || dec === 'return' ? '#8A5A12' : (dec === 'approve' ? '#17647D' : '#07131C'),
+      roles: roleDefs.map((r, i) => ({ name: r.name, selected: s.role === i, border: s.role === i ? '#02203D' : 'rgba(7,19,28,0.18)', bg: s.role === i ? '#02203D' : '#FFFFFF', color: s.role === i ? '#FFFFFF' : '#07131C', select: () => this.setState({ role: i }) })), tasks, roleEvidence: role.evidence,
+      techHeading: svc.techHeading || PG.techHeading, techIntro: svc.techIntro || PG.techIntro, hasMethods: (svc.methods || []).length > 0, methodsText: (svc.methods || []).join(', ').toLowerCase(),
+      tech: svc.tech.filter(t => t.status === 'public').map(t => ({ ...t, iconPath: PG.icon(isCap ? 'users' : (/SQL|Fabric|Azure/.test(t.name) && !/Power/.test(t.name) ? 'database' : (/Power BI|DAX|Excel|Query/.test(t.name) ? 'chart' : (/API|connector/.test(t.name) ? 'network' : 'layers')))) })),
+      related: svc.relatedServices.map(rs => services.find(x => x.slug === rs)).filter(Boolean),
+      relatedWork: { ...relatedWork, href: '#/work/' + relatedWork.slug }
+    };
+  }
+}
+</script>
+</body>
+</html>
