@@ -13,6 +13,29 @@ No build step, no dependencies. `public/` is the deployable artifact.
 
 ---
 
+## Deployment
+
+Live on GitHub Pages: **https://olufemiadetiwa.github.io/patterngrid/**
+
+`main` holds the whole project; the `gh-pages` branch is the `public/`
+directory alone, published with:
+
+```bash
+git subtree push --prefix public origin gh-pages
+```
+
+The app detects a `*.github.io` host and serves itself from the repository
+sub-path (`window.PG_BASE`, set in `index.html` before any asset loads); on any
+root host — a custom domain, Netlify, Vercel — the base is empty and nothing
+changes. Deep links on Pages arrive through `404.html`, which hands the path
+back to the app; the response status is still 404, which is fine for people
+and the client-side router but means crawlers see only the home page. When
+the site moves to its own domain, prefer Netlify or Vercel (rewrite files
+included) so every route answers 200, then regenerate `sitemap.xml` and
+`robots.txt` for that origin with `node tools/build-sitemap.js <origin>`.
+
+---
+
 ## Layout
 
 ```
