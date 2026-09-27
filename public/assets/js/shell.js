@@ -123,7 +123,7 @@
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/contact">Book</a>
+          <a class="mobile-cta" href="/contact">Book a call</a>
           <button type="button" class="menu-btn" data-drawer-open aria-label="Open menu"
                   aria-expanded="${state.drawerOpen ? 'true' : 'false'}">Menu</button>
         </div>

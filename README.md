@@ -339,6 +339,14 @@ any claim, number, client or credential:
 - Reserved team frames on About are hidden until a profile exists; the
   Insights index says plainly that nothing is published yet.
 
+Housekeeping from the same review: the superseded per-service fields in
+`content.js` (`h1`, `problem`, `describe`, `visual`, `starter`, string
+`deliverables`, `faqs`, Title Case `cta`) that `service-content.js` overrode
+are deleted, and the never-rendered `PG.heroData` sample figures are gone, so
+every public line now has exactly one place to edit it. The engineering
+approach's last stage is "Hand over" (was "Operate"); the founder page has
+its own closing line; the mobile header CTA reads "Book a call".
+
 Open questions for the founder are in `docs/copy-review.md` §4 (business
 email, form destination, engagement formats, pricing line, band labels,
 service name, Insights timing, legal pages).
