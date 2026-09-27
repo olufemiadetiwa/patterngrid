@@ -2,9 +2,9 @@
   "name": "Pattern Grid",
   "short_name": "Pattern Grid",
   "description": "Data, AI and Business Intelligence consulting.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#02203D",
-  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }
