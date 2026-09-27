@@ -9,8 +9,10 @@
   /* Static hosts serve this file for any unknown path. Hand the requested
      path back to the app so deep links resolve without a visible bounce. */
   (function () {
-    try { sessionStorage.setItem('pg-redirect', location.pathname + location.search); } catch (e) {}
-    location.replace('/');
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
+    if (base === '/') base = '';
+    try { sessionStorage.setItem('pg-redirect', location.pathname.slice(base.length) + location.search); } catch (e) {}
+    location.replace(base + '/');
   })();
 </script>
 </head>

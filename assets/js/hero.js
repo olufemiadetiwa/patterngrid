@@ -48,7 +48,7 @@
       var l = document.createElement('link');
       l.rel = 'preload';
       l.as = 'image';
-      l.href = pair[0];
+      l.href = C.href(pair[0]);
       l.media = pair[1];
       l.setAttribute('fetchpriority', 'high');
       l.setAttribute('data-hero-preload', key);
@@ -79,8 +79,8 @@
           <div class="hero-slide is-active" data-slide="0" aria-hidden="false"
                style="--focal:${img.focal};--focal-m:${img.focalMobile};background-image:url('${local.lqip}')">
             <picture>
-              <source media="(max-width: 720px)" srcset="${local.m}" width="900" height="1200">
-              <img src="${local.d}" width="${local.w}" height="${local.h}" alt="${img.alt}" decoding="async" fetchpriority="high">
+              <source media="(max-width: 720px)" srcset="${C.href(local.m)}" width="900" height="1200">
+              <img src="${C.href(local.d)}" width="${local.w}" height="${local.h}" alt="${img.alt}" decoding="async" fetchpriority="high">
             </picture>
           </div>`;
       }

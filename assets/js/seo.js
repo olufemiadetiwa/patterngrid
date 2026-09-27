@@ -9,7 +9,7 @@
   var SITE = (PG.site = {
     name: 'Pattern Grid',
     tagline: 'Data, AI and Business Intelligence Consulting',
-    origin: location.origin,
+    origin: location.origin + (window.PG_BASE || ''),
     description:
       'Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.',
     locale: 'en_GB'

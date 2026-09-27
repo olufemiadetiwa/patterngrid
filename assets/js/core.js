@@ -218,6 +218,12 @@
   /* Routes are real paths. Legacy `#/...` links from the prototype are
      translated to paths on the way in, so old links keep working. */
 
+  /* Sub-path hosting (GitHub project pages): every route and asset lives
+     under BASE. Empty string on a root host. */
+  var BASE = window.PG_BASE || '';
+  core.base = BASE;
+  core.href = function (path) { return BASE + path; };
+
   var routes = [];
   var current = null;
 
@@ -255,8 +261,8 @@
     var url = new URL(to, location.origin);
     var next = url.pathname + url.search;
     if (!opts.replace && next === current) return;
-    if (opts.replace) history.replaceState({}, '', next);
-    else history.pushState({}, '', next);
+    if (opts.replace) history.replaceState({}, '', BASE + next);
+    else history.pushState({}, '', BASE + next);
     core.render(opts);
   };
 
@@ -265,7 +271,9 @@
 
   core.render = function (opts) {
     opts = opts || {};
-    var path = location.pathname.replace(/\/+$/, '') || '/';
+    var path = location.pathname;
+    if (BASE && path.indexOf(BASE) === 0) path = path.slice(BASE.length);
+    path = path.replace(/\/+$/, '') || '/';
     var match = core.resolve(path) || core.resolve('/404');
     current = path;
     onBeforeRender.forEach(function (fn) { fn(path, match); });
@@ -287,14 +295,28 @@
       core.navigate(hashPath === '/' ? '/' : hashPath);
       return;
     }
-    if (href.charAt(0) === '#') return; // same-page anchor
+    if (href.charAt(0) === '#') {
+      // With a <base> set for sub-path hosting, a bare "#main" would resolve
+      // against the base URL and navigate away; handle it in-document instead.
+      var target = href.length > 1 && document.getElementById(href.slice(1));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ block: 'start' });
+        if (typeof target.focus === 'function') target.focus({ preventScroll: true });
+      }
+      return;
+    }
 
     var url;
     try { url = new URL(href, location.href); } catch (err) { return; }
     if (url.origin !== location.origin) return;
 
     e.preventDefault();
-    core.navigate(url.pathname + url.search);
+    // Markup links are written root-relative (/services/x); strip a base if the
+    // browser resolved one in, so navigate() can add it back exactly once.
+    var p = url.pathname;
+    if (BASE && p.indexOf(BASE) === 0) p = p.slice(BASE.length);
+    core.navigate((p || '/') + url.search);
   });
 
   window.addEventListener('popstate', function () { core.render(); });
@@ -303,7 +325,7 @@
      once at boot so the canonical path is what the user (and crawlers) see. */
   core.normaliseEntryUrl = function () {
     var p = hashToPath(location.hash);
-    if (p) history.replaceState({}, '', p);
+    if (p) history.replaceState({}, '', BASE + p);
   };
 
   /* Static hosts commonly serve 404.html for unknown paths; that page stores
@@ -312,7 +334,7 @@
     var redirected = sessionStorage.getItem('pg-redirect');
     if (redirected) {
       sessionStorage.removeItem('pg-redirect');
-      history.replaceState({}, '', redirected);
+      history.replaceState({}, '', BASE + redirected);
     }
   } catch (e) { /* ignore */ }
 })();
