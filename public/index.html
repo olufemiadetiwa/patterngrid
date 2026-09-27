@@ -9,12 +9,19 @@
 <meta name="color-scheme" content="light">
 <script>
   /* Base path: empty on any root host; "/<repo>" on a GitHub project page.
-     Set here so every asset and route below resolves under it. */
+     The stylesheet is written from here rather than as a static relative tag,
+     because the preload scanner resolves relative URLs before any <base>
+     exists and would request them under a deep link's own path. */
   (function () {
     var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
-    var b = document.createElement('base'); b.href = base + '/'; document.head.appendChild(b);
+    document.write(
+      '<base href="' + base + '/">' +
+      '<link rel="stylesheet" href="' + base + '/assets/css/site.css">' +
+      '<link rel="icon" href="' + base + '/favicon.svg" type="image/svg+xml">' +
+      '<link rel="manifest" href="' + base + '/manifest.webmanifest">'
+    );
   })();
 </script>
 
@@ -22,10 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css">
 
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
 
@@ -49,23 +53,15 @@
   </div>
 </noscript>
 
-<script src="assets/js/content.js"></script>
-<script src="assets/js/service-content.js"></script>
-<script src="assets/js/local-images.js"></script>
-<script src="assets/js/core.js"></script>
-<script src="assets/js/seo.js"></script>
-<script src="assets/js/hero.js"></script>
-<script src="assets/js/shell.js"></script>
-<script src="assets/js/pages/home.js"></script>
-<script src="assets/js/pages/services.js"></script>
-<script src="assets/js/pages/industries.js"></script>
-<script src="assets/js/pages/work.js"></script>
-<script src="assets/js/pages/insights.js"></script>
-<script src="assets/js/pages/about.js"></script>
-<script src="assets/js/pages/assessment.js"></script>
-<script src="assets/js/pages/contact.js"></script>
-<script src="assets/js/pages/legal.js"></script>
-<script src="assets/js/pages/not-found.js"></script>
-<script src="assets/js/app.js"></script>
+<script>
+  /* Scripts are written with the resolved base for the same reason as the
+     stylesheet above; document.write during parsing keeps them in order. */
+  (function () {
+    var b = window.PG_BASE || '';
+    ['content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
+      document.write('<script src="' + b + '/assets/js/' + f + '.js"><\/script>');
+    });
+  })();
+</script>
 </body>
 </html>

@@ -41,12 +41,12 @@
     var foundationNote = '';
     if (band.label === 'AI ready') {
       var fails = [];
-      if (byKey.quality < 3) fails.push('data quality (needs at least 3 of 4)');
-      if (byKey.governance < 3) fails.push('governance (needs at least 3 of 4)');
-      if (byKey.infrastructure < 2) fails.push('data infrastructure (needs at least 2 of 4)');
+      if (byKey.quality < 3) fails.push('data quality (you scored below 3 of 4)');
+      if (byKey.governance < 3) fails.push('governance (you scored below 3 of 4)');
+      if (byKey.infrastructure < 2) fails.push('data infrastructure (you scored below 2 of 4)');
       if (fails.length) {
         band = PG.bands.find(function (b) { return b.label === 'Intelligent'; });
-        foundationNote = 'Your score is in the top band, but the label is held at Intelligent because a foundation needs attention: ' + fails.join('; ') + '.';
+        foundationNote = 'Your total is in the top band, but we hold the label at Intelligent until the basics are stronger: ' + fails.join('; ') + '.';
       }
     }
 
@@ -66,14 +66,14 @@
       priorities = [
         { title: 'Keep definitions and ownership under review', text: 'Strong self-reported foundations still drift. Schedule a regular review of metric definitions, owners and access rules.', href: '/services/data-ai-strategy', link: 'Explore data strategy' },
         { title: 'Evaluate established use cases', text: 'Reassess automated and AI-assisted workflows against agreed quality and value measures.', href: '/services/ai-automation', link: 'Explore AI and automation' },
-        { title: 'Reassess in six to twelve months', text: 'Repeat this self-assessment with the same respondents to check whether practices are holding.', href: '/assessment', link: 'Return to the assessment' }
+        { title: 'Reassess in six to twelve months', text: 'Repeat this assessment in six to twelve months with the same people to check the practices are holding.', href: '/assessment', link: 'Return to the assessment' }
       ];
     } else {
       heading = 'Recommended priorities';
       priorities = sorted.filter(function (d) { return d.v < 4; }).slice(0, 3).map(function (d) {
         var m = PG.priorityMap[d.key];
         return {
-          title: d.name + ' · ' + svcTitle(m.service),
+          title: d.name + ', addressed by ' + svcTitle(m.service),
           text: m.text,
           href: '/services/' + m.service,
           link: 'Explore ' + svcTitle(m.service).toLowerCase()
@@ -84,7 +84,7 @@
       if (adoption && priorities.length < 3) {
         priorities.push({
           title: 'Adoption · Capability Building',
-          text: 'Systems appear ahead of daily use. Capability building can help teams interpret and act on the reporting they already have.',
+          text: 'Your reporting looks more developed than the way it is used day to day. Training can help teams read and act on the reports they already have.',
           href: '/services/capability-building',
           link: 'Explore capability building'
         });
@@ -106,8 +106,8 @@
       ${PG.hero('assessment')}
       <section class="bg-paper" style="padding:0 0 clamp(72px,9vw,128px)">
         <div class="wrap stack stack-16" data-reveal="rise" style="align-items:flex-start">
-          <button type="button" class="btn" data-start>${answered ? 'Continue the Assessment' : 'Start the Assessment'}</button>
-          <span class="small muted" style="max-width:44em">Eight questions. This is an indicative self-assessment, not an audit or a validated industry benchmark. Your answers stay in this browser session unless you choose to share them, and you can view your result without an email address.</span>
+          <button type="button" class="btn" data-start>${answered ? 'Continue the assessment' : 'Start the assessment'}</button>
+          <span class="small muted" style="max-width:44em">Eight questions, no email address needed. You get a score out of 100, your weakest areas and up to three suggested next steps. It is a self-assessment, not an audit or an industry benchmark. Your answers stay in this browser unless you choose to send them with an enquiry.</span>
         </div>
       </section>`;
   }
@@ -164,18 +164,18 @@
         <div class="wrap stack stack-48" data-reveal="rise">
           <div class="autogrid end" style="--min:380px;--gap:40px;--gap-x:96px">
             <div class="stack stack-20">
-              <p class="eyebrow-caps">YOUR INDICATIVE RESULT</p>
+              <p class="eyebrow-caps">Your result (indicative)</p>
               <div class="row" style="gap:16px;align-items:baseline">
                 <span class="score">${res.score}</span>
                 <span style="font-size:clamp(24px,2.4vw,36px);font-weight:500;color:var(--navy)">${res.band.label}</span>
               </div>
               <p style="font-size:19px;line-height:1.5;max-width:34em">${res.band.text}</p>
               ${when(!!res.foundationNote, function () { return html`<p class="callout">${res.foundationNote}</p>`; })}
-              <p class="fine" style="max-width:44em">A low score in a dimension points to the service that usually addresses it; the outputs shown are typical, not a complete solution or commercial scope. Score out of 100 from eight self-reported answers. Indicative only; “AI ready” does not certify security, compliance or suitability for a particular use case.</p>
+              <p class="fine" style="max-width:44em">Score out of 100 from your eight answers. It is indicative only; “AI ready” does not certify security, compliance or suitability for any particular use. Each low-scoring area points to the service that usually addresses it. The outputs shown are typical, not a quote or a full solution.</p>
             </div>
 
             <div class="stack stack-12" style="align-items:flex-start">
-              <button type="button" class="btn" data-discuss>Discuss My Priorities</button>
+              <button type="button" class="btn" data-discuss>Send my priorities with an enquiry</button>
               ${when(state.askInclude, function () {
                 return html`
                   <div role="group" aria-label="Include your result"
@@ -196,7 +196,7 @@
 
           <div class="autogrid start" style="--min:400px;--gap:48px;--gap-x:96px;border-top:1px solid var(--line);padding-top:48px">
             <div class="stack stack-20">
-              <h2 style="font-size:22px;font-weight:600;color:var(--navy)">Eight dimensions</h2>
+              <h2 style="font-size:22px;font-weight:600;color:var(--navy)">Your eight scores</h2>
               <div class="stack stack-14">
                 ${each(PG.assessment, function (d, i) {
                   var v = res.a[i];

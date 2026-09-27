@@ -20,7 +20,7 @@
           </div>
           <div class="row" style="gap:16px 28px">
             <a class="btn" href="/contact">${label}</a>
-            <a class="arrow" href="/assessment">Check your readiness <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
@@ -30,8 +30,9 @@
     return html`
       ${PG.hero('industries')}
 
-      <section style="padding:clamp(48px,6vw,96px) 0 clamp(64px,8vw,128px)">
+      <section style="padding:0 0 clamp(64px,8vw,128px)">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(56px,6vw,96px)">
+          <p class="lede" style="max-width:40em">Each page below gives one question leaders in that sector ask, the measures we would define with you, and a sample of what a connected view could show.</p>
           ${each(PG.industries, function (ind, k) {
             var img = PG.img.get(ind.photo);
             return html`
@@ -41,17 +42,20 @@
                   <span style="font-weight:500;font-size:12px;color:var(--muted)">0${k + 1}</span>
                   <h2 style="font-size:clamp(26px,2.6vw,40px);font-weight:600;line-height:1.15;color:var(--navy)">${ind.title}</h2>
                   <p style="font-size:19px;line-height:1.45;color:var(--navy);font-weight:500">${ind.question}</p>
-                  <div class="row" style="gap:8px">
-                    ${each(ind.metrics.slice(0, 4), function (m) { return html`<span class="chip-line">${m}</span>`; })}
+                  <div class="stack stack-8">
+                    <span class="label-caps">Measures we would define</span>
+                    <div class="row" style="gap:8px">
+                      ${each(ind.metrics.slice(0, 4), function (m) { return html`<span class="chip-line">${m}</span>`; })}
+                    </div>
                   </div>
-                  <a class="arrow" href="/industries/${ind.slug}">Explore ${ind.title} <span class="chev" aria-hidden="true">→</span></a>
+                  <a class="arrow" href="/industries/${ind.slug}">Read about ${ind.title} <span class="chev" aria-hidden="true">→</span></a>
                 </div>
               </div>`;
           })}
         </div>
       </section>
 
-      ${closing('Book a Data & AI Consultation')}`;
+      ${closing('Book a consultation')}`;
   }
 
   function detail(ind) {
@@ -78,16 +82,16 @@
       <section class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px;--gap:48px;--gap-x:96px">
           <div class="stack stack-24">
-            <span class="label-caps">THE EXECUTIVE QUESTION</span>
+            <span class="label-caps">The question leaders ask</span>
             <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:500;line-height:1.15;letter-spacing:-.03em;color:var(--navy);text-wrap:balance">${ind.question}</h2>
             <p class="body muted">${ind.note}</p>
           </div>
           <div class="stack stack-16">
-            <span class="label-caps">METRICS WORTH DEFINING</span>
-            <div role="list" class="rows" data-metrics>
+            <span class="label-caps">Measures we would define with you</span>
+            <div class="rows" data-metrics>
               ${each(ind.metrics, function (m, i) {
                 return html`
-                  <button type="button" role="listitem" class="metric-btn" data-metric="${i}" aria-expanded="false">
+                  <button type="button" class="metric-btn" data-metric="${i}" aria-expanded="false">
                     <span class="hd"><span>${m}</span><span class="sign" aria-hidden="true">+</span></span>
                   </button>`;
               })}
@@ -99,9 +103,9 @@
       <section class="bg-paper sec-sm">
         <div class="wrap autogrid" data-reveal="rise" style="--min:400px;--gap:48px;--gap-x:64px;align-items:center">
           <div class="stack stack-20">
-            <p class="eyebrow-caps">DATA LANDSCAPE</p>
-            <h2 class="h2-sm" style="color:var(--navy)">How the information relates.</h2>
-            <p class="body">Each source keeps its own identity. A shared model connects them around the entities the business measures, so a single figure can be traced back to the system it came from.</p>
+            <p class="eyebrow-caps">Your data sources</p>
+            <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
+            <p class="body">Each system stays as it is. A shared model links them around the things you measure (products, outlets, customers, periods), so any figure can be traced back to the system it came from.</p>
             <p class="small slate" style="max-width:36em;border-top:1px solid var(--rule);padding-top:16px">${ind.serviceNote}</p>
             <div class="row" style="gap:8px;margin-top:8px">
               ${each(caps, function (c) { return html`<a class="tag-link" href="/services/${c.slug}">${c.title} →</a>`; })}
@@ -133,12 +137,12 @@
       <section style="padding:clamp(64px,8vw,128px) 0 0">
         <div class="wrap autogrid" data-reveal="rise" style="--min:380px;--gap:40px;--gap-x:64px;align-items:center">
           <div class="stack stack-18">
-            <span class="eyebrow">A view worth building</span>
-            <h2 class="h2-sm">One record grid, shared definitions, visible exceptions.</h2>
+            <span class="eyebrow">What a connected view could show</span>
+            <h2 class="h2-sm">Sample data, shared definitions, and the exceptions made visible.</h2>
             <p class="body slate">${grid.note}</p>
           </div>
           <div class="panel-dark" aria-label="Illustrative record grid">
-            <div class="card-head"><span>${grid.title}</span><span>Sample data · illustrative</span></div>
+            <div class="card-head"><span>${grid.title}</span><span>Sample data · not a client</span></div>
             <div class="dgrid" style="grid-template-columns:1.3fr 1fr 1fr 1fr;font-size:12px">
               ${each(grid.head, function (h) { return html`<span class="th">${h}</span>`; })}
               ${each(grid.rows, function (row) {
@@ -150,7 +154,7 @@
                 });
               })}
             </div>
-            <span class="lbl" style="color:rgba(255,255,255,.55)">lineage ← ${ind.sources.join(' · ')}</span>
+            <span class="lbl" style="color:rgba(255,255,255,.55)">Sources: ${ind.sources.join(' · ')}</span>
           </div>
         </div>
       </section>
@@ -177,7 +181,7 @@
       ${closing(ind.cta)}`;
   }
 
-  var DEFINITION_NOTE = 'Definition, reporting period, owner and source lineage are agreed with the organisation before this metric appears in reporting.';
+  var DEFINITION_NOTE = 'Before this measure goes into a report, we agree its definition, reporting period, owner and source with you.';
 
   PG.pages = PG.pages || {};
 

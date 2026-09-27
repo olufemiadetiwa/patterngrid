@@ -139,14 +139,14 @@
           <div class="stack stack-18">
             <h2 style="font-size:clamp(28px,3.4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${ov.mapHeading}</h2>
             <p style="font-size:18px;line-height:1.6;max-width:32em">${ov.mapText}</p>
-            <p class="small muted" style="max-width:36em">Strategy informs Engineering, Business Intelligence and Automation. Engineering supports both BI and Automation. Capability Building supports the people operating all three.</p>
+            <p class="small muted" style="max-width:36em">Strategy sets the order. Engineering supplies the checked data that reporting and automation depend on. Capability Building keeps your own team able to run all of it.</p>
           </div>
           <div class="svc-map">
-            <a class="wide lead" href="/services/data-ai-strategy"><span>Data &amp; AI Strategy</span><span class="note mono">informs ↓</span></a>
-            <a href="/services/data-engineering">Data Engineering<span class="note">supports → BI, Automation</span></a>
+            <a class="wide lead" href="/services/data-ai-strategy"><span>Data &amp; AI Strategy</span><span class="note mono">sets the order</span></a>
+            <a href="/services/data-engineering">Data Engineering<span class="note">supplies the checked data</span></a>
             <a href="/services/business-intelligence">Business Intelligence</a>
             <a href="/services/ai-automation">AI &amp; Automation</a>
-            <a class="wide support" href="/services/capability-building"><span>Capability Building</span><span class="note mono" style="color:var(--teal)">↑ supports the people operating all three</span></a>
+            <a class="wide support" href="/services/capability-building"><span>Capability Building</span><span class="note mono" style="color:var(--teal)">keeps your team able to run all of it</span></a>
           </div>
         </div>
       </section>`;
@@ -154,12 +154,12 @@
 
   /* -------------------------------------------------------------- detail */
 
-  var KIND_LABEL = { input: 'Input', process: 'Process', gate: 'Decision', output: 'Output', exception: 'Exception', use: 'Use' };
+  var KIND_LABEL = { input: 'Input', process: 'Process', gate: 'Decision', output: 'Output', exception: 'Exception', use: 'Used by' };
 
   /* Artifact panels — one per service, each with its own small interaction. */
 
   var ROADMAP_INITS = [
-    { name: 'Metric definitions', owner: 'Finance lead', phase: 0, question: 'Which definition of net sales do we report?', prereq: 'None — this is the first foundation.', accept: 'One agreed definition, period rule and owner recorded in the KPI dictionary.', fixedReady: true },
+    { name: 'Metric definitions', owner: 'Finance lead', phase: 0, question: 'Which definition of net sales do we report?', prereq: 'None. This comes first.', accept: 'One agreed definition, period rule and owner recorded in the KPI dictionary.', fixedReady: true },
     { name: 'Source integration', owner: 'Data owner', phase: 0, question: 'Can sales and finance data be joined without manual reconciliation?', prereq: 'Metric definitions agreed.', accept: 'Both sources load on schedule with reconciliation checks passing.', fixedReady: true },
     { name: 'Weekly commercial reporting', owner: 'Commercial finance lead', phase: 1, question: 'Where is performance slipping this week?', prereq: 'Source integration complete; net sales definition agreed.', accept: 'Report reconciles to the ledger; used in the weekly review for four consecutive weeks.', togglesWithReady: true },
     { name: 'AI reporting assistant', owner: 'Process owner', phase: 2, question: 'Can the weekly briefing be drafted with less manual preparation?', prereq: 'Weekly commercial reporting in use; checked figures available.', accept: 'Draft passes agreed checks; reviewer approval recorded for every release.', fixedReady: false }
@@ -186,7 +186,7 @@
           <span style="font-weight:600;font-size:17px">Phased delivery roadmap</span>
           <label class="row" style="gap:10px;font-size:13px;color:var(--muted);cursor:pointer">
             <input type="checkbox" data-rm-ready ${raw(s.rmReady ? 'checked' : '')} style="width:18px;height:18px;accent-color:#02203D">
-            Illustrative readiness: source integration complete
+            Try it: mark source integration as complete
           </label>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:10px">
@@ -347,7 +347,7 @@
           <span class="k">Final status</span>
           <span style="font-weight:600;color:${missing || dec === 'return' ? 'var(--amber-ink)' : (dec === 'approve' ? 'var(--teal)' : 'var(--ink)')}">${status}</span>
         </div>
-        <p class="fine">This is an illustration on the page. It does not connect to a live assistant or submit anything to an external system.</p>
+        <p class="fine">This is a page illustration. Nothing here is sent anywhere.</p>
       </div>`;
   }
 
@@ -412,13 +412,13 @@
         <h3 class="h3">${stage.name}</h3>
         <p class="body">${stage.activity}</p>
         <div class="stack stack-6">
-          <span class="lbl" style="color:var(--muted)">Output</span>
+          <span class="lbl" style="color:var(--muted)">What you get at the end of this stage</span>
           <p style="font-size:17px;font-weight:500;line-height:1.45">${stage.output}</p>
         </div>
         ${when(hasFeedback, function () { return html`<p class="feedback-note">${svc.feedback.label}</p>`; })}
       </div>
       <div aria-label="Stage output preview" class="stage-doc">
-        <span class="lbl" style="color:var(--muted)">Illustrative preview · ${stage.name}</span>
+        <span class="lbl" style="color:var(--muted)">Sample of the output · ${stage.name}</span>
         <div class="doc">
           ${each(stage.preview, function (p) {
             return html`
@@ -466,7 +466,7 @@
       <section id="svc-overview" class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px">
           <div class="stack stack-20">
-            <span class="eyebrow">Overview · ${svc.index}</span>
+            <span class="eyebrow">What this is</span>
             <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em;text-wrap:balance">${svc.heading}</h2>
             ${each(svc.intro, function (p) { return html`<p class="body">${p}</p>`; })}
           </div>
@@ -476,7 +476,7 @@
               <ul class="ticks">${each(svc.situations, function (x) { return html`<li>${x}</li>`; })}</ul>
             </div>
             <div class="stack stack-8" style="background:var(--paper);border-radius:var(--radius);padding:20px 22px">
-              <span class="lbl" style="color:var(--muted)">Outcome to work towards</span>
+              <span class="lbl" style="color:var(--muted)">What you are working towards</span>
               <p style="font-size:18px;line-height:1.45;font-weight:500">${svc.outcomeText}</p>
             </div>
           </div>
@@ -487,8 +487,7 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
           <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
             <div class="stack stack-14">
-              <span class="eyebrow">What you receive</span>
-              <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em">Six concrete deliverables.</h2>
+              <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em">What you receive</h2>
             </div>
             <p class="small muted" style="max-width:36em;line-height:1.55">${PG.deliverablesLine}</p>
           </div>
@@ -504,7 +503,7 @@
             })}
           </div>
           <button type="button" class="btn btn-ghost" data-jump="svc-artifact"
-                  style="align-self:flex-start;height:44px;font-size:15px">View an example artifact <span class="chev down" aria-hidden="true">↓</span></button>
+                  style="align-self:flex-start;height:44px;font-size:15px">See a sample deliverable <span class="chev down" aria-hidden="true">↓</span></button>
         </div>
       </section>
 
@@ -512,7 +511,7 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
           <div class="stack stack-14" style="max-width:720px">
             <span class="eyebrow">How we work</span>
-            <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em">Five stages, each with an output and a decision.</h2>
+            <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em">How the work runs: five stages, each ending in something you can see.</h2>
           </div>
           <div role="tablist" aria-label="Approach stages" data-stage-tabs class="stepper">
             ${each(svc.approach, function (st, i) {
@@ -539,7 +538,7 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
           <div class="row between end" style="gap:16px 48px">
             <div class="stack stack-14" style="max-width:760px">
-              <span class="eyebrow eyebrow-dark">How information moves</span>
+              <span class="eyebrow eyebrow-dark">How your information becomes an answer</span>
               <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em;text-wrap:balance">${svc.flow.title}</h2>
             </div>
             <button type="button" class="toggle toggle-dark" data-replay-flow style="height:40px">Replay</button>
@@ -568,9 +567,9 @@
               </div>
             </div>
             <aside class="flow-aside" aria-live="polite" data-flow-aside>
-              <span class="eyebrow eyebrow-dark">Select a node</span>
+              <span class="eyebrow eyebrow-dark">Select any box</span>
               <span style="font-weight:600;font-size:17px">${svc.flow.title}</span>
-              <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.8)">Each node explains its role here. Solid lines carry information forward, amber lines mark exceptions and dashed teal lines show feedback.</p>
+              <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.8)">Select any box to read what happens there. Solid lines move forward, amber lines are exceptions, dashed lines go back for correction.</p>
             </aside>
           </div>
 
@@ -605,11 +604,11 @@
                   </li>`;
               })}
             </ol>
-            <p class="fine">Illustrative example with sample figures. It is not an assessment of your organisation or a client result.</p>
+            <p class="fine">Illustrative example with sample figures, not a client result.</p>
           </div>
 
           <div class="stack stack-14">
-            <span class="lbl" style="color:var(--muted)">Sample artifact · ${ARTIFACT_TITLES[svc.slug]}</span>
+            <span class="lbl" style="color:var(--muted)">Sample deliverable · ${ARTIFACT_TITLES[svc.slug]}</span>
             <div data-artifact>${ARTIFACTS[svc.slug](s)}</div>
           </div>
         </div>
@@ -622,7 +621,7 @@
             <h2 class="h2-sm">${svc.techHeading || PG.techHeading}</h2>
             <p class="small slate" style="font-size:16px;line-height:1.6;max-width:32em">${svc.techIntro || PG.techIntro}</p>
             ${when((svc.methods || []).length > 0, function () {
-              return html`<p class="small muted">Working methods, not software: ${svc.methods.join(', ').toLowerCase()}.</p>`;
+              return html`<p class="small muted">Ways of working (not software): ${svc.methods.join(', ').toLowerCase()}.</p>`;
             })}
           </div>
           <div class="stack" style="border-top:1px solid var(--rule-strong)">
@@ -642,14 +641,14 @@
       <section id="svc-questions" class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:clamp(40px,5vw,80px)">
           <div class="stack stack-18">
-            <span class="eyebrow">Measures to agree</span>
-            <p class="small muted">Measurement categories to agree at the outset — not achieved results.</p>
+            <span class="eyebrow">How we would measure success</span>
+            <p class="small muted">Agreed with you before work starts. These are the measures, not results we are claiming.</p>
             <ul class="rows" style="list-style:none">
               ${each(svc.measures, function (m) { return html`<li style="padding:12px 0;font-size:16px">${m}</li>`; })}
             </ul>
           </div>
           <div class="stack stack-18">
-            <span class="eyebrow">Questions</span>
+            <span class="eyebrow">Common questions</span>
             <div class="stack" style="border-top:1px solid var(--rule)">
               ${each(svc.faqs, function (f) {
                 return html`<details class="faq"><summary>${f.q}</summary><p>${f.a}</p></details>`;
@@ -657,7 +656,7 @@
             </div>
           </div>
           <div class="stack stack-18">
-            <span class="eyebrow">Related expertise</span>
+            <span class="eyebrow">Related services</span>
             <div class="stack stack-10">
               ${each(related, function (r) {
                 return html`
@@ -696,8 +695,8 @@
             ${when(!svc, function () { return html`<p class="small muted" style="font-size:17px;line-height:1.55;max-width:34em">${ov.closing.p}</p>`; })}
           </div>
           <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact${svc ? '?service=' + svc.slug : ''}">${svc ? svc.cta : 'Discuss your priorities'}</a>
-            <a class="arrow" href="/assessment">Check your readiness <span class="chev" aria-hidden="true">→</span></a>
+            <a class="btn" href="/contact${svc ? '?service=' + svc.slug : ''}">${svc ? svc.cta : 'Send us your question'}</a>
+            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
@@ -968,10 +967,10 @@
         var n = nodes.find(function (x) { return x.id === s.node; });
         asideEl.innerHTML =
           '<span class="eyebrow eyebrow-dark">' +
-          C.esc(n ? (KIND_LABEL[n.kind] || '') : 'Select a node') + '</span>' +
+          C.esc(n ? (KIND_LABEL[n.kind] || '') : 'Select any box') + '</span>' +
           '<span style="font-weight:600;font-size:17px">' + C.esc(n ? n.label : svc.flow.title) + '</span>' +
           '<p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.8)">' +
-          C.esc(n ? n.note : 'Each node explains its role here. Solid lines carry information forward, amber lines mark exceptions and dashed teal lines show feedback.') +
+          C.esc(n ? n.note : 'Select any box to read what happens there. Solid lines move forward, amber lines are exceptions, dashed lines go back for correction.') +
           '</p>';
       }
 

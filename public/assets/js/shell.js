@@ -49,7 +49,7 @@
               <b></b><b></b><b class="on"></b><b></b><b></b>
               <span>Strategy</span><span>Engineering</span><span>BI</span><span>AI</span><span>Capability</span>
             </div>
-            <p class="small muted">Five connected capabilities. Start with the business problem and build the capability needed to solve it.</p>
+            <p class="small muted">Five services that build on each other. Start with the problem in front of you; we add the next step only if it is needed.</p>
             <a href="/assessment" style="font-weight:600;font-size:15px">Not sure where to start? Take the readiness assessment →</a>
           </div>
         </div>
@@ -118,8 +118,8 @@
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/assessment">Readiness Assessment</a>
-          <a class="header-cta" href="/contact">Book a Consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Book a consultation</a>
         </div>
 
         <div class="mobile-actions">
@@ -177,9 +177,9 @@
               <a href="/about/precious-celestine">Founder</a>
             </div>
           </details>
-          <a href="/assessment">Readiness Assessment</a>
+          <a href="/assessment">Readiness assessment</a>
         </nav>
-        <a class="drawer-cta" href="/contact">Book a Data &amp; AI Consultation</a>
+        <a class="drawer-cta" href="/contact">Book a consultation</a>
       </div>`;
   }
 
@@ -254,22 +254,22 @@
             </div>
           </div>
           <div>
-            <p class="footer-head">COMPANY</p>
+            <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
               <a href="/about">About</a>
               <a href="/approach">Our Approach</a>
               <a href="/work">Our Work</a>
               ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
-              <a href="/assessment">Readiness Assessment</a>
-              <a href="/contact">Book a Consultation</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Book a consultation</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/privacy" style="color:rgba(255,255,255,.7)">Privacy</a>
-            <a href="/terms" style="color:rgba(255,255,255,.7)">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion
                     aria-pressed="${C.motion.reduced ? 'true' : 'false'}">
               <span class="sw" aria-hidden="true"></span>Reduce motion: ${C.motion.reduced ? 'on' : 'off'}
@@ -307,6 +307,9 @@
       return;
     }
 
+    // A click anywhere outside the header closes an open mega menu.
+    if (state.menu && !(t.closest && t.closest('#header'))) { state.menu = null; paintHeader(); }
+
     // Any link click closes whatever is open.
     if (t.closest && t.closest('a[href]')) {
       if (state.menu) { state.menu = null; paintHeader(); }
@@ -331,6 +334,16 @@
 
   document.getElementById('header').addEventListener('mouseleave', function () {
     if (state.menu) { state.menu = null; paintHeader(); }
+  });
+
+  /* Focus leaving the header (Tab past the last menu link) closes the menu.
+     A null relatedTarget is ignored: that is a repaint or a click on a
+     non-focusable target, not the visitor moving on. */
+  document.getElementById('header').addEventListener('focusout', function (e) {
+    if (!state.menu || !e.relatedTarget) return;
+    if (document.getElementById('header').contains(e.relatedTarget)) return;
+    state.menu = null;
+    paintHeader();
   });
 
   window.addEventListener('scroll', function () {

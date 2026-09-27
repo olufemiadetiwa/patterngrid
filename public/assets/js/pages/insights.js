@@ -66,8 +66,8 @@
             <h2 style="font-size:22px;font-weight:600;color:var(--navy);line-height:1.25">${a.title}</h2>
             <p class="small muted">${a.summary}</p>
             <div class="stack stack-6" style="border-top:1px solid rgba(7,19,28,.1);padding-top:12px;font-size:13px">
-              <span class="muted">Next question: ${a.next}</span>
-              <a href="/services/${a.service}" style="font-weight:600">Related: ${svc.title || ''} →</a>
+              <span class="muted">The question it leads to: ${a.next}</span>
+              <a href="/services/${a.service}" style="font-weight:600">Related service: ${svc.title || ''}</a>
             </div>
           </article>`;
       })}`;
@@ -93,7 +93,7 @@
 
         <section style="padding:0 0 clamp(40px,5vw,64px)">
           <div class="wrap" data-reveal="rise">
-            <p class="small muted" style="max-width:52em">The titles below are commissioned and in preparation; none is published yet. Each opens as a full article once written and approved.</p>
+            <p class="small muted" style="max-width:36em">These articles are being written. None is published yet; each will open as a full article once approved.</p>
           </div>
         </section>
 
@@ -113,7 +113,7 @@
         <section style="padding:0 0 clamp(96px,10vw,160px)">
           <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
             <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">Not sure where your data practices stand?</h2>
-            <a class="btn" href="/assessment">Assess Your Readiness</a>
+            <a class="btn" href="/assessment">Take the readiness assessment</a>
           </div>
         </section>`;
     },

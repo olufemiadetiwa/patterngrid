@@ -153,8 +153,11 @@ The check ignores whitespace — the two renderers break lines between inline
 elements differently — and a short list of deliberate differences that
 `compare.js` documents inline.
 
-Current result: **24/24 routes match**, with one prototype bug deliberately
-fixed (below).
+The port was proven at commit `95fb1f0`: **24/24 routes matched** the
+prototype's text, with one prototype bug deliberately fixed (below). Since the
+copy pass (sixth pass, below) the wording diverges from the prototype on
+purpose, so the check is now informational — run it to see exactly what was
+reworded, not as a gate.
 
 ---
 
@@ -277,6 +280,68 @@ Everything raised by the `design:design-critique` review, applied:
   when `PG.team.founder.photo` is set (reserved frames stay on `/about`);
   Insights is removed from the primary nav, drawer and footer until an article
   has `published: true`, and the index states that nothing is published yet.
+
+## Craft pass (fifth pass)
+
+A frontend agent audited the site against Vercel's Web Interface Guidelines
+(`.agents/skills/web-design-guidelines`) and Anthropic's `frontend-design`
+skill, within the brief's constraints. Sixty-one stylesheet patches and a
+handful of attribute-level JS changes; no copy touched. Highlights:
+
+- Focus rings were below the WCAG 2.2 3:1 floor on white; now a `--focus`
+  token that adapts to the surface (navy on light, white over photographs,
+  light teal inside ink/navy).
+- Every control has a hit area of at least 44 px (generic `::after` extension
+  on buttons and toggles), a hover state, an active state, `touch-action:
+  manipulation`, and an easing token; ten untokenised transitions fixed.
+- Header hover/current/open states share one grammar — a hairline that draws
+  in from the left — instead of a grey pill. Mega menus close on outside click
+  and when focus leaves them.
+- The one glass effect (hero controls) and the large shadows the brief forbids
+  are gone; `scroll-padding-top` and safe-area insets added; the drawer
+  contains overscroll.
+- Clip-revealed images hand off to a 320 ms hover zoom instead of inheriting
+  the 1100 ms reveal transition.
+- Stepper and decision path stay five-up at tablet and stack cleanly below
+  600 px; assessment options ring the whole card on keyboard focus.
+- Invalid ARIA fixed on the industry metric list (`role="listitem"` on a
+  button); email field gets `spellcheck="false"`.
+
+## Copy pass (sixth pass)
+
+A copy agent reviewed every string against the `copywriting` skill and the
+master brief's accuracy rules and wrote `docs/copy-review.md` (systemic
+issues, ~150 per-page findings with rationale, an apply-first list and
+fourteen questions only the founder can answer). Applied here, without adding
+any claim, number, client or credential:
+
+- **Bug:** the Approach page rendered `stages[*].change` — the brief's
+  animation stage directions ("lineage, ownership and quality markers
+  appear") — as the description of each engagement stage. Inherited from the
+  prototype template. It now renders `copy`.
+- One name each, everywhere: "Book a consultation", "Take the readiness
+  assessment", "Data Engineering & Platforms" (the contact form now takes
+  service names from the content model).
+- Every enquiry CTA says it is an enquiry ("Discuss your reporting with us",
+  "Send my enquiry"); "Explore an AI use case" retired as a form label.
+- "Intelligence" and "capability" as product nouns replaced below the approved
+  hero lines; passive "are agreed" sentences made active; jargon explained on
+  first use or replaced (semantic model, lakehouse, lineage, curated, decision
+  gate, bounded, deterministic, entity, node, artifact).
+- Section headings say what the section contains ("Measures we would define
+  with you", "How the sources connect into one view", "Related services").
+- Safeguards kept intact and shortened where the honesty was unchanged; the
+  two brief-mandated work-detail sentences are verbatim.
+- The contact page no longer shows a developer note to prospects when no
+  endpoint is configured, and a line I had added earlier ("Enquiries are read
+  by the consultant who would work with you") is removed as an unverified
+  commitment.
+- Reserved team frames on About are hidden until a profile exists; the
+  Insights index says plainly that nothing is published yet.
+
+Open questions for the founder are in `docs/copy-review.md` §4 (business
+email, form destination, engagement formats, pricing line, band labels,
+service name, Insights timing, legal pages).
 
 ## What changed from the prototype
 

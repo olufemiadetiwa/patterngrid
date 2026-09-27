@@ -4,7 +4,7 @@
 
   var PG = window.PG;
   var C = PG.core;
-  var html = C.html, each = C.each;
+  var html = C.html, each = C.each, when = C.when;
 
   function closing() {
     return html`
@@ -12,8 +12,8 @@
         <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
           <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">Start with the decision you need to improve.</h2>
           <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact">Book a Data &amp; AI Consultation</a>
-            <a class="arrow" href="/assessment">Check your readiness <span class="chev" aria-hidden="true">→</span></a>
+            <a class="btn" href="/contact">Book a consultation</a>
+            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
@@ -24,8 +24,11 @@
   function peopleSection() {
     var T = PG.team || { founder: {}, members: [], reservedSlots: 0 };
     var f = T.founder;
+    /* Reserved frames stay out of the live page until at least one approved
+       profile exists (master brief: hide unapproved modules). */
+    var showTeam = (T.members || []).length > 0;
     var slots = [];
-    for (var i = 0; i < (T.reservedSlots || 0); i++) slots.push(i);
+    for (var i = 0; showTeam && i < (T.reservedSlots || 0); i++) slots.push(i);
 
     return html`
       <section id="about-people" style="padding:0 0 clamp(64px,8vw,128px)">
@@ -41,13 +44,14 @@
             </div>
           </div>
 
+          ${when(showTeam, function () { return html`
           <div class="stack stack-24">
             <div class="row between end" style="gap:16px 48px">
               <div class="stack stack-12">
                 <p class="eyebrow-caps">THE TEAM</p>
                 <h2 class="h2-sm" style="color:var(--navy);max-width:18ch">The people behind the work.</h2>
               </div>
-              <p class="small muted" style="max-width:34em">Profiles appear here as they are approved. Roles are described by the work they do, not by title alone.</p>
+              <p class="small muted" style="max-width:34em">More profiles will be added as they are approved.</p>
             </div>
             <div class="team-grid">
               ${each(T.members, function (m) {
@@ -66,7 +70,7 @@
                   </div>`;
               })}
             </div>
-          </div>
+          </div>`; })}
         </div>
       </section>`;
   }
@@ -79,8 +83,8 @@
 
       <section style="padding:0 0 clamp(56px,7vw,96px)">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:380px;--gap:32px;--gap-x:64px">
-          <p class="lede">Businesses collect information across finance, sales, operations and customer systems. The difficulty is making that information consistent, connected and useful. Pattern Grid exists to help organisations build the systems and working practices that make this possible.</p>
-          <p class="body muted">We bring business questions, data architecture, analytics and practical AI into the same conversation. The work begins with what the organisation needs to understand and continues through the foundations required to support it.</p>
+          <p class="lede">Every business collects information in its finance, sales, operations and customer systems. The hard part is making those numbers agree, connect and mean something. Pattern Grid exists to help you do that, in the systems and in the way your teams work.</p>
+          <p class="body muted">We start with what you need to understand, then work back through the reporting, the data and the systems needed to support it.</p>
         </div>
       </section>
 
@@ -93,8 +97,8 @@
       <section class="bg-paper sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:64px">
           <div class="stack stack-20">
-            <p class="eyebrow-caps">OPERATING BELIEFS</p>
-            <h2 style="font-size:clamp(30px,3.4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);text-wrap:balance">How we work, in four commitments.</h2>
+            <p class="eyebrow-caps">HOW WE WORK</p>
+            <h2 style="font-size:clamp(30px,3.4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);text-wrap:balance">Four commitments.</h2>
             <p style="font-size:16px;color:var(--muted);max-width:32em">African-founded, with an international outlook. The work is shaped around the organisation in front of us.</p>
           </div>
           <div class="rows">
@@ -160,7 +164,7 @@
               <p style="font-size:clamp(17px,1.3vw,19px);line-height:1.6;max-width:34em">Precious Chinenye Celestine is a Data and AI professional and Business Intelligence consultant. Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution. At Pattern Grid, she brings these disciplines together around the business questions clients need to answer.</p>
               <div class="stack stack-12" style="border-top:1px solid var(--rule);padding-top:24px">
                 <span class="lbl" style="color:var(--muted)">Selected experience</span>
-                <p style="font-size:16px;line-height:1.6;max-width:34em">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses. Previous roles and personal projects are attributed to their organisations, not to Pattern Grid.</p>
+                <p style="font-size:16px;line-height:1.6;max-width:34em">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses. This experience comes from previous roles and personal projects, not from work delivered by Pattern Grid.</p>
               </div>
             </div>
           </div>
@@ -187,7 +191,7 @@
                 <div style="${style};display:flex;flex-direction:column;gap:10px;border-radius:var(--radius);padding:18px;min-height:200px">
                   <span class="mono" style="font-weight:500;font-size:10px;letter-spacing:.08em;opacity:.8">STAGE 0${i + 1}</span>
                   <span style="font-weight:600;font-size:18px">${s.name}</span>
-                  <span style="font-size:13px;line-height:1.5;opacity:.9">${s.change}</span>
+                  <span style="font-size:13px;line-height:1.5;opacity:.9">${s.copy}</span>
                   <span class="mono" style="margin-top:auto;font-weight:500;font-size:10px;letter-spacing:.04em;opacity:.75">OUTPUT · ${s.output}</span>
                 </div>`;
             })}
@@ -215,8 +219,8 @@
       <section style="padding:0 0 clamp(64px,8vw,128px)">
         <div class="wrap stack stack-24" data-reveal="rise">
           <div class="stack stack-10" style="max-width:720px">
-            <span class="eyebrow">Each capability has its own approach</span>
-            <p class="body slate">The Decision Path is the shared shape. Each service applies it differently, with its own outputs and decision points. Capability Building supports ownership throughout.</p>
+            <span class="eyebrow">Each service runs the path differently</span>
+            <p class="body slate">The Decision Path is the common pattern. Each service has its own five stages, outputs and review points. Capability Building runs alongside all of them so your team can take over.</p>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
             ${each(PG.services, function (s) {
@@ -236,7 +240,7 @@
       <section class="bg-paper sec-sm">
         <div class="wrap autogrid" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:64px;align-items:start">
           <div class="stack stack-20">
-            <p class="eyebrow-caps">THREE PRINCIPLES</p>
+            <p class="eyebrow-caps">THREE RULES WE HOLD TO</p>
             <div class="rows">
               <div style="padding:18px 0;font-size:19px;font-weight:600;color:var(--navy)">Agree success measures before delivery.</div>
               <div style="padding:18px 0;font-size:19px;font-weight:600;color:var(--navy)">Make ownership explicit.</div>
@@ -254,7 +258,7 @@
                   </div>`;
               })}
             </div>
-            <a class="arrow" href="/assessment">Find your starting point with the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/assessment">Take the readiness assessment to find your starting point <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
