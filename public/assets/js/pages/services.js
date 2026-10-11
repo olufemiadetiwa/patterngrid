@@ -12,72 +12,14 @@
 
   /* ------------------------------------------------------------ overview */
 
-  function miniStrategy() {
-    return html`
-      <div class="matrix">
-        <span class="axis-y">Value</span>
-        <div class="m"><span class="dot"></span>Later</div>
-        <div class="m on"><span class="dot on"></span>Sequence first</div>
-        <div class="m dim">Avoid</div>
-        <div class="m"><span class="dot need"></span>Foundation needed</div>
-        <span></span><span class="axis-x">Feasibility · Readiness</span>
-      </div>`;
-  }
-
-  function miniEngineering() {
-    return raw(
-      '<svg viewBox="0 0 360 160" width="100%" style="max-width:420px" aria-hidden="true" font-family="Geist, sans-serif">' +
-      '<rect x="8" y="60" width="72" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"/><text x="44" y="84" text-anchor="middle" font-size="12" fill="#02203D">Sources</text>' +
-      '<rect x="120" y="60" width="88" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"/><text x="164" y="84" text-anchor="middle" font-size="12" fill="#02203D">Quality gate</text>' +
-      '<rect x="260" y="20" width="92" height="40" rx="3" fill="#02203D"/><text x="306" y="44" text-anchor="middle" font-size="12" fill="#FFFFFF">Curated model</text>' +
-      '<rect x="260" y="104" width="92" height="40" rx="3" fill="none" stroke="#C9821A" stroke-width="1.5"/><text x="306" y="128" text-anchor="middle" font-size="12" fill="#07131C">Exception queue</text>' +
-      '<path d="M80 80H120 M208 72C230 72 236 40 260 40 M208 88C230 88 236 124 260 124" fill="none" stroke="#02203D" stroke-width="1.5"/>' +
-      '<path d="M260 134C220 150 170 150 164 100" fill="none" stroke="#17647D" stroke-width="1.5" stroke-dasharray="4 4"/>' +
-      '<text x="200" y="158" text-anchor="middle" font-size="11" fill="#17647D">corrected → revalidated</text></svg>');
-  }
-
-  function miniBI() {
-    return html`
-      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:3px;padding:20px;width:min(100%,320px);display:flex;flex-direction:column;gap:10px">
-        <span class="mono" style="font-size:11px;opacity:.7">Net sales · sample units</span>
-        <span class="num" style="font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1">9.6m</span>
-        <span style="font-size:13px;opacity:.85">Plan 10.0m · Variance −0.4m (−4%)</span>
-        <div class="row" style="gap:6px;margin-top:6px">
-          <span style="font-size:11px;border:1px solid #38A0C3;color:#38A0C3;border-radius:3px;padding:3px 8px">Definition</span>
-          <span style="font-size:11px;border:1px solid rgba(255,255,255,.3);border-radius:3px;padding:3px 8px">Period</span>
-          <span style="font-size:11px;border:1px solid rgba(255,255,255,.3);border-radius:3px;padding:3px 8px">Source</span>
-          <span style="font-size:11px;border:1px solid rgba(255,255,255,.3);border-radius:3px;padding:3px 8px">Owner</span>
-        </div>
-      </div>`;
-  }
-
-  function miniAI() {
-    return raw(
-      '<svg viewBox="0 0 360 160" width="100%" style="max-width:420px" aria-hidden="true" font-family="Geist, sans-serif">' +
-      '<rect x="8" y="60" width="80" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"/><text x="48" y="84" text-anchor="middle" font-size="12" fill="#02203D">Proposed</text>' +
-      '<rect x="128" y="60" width="80" height="40" rx="3" fill="none" stroke="#02203D" stroke-width="1.5"/><text x="168" y="84" text-anchor="middle" font-size="12" fill="#02203D">Checks</text>' +
-      '<rect x="248" y="20" width="104" height="40" rx="3" fill="#02203D"/><text x="300" y="44" text-anchor="middle" font-size="12" fill="#FFFFFF">Human review</text>' +
-      '<rect x="248" y="104" width="104" height="40" rx="3" fill="none" stroke="#C9821A" stroke-width="1.5"/><text x="300" y="128" text-anchor="middle" font-size="12" fill="#07131C">Returned</text>' +
-      '<path d="M88 80H128 M208 72C226 72 232 40 248 40 M208 88C226 88 232 124 248 124" fill="none" stroke="#02203D" stroke-width="1.5"/>' +
-      '<path d="M248 134C160 156 60 150 48 100" fill="none" stroke="#17647D" stroke-width="1.5" stroke-dasharray="4 4"/></svg>');
-  }
-
-  function miniCapability() {
-    return raw(
-      '<svg viewBox="0 0 360 180" width="100%" style="max-width:400px" aria-hidden="true" font-family="Geist, sans-serif">' +
-      '<circle cx="180" cy="90" r="64" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>' +
-      '<rect x="130" y="8" width="100" height="30" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)"/><text x="180" y="28" text-anchor="middle" font-size="12" fill="#FFFFFF">Guided practice</text>' +
-      '<rect x="248" y="75" width="104" height="30" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)"/><text x="300" y="95" text-anchor="middle" font-size="12" fill="#FFFFFF">Work sample</text>' +
-      '<rect x="120" y="142" width="120" height="30" rx="3" fill="#38A0C3"/><text x="180" y="162" text-anchor="middle" font-size="12" fill="#07131C">Independent use</text>' +
-      '<rect x="8" y="75" width="104" height="30" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)"/><text x="60" y="95" text-anchor="middle" font-size="12" fill="#FFFFFF">Review</text></svg>');
-  }
-
-  var MINIS = {
-    'data-ai-strategy': miniStrategy,
-    'data-engineering': miniEngineering,
-    'business-intelligence': miniBI,
-    'ai-automation': miniAI,
-    'capability-building': miniCapability
+  /* Each service is explained by one workspace scene from scenes.js; the
+     overview mounts the compact form, the detail page the full one. */
+  var SCENE_OF = {
+    'data-ai-strategy': 'strategy',
+    'data-engineering': 'engineering',
+    'business-intelligence': 'bi',
+    'ai-automation': 'ai',
+    'capability-building': 'capability'
   };
 
   function overview() {
@@ -128,7 +70,7 @@
                   </div>
                   <a class="arrow" href="/services/${s.slug}">${s.link} <span class="chev" aria-hidden="true">→</span></a>
                 </div>
-                <div class="mini ${dark ? 'dark' : 'light'}" aria-hidden="true">${MINIS[s.slug]()}</div>
+                <div class="mini ${dark ? 'dark' : 'light'}" data-scene="${SCENE_OF[s.slug]}" data-scene-compact></div>
               </article>`;
           })}
         </div>
@@ -156,249 +98,12 @@
 
   var KIND_LABEL = { input: 'Input', process: 'Process', gate: 'Decision', output: 'Output', exception: 'Exception', use: 'Used by' };
 
-  /* Artifact panels — one per service, each with its own small interaction. */
-
-  var ROADMAP_INITS = [
-    { name: 'Metric definitions', owner: 'Finance lead', phase: 0, question: 'Which definition of net sales do we report?', prereq: 'None. This comes first.', accept: 'One agreed definition, period rule and owner recorded in the KPI dictionary.', fixedReady: true },
-    { name: 'Source integration', owner: 'Data owner', phase: 0, question: 'Can sales and finance data be joined without manual reconciliation?', prereq: 'Metric definitions agreed.', accept: 'Both sources load on schedule with reconciliation checks passing.', fixedReady: true },
-    { name: 'Weekly commercial reporting', owner: 'Commercial finance lead', phase: 1, question: 'Where is performance slipping this week?', prereq: 'Source integration complete; net sales definition agreed.', accept: 'Report reconciles to the ledger; used in the weekly review for four consecutive weeks.', togglesWithReady: true },
-    { name: 'AI reporting assistant', owner: 'Process owner', phase: 2, question: 'Can the weekly briefing be drafted with less manual preparation?', prereq: 'Weekly commercial reporting in use; checked figures available.', accept: 'Draft passes agreed checks; reviewer approval recorded for every release.', fixedReady: false }
-  ];
-  var PHASE_NAMES = ['Phase 1 · Foundations', 'Phase 2 · Reporting', 'Phase 3 · Assisted work', 'Foundation needed'];
-
-  function readyOf(init, rmReady) {
-    return init.togglesWithReady ? rmReady : init.fixedReady;
-  }
-
-  function artifactStrategy(s) {
-    var phases = PHASE_NAMES.map(function (name, pi) {
-      var items = ROADMAP_INITS
-        .map(function (it, ii) { return Object.assign({}, it, { ii: ii, ready: readyOf(it, s.rmReady) }); })
-        .filter(function (it) { return pi === 3 ? !it.ready : (it.ready && it.phase === pi); });
-      return { name: name, need: pi === 3, items: items };
-    });
-    var sel = ROADMAP_INITS[s.rmInit];
-    var selReady = readyOf(sel, s.rmReady);
-
-    return html`
-      <div class="panel">
-        <div class="row between" style="gap:12px">
-          <span style="font-weight:600;font-size:17px">Phased delivery roadmap</span>
-          <label class="row" style="gap:10px;font-size:13px;color:var(--muted);cursor:pointer">
-            <input type="checkbox" data-rm-ready ${raw(s.rmReady ? 'checked' : '')} style="width:18px;height:18px;accent-color:#02203D">
-            Try it: mark source integration as complete
-          </label>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:10px">
-          ${each(phases, function (ph) {
-            return html`
-              <div class="phase-col${ph.need ? ' need' : ''}">
-                <span class="nm">${ph.name}</span>
-                ${each(ph.items, function (it) {
-                  return html`
-                    <button type="button" class="phase-item" data-rm-init="${it.ii}"
-                            aria-pressed="${s.rmInit === it.ii ? 'true' : 'false'}">${it.name}<span>${it.owner}</span></button>`;
-                })}
-              </div>`;
-          })}
-        </div>
-        <div class="kv boxed" style="--kv:120px">
-          <span class="k">Initiative</span><span style="font-weight:600">${sel.name}</span>
-          <span class="k">Business question</span><span>${sel.question}</span>
-          <span class="k">Prerequisites</span><span>${sel.prereq}</span>
-          <span class="k">Acceptance</span><span>${sel.accept}</span>
-          <span class="k">Status</span><span style="font-weight:500;color:${selReady ? 'var(--teal)' : 'var(--amber-ink)'}">${selReady
-            ? 'Ready to sequence'
-            : 'Foundation needed — ' + (s.rmInit === 2 ? 'source integration not yet complete' : 'depends on earlier phases')}</span>
-        </div>
-      </div>`;
-  }
-
-  var RUNS = [
-    { source: 'ERP orders', load: 'Tue 06:10', checks: '12 / 12 passed', status: 'Loaded', ok: true },
-    { source: 'CRM outlets', load: 'Tue 06:14', checks: '8 / 8 passed', status: 'Loaded', ok: true },
-    { source: 'Stock file (weekly)', load: 'Tue 06:22', checks: '6 / 7 passed', status: '1 exception · Missing product ID', ok: false }
-  ];
-
-  function artifactEngineering(s) {
-    var cols = 'minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)';
-    return html`
-      <div class="panel">
-        <div class="row between" style="gap:12px">
-          <span style="font-weight:600;font-size:17px">Pipeline run · week 36 (sample)</span>
-          <span class="lbl" style="color:var(--muted)">Fixed illustrative timestamps</span>
-        </div>
-        <div class="artifact-head" style="grid-template-columns:${cols}">
-          <span>Source</span><span>Last completed load</span><span>Checks</span><span>Status</span>
-        </div>
-        ${each(RUNS, function (r) {
-          return html`
-            <button type="button" class="artifact-row${r.ok ? '' : ' warn'}" style="grid-template-columns:${cols}"
-                    ${raw(r.ok ? 'disabled aria-disabled="true"' : 'data-trace')}
-                    aria-pressed="${!r.ok && s.trace ? 'true' : 'false'}">
-              <span style="font-weight:500">${r.source}</span>
-              <span class="num">${r.load}</span>
-              <span>${r.checks}</span>
-              <span style="font-weight:500;color:${r.ok ? 'var(--teal)' : 'var(--amber-ink)'}">${r.status}</span>
-            </button>`;
-        })}
-        ${s.trace ? html`
-          <div class="kv boxed">
-            <span class="k">Held record</span><span>Stock file row 412 · Item 4471 · Outlet code E-0118</span>
-            <span class="k">Why it was held</span><span>Product ID is missing, so the record cannot join the product master. It is held rather than loaded as an unknown product.</span>
-            <span class="k">Owner</span><span>Supply chain data owner</span>
-            <span class="k">Return path</span><span>Once the product ID is supplied, the record is revalidated against the same checks and, if it passes, loaded into the curated stock model.</span>
-          </div>
-          <button type="button" class="btn btn-ghost" data-close-trace style="align-self:flex-start;height:40px;font-size:14px;font-weight:500">Back to the normal path</button>`
-          : html`<p class="fine">Select the run with an exception to trace the held record.</p>`}
-      </div>`;
-  }
-
-  var METRIC_DEFS = [
-    ['Definition', 'Net sales = gross invoiced sales less credited returns, excluding VAT and internal transfers.'],
-    ['Period', 'Reporting week 36, Monday to Sunday, based on invoice date.'],
-    ['Source', 'Finance ledger (invoices, credit notes) joined to the product master through the curated sales model.'],
-    ['Owner', 'Commercial finance lead owns the definition; changes are agreed at the monthly metric review.'],
-    ['Exclusions', 'Samples, staff sales and intercompany transfers are excluded from both gross sales and returns.']
-  ];
-  var BI_ROWS = [['Beverages', -0.1], ['Snacks', -0.3], ['Personal care', 0.0], ['Household', 0.0]];
-
-  function artifactBI(s) {
-    return html`
-      <div class="panel">
-        <div class="row between end" style="gap:16px">
-          <div class="stack stack-6">
-            <span class="lbl" style="color:var(--muted)">Net sales · week 36 · sample units (m)</span>
-            <span class="num" style="font-size:clamp(40px,4vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1">9.6</span>
-          </div>
-          <div class="num" style="display:grid;grid-template-columns:auto auto;gap:4px 16px;font-size:14px;text-align:right">
-            <span class="muted">Gross sales</span><span>10.0</span>
-            <span class="muted">Returns</span><span>−0.4</span>
-            <span class="muted">Plan</span><span>10.0</span>
-            <span class="muted">Variance</span><span style="font-weight:600">−0.4 (−4%)</span>
-          </div>
-        </div>
-        <div role="group" aria-label="Inspect the measure" class="row" style="gap:6px">
-          ${each(METRIC_DEFS, function (m, i) {
-            return html`<button type="button" class="toggle toggle-sm" data-metric="${i}"
-              aria-pressed="${s.metric === i ? 'true' : 'false'}">${m[0]}</button>`;
-          })}
-        </div>
-        <p class="small" style="background:var(--paper);border-radius:var(--radius);padding:14px 16px">${METRIC_DEFS[s.metric][1]}</p>
-        <div class="stack stack-8">
-          <span class="lbl" style="color:var(--muted)">Variance by product line (sums to −0.4)</span>
-          ${each(BI_ROWS, function (b) {
-            var low = b[1] <= -0.3;
-            return html`
-              <div style="display:grid;grid-template-columns:120px minmax(0,1fr) 56px;gap:12px;align-items:center;font-size:14px">
-                <span>${b[0]}</span>
-                <span style="height:8px;background:rgba(7,19,28,.06);border-radius:2px;position:relative">
-                  <span style="position:absolute;right:0;top:0;height:100%;border-radius:2px;width:${Math.abs(b[1]) / 0.4 * 100}%;background:${low ? 'var(--amber-mid)' : 'var(--navy)'}"></span>
-                </span>
-                <span class="num" style="text-align:right;font-weight:${low ? 600 : 400}">${(b[1] > 0 ? '+' : '') + b[1].toFixed(1)}</span>
-              </div>`;
-          })}
-        </div>
-        <div class="kv" style="--kv:120px;border-top:1px solid var(--rule);padding-top:14px">
-          <span class="k">Next question</span><span>Are returns concentrated in Snacks, and since which week?</span>
-          <span class="k">Follow-up</span><span>Commercial finance lead</span>
-        </div>
-      </div>`;
-  }
-
-  function artifactAI(s) {
-    var missing = s.aiMode === 'missing';
-    var dec = s.aiDecision;
-    var status = missing
-      ? 'Stopped at review · missing evidence (Finance ledger, W36)'
-      : (dec === 'approve' ? 'Approved for release · recorded'
-        : (dec === 'return' ? 'Returned for correction · recorded' : 'Awaiting reviewer decision'));
-
-    return html`
-      <div class="panel">
-        <div class="row between" style="gap:12px">
-          <span style="font-weight:600;font-size:17px">Work item · weekly performance briefing</span>
-          <div role="group" aria-label="Sample" class="row" style="gap:4px">
-            <button type="button" class="toggle toggle-xs" data-ai-mode="normal" aria-pressed="${!missing ? 'true' : 'false'}">Normal sample</button>
-            <button type="button" class="toggle toggle-xs" data-ai-mode="missing" aria-pressed="${missing ? 'true' : 'false'}">Missing source</button>
-          </div>
-        </div>
-        <div class="kv" style="--kv:140px;gap:10px 16px">
-          <span class="k">Input</span><span>Scheduled trigger · Monday 07:00 · Reporting period W36</span>
-          <span class="k">Supporting sources</span><span>${missing
-            ? 'Sales model (W36) · Stock model (W36) · Finance ledger — not available for W36'
-            : 'Sales model (W36) · Stock model (W36) · Finance ledger (W36)'}</span>
-          <span class="k">Proposed output</span>
-          <span style="border-left:2px solid var(--accent);padding-left:10px">${missing
-            ? 'Draft briefing with the net sales statement flagged: “Figure unavailable — finance ledger for W36 not yet loaded.”'
-            : 'Draft briefing: “Net sales 9.6m against plan 10.0m (−4%). Snacks returns account for −0.3m.” Each statement links to its measure.'}
-            <span class="eyebrow" style="display:block;margin-top:4px">Labelled: Proposed · not verified</span>
-          </span>
-          <span class="k">Checks</span>
-          <span style="font-weight:500;color:${missing ? 'var(--amber-ink)' : 'var(--teal)'}">${missing
-            ? 'Failed · required source missing · period check not possible'
-            : 'Passed · all figures W36 · references resolve'}</span>
-          <span class="k">Review</span>
-          <span class="row" style="gap:8px">
-            <button type="button" class="btn btn-sm" data-ai-decision="approve" ${raw(missing ? 'disabled' : '')} style="height:36px;font-size:13px">Approve release</button>
-            <button type="button" class="btn btn-ghost btn-sm" data-ai-decision="return" style="height:36px;font-size:13px">Return for correction</button>
-            <span class="fine">Reviewer: Commercial finance lead</span>
-          </span>
-          <span class="k">Final status</span>
-          <span style="font-weight:600;color:${missing || dec === 'return' ? 'var(--amber-ink)' : (dec === 'approve' ? 'var(--teal)' : 'var(--ink)')}">${status}</span>
-        </div>
-        <p class="fine">This is a page illustration. Nothing here is sent anywhere.</p>
-      </div>`;
-  }
-
-  var ROLE_DEFS = [
-    { name: 'Leader', evidence: 'a written explanation of one KPI variance reviewed against the rubric', tasks: [['Explain a KPI variance', 1, 2, 3], ['Challenge a definition in review', 1, 2, 2], ['Assign and track a follow-up action', 2, 3, 3]] },
-    { name: 'Analyst', evidence: 'an updated measure and a reconciled report checked by a reviewer', tasks: [['Update a measure', 1, 3, 3], ['Reconcile a report to source', 1, 2, 3], ['Add a drill path', 1, 2, 2]] },
-    { name: 'Engineer', evidence: 'a failed load investigated and resolved using the runbook', tasks: [['Investigate a failed load', 1, 3, 3], ['Resolve an exception queue item', 2, 3, 3], ['Deploy a model change', 1, 2, 2]] }
-  ];
-
-  function artifactCapability(s) {
-    var role = ROLE_DEFS[s.role];
-    return html`
-      <div class="panel">
-        <div class="row between" style="gap:12px">
-          <span style="font-weight:600;font-size:17px">Role-to-task matrix (illustrative)</span>
-          <div role="group" aria-label="Role" class="row" style="gap:4px">
-            ${each(ROLE_DEFS, function (r, i) {
-              return html`<button type="button" class="toggle toggle-xs" data-role="${i}"
-                aria-pressed="${s.role === i ? 'true' : 'false'}">${r.name}</button>`;
-            })}
-          </div>
-        </div>
-        <div class="artifact-head tasks" style="grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))">
-          <span>Task</span><span>Baseline</span><span>Guided practice</span><span>Independent demonstration</span>
-        </div>
-        ${each(role.tasks, function (t) {
-          return html`
-            <div class="task-row">
-              <span style="font-weight:500">${t[0]}</span>
-              <span class="dot-cell"><span class="d${t[1] >= 1 ? ' filled' : ''}"></span><span class="lbl">${t[1] >= 1 ? 'Baseline set' : '—'}</span></span>
-              <span class="dot-cell"><span class="d${t[2] >= 2 ? ' filled' : ''}"></span><span class="lbl">${t[2] >= 2 ? 'Practised' : 'Planned'}</span></span>
-              <span class="dot-cell"><span class="d hi${t[3] >= 3 ? ' filled' : ''}"></span><span class="lbl">${t[3] >= 3 ? 'Demonstrated' : 'Not yet'}</span></span>
-            </div>`;
-        })}
-        <p class="fine">Evidence: ${role.evidence}. Illustrative roles and tasks; individual results are never published.</p>
-      </div>`;
-  }
-
-  var ARTIFACTS = {
-    'data-ai-strategy': artifactStrategy,
-    'data-engineering': artifactEngineering,
-    'business-intelligence': artifactBI,
-    'ai-automation': artifactAI,
-    'capability-building': artifactCapability
-  };
-  var ARTIFACT_TITLES = {
-    'data-ai-strategy': 'Phased delivery roadmap',
-    'data-engineering': 'Pipeline run and exception queue',
-    'business-intelligence': 'Inspectable metric card',
-    'ai-automation': 'Work item with review',
-    'capability-building': 'Role-to-task matrix'
+  var SCENE_TITLES = {
+    'data-ai-strategy': 'Delivery workspace',
+    'data-engineering': 'Source workspace',
+    'business-intelligence': 'Decision workspace',
+    'ai-automation': 'Review workspace',
+    'capability-building': 'Capability workspace'
   };
 
   /* ------------------------------------------------------- stage / flow */
@@ -544,6 +249,15 @@
             <button type="button" class="toggle toggle-dark" data-replay-flow style="height:40px">Replay</button>
           </div>
 
+          <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
+            <span class="lbl" style="color:rgba(255,255,255,.6)">${svc.flow.bandTitle}</span>
+            ${each(svc.flow.band, function (b) {
+              return html`<span class="band-chip">${b}</span>`;
+            })}
+          </div>
+
+          <details class="flow-details" data-flow-details>
+          <summary>Open the full flow diagram <span class="chev down" aria-hidden="true">↓</span></summary>
           <div class="flow-wrap">
             <div class="flow flow-paper" data-flow>
               <svg class="flow-svg" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" data-flow-svg>
@@ -573,11 +287,7 @@
             </aside>
           </div>
 
-          <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
-            <span class="lbl" style="color:rgba(255,255,255,.6)">${svc.flow.bandTitle}</span>
-            ${each(svc.flow.band, function (b) {
-              return html`<span class="band-chip">${b}</span>`;
-            })}
+          <div class="row" style="gap:12px 24px;padding-top:20px">
             <span class="flow-legend"><span>— forward</span><span style="color:var(--amber)">— exception</span><span style="color:var(--accent)">- - feedback</span></span>
           </div>
 
@@ -588,29 +298,30 @@
               return html`<li>${a.label} → ${b.label}${e.label ? ' (' + e.label + ')' : ''}${e.type === 'exception' ? ' — exception route' : (e.type === 'feedback' ? ' — feedback' : '')}.</li>`;
             })}
           </ol>
+          </details>
         </div>
       </section>
 
       <section id="svc-artifact" class="sec-sm">
-        <div class="wrap autogrid start" data-reveal="rise" style="--min:380px">
-          <div class="stack stack-20">
-            <span class="eyebrow">Worked example</span>
-            <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${svc.example.question}</h2>
-            <ol class="stack stack-14" style="list-style:none;border-top:1px solid var(--rule);padding-top:20px">
-              ${each(svc.example.steps, function (t, i) {
-                return html`
-                  <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:16px;line-height:1.55">
-                    <span class="lbl" style="color:var(--muted);padding-top:4px">0${i + 1}</span><span>${t}</span>
-                  </li>`;
-              })}
-            </ol>
-            <p class="fine">Illustrative example with sample figures, not a client result.</p>
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
+            <div class="stack stack-16">
+              <span class="eyebrow">Worked example</span>
+              <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${svc.example.question}</h2>
+            </div>
+            <div class="stack stack-14">
+              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
+                ${each(svc.example.steps, function (t, i) {
+                  return html`
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="lbl" style="color:var(--muted);padding-top:3px">0${i + 1}</span><span>${t}</span>
+                    </li>`;
+                })}
+              </ol>
+              <p class="fine">Sample deliverable · ${SCENE_TITLES[svc.slug]}. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+            </div>
           </div>
-
-          <div class="stack stack-14">
-            <span class="lbl" style="color:var(--muted)">Sample deliverable · ${ARTIFACT_TITLES[svc.slug]}</span>
-            <div data-artifact>${ARTIFACTS[svc.slug](s)}</div>
-          </div>
+          <div data-scene="${SCENE_OF[svc.slug]}"></div>
         </div>
       </section>
 
@@ -729,7 +440,7 @@
 
     render: function (p) {
       var svc = p.slug && find(p.slug);
-      var s = { stage: 0, node: null, rmInit: 0, rmReady: false, trace: false, metric: 0, aiMode: 'normal', aiDecision: null, role: 0 };
+      var s = { stage: 0, node: null };
       this._state = s;
       this._svc = svc;
       return svc
@@ -740,6 +451,11 @@
     mount: function (root, cleanup) {
       var svc = this._svc;
       var s = this._state;
+
+      /* --- workspace scenes ------------------------------------------ */
+      C.qsa('[data-scene]', root).forEach(function (host) {
+        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { compact: host.hasAttribute('data-scene-compact') }));
+      });
 
       /* Jump links and the deliverables button scroll to a section. */
       var onJump = function (e) {
@@ -807,57 +523,6 @@
         cleanup(function () {
           tabList.removeEventListener('click', onTab);
           tabList.removeEventListener('keydown', onTabKey);
-        });
-      }
-
-      /* --- artifact interactions ------------------------------------ */
-      var artifactHost = root.querySelector('[data-artifact]');
-
-      function repaintArtifact() {
-        if (artifactHost) artifactHost.innerHTML = ARTIFACTS[svc.slug](s).value;
-      }
-
-      var onArtifact = function (e) {
-        var t = e.target;
-        var hit = false;
-
-        var init = t.closest('[data-rm-init]');
-        if (init) { s.rmInit = Number(init.getAttribute('data-rm-init')); hit = true; }
-
-        if (t.closest('[data-rm-ready]')) {
-          s.rmReady = t.closest('[data-rm-ready]').checked;
-          s.rmInit = 2;
-          hit = true;
-        }
-
-        if (t.closest('[data-trace]')) { s.trace = true; hit = true; }
-        if (t.closest('[data-close-trace]')) { s.trace = false; hit = true; }
-
-        var metric = t.closest('[data-metric]');
-        if (metric) { s.metric = Number(metric.getAttribute('data-metric')); hit = true; }
-
-        var mode = t.closest('[data-ai-mode]');
-        if (mode) { s.aiMode = mode.getAttribute('data-ai-mode'); s.aiDecision = null; hit = true; }
-
-        var dec = t.closest('[data-ai-decision]');
-        if (dec) {
-          var which = dec.getAttribute('data-ai-decision');
-          if (which === 'approve' && s.aiMode === 'missing') return;
-          s.aiDecision = which;
-          hit = true;
-        }
-
-        var role = t.closest('[data-role]');
-        if (role) { s.role = Number(role.getAttribute('data-role')); hit = true; }
-
-        if (hit) repaintArtifact();
-      };
-      if (artifactHost) {
-        artifactHost.addEventListener('click', onArtifact);
-        artifactHost.addEventListener('change', onArtifact);
-        cleanup(function () {
-          artifactHost.removeEventListener('click', onArtifact);
-          artifactHost.removeEventListener('change', onArtifact);
         });
       }
 
@@ -984,6 +649,8 @@
           return;
         }
         if (e.target.closest('[data-replay-flow]')) {
+          var det = root.querySelector('[data-flow-details]');
+          if (det && !det.open) { det.open = true; return; } // the toggle handler draws and plays
           s.node = null;
           animate = false;
           paintNodes();
@@ -1025,6 +692,17 @@
          tab, a browser without IntersectionObserver — reveal it anyway. */
       var playFallback = setTimeout(play, 2500);
 
+      /* The diagram lives inside a <details>; nothing can be measured while
+         it is closed, so draw and play again whenever it opens. */
+      var details = root.querySelector('[data-flow-details]');
+      var onToggle = function () {
+        if (!details.open) return;
+        played = false; animate = false;
+        drawEdges();
+        requestAnimationFrame(function () { drawEdges(); play(); });
+      };
+      if (details) details.addEventListener('toggle', onToggle);
+
       var flowIO = null;
       if ('IntersectionObserver' in window) {
         flowIO = new IntersectionObserver(function (es) { if (es[0].isIntersecting) play(); }, { threshold: 0.2 });
@@ -1048,6 +726,7 @@
         clearTimeout(resizeT);
         clearTimeout(settle);
         clearTimeout(playFallback);
+        if (details) details.removeEventListener('toggle', onToggle);
         if (flowIO) flowIO.disconnect();
         if (ro) ro.disconnect();
       });

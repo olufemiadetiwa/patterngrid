@@ -351,6 +351,43 @@ Open questions for the founder are in `docs/copy-review.md` §4 (business
 email, form destination, engagement formats, pricing line, band labels,
 service name, Insights timing, legal pages).
 
+## Visual scenes (seventh pass)
+
+A visual-upgrade brief (`docs/visuals/brief.md`) asked for the diagram-like
+explanations — thin boxes, arrows, dot grids, label-heavy side panels — to
+become product-like scenes that explain the work by state. The pass is
+recorded route by route in `docs/visuals/routes.md`, with full-page before and
+after captures in `docs/visuals/before|after` (desktop and phone, taken with
+`tools/capture-visuals.sh`, which drives the installed Chrome headless).
+
+- **One visual language**, written down as a project skill
+  (`.claude/skills/site-visual-language/SKILL.md`): cool neutral scene
+  surfaces (`--surface-0/1/2`, `--surface-line`), two shadow steps, chart
+  tokens (`--bar`, `--bar-on`), state colours, 2/3/6 px radii, motion limits.
+- **Scene components** in `public/assets/js/scenes.js` (`PG.scene.*`): frame
+  with title bar and `Illustrative demo` tag, stepper, KPI, bar chart,
+  action drawer, record previews, source tiles, join rows, timeline rows,
+  flowline, skill rows; one shared sample dataset so the figures agree across
+  every scene and with the home sequence. Layouts respond to the scene's own
+  width (`@container` queries), so the same scene is mounted full-bleed on a
+  service page, compact in an overview column and static in the home preview.
+- **Six scenes**: Decision workspace (BI — metric → trace → assign an owner,
+  matching the brief's mock), Delivery workspace (Strategy — initiatives,
+  owners, dependencies, phase track, readiness that cascades when a
+  prerequisite is marked complete), Source workspace (Engineering — records →
+  shared keys → one view, with the held record traceable), Review workspace
+  (AI — proposed → checks → human decision), Capability workspace (role → task
+  progression), and a per-industry Source workspace that replaces the lineage
+  box and the duplicate record grid.
+- **Progressive disclosure**: the measured flow diagram on each service page
+  is kept as the deeper explanation under `Open the full flow diagram`; it
+  measures and plays when opened. The worked-example section is now a heading
+  row above a full-width scene, so the page alternates compositions instead of
+  repeating text-left/diagram-right.
+- **Motion explains state**: 160 ms settle + 240 ms enter on repaint, 500 ms
+  bars, 200–400 ms selection and status changes; reduced motion repaints
+  synchronously with every transition off.
+
 ## What changed from the prototype
 
 Same design, same words, same interactions. The differences are structural.
@@ -428,7 +465,8 @@ the first thing to split.
 ## Verified
 
 - 24/24 routes render with no console errors, on load and via client navigation.
-- No horizontal overflow on any route at 375 px.
+- No horizontal overflow on any route at 375 px, and at 390 px after the scene pass (16 routes).
+- Scene interactions exercised in the browser: BI steps, trace rows, assign; Strategy readiness cascade; Engineering source select and held record; AI approve/return and the missing-source stop; stepper arrow keys keep focus; reduced motion repaints synchronously.
 - One `<h1>` per page, no heading-level jumps, every image has `alt`, every
   control has an accessible name, every input has a label.
 - Text contrast at or above 4.5:1 for body text on every surface.

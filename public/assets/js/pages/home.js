@@ -74,124 +74,11 @@
   }
 
   /* Per-service preview cards shown beside the capability list. */
+  /* The sticky preview beside the service list: one compact workspace scene
+     per service, the same scenes the service pages mount interactively. */
+  var PREVIEW_SCENES = ['strategy', 'engineering', 'bi', 'ai', 'capability'];
   function previewBody(i) {
-    if (i === 0) {
-      var quads = [
-        { quad: 'high value · ready', items: ['Weekly commercial reporting'], cls: 'on' },
-        { quad: 'high value · foundation needed', items: ['AI reporting assistant'], cls: 'warn' },
-        { quad: 'foundation', items: ['Metric definitions', 'Source integration'], cls: '' },
-        { quad: 'later', items: ['Customer churn model'], cls: 'off' }
-      ];
-      return html`
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
-          ${each(quads, function (q) {
-            return html`<div class="quad ${q.cls}">
-              <span class="q">${q.quad}</span>
-              ${each(q.items, function (it) { return html`<span class="i">${it}</span>`; })}
-            </div>`;
-          })}
-        </div>
-        <div class="mono" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:11px;color:rgba(255,255,255,.7)">
-          <span>Phase 1 · Definitions</span><span>Phase 2 · Reporting</span><span>Phase 3 · Assisted work</span>
-        </div>`;
-    }
-
-    if (i === 1) {
-      var runs = [
-        { s: 'erp_orders', l: 'Tue 06:10', c: '12/12', st: 'loaded', ok: true },
-        { s: 'crm_outlets', l: 'Tue 06:14', c: '8/8', st: 'loaded', ok: true },
-        { s: 'stock_weekly', l: 'Tue 06:22', c: '6/7', st: '1 held', ok: false }
-      ];
-      return html`
-        <div class="mono" style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:6px 10px;font-size:12px">
-          <span style="color:rgba(255,255,255,.55)">source</span>
-          <span style="color:rgba(255,255,255,.55)">last load</span>
-          <span style="color:rgba(255,255,255,.55)">checks</span>
-          <span style="color:rgba(255,255,255,.55)">status</span>
-          ${each(runs, function (r) {
-            var b = 'padding:8px 0;border-top:1px solid rgba(255,255,255,.12)';
-            return html`
-              <span style="${b}">${r.s}</span><span style="${b}">${r.l}</span><span style="${b}">${r.c}</span>
-              <span style="${b}"><span class="pill" style="color:${r.ok ? '#38A0C3' : '#FFD08A'}">${r.st}</span></span>`;
-          })}
-        </div>
-        <pre class="code">-- quality gate: hold records without a product key
-SELECT s.*, CASE WHEN p.product_id IS NULL
-  THEN 'HELD: missing product ID' ELSE 'OK' END AS check_status
-FROM stg.stock_weekly s
-LEFT JOIN dim.product p ON p.product_id = s.product_id;</pre>`;
-    }
-
-    if (i === 2) {
-      var bars = [['Beverages', -0.1], ['Snacks', -0.3], ['Personal care', 0.0], ['Household', 0.0]];
-      return html`
-        <div style="border:1px solid rgba(255,255,255,.18);border-left:2px solid #FFD08A;border-radius:3px;padding:16px;display:flex;flex-direction:column;gap:6px">
-          <span class="lbl" style="color:rgba(255,255,255,.65)">Net sales · W36 · sample units (m)</span>
-          <span class="num" style="font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1">9.6</span>
-          <span style="font-size:13px;color:rgba(255,255,255,.8)">Plan 10.0 · Variance −0.4 (−4%) · Gross 10.0 − Returns 0.4</span>
-        </div>
-        <div class="stack stack-8">
-          ${each(bars, function (b) {
-            var v = (b[1] > 0 ? '+' : '') + b[1].toFixed(1);
-            return html`
-              <div style="display:grid;grid-template-columns:110px minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:13px">
-                <span>${b[0]}</span>
-                <span style="height:8px;background:rgba(255,255,255,.08);border-radius:2px;position:relative">
-                  <span style="position:absolute;right:0;top:0;height:100%;border-radius:2px;width:${Math.abs(b[1]) / 0.4 * 100}%;background:${b[1] <= -0.3 ? '#FFD08A' : 'rgba(255,255,255,.6)'}"></span>
-                </span>
-                <span class="mono num" style="text-align:right;font-size:12px">${v}</span>
-              </div>`;
-          })}
-        </div>
-        <pre class="code">Net Sales = [Gross Sales] - [Returns]
-Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
-    }
-
-    if (i === 3) {
-      var queue = [
-        { item: 'Weekly briefing · W36', meta: 'proposed · 3/3 checks · linked to 6 measures', st: 'awaiting review', warn: true },
-        { item: 'Weekly briefing · W35', meta: 'approved by finance lead · released Mon 09:12', st: 'approved', warn: false },
-        { item: 'Stock alert · Territory East', meta: 'rule: demand > available for 3+ outlets', st: 'sent · owner assigned', warn: false },
-        { item: 'Briefing · W34', meta: 'finance ledger missing → stopped at review', st: 'returned', warn: true }
-      ];
-      return html`
-        <div class="stack stack-8">
-          ${each(queue, function (q) {
-            return html`
-              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid rgba(255,255,255,.14);border-radius:3px;padding:12px 14px">
-                <span class="stack" style="gap:3px">
-                  <span style="font-size:13px;font-weight:500">${q.item}</span>
-                  <span class="lbl" style="color:rgba(255,255,255,.6)">${q.meta}</span>
-                </span>
-                <span class="pill" style="font-size:10.5px;padding:3px 8px;white-space:nowrap;color:${q.warn ? '#FFD08A' : '#38A0C3'}">${q.st}</span>
-              </div>`;
-          })}
-        </div>`;
-    }
-
-    var tasks = [
-      { n: 'Update a measure', practised: true, independent: true },
-      { n: 'Reconcile a report to source', practised: true, independent: true },
-      { n: 'Add a drill path', practised: true, independent: false }
-    ];
-    var th = 'font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.55)';
-    var td = 'padding:10px 0;border-top:1px solid rgba(255,255,255,.12)';
-    return html`
-      <div style="display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:6px 10px;font-size:12px;align-items:center">
-        <span style="${th}">task · analyst</span><span style="${th}">baseline</span>
-        <span style="${th}">practised</span><span style="${th}">independent</span>
-        ${each(tasks, function (k) {
-          function dot(fill, border) {
-            return raw('<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1.5px solid ' +
-              border + ';background:' + fill + '"></span>');
-          }
-          return html`
-            <span style="${td}">${k.n}</span>
-            <span style="${td}">${dot('#FFFFFF', '#FFFFFF')}</span>
-            <span style="${td}">${dot(k.practised ? '#FFFFFF' : 'transparent', '#FFFFFF')}</span>
-            <span style="${td}">${dot(k.independent ? '#38A0C3' : 'transparent', '#38A0C3')}</span>`;
-        })}
-      </div>`;
+    return PG.scene.render(PREVIEW_SCENES[i], { compact: true, preview: true });
   }
 
   /* Illustrative record grids beside each work scenario. */
@@ -232,7 +119,7 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
     var s = STAGES[stage];
 
     return html`
-      <span class="lbl" style="color:rgba(255,255,255,.55)">Illustrative scenario · Sample data · ${s.caption}</span>
+      <span class="label-caps" style="color:var(--muted)">Stage ${stage + 1} · ${s.caption}</span>
 
       ${when(stage <= 1, function () {
         return html`
@@ -252,7 +139,7 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
       ${when(stage >= 2, function () {
         return html`
           <div class="stack stack-10">
-            <div style="display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1fr);gap:12px;font-size:12px;color:rgba(255,255,255,.55)">
+            <div style="display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1fr);gap:12px;font-size:12px;color:var(--muted)">
               <span>Location</span><span>Sales index</span><span>Availability</span>
             </div>
             ${each(LOCS, function (l) {
@@ -261,11 +148,11 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
                   <span class="n">${l.name}</span>
                   <span style="display:flex;align-items:center;gap:8px">
                     <span class="b" style="width:${l.sales * 0.9}%"></span>
-                    <span class="num" style="color:rgba(255,255,255,.8)">${l.sales}</span>
+                    <span class="num" style="color:var(--slate)">${l.sales}</span>
                   </span>
                   <span style="display:flex;align-items:center;gap:8px">
                     <span class="b" style="width:${l.avail * 0.9}%"></span>
-                    <span class="num" style="color:rgba(255,255,255,.8)">${l.avail}%</span>
+                    <span class="num" style="color:var(--slate)">${l.avail}%</span>
                   </span>
                 </div>`;
             })}
@@ -313,11 +200,8 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
             </div>
           </div>
 
-          <div class="preview-sticky" aria-hidden="true">
+          <div class="preview-sticky" aria-hidden="true" inert>
             <div class="preview-card" data-preview-card>
-              <div class="card-head">
-                <span data-preview-kicker>${PREVIEW_KICKERS[0]}</span><span>Sample data</span>
-              </div>
               <div data-preview-body>${previewBody(0)}</div>
             </div>
             <div class="row between" style="gap:16px;font-size:14px;color:var(--muted)">
@@ -343,19 +227,21 @@ Variance to Plan = DIVIDE([Net Sales] - [Plan], [Plan])</pre>`;
 
           <div class="autogrid start" style="--min:400px;--gap:40px">
             <div class="seq-sticky">
-              <div class="seq-panel">
-                <div class="row between" style="gap:12px">
-                  <div role="tablist" aria-label="Stages" class="row" style="gap:4px" data-stage-tabs>
-                    ${each(STAGES, function (t, i) {
-                      return html`<button type="button" role="tab" class="toggle toggle-sm toggle-dark"
-                        data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
-                        aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}">${t.name}</button>`;
-                    })}
-                  </div>
-                  <button type="button" class="toggle toggle-sm toggle-dark" data-replay>Replay</button>
+              <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
+                <div class="scene-bar">
+                  <span class="scene-id"><span class="scene-glyph" aria-hidden="true"><i></i><i></i><i></i></span>Connected view</span>
+                  <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay style="height:32px">Replay</button></span>
                 </div>
-                <div role="tabpanel" id="seq-panel" class="seq-body stack stack-16" data-seq-body
+                <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs>
+                  ${each(STAGES, function (t, i) {
+                    return html`<button type="button" role="tab" class="scene-step"
+                      data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
+                      aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}"><span class="n">${i + 1}</span>${t.name}</button>`;
+                  })}
+                </div>
+                <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body
                      aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
+                <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · local interactions only</span></div>
               </div>
             </div>
 
