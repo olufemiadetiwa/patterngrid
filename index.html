@@ -58,7 +58,7 @@
      stylesheet above; document.write during parsing keeps them in order. */
   (function () {
     var b = window.PG_BASE || '';
-    ['content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
+    ['content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
       document.write('<script src="' + b + '/assets/js/' + f + '.js"><\/script>');
     });
   })();

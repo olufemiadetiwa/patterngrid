@@ -100,62 +100,23 @@
         </div>
       </section>
 
-      <section class="bg-paper sec-sm">
-        <div class="wrap autogrid" data-reveal="rise" style="--min:400px;--gap:48px;--gap-x:64px;align-items:center">
-          <div class="stack stack-20">
-            <p class="eyebrow-caps">Your data sources</p>
-            <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-            <p class="body">Each system stays as it is. A shared model links them around the things you measure (products, outlets, customers, periods), so any figure can be traced back to the system it came from.</p>
-            <p class="small slate" style="max-width:36em;border-top:1px solid var(--rule);padding-top:16px">${ind.serviceNote}</p>
-            <div class="row" style="gap:8px;margin-top:8px">
-              ${each(caps, function (c) { return html`<a class="tag-link" href="/services/${c.slug}">${c.title} →</a>`; })}
+      <section class="bg-paper sec-sm" id="ind-sources">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
+            <div class="stack stack-16">
+              <p class="eyebrow-caps">Your data sources</p>
+              <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
+              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced back to the system it came from.</p>
             </div>
-          </div>
-
-          <div class="lineage" aria-label="Source systems connected to a shared model">
-            <div class="stack stack-8">
-              ${each(ind.sources, function (s) { return html`<span class="src">${s}</span>`; })}
-            </div>
-            <svg viewBox="0 0 40 200" preserveAspectRatio="none" aria-hidden="true" style="width:40px;height:100%">
-              <path d="M0 20 C 20 20, 20 100, 40 100 M0 60 C 20 60, 20 100, 40 100 M0 100 L 40 100 M0 140 C 20 140, 20 100, 40 100 M0 180 C 20 180, 20 100, 40 100"
-                    fill="none" stroke="#38A0C3" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
-            </svg>
-            <div class="stack stack-10">
-              <div class="model">
-                <span class="cap mono">SHARED MODEL</span>
-                <span style="font-size:14px;font-weight:600">${ind.title} entities and agreed definitions</span>
-              </div>
-              <div class="view">
-                <span class="cap mono">TRACEABLE VIEW</span>
-                <span style="font-size:14px;font-weight:600">${ind.question}</span>
+            <div class="stack stack-14">
+              <p class="small slate" style="max-width:36em">${grid.note || ind.serviceNote}</p>
+              <div class="row" style="gap:8px">
+                ${each(caps, function (c) { return html`<a class="tag-link" href="/services/${c.slug}">${c.title} →</a>`; })}
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section style="padding:clamp(64px,8vw,128px) 0 0">
-        <div class="wrap autogrid" data-reveal="rise" style="--min:380px;--gap:40px;--gap-x:64px;align-items:center">
-          <div class="stack stack-18">
-            <span class="eyebrow">What a connected view could show</span>
-            <h2 class="h2-sm">Sample data, shared definitions, and the exceptions made visible.</h2>
-            <p class="body slate">${grid.note}</p>
-          </div>
-          <div class="panel-dark" aria-label="Illustrative record grid">
-            <div class="card-head"><span>${grid.title}</span><span>Sample data · not a client</span></div>
-            <div class="dgrid" style="grid-template-columns:1.3fr 1fr 1fr 1fr;font-size:12px">
-              ${each(grid.head, function (h) { return html`<span class="th">${h}</span>`; })}
-              ${each(grid.rows, function (row) {
-                return each(row, function (cell, ci) {
-                  var last = ci === row.length - 1;
-                  var warn = /exception|41%|9\.8%|11\.2%|212/.test(cell);
-                  var cls = (ci === 0 ? 'key ' : '') + (warn ? 'warn' : (last ? 'ok' : ''));
-                  return html`<span class="td ${cls}" style="padding:10px 0">${cell}</span>`;
-                });
-              })}
-            </div>
-            <span class="lbl" style="color:rgba(255,255,255,.55)">Sources: ${ind.sources.join(' · ')}</span>
-          </div>
+          <div data-scene="lineage" data-scene-industry="${ind.slug}"></div>
+          <p class="small slate" style="max-width:40em;border-top:1px solid var(--rule);padding-top:16px">${ind.serviceNote}</p>
         </div>
       </section>
 
@@ -206,10 +167,16 @@
 
     render: function (p) {
       var ind = p.slug && find(p.slug);
+      this._ind = ind || null;
       return ind ? detail(ind) : overview();
     },
 
     mount: function (root, cleanup) {
+      var ind = this._ind;
+      C.qsa('[data-scene]', root).forEach(function (host) {
+        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { industry: ind, compact: host.hasAttribute('data-scene-compact') }));
+      });
+
       var open = -1;
       var onClick = function (e) {
         var b = e.target.closest('[data-metric]');
