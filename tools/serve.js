@@ -8,7 +8,8 @@ const path = require('path');
 /* --dist serves the static build the way a static host does: real route
    files, a real 404 for anything else, no SPA fallback. */
 const DIST_MODE = process.argv.includes('--dist');
-const ROOT = path.join(__dirname, '..', DIST_MODE ? 'dist' : 'public');
+const rootIx = process.argv.indexOf('--root');
+const ROOT = rootIx >= 0 ? path.resolve(process.argv[rootIx + 1]) : path.join(__dirname, '..', DIST_MODE ? 'dist' : 'public');
 const PORT = Number(process.argv.find((a) => /^\d+$/.test(a)) || 8780);
 /* --base /patterngrid serves the site under a project-page prefix, with the
    base pinned in the shell, so sub-path hosting can be exercised locally and
@@ -77,6 +78,15 @@ http
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
       });
       return res.end();
+    }
+    // Dev-only: a page framed at an exact CSS width, for phone captures with
+    // headless Chrome, whose window cannot go below about 500 px.
+    if (url === '/__frame') {
+      const q = new URLSearchParams(req.url.split('?')[1] || '');
+      const w = Math.max(200, Math.min(2000, Number(q.get('w')) || 390));
+      const h = Math.max(400, Math.min(12000, Number(q.get('h')) || 9000));
+      const src = (q.get('src') || '/').replace(/[^\w\-\/?=&#.%]/g, '');
+      return send(res, 200, `<!doctype html><meta charset="utf-8"><style>html,body{margin:0;background:#fff}iframe{display:block;border:0;width:${w}px;height:${h}px}</style><iframe src="${src}"></iframe>`, TYPES['.html']);
     }
     if (url === '/assets/js/config.js' && !NO_MOCK) {
       return send(res, 200, 'window.PG_CONFIG = ' + JSON.stringify({ formEndpoint: FORM_ENDPOINT, mock: true }) + ';\n', TYPES['.js']);
