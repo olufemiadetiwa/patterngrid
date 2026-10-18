@@ -2,13 +2,22 @@
   "name": "patterngrid",
   "version": "1.0.0",
   "private": true,
-  "description": "Pattern Grid — data, AI and business intelligence consulting website.",
+  "description": "Pattern Grid \u2014 data, AI and business intelligence consulting website.",
   "scripts": {
     "dev": "node tools/serve.js 8780",
-    "reference": "python3 -m http.server 8781 --directory design-source/runnable",
+    "build": "node tools/build-static.js",
+    "build:pages": "node tools/build-static.js --base /patterngrid --origin https://olufemiadetiwa.github.io",
+    "serve:dist": "node tools/serve.js 8790 --dist",
+    "test": "node --test tools/test.js",
+    "deploy": "tools/deploy.sh",
     "sitemap": "node tools/build-sitemap.js",
+    "images": "node tools/build-hero-frames.js",
+    "capture": "tools/capture-visuals.sh",
+    "reference": "python3 -m http.server 8781 --directory design-source/runnable",
     "compare": "node tools/compare.js",
     "build:reference": "node tools/make-reference.js"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  }
 }

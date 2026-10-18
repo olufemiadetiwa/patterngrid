@@ -89,11 +89,12 @@
       var names = ['All'].concat(Array.from(new Set((PG.articles || []).map(function (a) { return a.category; }))));
 
       return html`
-        ${PG.hero('insights')}
-
-        <section style="padding:0 0 clamp(40px,5vw,64px)">
-          <div class="wrap" data-reveal="rise">
-            <p class="small muted" style="max-width:36em">These articles are being written. None is published yet; each will open as a full article once approved.</p>
+        <section class="page-intro compact">
+          <div class="wrap">
+            <span class="eyebrow">Insights</span>
+            <h1>Articles in preparation.</h1>
+            <p class="lead">Nothing is published yet. The titles below are being written; until they open as full articles, the worked examples on the service pages are the most useful reading on this site.</p>
+            <div class="row" style="gap:16px 28px"><a class="btn btn-ghost" href="/services/business-intelligence#svc-artifact">See a worked example <span class="chev" aria-hidden="true">→</span></a></div>
           </div>
         </section>
 

@@ -15,26 +15,12 @@ No build step, no dependencies. `public/` is the deployable artifact.
 
 ## Deployment
 
-Live on GitHub Pages: **https://olufemiadetiwa.github.io/patterngrid/**
-
-`main` holds the whole project; the `gh-pages` branch is the `public/`
-directory alone, published with:
-
-```bash
-git subtree push --prefix public origin gh-pages
-```
-
-The app detects a `*.github.io` host and serves itself from the repository
-sub-path (`window.PG_BASE`, set in `index.html` before any asset loads); on any
-root host — a custom domain, Netlify, Vercel — the base is empty and nothing
-changes. Deep links on Pages arrive through `404.html`, which hands the path
-back to the app; the response status is still 404, which is fine for people
-and the client-side router but means crawlers see only the home page. When
-the site moves to its own domain, prefer Netlify or Vercel (rewrite files
-included) so every route answers 200, then regenerate `sitemap.xml` and
-`robots.txt` for that origin with `node tools/build-sitemap.js <origin>`.
-
----
+The site is a static build. `npm run build:pages` renders every route into
+`dist/` for https://olufemiadetiwa.github.io/patterngrid (base path
+`/patterngrid`); `npm run deploy` does that and publishes `dist/` to the
+`gh-pages` branch from a temporary worktree, so build output is never
+committed on `main`. For root hosting use `npm run build` (set `PG_ORIGIN`).
+Check a build locally with `node tools/serve.js 8790 --dist --base /patterngrid`.
 
 ## Layout
 
@@ -350,6 +336,31 @@ its own closing line; the mobile header CTA reads "Book a call".
 Open questions for the founder are in `docs/copy-review.md` §4 (business
 email, form destination, engagement formats, pricing line, band labels,
 service name, Insights timing, legal pages).
+
+## UX pass (eighth pass)
+
+A deep UI/UX review (`docs/ux/brief.md`) was executed in full on branch
+`ux-pass-8`; the record is `docs/ux/handoff.md` (route/status matrix, results,
+blockers) with before/after captures in `docs/ux/before|after`.
+
+- **Foundations**: base-aware markup (native links work on the project-page
+  host), a static build that renders every route to `dist/` with its own
+  metadata and content (`npm run build`, `npm run serve:dist`, `npm run
+  deploy`), a complete contact flow against a local mock with an honest
+  unavailable state in production (`docs/ux/contact-integration.md`), scene
+  re-renders that keep focus, inspectable industry figures with sector-correct
+  definitions, and `npm test`.
+- **Composition**: proposition-first heroes (home: copy beside the interactive
+  decision workspace, no photograph); worked examples in the second screen of
+  every service page; services overview as a problem chooser plus comparison;
+  work previews are the deliverables; text-led founder; typographic utility
+  pages. Home ≈10.5k → 8.0k px, services ≈9.1k → 5.5k px, contact form at
+  468 px.
+- **System**: radius/motion/width tokens, one hero module without a slideshow,
+  reveals reduced to opacity + rise, 111 dead CSS rules removed.
+- **Images**: crop-for-the-frame pipeline with quality floors and an asset
+  manifest (`npm run images`, `docs/assets/manifest.md`); billboard,
+  architecture-as-founder and work/about stock photos removed.
 
 ## Visual scenes (seventh pass)
 

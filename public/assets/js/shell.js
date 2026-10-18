@@ -112,18 +112,18 @@
         <nav class="nav" aria-label="Primary">
           ${navBtn('services', 'Services')}
           ${navBtn('industries', 'Industries')}
-          <a class="nav-item" href="/work" data-close-menu ${raw(sec === 'work' ? 'aria-current="page"' : '')}>Our Work</a>
+          <a class="nav-item" href="/work" data-close-menu ${raw(sec === 'work' ? 'aria-current="page"' : '')}>Work &amp; demos</a>
           ${when(insightsLive(), function () { return html`<a class="nav-item" href="/insights" data-close-menu ${raw(sec === 'insights' ? 'aria-current="page"' : '')}>Insights</a>`; })}
           ${navBtn('about', 'About')}
         </nav>
 
         <div class="header-actions">
           <a class="header-link" href="/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/contact">Book a consultation</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/contact">Book a call</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open aria-label="Open menu"
                   aria-expanded="${state.drawerOpen ? 'true' : 'false'}">Menu</button>
         </div>
@@ -167,7 +167,7 @@
               <a class="hi" href="/industries">All industries</a>
             </div>
           </details>
-          <a href="/work">Our Work</a>
+          <a href="/work">Work &amp; demos</a>
           ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
           <details>
             <summary>About</summary>
@@ -179,7 +179,7 @@
           </details>
           <a href="/assessment">Readiness assessment</a>
         </nav>
-        <a class="drawer-cta" href="/contact">Book a consultation</a>
+        <a class="drawer-cta" href="/contact">Request a consultation</a>
       </div>`;
   }
 
@@ -258,10 +258,10 @@
             <div class="stack stack-10">
               <a href="/about">About</a>
               <a href="/approach">Our Approach</a>
-              <a href="/work">Our Work</a>
+              <a href="/work">Work &amp; demos</a>
               ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
               <a href="/assessment">Readiness assessment</a>
-              <a href="/contact">Book a consultation</a>
+              <a href="/contact">Request a consultation</a>
             </div>
           </div>
         </div>

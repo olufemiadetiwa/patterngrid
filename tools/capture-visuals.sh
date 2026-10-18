@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Full-page captures of the routes that carry workspace scenes, at desktop and
 # phone widths, using the installed Chrome in headless mode. No downloads.
-#   tools/capture-visuals.sh <base-url> <out-dir>
+#   [ROUTES="name:/path ..."] tools/capture-visuals.sh <base-url> <out-dir>
 # e.g. tools/capture-visuals.sh http://localhost:8780 docs/visuals/after
 set -euo pipefail
 BASE="${1:-http://localhost:8780}"; OUT="${2:-docs/visuals/after}"
 CH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 mkdir -p "$OUT"
-ROUTES="home:/ services:/services strategy:/services/data-ai-strategy engineering:/services/data-engineering bi:/services/business-intelligence ai:/services/ai-automation capability:/services/capability-building fmcg:/industries/fmcg-distribution"
+ROUTES="${ROUTES:-home:/ services:/services strategy:/services/data-ai-strategy engineering:/services/data-engineering bi:/services/business-intelligence ai:/services/ai-automation capability:/services/capability-building fmcg:/industries/fmcg-distribution retail:/industries/retail-ecommerce work:/work about:/about founder:/about/precious-celestine contact:/contact assessment:/assessment}"
 for pair in $ROUTES; do
   name="${pair%%:*}"; path="${pair#*:}"
   for size in 1440x7200 390x9000; do

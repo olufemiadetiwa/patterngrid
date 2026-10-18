@@ -103,11 +103,27 @@
     state.answers = restore();
     var answered = state.answers.filter(function (v) { return v != null; }).length;
     return html`
-      ${PG.hero('assessment')}
-      <section class="bg-paper" style="padding:0 0 clamp(72px,9vw,128px)">
-        <div class="wrap stack stack-16" data-reveal="rise" style="align-items:flex-start">
-          <button type="button" class="btn" data-start>${answered ? 'Continue the assessment' : 'Start the assessment'}</button>
-          <span class="small muted" style="max-width:44em">Eight questions, no email address needed. You get a score out of 100, your weakest areas and up to three suggested next steps. It is a self-assessment, not an audit or an industry benchmark. Your answers stay in this browser unless you choose to send them with an enquiry.</span>
+      <section class="page-intro">
+        <div class="wrap">
+          <span class="eyebrow">Readiness assessment</span>
+          <h1>Find your next priority.</h1>
+          <p class="lead">Eight questions about how your organisation moves, checks and uses its data. About five minutes, no email address, and the result stays in this browser.</p>
+        </div>
+      </section>
+      <section class="sec-xs">
+        <div class="wrap assess-intro" data-reveal="rise">
+          <div class="stack stack-16" style="align-items:flex-start">
+            <button type="button" class="btn" data-start>${answered ? 'Continue the assessment (' + answered + ' of 8 answered)' : 'Start the assessment'}</button>
+            <p class="small muted" style="max-width:40em">You can go back and change any answer. It is a self-assessment based on what you report, not an audit, a certification or an industry benchmark.</p>
+          </div>
+          <div class="stack stack-12">
+            <span class="label-caps">What you get</span>
+            <ul class="ticks">
+              <li>A score out of 100 and a band, from Fragmented to AI ready, with the rule that holds a high score back when a foundation is weak.</li>
+              <li>Your three weakest areas, each matched to the service that addresses it.</li>
+              <li>A printable summary you can add to an enquiry, or remove again, from the contact page.</li>
+            </ul>
+          </div>
         </div>
       </section>`;
   }

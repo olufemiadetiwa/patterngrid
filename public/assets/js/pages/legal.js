@@ -29,12 +29,17 @@
     render: function (p) {
       var c = COPY[p.view];
       return html`
-        ${PG.hero(p.view)}
-        <section style="padding:24px 0 clamp(96px,10vw,160px)">
-          <div class="wrap stack stack-24" data-reveal="rise">
+        <section class="page-intro compact">
+          <div class="wrap">
             <nav class="crumbs" aria-label="Breadcrumb">
               <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">${c.title}</span>
             </nav>
+            <h1>${c.title}</h1>
+            <p class="lead">${c.intro}</p>
+          </div>
+        </section>
+        <section style="padding:0 0 clamp(96px,10vw,160px)">
+          <div class="wrap stack stack-24" data-reveal="rise">
             <div class="stack stack-14" style="max-width:40em;padding:20px 24px;background:var(--paper);border-radius:var(--radius);font-size:16px;line-height:1.6">
               <span class="lbl" style="color:var(--muted)">Status</span>
               <p>${c.status}</p>

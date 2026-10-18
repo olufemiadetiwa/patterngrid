@@ -46,8 +46,8 @@
     var anchor = location.hash && location.hash.length > 1 && document.getElementById(location.hash.slice(1));
     if (anchor) {
       requestAnimationFrame(function () {
-        anchor.scrollIntoView({ block: 'start', behavior: 'auto' });
-        window.scrollBy(0, -24);
+        anchor.scrollIntoView({ block: 'start', behavior: 'auto' }); // scroll-margin-top clears the sticky header
+        if (typeof anchor.focus === 'function') anchor.focus({ preventScroll: true });
       });
     }
     firstPaint = false;
@@ -62,7 +62,7 @@
     pendingSwap = setTimeout(function () {
       show(mod, params, ctx);
       pageEl.classList.remove('is-leaving');
-    }, 180);
+    }, 120);
   }
 
   function page(name) {
@@ -120,7 +120,7 @@
   document.addEventListener('mouseover', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="/"]');
     if (!a || !window.matchMedia('(hover: hover)').matches) return;
-    var path = a.getAttribute('href').split('?')[0].split('#')[0];
+    var path = C.strip(a.getAttribute('href').split('?')[0].split('#')[0]);
     if (warmed[path]) return;
     warmed[path] = true;
     PG.hero.warm(path);

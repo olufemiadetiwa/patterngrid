@@ -17,7 +17,6 @@
     if (base === '/') base = '';
     window.PG_BASE = base;
     document.write(
-      '<base href="' + base + '/">' +
       '<link rel="stylesheet" href="' + base + '/assets/css/site.css">' +
       '<link rel="icon" href="' + base + '/favicon.svg" type="image/svg+xml">' +
       '<link rel="manifest" href="' + base + '/manifest.webmanifest">'
@@ -58,7 +57,7 @@
      stylesheet above; document.write during parsing keeps them in order. */
   (function () {
     var b = window.PG_BASE || '';
-    ['content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
+    ['config', 'content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
       document.write('<script src="' + b + '/assets/js/' + f + '.js"><\/script>');
     });
   })();

@@ -5,9 +5,9 @@ description: The Pattern Grid visual language — tokens, surfaces, scene compon
 
 # Pattern Grid visual language
 
-Direction: **calm, premium enterprise. Intelligence in the real world.** Photography and product-like scenes make the work tangible; typography and spacing carry hierarchy; teal is a selective accent, never a wash.
+Direction: **precision, useful depth and human credibility.** The work itself is the visual: a metric with its definition, a source model, an exception that explains itself, a reviewer approving an action. Photography adds context and people where those are the point of a section; it never carries the proposition. Typography and spacing carry hierarchy; teal is a selective accent, never a wash.
 
-Authorities, in order: `design-source/uploads/Pattern_Grid_Visual_Upgrade_Prompt.md` (type, heroes, motion limits), `docs/visuals/brief.md` (scene direction), then this file.
+Authorities, in order: `docs/ux/brief.md` (the October 2026 deep UX review — first screen, page order, images, motion, contact, static routes), `docs/visuals/brief.md` (scene direction), then this file. The earlier Visual Upgrade Prompt in `design-source/uploads/` is superseded where it asked for photography on every hero, a slideshow, a scroll-lit statement or near-square radii.
 
 ## Stack facts
 
@@ -33,7 +33,7 @@ Chart: `--bar #D7E3EB` (context) · `--bar-on #2E6E8E` (selected) · `--trend #3
 
 Type: Geist. Scene UI text 13–15 px; values 28–44 px at weight 600, tabular numerals; labels 11 px uppercase 0.12 em (`.label-caps`). Mono (`--mono`) only for record ids, code and counters.
 
-Radius: 2 px on controls, 3 px on cards, 6 px on the scene frame. Fine 1 px rules. No glass, no large shadows, no gradients except the hero scrims.
+Radius by role: `--radius-sm 4px` chips and keys · `--radius 6px` controls and inner surfaces · `--radius-lg 12px` cards · `--radius-xl 16px` scene frames. Fine 1 px rules. No glass, no large shadows (`--shadow-2` is the ceiling), no gradients except the hero scrim. Content width `--wrap 1360px`.
 
 ## Scene grammar
 
@@ -50,7 +50,16 @@ Scene families: **performance** (metric → trace → action), **delivery** (ini
 
 ## Motion
 
-Small interactions 180–240 ms; explanatory transitions 450–650 ms; one easing, `--ease` (`cubic-bezier(.22,1,.36,1)`); crossfades on `--ease-io`. Animate selection, expansion, highlighting and status changes only. Finite sequences; nothing loops; nothing runs offscreen. `html.reduce-motion` and `prefers-reduced-motion` must show every final state immediately.
+Tokens: `--dur-1 150ms` control feedback · `--dur-2 220ms` panels and selection · `--dur-3 300ms` drawers · `--dur-4 550ms` data explanation and the one-time hero entrance; travel `--travel-sm 6px` / `--travel-md 12px`; easings `--ease` and `--ease-io`. Route change fades 120 ms. Scene repaints settle the body 160 ms, patch, enter 240 ms — the frame and controls stay in place and focus is restored after the real render. Reveals are opacity plus 12 px rise, nothing else; no image zoom, no clip reveals, no scroll-driven word colouring, no slideshow. One photograph may settle from 1.02× over 10 s once, desktop only. The home sequence has a user-started Replay; a click or key press takes over from the scroll observer. `html.reduce-motion` and `prefers-reduced-motion` show every final state immediately.
+
+## Page openings
+
+- Home: `.hero-home` — category eyebrow, H1, one supporting sentence, two actions, beside the interactive BI decision workspace on a navy field. No photograph.
+- Services, industries, about, approach: `.hero-photo` — one pre-cropped local photograph (`npm run images`), eyebrow, H1, supporting sentence, two actions. Height follows content (floor only above 720 px).
+- Work, founder, insights: a photo-less compact hero (same markup, navy field).
+- Contact, assessment, legal, 404, work detail: `.page-intro` — typographic, the task starts in the first screen.
+
+Order on a service page: hero → example (the scene) → what you receive → approach → flow diagram (disclosure) → technology → questions → closing.
 
 ## Composition
 

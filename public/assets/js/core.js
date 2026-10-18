@@ -26,13 +26,24 @@
     return esc(v);
   }
 
+  /* Sub-path hosting (GitHub project pages): every route and asset lives
+     under BASE. Empty string on a root host. Markup is written root-relative
+     (href="/services"); the renderer prefixes BASE so that native browser
+     behaviour — new tabs, copied links, middle-click, no JavaScript — works
+     without the click interceptor. Already-prefixed values are left alone. */
+  var BASE = window.PG_BASE || '';
+  var ABS_RX = BASE ? new RegExp('((?:href|src|action|srcset|poster)=")/(?!/|' + BASE.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:/|"))', 'g') : null;
+  function absolutise(markup) {
+    return ABS_RX ? markup.replace(ABS_RX, '$1' + BASE + '/') : markup;
+  }
+
   /* html`<p>${value}</p>` — interpolations are escaped unless wrapped in raw(). */
   function html(strings) {
     var out = strings[0];
     for (var i = 1; i < arguments.length; i++) {
       out += flatten(arguments[i]) + strings[i];
     }
-    return new Raw(out);
+    return new Raw(absolutise(out));
   }
 
   /* Conditionally emit markup. */
@@ -56,6 +67,7 @@
 
   core.esc = esc;
   core.raw = raw;
+  core.absolutise = absolutise;
   core.html = html;
   core.when = when;
   core.each = each;
@@ -218,11 +230,15 @@
   /* Routes are real paths. Legacy `#/...` links from the prototype are
      translated to paths on the way in, so old links keep working. */
 
-  /* Sub-path hosting (GitHub project pages): every route and asset lives
-     under BASE. Empty string on a root host. */
-  var BASE = window.PG_BASE || '';
   core.base = BASE;
-  core.href = function (path) { return BASE + path; };
+  /* Prefix a root-relative path once; a path that already carries BASE is returned unchanged. */
+  core.href = function (path) {
+    return BASE && String(path).indexOf(BASE + '/') !== 0 && path !== BASE ? BASE + path : path;
+  };
+  /* The reverse: strip BASE from a pathname so route matching sees the app path. */
+  core.strip = function (pathname) {
+    return BASE && pathname.indexOf(BASE) === 0 ? (pathname.slice(BASE.length) || '/') : pathname;
+  };
 
   var routes = [];
   var current = null;
@@ -259,10 +275,10 @@
   core.navigate = function (to, opts) {
     opts = opts || {};
     var url = new URL(to, location.origin);
-    var next = url.pathname + url.search;
-    if (!opts.replace && next === current) return;
-    if (opts.replace) history.replaceState({}, '', BASE + next);
-    else history.pushState({}, '', BASE + next);
+    var next = core.strip(url.pathname) + url.search;
+    if (!opts.replace && next === current && !url.hash) return;
+    if (opts.replace) history.replaceState({}, '', BASE + next + url.hash);
+    else history.pushState({}, '', BASE + next + url.hash);
     core.render(opts);
   };
 
@@ -271,9 +287,7 @@
 
   core.render = function (opts) {
     opts = opts || {};
-    var path = location.pathname;
-    if (BASE && path.indexOf(BASE) === 0) path = path.slice(BASE.length);
-    path = path.replace(/\/+$/, '') || '/';
+    var path = core.strip(location.pathname).replace(/\/+$/, '') || '/';
     var match = core.resolve(path) || core.resolve('/404');
     current = path;
     onBeforeRender.forEach(function (fn) { fn(path, match); });
@@ -296,13 +310,13 @@
       return;
     }
     if (href.charAt(0) === '#') {
-      // With a <base> set for sub-path hosting, a bare "#main" would resolve
-      // against the base URL and navigate away; handle it in-document instead.
+      // Same-page anchor: native scrolling, plus focus so keyboard users land there.
       var target = href.length > 1 && document.getElementById(href.slice(1));
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ block: 'start' });
+        target.scrollIntoView({ block: 'start', behavior: motion.reduced ? 'auto' : 'smooth' });
         if (typeof target.focus === 'function') target.focus({ preventScroll: true });
+        history.replaceState(history.state, '', href);
       }
       return;
     }
@@ -311,12 +325,12 @@
     try { url = new URL(href, location.href); } catch (err) { return; }
     if (url.origin !== location.origin) return;
 
+    // A route the app does not own (a file, or a path outside BASE) is left to the browser.
+    if (BASE && url.pathname.indexOf(BASE + '/') !== 0 && url.pathname !== BASE) return;
+    if (/\.[a-z0-9]+$/i.test(url.pathname) && !/\.html$/i.test(url.pathname)) return;
     e.preventDefault();
-    // Markup links are written root-relative (/services/x); strip a base if the
-    // browser resolved one in, so navigate() can add it back exactly once.
-    var p = url.pathname;
-    if (BASE && p.indexOf(BASE) === 0) p = p.slice(BASE.length);
-    core.navigate((p || '/') + url.search);
+    var p = core.strip(url.pathname).replace(/\/index\.html$/, '') || '/';
+    core.navigate(p + url.search + url.hash);
   });
 
   window.addEventListener('popstate', function () { core.render(); });

@@ -50,29 +50,48 @@
         </div>
       </section>
 
-      <section style="padding:0 0 clamp(72px,9vw,144px)">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(56px,7vw,112px)">
-          ${each(PG.services, function (s, i) {
-            var f = (ov.features[s.slug]) || {};
-            var dark = i % 2 === 0;
-            return html`
-              <article class="autogrid divide-top" style="--min:400px;--gap:32px;--gap-x:clamp(40px,6vw,96px);align-items:center;padding-top:clamp(32px,4vw,56px)">
-                <div class="stack stack-18" style="order:${i % 2 === 0 ? 0 : 1}">
-                  <div class="row" style="gap:14px">
-                    <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D"
-                         stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="${PG.icon(s.icon)}"/></svg>
-                    <span class="lbl" style="color:var(--muted)">${s.index}</span>
+      <section class="sec-sm bg-paper" id="svc-compare">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <span class="eyebrow">Compare the five</span>
+              <h2 class="h2-sm">What each service is for, and what you receive.</h2>
+            </div>
+            <p class="body muted" style="max-width:34em">Each one is a complete piece of work on its own. Together they run in the order shown on the map below.</p>
+          </div>
+          <div class="compare">
+            ${each(PG.services, function (s) {
+              var f = (ov.features[s.slug]) || {};
+              return html`
+                <article class="compare-card">
+                  <div class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy)"><path d="${PG.icon(s.icon)}"/></svg>
+                    <span class="idx">${s.index}</span>
                   </div>
-                  <h2 style="font-size:clamp(28px,3vw,46px);font-weight:600;line-height:1.08;letter-spacing:-.025em">${s.title}</h2>
-                  <p class="body">${f.text}</p>
-                  <div class="row" style="gap:8px">
-                    ${each(f.outputs || [], function (o) { return html`<span class="chip chip-lg">${o}</span>`; })}
-                  </div>
+                  <h3>${s.title}</h3>
+                  <p class="outcome">${s.outcomeText || f.text}</p>
+                  <dl class="compare-rows">
+                    <div><dt>Ideal when</dt><dd>${(s.situations || []).slice(0, 2).join(' · ')}</dd></div>
+                    <div><dt>You receive</dt><dd>${(s.deliverables || []).slice(0, 3).map(function (d) { return d.title; }).join(' · ')}</dd></div>
+                    <div><dt>Output preview</dt><dd>${SCENE_TITLES[s.slug]}</dd></div>
+                  </dl>
                   <a class="arrow" href="/services/${s.slug}">${s.link} <span class="chev" aria-hidden="true">→</span></a>
-                </div>
-                <div class="mini ${dark ? 'dark' : 'light'}" data-scene="${SCENE_OF[s.slug]}" data-scene-compact></div>
-              </article>`;
-          })}
+                </article>`;
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-sm" id="svc-featured">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="autogrid end" style="--min:380px;--gap:12px;--gap-x:64px">
+            <div class="stack stack-14">
+              <span class="eyebrow">One worked example</span>
+              <h2 class="h2-sm">From a trusted measure to an accountable action.</h2>
+            </div>
+            <p class="body muted" style="max-width:34em">A reporting workspace with sample data. Trace the figure to its sources, read the agreed definition, then assign a follow-up with an owner. Every service page has its own example.</p>
+          </div>
+          <div data-scene="bi"></div>
         </div>
       </section>
 
@@ -146,7 +165,7 @@
   function detail(svc, s) {
     var nodes = svc.flow.nodes;
     var maxCol = Math.max.apply(null, nodes.map(function (n) { return n.col; }));
-    var jumps = [['Overview', 'svc-overview'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
+    var jumps = [['Overview', 'svc-overview'], ['Example', 'svc-artifact'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
     var related = svc.relatedServices.map(find).filter(Boolean);
     var relatedWork = (PG.work || []).find(function (w) { return w.slug === svc.related; }) || {};
 
@@ -188,6 +207,29 @@
         </div>
       </section>
 
+      <section id="svc-artifact" class="sec-sm" style="padding-top:0">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
+            <div class="stack stack-16">
+              <span class="eyebrow">Worked example</span>
+              <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${svc.example.question}</h2>
+            </div>
+            <div class="stack stack-14">
+              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
+                ${each(svc.example.steps, function (t, i) {
+                  return html`
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="lbl" style="color:var(--muted);padding-top:3px">0${i + 1}</span><span>${t}</span>
+                    </li>`;
+                })}
+              </ol>
+              <p class="fine">Sample deliverable · ${SCENE_TITLES[svc.slug]}. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+            </div>
+          </div>
+          <div data-scene="${SCENE_OF[svc.slug]}"></div>
+        </div>
+      </section>
+
       <section id="svc-deliverables" class="bg-paper sec-sm">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
           <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
@@ -207,8 +249,6 @@
                 </div>`;
             })}
           </div>
-          <button type="button" class="btn btn-ghost" data-jump="svc-artifact"
-                  style="align-self:flex-start;height:44px;font-size:15px">See a sample deliverable <span class="chev down" aria-hidden="true">↓</span></button>
         </div>
       </section>
 
@@ -299,29 +339,6 @@
             })}
           </ol>
           </details>
-        </div>
-      </section>
-
-      <section id="svc-artifact" class="sec-sm">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
-          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
-            <div class="stack stack-16">
-              <span class="eyebrow">Worked example</span>
-              <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${svc.example.question}</h2>
-            </div>
-            <div class="stack stack-14">
-              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
-                ${each(svc.example.steps, function (t, i) {
-                  return html`
-                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
-                      <span class="lbl" style="color:var(--muted);padding-top:3px">0${i + 1}</span><span>${t}</span>
-                    </li>`;
-                })}
-              </ol>
-              <p class="fine">Sample deliverable · ${SCENE_TITLES[svc.slug]}. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
-            </div>
-          </div>
-          <div data-scene="${SCENE_OF[svc.slug]}"></div>
         </div>
       </section>
 

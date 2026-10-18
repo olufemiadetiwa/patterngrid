@@ -1,0 +1,602 @@
+{
+  "builtAt": "2026-10-18T23:17:39.972Z",
+  "images": [
+    {
+      "key": "lagos-aerial",
+      "usedOn": [
+        {
+          "route": "/industries",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1594538756542-8c88bda491c5",
+      "creator": "Obinna Okerekeocha",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "Aerial view of Lagos city buildings in daylight",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 50%",
+        "phone": "50% 50%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 234728,
+        "d1200": 119462,
+        "m": 126856
+      },
+      "quality": {
+        "d": 74,
+        "d1200": 78,
+        "m": 74
+      },
+      "original": {
+        "w": 2400,
+        "h": 1800
+      }
+    },
+    {
+      "key": "lagos-bridge-traffic",
+      "usedOn": [
+        {
+          "route": "/industries/financial-services",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1745725427994-30530297f537",
+      "creator": "Vitalis Nwenyi",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "Traffic on a Lagos bridge leading toward the cityscape",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 55%",
+        "phone": "50% 55%"
+      },
+      "crops": {
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+      },
+      "files": null,
+      "quality": null,
+      "original": null
+    },
+    {
+      "key": "lagos-civic-towers",
+      "usedOn": [
+        {
+          "route": "/industries/financial-services",
+          "role": "hero"
+        },
+        {
+          "route": "/industries/financial-services",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1618828665347-d870c38c95c7",
+      "creator": "Nupo Deyon Daniel",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "Civic Towers, Lekki, Lagos under a blue sky",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 40%",
+        "phone": "50% 40%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 153370,
+        "d1200": 69180,
+        "m": 139614
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2253,
+        "h": 4005
+      }
+    },
+    {
+      "key": "lagos-skyline",
+      "usedOn": [
+        {
+          "route": "/about",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1559833064-6f4573ec1ac9",
+      "creator": "Stephen Olatunde",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "Lagos skyline in daylight",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 50%",
+        "phone": "50% 50%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 195500,
+        "d1200": 106110,
+        "m": 118388
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1600
+      }
+    },
+    {
+      "key": "wh-pallets",
+      "usedOn": [
+        {
+          "route": "/industries/fmcg-distribution",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1721937127582-ed331de95a04",
+      "creator": "Ashley",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A warehouse floor filled with boxes and pallets",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 50%",
+        "phone": "50% 50%"
+      },
+      "crops": {
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+      },
+      "files": null,
+      "quality": null,
+      "original": null
+    },
+    {
+      "key": "wh-racks",
+      "usedOn": [
+        {
+          "route": "/industries/retail-ecommerce",
+          "role": "hero"
+        },
+        {
+          "route": "/industries/retail-ecommerce",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1789130963347-cc572f0e9be0",
+      "creator": "Robin",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A picking cart beside tall storage racks in a fulfilment warehouse",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 50%",
+        "phone": "50% 50%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 211124,
+        "d1200": 114814,
+        "m": 140530
+      },
+      "quality": {
+        "d": 74,
+        "d1200": 74,
+        "m": 66
+      },
+      "original": {
+        "w": 2400,
+        "h": 3200
+      }
+    },
+    {
+      "key": "wh-tablet",
+      "usedOn": [
+        {
+          "route": "/services/ai-automation",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1781559818983-c32838ee3d55",
+      "creator": "Rodrigo Rodrigues",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A warehouse worker in a high-visibility vest reviewing a work item on a tablet",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 40%",
+        "phone": "50% 40%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 116110,
+        "d1200": 51158,
+        "m": 56248
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 3600
+      }
+    },
+    {
+      "key": "wh-tablet-2",
+      "usedOn": [
+        {
+          "route": "/industries/fmcg-distribution",
+          "role": "hero"
+        },
+        {
+          "route": "/industries/fmcg-distribution",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1781559818983-4180d744416a",
+      "creator": "Rodrigo Rodrigues",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A warehouse worker looking up at stock while holding a tablet",
+      "decorative": false,
+      "focal": {
+        "desktop": "58% 38%",
+        "phone": "72% 40%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 73920,
+        "d1200": 39102,
+        "m": 62934
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 3600
+      }
+    },
+    {
+      "key": "wh-ladder",
+      "usedOn": [
+        {
+          "route": "/industries/retail-ecommerce",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1740914994162-0b2a49280aeb",
+      "creator": "Kseniia Ilinykh",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A worker on a ladder checking stock in a warehouse",
+      "decorative": false,
+      "focal": {
+        "desktop": "60% 45%",
+        "phone": "68% 45%"
+      },
+      "crops": {
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+      },
+      "files": null,
+      "quality": null,
+      "original": null
+    },
+    {
+      "key": "team-laptops",
+      "usedOn": [
+        {
+          "route": "/services/capability-building",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1522071820081-009f0129c71c",
+      "creator": "Annie Spratt",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A small group learning around a laptop",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 138842,
+        "d1200": 65900,
+        "m": 80540
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1601
+      }
+    },
+    {
+      "key": "team-talking",
+      "usedOn": [
+        {
+          "route": "/approach",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1568992688065-536aad8a12f6",
+      "creator": "Redd Francisco",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "Two colleagues in conversation at a table",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 40%",
+        "phone": "50% 40%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 208886,
+        "d1200": 97348,
+        "m": 130582
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1350
+      }
+    },
+    {
+      "key": "team-focus",
+      "usedOn": [
+        {
+          "route": "/services/data-ai-strategy",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1521737852567-6949f3f9f2b5",
+      "creator": "Annie Spratt",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A working session photographed from the side with selective focus",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 167348,
+        "d1200": 58508,
+        "m": 64986
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1644
+      }
+    },
+    {
+      "key": "team-table",
+      "usedOn": [
+        {
+          "route": "/services",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1573164574572-cb89e39749b4",
+      "creator": "Christina Morillo",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A team seated at a long wooden table with laptops, examining a shared question",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 166878,
+        "d1200": 88108,
+        "m": 98434
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1602
+      }
+    },
+    {
+      "key": "team-review",
+      "usedOn": [
+        {
+          "route": "/services/business-intelligence",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1573167507387-6b4b98cb7c13",
+      "creator": "Christina Morillo",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "People at a conference table listening to a colleague speak",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 141590,
+        "d1200": 67714,
+        "m": 75466
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1602
+      }
+    },
+    {
+      "key": "team-whiteboard",
+      "usedOn": [
+        {
+          "route": "/industries/technology",
+          "role": "hero"
+        },
+        {
+          "route": "/industries/technology",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1557804506-669a67965ba0",
+      "creator": "Austin Distel",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A product team working with laptops beside a whiteboard",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 232914,
+        "d1200": 113320,
+        "m": 125440
+      },
+      "quality": {
+        "d": 66,
+        "d1200": 74,
+        "m": 74
+      },
+      "original": {
+        "w": 2400,
+        "h": 1800
+      }
+    },
+    {
+      "key": "team-white",
+      "usedOn": [
+        {
+          "route": "/industries/technology",
+          "role": "section photo (CDN)"
+        }
+      ],
+      "source": "Unsplash photo 1681949103006-70066fb25dfe",
+      "creator": "Sable Flow",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A team gathered around a white table in a modern workspace",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+      },
+      "files": null,
+      "quality": null,
+      "original": null
+    },
+    {
+      "key": "technician",
+      "usedOn": [
+        {
+          "route": "/services/data-engineering",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1785682117346-4b114502e9b8",
+      "creator": "Valentin Lacoste",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A technician working on a server rack",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 191908,
+        "d1200": 72526,
+        "m": 107206
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 3600
+      }
+    }
+  ]
+}
