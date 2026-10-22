@@ -113,3 +113,28 @@ Verification on this pass: 19 routes render with no console errors; heading orde
 - **Founder portrait**: of the four photographs supplied, `IMG_7940` (grey backdrop, black lace dress, arms crossed, direct gaze) is used — the most composed and the one that reads best in black and white; `IMG_7939` is a close second; the brown-backdrop stool portrait is more casual and the close-up is 720 px. Built as 4:5 WebP at 1200 and 720 (`npm run portraits`, source kept in `design-source/people/`). Rendered **black and white by default, colour on click** (`button.portrait`, `aria-pressed`, hint label on hover/touch) on the home founder block, About and the founder page; the text-led layouts switch to the photo layouts automatically.
 - **Work**: recommendation adopted — one Work & demos index with two sections (case studies first, illustrative scenarios second) and a **dedicated page per case study** (`/work/ledrop-distribution-visibility`, `/work/party-drinks-connected-reporting`), so each can be linked and featured. Both are written up in the third person from the supplied documents without adding figures, labelled "delivered by Precious Chinenye Celestine as a Business Intelligence and Data consultant". Template: typographic intro with client/role/focus/tools, a data-flow strip (sources → pipeline → outputs), the problem with its challenges, what was built as delivered steps, what it made possible, relevant services, closing. Home features the two case studies above the demos; both routes are in the static build and sitemap.
 - Founder's direction (22 Oct): the case studies are **Pattern Grid engagements** (labelled so, creator = Pattern Grid), the clients are **Ledrop** and **Drinks.NG**, spelt out boldly (the client name is the card title and the page H1); the portrait shows colour on hover (tap toggles on touch) and is sized to a 260–300 px column.
+
+
+---
+
+## Pass 11 — photography localised (22 October 2026)
+
+The founder's direction: the site is Nigerian and African, and the stock set read as Western and "AI-ish". Every people and workplace photograph was replaced with free-licence Unsplash photographs made in Nigeria (Lagos, Abuja, Enugu, Port Harcourt, Sango) by Nigerian photographers — Ninthgrid, Francis Odeyemi, Shedrack Salami, Tunde Buremo, Kagou Dicko, Micheal Ogungbe, Emmanuel Ikwuegbu, Mary, Ayoola Salako, Dami Akinbode, Muhammad-Taha Ibrahim, Blessing Olarewaju, owolabi oluwatosin, Fahd Aminu — plus two by Black-led collectives (UK Black Tech, Iwaria). Unsplash+ premium images (identified by `plus.unsplash.com/premium_photo-…`) were excluded even when the subject fitted; only `images.unsplash.com/photo-…` files are used.
+
+| Page | Before | After |
+|---|---|---|
+| Services | Western team at a table | Lagos office meeting (Ninthgrid) |
+| Data & AI Strategy | Selective-focus Western office | Lagos office discussion |
+| Data Engineering | Technician at a server rack | Developer at a laptop, Abuja (Kagou Dicko) |
+| Business Intelligence | Western conference room | Colleague pointing at a laptop screen, Lagos |
+| AI & Automation | Network cables | Woman reviewing on a tablet, Lagos (Francis Odeyemi) |
+| Capability Building | Western laptop group | Facilitator explaining to a group (UK Black Tech) |
+| FMCG & Distribution | Warehouse worker (European) | Trader moving goods at Mile 12 market, Lagos (Shedrack Salami); card: trader carrying cartons (Mary) |
+| Retail & Ecommerce | Fulfilment warehouse | Shoppers in a Lagos supermarket (Ninthgrid); card: mini-mart shelves |
+| Technology | Western whiteboard team | Two founders at a laptop, Lagos (Francis Odeyemi); card: developer with laptop (Micheal Ogungbe) |
+| Work & demos | Western meeting | Two men in conversation across a desk, Lagos (Ninthgrid) |
+| About | Lagos skyline | Lagos office working session |
+| Approach | Western café pair | Colleagues working through notes, Port Harcourt, black and white (Emmanuel Ikwuegbu) |
+| Home, Industries, Financial services | Lagos bridge / aerial / Civic Towers | Unchanged (already Nigerian places) |
+
+Crops were checked at desktop (16:9) and phone (3:4) on a contact sheet; focal points recorded in `content.js`. Provenance and credits in `docs/assets/manifest.md`. Still open: an approved photograph of the founder's own team or clients would replace the remaining stock use entirely.

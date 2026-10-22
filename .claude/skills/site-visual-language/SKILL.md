@@ -5,7 +5,7 @@ description: The Pattern Grid visual language — tokens, surfaces, scene compon
 
 # Pattern Grid visual language
 
-Direction: **precision, useful depth and human credibility.** The work itself is the visual: a metric with its definition, a source model, an exception that explains itself, a reviewer approving an action. Photography adds context and people where those are the point of a section; it never carries the proposition. Typography and spacing carry hierarchy; teal is a selective accent, never a wash.
+Direction: **precision, useful depth and human credibility.** The work itself is the visual: a metric with its definition, a source model, an exception that explains itself, a reviewer approving an action. Photography adds context and people where those are the point of a section; it never carries the proposition. **Photographs are Nigerian/African: made in Nigeria by Nigerian photographers wherever possible, free-licence only (`images.unsplash.com/photo-…`, never `plus.unsplash.com/premium_photo-…`), people at real work, no Western stock offices, no AI-looking renders.** Credits stay in the registry; `npm run images` records provenance in `docs/assets/manifest.md`. Typography and spacing carry hierarchy; teal is a selective accent, never a wash.
 
 Authorities, in order: `docs/ux/brief.md` (the October 2026 deep UX review — first screen, page order, images, motion, contact, static routes), `docs/visuals/brief.md` (scene direction), then this file. The earlier Visual Upgrade Prompt in `design-source/uploads/` is superseded where it asked for photography on every hero, a slideshow, a scroll-lit statement or near-square radii.
 
