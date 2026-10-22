@@ -83,7 +83,7 @@
     var initialMessage = d.message != null ? d.message : (sum ? '\n\n— ' + sum : '');
     var optionalOpen = !!(preset || d.role || d.service || d.process || d.time);
     return html`
-      <form class="form form-lined" novalidate data-form aria-describedby="privacy-note">
+      <form class="form form-bounded" novalidate data-form aria-describedby="privacy-note">
         ${when(!!sum, function () {
           return html`
             <div class="notice notice-row" data-summary-row>
@@ -117,8 +117,8 @@
                 }).join('') + '</select>'
             })}
             ${field('role', 'Your role', { control: '<input id="f-role" name="role" type="text" autocomplete="organization-title" value="' + C.esc(d.role || '') + '">' })}
-            ${field('process', 'How does this work today?', { control: '<textarea id="f-process" name="process" rows="3" placeholder="e.g. Finance exports three reports on Monday and reconciles them by hand">' + C.esc(d.process || '') + '</textarea>' })}
-            ${field('time', 'Good times for a call', { control: '<input id="f-time" name="time" type="text" autocomplete="off" placeholder="e.g. weekday mornings, West Africa time" value="' + C.esc(d.time || '') + '">' })}
+            ${field('process', 'How does this work today?', { control: '<textarea id="f-process" name="process" rows="3" placeholder="e.g. Finance exports three reports on Monday and reconciles them by hand…">' + C.esc(d.process || '') + '</textarea>' })}
+            ${field('time', 'Good times for a call', { control: '<input id="f-time" name="time" type="text" autocomplete="off" placeholder="e.g. weekday mornings, West Africa time…" value="' + C.esc(d.time || '') + '">' })}
             <label class="check">
               <input type="checkbox" name="optin" ${raw(d.optin ? 'checked' : '')}>
               <span>Send me occasional Pattern Grid articles by email.</span>

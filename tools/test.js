@@ -132,3 +132,28 @@ test('static route list matches the router and excludes unpublished pages', () =
   assert.ok(!ROUTES.includes('/insights'), 'insights stays out until an article is published');
   assert.equal(new Set(ROUTES).size, ROUTES.length, 'no duplicates');
 });
+
+test('every scene has a thumbnail form and service heroes are scene-led', () => {
+  const PG = load('');
+  for (const name of ['bi', 'strategy', 'engineering', 'ai', 'capability']) {
+    const out = PG.scene.render(name, { thumb: true, plainHeading: true }).value;
+    assert.ok(/scene-thumb/.test(out), name + ' renders as a thumbnail');
+    assert.ok(!/role="tablist"/.test(out) && !/scene-foot/.test(out), name + ' thumbnail has no stepper or footer');
+    assert.ok(!/<h3>/.test(out), name + ' thumbnail keeps the heading outline');
+  }
+  for (const s of PG.services) {
+    const h = PG.heroes['services/' + s.slug];
+    assert.ok(h.scene && PG.scene.defs[h.scene], s.slug + ' hero names a scene');
+    assert.equal(h.images.length, 0, s.slug + ' hero has no photograph');
+  }
+  assert.ok(PG.heroes.home.walkthrough, 'home hero offers the walkthrough');
+});
+
+test('the nine-cell device lights one cell and carries no text for assistive tech', () => {
+  const PG = load('');
+  const out = PG.core.cells(4).value;
+  assert.equal((out.match(/<i/g) || []).length, 9);
+  assert.equal((out.match(/class="on"/g) || []).length, 1);
+  assert.ok(/aria-hidden="true"/.test(out));
+  assert.equal((PG.core.cells(13).value.match(/<i class="on">/g) || []).length, 1, 'wraps past nine');
+});

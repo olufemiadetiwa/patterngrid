@@ -1,0 +1,5 @@
+/* Geist, self-hosted (latin subsets). Fallback metrics tuned to Arial so the
+   swap does not move large headings. */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('../fonts/geist-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('../fonts/geist-mono-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Geist Fallback'; src: local('Arial'); size-adjust: 100.5%; ascent-override: 95%; descent-override: 25%; line-gap-override: 0%; }

@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-18T23:17:39.972Z",
+  "builtAt": "2026-10-22T08:22:04.731Z",
   "images": [
     {
       "key": "lagos-aerial",
@@ -105,43 +105,6 @@
       }
     },
     {
-      "key": "lagos-skyline",
-      "usedOn": [
-        {
-          "route": "/about",
-          "role": "hero"
-        }
-      ],
-      "source": "Unsplash photo 1559833064-6f4573ec1ac9",
-      "creator": "Stephen Olatunde",
-      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
-      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
-      "alt": "Lagos skyline in daylight",
-      "decorative": false,
-      "focal": {
-        "desktop": "50% 50%",
-        "phone": "50% 50%"
-      },
-      "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
-      },
-      "files": {
-        "d": 195500,
-        "d1200": 106110,
-        "m": 118388
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1600
-      }
-    },
-    {
       "key": "wh-pallets",
       "usedOn": [
         {
@@ -193,9 +156,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 211124,
-        "d1200": 114814,
-        "m": 140530
+        "d": 208692,
+        "d1200": 114868,
+        "m": 139332
       },
       "quality": {
         "d": 74,
@@ -205,43 +168,6 @@
       "original": {
         "w": 2400,
         "h": 3200
-      }
-    },
-    {
-      "key": "wh-tablet",
-      "usedOn": [
-        {
-          "route": "/services/ai-automation",
-          "role": "hero"
-        }
-      ],
-      "source": "Unsplash photo 1781559818983-c32838ee3d55",
-      "creator": "Rodrigo Rodrigues",
-      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
-      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
-      "alt": "A warehouse worker in a high-visibility vest reviewing a work item on a tablet",
-      "decorative": false,
-      "focal": {
-        "desktop": "50% 40%",
-        "phone": "50% 40%"
-      },
-      "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
-      },
-      "files": {
-        "d": 116110,
-        "d1200": 51158,
-        "m": 56248
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 3600
       }
     },
     {
@@ -311,43 +237,6 @@
       "original": null
     },
     {
-      "key": "team-laptops",
-      "usedOn": [
-        {
-          "route": "/services/capability-building",
-          "role": "hero"
-        }
-      ],
-      "source": "Unsplash photo 1522071820081-009f0129c71c",
-      "creator": "Annie Spratt",
-      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
-      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
-      "alt": "A small group learning around a laptop",
-      "decorative": false,
-      "focal": {
-        "desktop": "50% 45%",
-        "phone": "50% 45%"
-      },
-      "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
-      },
-      "files": {
-        "d": 138842,
-        "d1200": 65900,
-        "m": 80540
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1601
-      }
-    },
-    {
       "key": "team-talking",
       "usedOn": [
         {
@@ -370,9 +259,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 208886,
-        "d1200": 97348,
-        "m": 130582
+        "d": 209018,
+        "d1200": 97608,
+        "m": 130548
       },
       "quality": {
         "d": 82,
@@ -382,43 +271,6 @@
       "original": {
         "w": 2400,
         "h": 1350
-      }
-    },
-    {
-      "key": "team-focus",
-      "usedOn": [
-        {
-          "route": "/services/data-ai-strategy",
-          "role": "hero"
-        }
-      ],
-      "source": "Unsplash photo 1521737852567-6949f3f9f2b5",
-      "creator": "Annie Spratt",
-      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
-      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
-      "alt": "A working session photographed from the side with selective focus",
-      "decorative": false,
-      "focal": {
-        "desktop": "50% 45%",
-        "phone": "50% 45%"
-      },
-      "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
-      },
-      "files": {
-        "d": 167348,
-        "d1200": 58508,
-        "m": 64986
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1644
       }
     },
     {
@@ -459,43 +311,6 @@
       }
     },
     {
-      "key": "team-review",
-      "usedOn": [
-        {
-          "route": "/services/business-intelligence",
-          "role": "hero"
-        }
-      ],
-      "source": "Unsplash photo 1573167507387-6b4b98cb7c13",
-      "creator": "Christina Morillo",
-      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
-      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
-      "alt": "People at a conference table listening to a colleague speak",
-      "decorative": false,
-      "focal": {
-        "desktop": "50% 45%",
-        "phone": "50% 45%"
-      },
-      "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
-      },
-      "files": {
-        "d": 141590,
-        "d1200": 67714,
-        "m": 75466
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1602
-      }
-    },
-    {
       "key": "team-whiteboard",
       "usedOn": [
         {
@@ -522,9 +337,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 232914,
-        "d1200": 113320,
-        "m": 125440
+        "d": 232890,
+        "d1200": 113010,
+        "m": 126598
       },
       "quality": {
         "d": 66,
@@ -560,43 +375,6 @@
       "files": null,
       "quality": null,
       "original": null
-    },
-    {
-      "key": "technician",
-      "usedOn": [
-        {
-          "route": "/services/data-engineering",
-          "role": "hero"
-        }
-      ],
-      "source": "Unsplash photo 1785682117346-4b114502e9b8",
-      "creator": "Valentin Lacoste",
-      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
-      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
-      "alt": "A technician working on a server rack",
-      "decorative": false,
-      "focal": {
-        "desktop": "50% 45%",
-        "phone": "50% 45%"
-      },
-      "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
-      },
-      "files": {
-        "d": 191908,
-        "d1200": 72526,
-        "m": 107206
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 3600
-      }
     }
   ]
 }

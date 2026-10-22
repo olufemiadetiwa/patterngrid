@@ -124,7 +124,7 @@
         return html`
           <div class="seq-q">
             <span class="eyebrow">Question to investigate</span>
-            <p style="font-size:clamp(20px,1.6vw,24px);font-weight:600;line-height:1.25">Is availability limiting sales here?</p>
+            <p class="h3">Is availability limiting sales here?</p>
             <p class="small muted">Surulere shows both the lowest sales index (61) and the lowest availability (41%). The connected view raises the question; it does not prove the cause or claim a result.</p>
           </div>`;
       })}`;
@@ -152,7 +152,7 @@
                 <a class="svc-card" href="/services/${s.slug}">
                   <span class="row between" style="gap:12px">
                     <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(s.icon)}"/></svg>
-                    <span class="idx">${s.index}</span>
+                    <span class="num-cell">${C.cells(PG.services.indexOf(s))}${s.index}</span>
                   </span>
                   <span class="stack stack-8">
                     ${when(!!sit, function () { return html`<span class="when">“${sit.situation}”</span>`; })}
@@ -176,49 +176,49 @@
       </section>`;
   }
 
+  /* The signature sequence on paper: the scene full-width, the four stages
+     as a rail, the narrative under the active stage. Replay is user-started
+     and any selection takes over. */
   function sequenceSection() {
     return html`
-      <section class="sec bg-ink" aria-labelledby="seq-h2">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(48px,6vw,80px)">
-          <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
-            <div class="stack stack-16">
-              <span class="eyebrow eyebrow-dark">One question, followed through</span>
-              <h2 class="h2" id="seq-h2">Where is performance slipping?</h2>
+      <section class="sec-sm bg-paper" aria-labelledby="seq-h2">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(28px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="eyebrow">One question, followed through</span>
+              <h2 class="h2-sm" id="seq-h2">Where is performance slipping?</h2>
             </div>
-            <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.78);max-width:34em">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
+            <p class="lead">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
           </div>
 
-          <div class="autogrid start" style="--min:400px;--gap:40px">
-            <div class="seq-sticky">
-              <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
-                <div class="scene-bar">
-                  <span class="scene-id"><span class="scene-glyph" aria-hidden="true"><i></i><i></i><i></i></span>Connected view</span>
-                  <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay style="height:32px">Replay</button></span>
-                </div>
-                <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs>
-                  ${each(STAGES, function (t, i) {
-                    return html`<button type="button" role="tab" class="scene-step"
-                      data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
-                      aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}"><span class="n">${i + 1}</span>${t.name}</button>`;
-                  })}
-                </div>
-                <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body
-                     aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
-                <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · local interactions only</span></div>
+          <div class="seq-wrap">
+            <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
+              <div class="scene-bar">
+                <span class="scene-id">${C.cells(1)}Connected view</span>
+                <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay style="height:32px">Replay</button></span>
               </div>
+              <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs>
+                ${each(STAGES, function (t, i) {
+                  return html`<button type="button" role="tab" class="scene-step"
+                    data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
+                    aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}"><span class="n">${i + 1}</span>${t.name}</button>`;
+                })}
+              </div>
+              <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body
+                   aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
+              <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · nothing is sent or saved</span></div>
             </div>
-
-            <div class="stack seq-steps">
+            <div class="seq-narrative" data-seq-narrative>
               ${each(STAGES, function (st, i) {
                 return html`
-                  <div class="seq-step${i === 0 ? ' is-active' : ''}" data-seq-step="${i}">
-                    <span class="eyebrow eyebrow-dark">0${i + 1}</span>
-                    <h3 class="h3">${st.name}</h3>
-                    <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.8);max-width:32em">${st.copy}</p>
-                  </div>`;
+                  <button type="button" class="seq-stage${i === 0 ? ' is-active' : ''}" data-seq-step="${i}">
+                    <span class="num-cell">${C.cells(i)}0${i + 1}</span>
+                    <span class="t">${st.name}</span>
+                    <span class="c">${st.copy}</span>
+                  </button>`;
               })}
-              <a class="arrow" href="/approach" style="color:#fff;padding:24px 0">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
             </div>
+            <a class="arrow" href="/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
@@ -272,7 +272,7 @@
               var meta = WORK_META[w.slug] || ['', '', ''];
               return html`
                 <a href="/work/${w.slug}" class="work-card">
-                  <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(WORK_SCENES[w.slug] || 'bi', { compact: true, preview: true })}</span>
+                  <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(WORK_SCENES[w.slug] || 'bi', { thumb: true, plainHeading: true })}</span>
                   <span class="stack stack-8" style="padding:4px 2px 0">
                     <span class="label-caps">Illustrative · ${w.sector}</span>
                     <span class="t">${w.title}</span>
@@ -308,19 +308,7 @@
   }
 
   function closingSection() {
-    return html`
-      <section aria-labelledby="close-h2" class="sec-xs">
-        <div class="wrap closing" data-reveal="rise">
-          <div class="stack stack-16">
-            <h2 id="close-h2" class="h2">What would you like to understand?</h2>
-            <p class="body muted" style="max-width:34em">Tell us the decision you want to improve. We reply to arrange a short conversation, then suggest a sensible next step.</p>
-          </div>
-          <div class="row" style="gap:16px 32px">
-            <a class="btn" href="/contact">Request a consultation</a>
-            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>`;
+    return PG.closing({ h: 'What would you like to understand?', p: 'Tell us the decision you want to improve. We reply to arrange a short conversation, then suggest a sensible next step.' });
   }
 
   /* ------------------------------------------------------------- module */
@@ -353,13 +341,45 @@
         cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { plainHeading: host.classList.contains('hero-scene') }));
       });
 
+      /* --- guided walkthrough: four states, ~20 s, any click takes over --- */
+      var walkBtn = root.querySelector('[data-walkthrough]');
+      var heroHost = root.querySelector('.hero-scene');
+      var progress = root.querySelector('[data-walk-progress]');
+      var walkT = [];
+      var walking = false;
+      function stopWalk() {
+        walking = false;
+        walkT.forEach(clearTimeout); walkT = [];
+        if (walkBtn) { walkBtn.setAttribute('aria-pressed', 'false'); walkBtn.innerHTML = '<span class="play" aria-hidden="true">▶</span>Replay the walkthrough'; }
+        if (progress) { progress.hidden = true; progress.firstElementChild.style.setProperty('--p', '0%'); }
+      }
+      function at(ms, fn) { walkT.push(setTimeout(fn, ms)); }
+      function startWalk() {
+        var d = heroHost && heroHost._pgScene; if (!d) return;
+        stopWalk();
+        walking = true;
+        walkBtn.setAttribute('aria-pressed', 'true');
+        walkBtn.innerHTML = '<span class="play" aria-hidden="true">❚❚</span>Stop';
+        d.reset();
+        if (progress) { progress.hidden = false; progress.firstElementChild.style.setProperty('--p', '0%'); }
+        var steps = [[0, null], [5000, ['step', '1']], [10000, ['line', '0']], [13000, ['line', '1']], [16000, ['step', '2']], [19000, ['assign', '']]];
+        steps.forEach(function (st) { at(st[0], function () { if (st[1]) d.act(st[1][0], st[1][1]); if (progress) progress.firstElementChild.style.setProperty('--p', Math.round(st[0] / 21000 * 100) + '%'); }); });
+        at(21000, function () { if (progress) progress.firstElementChild.style.setProperty('--p', '100%'); walking = false; walkBtn.setAttribute('aria-pressed', 'false'); walkBtn.innerHTML = '<span class="play" aria-hidden="true">▶</span>Replay the walkthrough'; });
+      }
+      if (walkBtn && heroHost) {
+        var onWalk = function () { walking ? stopWalk() : startWalk(); };
+        var onTake = function (e) { if (walking && e.target.closest('[data-act]')) stopWalk(); };
+        walkBtn.addEventListener('click', onWalk);
+        heroHost.addEventListener('click', onTake);
+        heroHost.addEventListener('keydown', onTake);
+        cleanup(function () { walkBtn.removeEventListener('click', onWalk); heroHost.removeEventListener('click', onTake); heroHost.removeEventListener('keydown', onTake); stopWalk(); });
+      }
+
       /* --- four-stage sequence -------------------------------------- */
       var tabs = C.qsa('[data-stage]', root);
       var seqBody = root.querySelector('[data-seq-body]');
-      var steps = C.qsa('[data-seq-step]', root);
+      var stages = C.qsa('[data-seq-step]', root);
       var stage = 0;
-      var replaying = false;
-      var manual = false; // a click or key press takes over from the scroll observer
       var fadeT = null, replayT = null;
 
       function paintStage(i) {
@@ -368,7 +388,7 @@
           t.setAttribute('aria-selected', j === i ? 'true' : 'false');
           t.tabIndex = j === i ? 0 : -1;
         });
-        steps.forEach(function (s, j) { s.classList.toggle('is-active', j === i); });
+        stages.forEach(function (s, j) { s.classList.toggle('is-active', j === i); });
         if (seqBody) {
           seqBody.innerHTML = stagePanel(i).value;
           seqBody.setAttribute('aria-labelledby', 'seq-tab-' + i);
@@ -386,13 +406,15 @@
         }, 220);
       }
 
-      tabs.forEach(function (t) {
-        var click = function () { replaying = false; manual = true; setStage(Number(t.getAttribute('data-stage'))); };
-        t.addEventListener('click', click);
-        cleanup(function () { t.removeEventListener('click', click); });
-      });
+      var onSeqClick = function (e) {
+        var t = e.target.closest('[data-stage], [data-seq-step]');
+        if (!t || !root.contains(t)) return;
+        clearTimeout(replayT);
+        setStage(Number(t.getAttribute('data-stage') || t.getAttribute('data-seq-step')));
+      };
+      root.addEventListener('click', onSeqClick);
+      cleanup(function () { root.removeEventListener('click', onSeqClick); });
 
-      /* Arrow-key support for the tablist — absent from the prototype. */
       var tablist = root.querySelector('[data-stage-tabs]');
       if (tablist) {
         var onKey = function (e) {
@@ -402,7 +424,7 @@
           e.preventDefault();
           var next = d === -99 ? 0 : d === 99 ? tabs.length - 1 :
             Math.min(tabs.length - 1, Math.max(0, stage + d));
-          replaying = false; manual = true;
+          clearTimeout(replayT);
           setStage(next);
           tabs[next].focus();
         };
@@ -413,13 +435,12 @@
       var replayBtn = root.querySelector('[data-replay]');
       if (replayBtn) {
         var onReplay = function () {
-          replaying = true;
           clearTimeout(replayT);
           setStage(0);
           var i = 0;
           var step = function () {
             i++;
-            if (i > 3) { replaying = false; return; }
+            if (i > 3) return;
             setStage(i);
             replayT = setTimeout(step, 1800);
           };
@@ -429,18 +450,7 @@
         cleanup(function () { replayBtn.removeEventListener('click', onReplay); });
       }
 
-      /* Scrolling the narrative column advances the panel. */
-      if ('IntersectionObserver' in window && steps.length) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting && !replaying && !manual) setStage(Number(e.target.getAttribute('data-seq-step')));
-          });
-        }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-        steps.forEach(function (s) { io.observe(s); });
-        cleanup(function () { io.disconnect(); });
-      }
-
-      cleanup(function () { clearTimeout(fadeT); clearTimeout(replayT); clearTimeout(swapT); });
+      cleanup(function () { clearTimeout(fadeT); clearTimeout(replayT); });
     }
   };
 })();

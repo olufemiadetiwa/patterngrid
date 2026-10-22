@@ -81,10 +81,14 @@
           <div class="hero-cta">
             <a class="btn btn-accent" href="${h.action.href}"
                ${raw(h.action.event ? 'data-hero-event="' + C.esc(h.action.event) + '"' : '')}>${h.action.label}</a>
-            ${when(!!h.secondary, function () {
-              return html`<a class="secondary" href="${h.secondary.href}">${h.secondary.label} <span aria-hidden="true">→</span></a>`;
+            ${when(!!h.walkthrough, function () {
+              return html`<button type="button" class="walk-btn" data-walkthrough aria-pressed="false"><span class="play" aria-hidden="true">▶</span>${h.walkthrough}</button>`;
             })}
-          </div>`;
+            ${when(!!h.secondary, function () {
+              return html`<a class="secondary${h.walkthrough ? ' text' : ''}" href="${h.secondary.href}">${h.secondary.label} <span aria-hidden="true">→</span></a>`;
+            })}
+          </div>
+          ${when(!!h.walkthrough, function () { return html`<div class="walk-progress" data-walk-progress hidden aria-hidden="true"><i></i></div>`; })}`;
       })}`;
   }
 
@@ -95,13 +99,13 @@
     var size = h.size || 'marketing';
     var images = h.images || [];
 
-    if (size === 'home') {
+    if (size === 'home' || h.scene) {
       return html`
         <div class="hero-unit" data-hero="${key}">
-          <section class="hero hero-home" aria-label="${(h.lines || []).join(' ')}">
+          <section class="hero hero-home grid-field${size !== 'home' ? ' is-service' : ''}" aria-label="${(h.lines || []).join(' ')}">
             <div class="hero-inner">
               <div class="hero-copy">${copy(h, rm, opts)}</div>
-              <div class="hero-scene" data-scene="${h.scene || 'bi'}" aria-label="Illustrative decision workspace"></div>
+              <div class="hero-scene" data-scene="${h.scene || 'bi'}" ${raw(size !== 'home' ? 'data-scene-compact data-scene-preview' : '')} aria-label="Illustrative workspace"></div>
             </div>
           </section>
         </div>`;
@@ -109,7 +113,7 @@
 
     return html`
       <div class="hero-unit" data-hero="${key}">
-        <section class="hero hero-photo" aria-label="${(h.lines || []).join(' ') || 'Page introduction'}"
+        <section class="hero hero-photo${images.length ? '' : ' grid-field'}" aria-label="${(h.lines || []).join(' ') || 'Page introduction'}"
                  style="--hero-h:${SIZES[size] || SIZES.marketing};--hero-h1:${H1[size] || H1.marketing}">
           ${when(images.length > 0, function () { return slide(images[0]); })}
           <div class="hero-scrim" aria-hidden="true"></div>
@@ -121,7 +125,9 @@
   PG.hero.mount = function () {
     PG.hero.unmount();
     var unit = document.querySelector('[data-hero]');
-    if (!unit) { window.dispatchEvent(new CustomEvent('pg-hero', { detail: false })); return; }
+    var tc = document.head.querySelector('meta[name="theme-color"]');
+    if (!unit) { if (tc) tc.setAttribute('content', '#FFFFFF'); window.dispatchEvent(new CustomEvent('pg-hero', { detail: false })); return; }
+    if (tc) tc.setAttribute('content', unit.querySelector('.hero-home') ? '#02203D' : '#07131C');
     window.dispatchEvent(new CustomEvent('pg-hero', { detail: true }));
 
     var inst = { listeners: [] };

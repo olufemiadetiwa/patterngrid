@@ -108,6 +108,17 @@
 
   core.pad2 = function (n) { return String(n).padStart(2, '0'); };
 
+  /* The nine-cell mark as a device: nine cells with one lit. Used as section
+     numbering (cell n lit, 0-8, wrapping), the scene glyph and empty states.
+     Decorative; the number itself is read by assistive technology. */
+  core.cells = function (n, label) {
+    var lit = ((Number(n) || 0) % 9 + 9) % 9;
+    var out = '<span class="cells" aria-hidden="true">';
+    for (var i = 0; i < 9; i++) out += i === lit ? '<i class="on"></i>' : '<i></i>';
+    out += '</span>' + (label != null ? '<span class="sr-only">' + esc(label) + '</span>' : '');
+    return raw(out);
+  };
+
   /* ------------------------------------------------------------- images */
 
   /* A photograph in a frame: blurred 32 px preview underneath, the real file

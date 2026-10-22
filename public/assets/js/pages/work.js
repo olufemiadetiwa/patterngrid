@@ -21,16 +21,7 @@
   };
 
   function closing() {
-    return html`
-      <section class="sec-sm">
-        <div class="wrap closing" data-reveal="rise">
-          <h2 class="h2-sm" style="max-width:18ch;text-wrap:balance">Have a similar question in your business?</h2>
-          <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact">Request a consultation</a>
-            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>`;
+    return PG.closing({ h: 'Have a similar question in your business?' });
   }
 
   function overview() {
@@ -42,10 +33,10 @@
           ${each(PG.work, function (w) {
             return html`
               <a href="/work/${w.slug}" class="work-card">
-                <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(SCENES[w.slug] || 'bi', { compact: true, preview: true })}</span>
+                <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(SCENES[w.slug] || 'bi', { thumb: true, plainHeading: true })}</span>
                 <span class="stack stack-8" style="padding:4px 2px 0">
                   <span class="label-caps">Illustrative scenario · ${w.sector}</span>
-                  <span class="t" style="font-size:clamp(20px,1.8vw,26px)">${w.title}</span>
+                  <span class="h3 t">${w.title}</span>
                   <span class="d">${w.summary}</span>
                   <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
                 </span>
@@ -109,13 +100,10 @@
           <aside class="stack stack-24 work-aside">
             <div class="stack stack-12">
               <span class="label-caps">Designed to enable</span>
-              <ul class="ticks">${each(item.enable, function (e) { return html`<li>${e}</li>`; })}</ul>
+              <div class="stack stack-8">${each(item.enable, function (e) { return html`<div>${PG.scene.chip('ok', e)}</div>`; })}</div>
               <p class="fine">What the system is built to make possible, not a measured result.</p>
             </div>
-            <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:16px">
-              <span class="label-caps">Limitation</span>
-              <p class="small slate">${LIMITS[item.slug] || ''}</p>
-            </div>
+            ${PG.scene.drawer({ chip: 'Limitation', chipTone: 'warn', title: 'What this does not prove', text: LIMITS[item.slug] || '' })}
             <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:16px">
               <span class="label-caps">Technology (illustrative options)</span>
               <p class="small slate">${(item.tech || []).join(' · ')}</p>

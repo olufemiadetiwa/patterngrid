@@ -1,5 +1,7 @@
 # Pattern Grid — stand-out review
 
+> **Status (22 October 2026): implemented on `ux-pass-8`.** Every item below is done except where marked in [`handoff.md`](handoff.md#pass-9-stand-out); the table is kept as the record of why.
+
 Branch `ux-pass-8` (PR #1), 22 October 2026. Reviewed: every public route, rendered at 1363×936 and 390 px (captures in `docs/ux/after/`), plus the code against the Web Interface Guidelines. Stage: pre-launch. Question asked: what would make this site stand out among data and AI consultancies, not merely pass.
 
 ## Overall impression

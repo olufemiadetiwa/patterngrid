@@ -39,18 +39,18 @@
 
   function frame(o) {
     return html`
-      <div class="scene${o.compact ? ' scene-compact' : ''}${o.dark ? ' scene-dark' : ''}" data-scene-frame role="group" aria-label="${o.title} — illustrative demo">
+      <div class="scene${o.compact ? ' scene-compact' : ''}${o.thumb ? ' scene-thumb' : ''}${o.dark ? ' scene-dark' : ''}" data-scene-frame role="group" aria-label="${o.title} — illustrative demo">
         <div class="scene-bar">
-          <span class="scene-id"><span class="scene-glyph" aria-hidden="true"><i></i><i></i><i></i></span>${o.title}</span>
+          <span class="scene-id">${C.cells(o.cell || 4)}${o.title}</span>
           <span class="scene-tag">Illustrative demo</span>
         </div>
-        ${when(!!o.steps, function () {
+        ${when(!!o.steps && !o.thumb, function () {
           return html`<div class="scene-steps" role="tablist" aria-label="${o.title} stages">${each(o.steps, function (st, i) {
             return html`<button type="button" role="tab" class="scene-step" data-act="step:${i}" aria-selected="${i === o.step ? 'true' : 'false'}" tabindex="${i === o.step ? '0' : '-1'}"><span class="n">${i + 1}</span>${st}</button>`;
           })}</div>`;
         })}
         <div class="scene-body" data-scene-body>${o.body}</div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>${o.chain}</span><span>Sample data · nothing is sent or saved</span></div>
+        ${when(!o.thumb, function () { return html`<div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>${o.chain}</span><span>Sample data · nothing is sent or saved</span></div>`; })}
       </div>`;
   }
 
@@ -118,7 +118,9 @@
       var pct = Math.round(delta / D.plan * 100);
       var line = D.lines[s.line];
       var body;
-      if (s.step === 0) {
+      if (o.thumb) {
+        body = html`<div class="surface">${kpi({ label: 'Week 36 net sales', value: D.current.toFixed(1) + 'm', delta: Math.abs(delta).toFixed(1) + 'm below plan', tone: 'warn', meta: 'Plan ' + D.plan.toFixed(1) + 'm' })}${bars({ labels: D.weeks, values: D.netSales, highlight: 5, plan: D.plan, caption: 'Weekly net sales · sample units (m)', aria: 'Net sales by week' })}</div>`;
+      } else if (s.step === 0) {
         body = html`
           <div class="scene-head"><div><span class="label-caps">A measure worth acting on</span><h3>Net sales, with context.</h3></div><span class="scene-meta">Sample period · W31–W36</span></div>
           <div class="scene-grid">
@@ -158,7 +160,7 @@
             ${drawer({ chip: s.assigned ? 'Recorded' : 'Ready to assign', chipTone: s.assigned ? 'ok' : 'warn', title: s.assigned ? 'The action is on the agenda.' : 'Make it someone\'s job.', text: s.assigned ? 'The question, its evidence and its owner travel together into the next review. Nothing here was sent anywhere.' : 'An action without an owner is a wish. Assigning it records who answers at the next review.', action: s.assigned ? { act: 'reset', label: 'Start again' } : { act: 'assign', label: 'Assign to ' + D.owner.toLowerCase() } })}
           </div>`;
       }
-      return frame({ title: defs.bi.title, steps: defs.bi.steps, step: s.step, chain: defs.bi.chain, body: body, compact: o.compact });
+      return frame({ title: defs.bi.title, steps: defs.bi.steps, step: s.step, chain: defs.bi.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 4 });
     },
     act: function (s, key, val) {
       if (key === 'step') s.step = Number(val);
@@ -208,7 +210,8 @@
           })}
         </div>
         ${when(!!o.compact, function () { return html`<p class="scene-meta"><b>${sel.name}</b> · ${sel.owner} · ${st[1]}. ${st[0] === 'warn' ? 'Readiness changes when its prerequisites are complete.' : sel.q}</p>`; })}`;
-      return frame({ title: defs.strategy.title, chain: defs.strategy.chain, body: body, compact: o.compact });
+      if (o.thumb) body = html`<div class="surface">${each(INITS, function (it) { var sst = status(it); return html`<div class="tl-row"><span class="tl-name">${it.name}</span><span class="tl-phases"><i class="tl-bar p${it.phase} ${sst[0]}"></i></span><span>${chip(sst[0], sst[1])}</span></div>`; })}</div>`;
+      return frame({ title: defs.strategy.title, chain: defs.strategy.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 0 });
     },
     act: function (s, key, val, el) {
       if (key === 'toggle') s.done[val] = !!el.checked;
@@ -258,7 +261,8 @@
             : { chip: '6 of 7 checks passed', chipTone: 'warn', title: 'One record was held.', text: 'The quality gate holds anything that cannot be joined and tells a named owner. Everything else loaded on schedule at 06:22.', rows: [['Loaded', 'ERP orders · CRM outlets · Stock file'], ['Held', '1 stock record']], action: { act: 'held:1', label: 'Trace the held record' } }); })}
         </div>
         ${when(!!o.compact, function () { return html`<p class="scene-meta">${chip('warn', '6 of 7 checks passed')} One stock record was held for a named owner; everything else loaded at 06:22.</p>`; })}`;
-      return frame({ title: defs.engineering.title, chain: defs.engineering.chain, body: body, compact: o.compact });
+      if (o.thumb) body = html`<div class="src-grid">${each(SOURCES.slice(0, 2), function (src) { return html`<div class="src-tile${src.id === s.src ? ' on' : ''}"><span class="src-sys"><b>${src.name}</b><small>${src.system}</small></span>${records(src.recs.slice(0, 2))}<span class="src-fields">${each(src.fields.slice(0, 3), function (f) { return html`<code class="${f === src.key ? 'key' : ''}">${f}</code>`; })}</span></div>`; })}</div>`;
+      return frame({ title: defs.engineering.title, chain: defs.engineering.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 2 });
     },
     act: function (s, key, val) { if (key === 'src') s.src = val; if (key === 'held') s.held = val === '1'; }
   };
@@ -289,7 +293,8 @@
           ${when(!o.preview, function () { return drawer({ chip: status.split(' · ')[0], chipTone: tone, title: it.ok ? (s.decision ? 'Decision recorded.' : 'Your call, reviewer.') : 'Nothing is released without its evidence.', text: it.ok ? (s.decision ? 'The decision, the draft and the checks are kept together. Nothing here was sent anywhere.' : 'The checks passed and every statement links to its measure. Approve the release, or send it back with a reason.') : 'The ledger for W36 had not loaded, so the period check could not run. The item stops here until the source arrives.', extra: it.ok && !s.decision ? html`<div class="row" style="gap:8px"><button type="button" class="btn btn-sm" data-act="decide:approve">Approve release</button><button type="button" class="btn btn-ghost btn-sm" data-act="decide:return">Return for correction</button></div>` : null, action: s.decision ? { act: 'decide:', label: 'Reset the decision' } : null }); })}
         </div>
         ${when(!!o.preview, function () { return html`<p class="scene-meta">${chip('neutral', 'Awaiting reviewer decision')} Checks passed; a named reviewer approves or returns the draft. Nothing is released without its evidence.</p>`; })}`;
-      return frame({ title: defs.ai.title, chain: defs.ai.chain, body: body, compact: o.compact });
+      if (o.thumb) body = html`<div class="surface flowline"><div class="fl-step done"><span class="label-caps">1 · Input</span><p>Scheduled trigger · W36</p></div><div class="fl-step done"><span class="label-caps">2 · Proposed</span><p>${it.proposed}</p></div><div class="fl-step ${it.ok ? 'done' : 'fail'}"><span class="label-caps">3 · Checks</span><p>${it.checks}</p></div><div class="fl-step now"><span class="label-caps">4 · Human review</span><p>${status}</p></div></div>`;
+      return frame({ title: defs.ai.title, chain: defs.ai.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 6 });
     },
     act: function (s, key, val) { if (key === 'item') { s.item = val; s.decision = null; } if (key === 'decide') s.decision = val || null; }
   };
@@ -320,7 +325,8 @@
           ${when(!o.preview, function () { return drawer({ chip: task[1] === 3 ? 'Independent' : 'Practising', chipTone: task[1] === 3 ? 'ok' : 'warn', title: task[0], text: task[1] === 3 ? 'Demonstrated on a real work sample and checked by a reviewer. Attendance alone never moves someone here.' : 'Practised with guidance. The next step is a work sample done without help, reviewed against the rubric.', rows: [['Role', role.name], ['Evidence', role.evidence]], note: 'Illustrative roles and tasks; individual results are never published.' }); })}
         </div>
         ${when(!!o.preview, function () { return html`<p class="scene-meta">${chip('ok', 'Independent')} Two of three analyst tasks demonstrated on real work and checked by a reviewer.</p>`; })}`;
-      return frame({ title: defs.capability.title, chain: defs.capability.chain, body: body, compact: o.compact });
+      if (o.thumb) body = html`<div class="surface">${each(role.tasks, function (t) { return html`<div class="skill-row"><span>${t[0]}</span>${each(LEVELS, function (l, li) { return html`<span class="seg ${li < t[1] ? 'done' : ''}${li === t[1] - 1 ? ' last' : ''}"></span>`; })}</div>`; })}</div>`;
+      return frame({ title: defs.capability.title, chain: defs.capability.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 8 });
     },
     act: function (s, key, val) { if (key === 'role') { s.role = Number(val); s.task = 0; } if (key === 'task') s.task = Number(val); }
   };
@@ -470,7 +476,7 @@
             ? { chip: 'Definition', chipTone: 'ok', title: metric.name, text: metric.definition, rows: [['Period', metric.period], ['Unit', metric.unit], ['Source', metric.source], ['Owner', metric.owner]], action: { act: 'metric:-1', label: 'Back to the question' } }
             : { chip: 'Traceable', chipTone: 'ok', title: ind.question, text: 'Every figure in the view is calculated from the sample records in these systems, with its definition, period and owner agreed before it goes into a report.', rows: [['Sources', M.sources.map(function (x) { return x.name; }).join(' · ')], ['Agreed first', 'Definition · period · unit · owner']] })}
         </div>`;
-      return frame({ title: defs.lineage.title, chain: defs.lineage.chain, body: body, compact: o.compact });
+      return frame({ title: defs.lineage.title, chain: defs.lineage.chain, body: body, compact: o.compact, cell: 2 });
     },
     act: function (s, key, val) { if (key === 'src') s.src = Number(val); if (key === 'metric') s.metric = Number(val); }
   };
@@ -571,7 +577,9 @@
       paint(true, null, true);
     }
     host.addEventListener('click', onEvent); host.addEventListener('change', onEvent); host.addEventListener('keydown', onKey);
-    return function () { host.removeEventListener('click', onEvent); host.removeEventListener('change', onEvent); host.removeEventListener('keydown', onKey); clearTimeout(swapT); };
+    /* A page can drive the scene (guided walkthroughs) through this handle. */
+    host._pgScene = { act: function (key, val) { def.act(s, key, val, null); paint(true, null, key === 'step'); }, state: s, reset: function () { s = Object.assign(def.init(), opts.state || {}); host._pgScene.state = s; paint(true); } };
+    return function () { host.removeEventListener('click', onEvent); host.removeEventListener('change', onEvent); host.removeEventListener('keydown', onKey); clearTimeout(swapT); delete host._pgScene; };
   };
 
   /* A static render for places that cannot host interaction (previews). */

@@ -41,7 +41,7 @@
         <section style="padding:0 0 clamp(96px,10vw,160px)">
           <div class="wrap stack stack-24" data-reveal="rise">
             <div class="stack stack-14" style="max-width:40em;padding:20px 24px;background:var(--paper);border-radius:var(--radius);font-size:16px;line-height:1.6">
-              <span class="lbl" style="color:var(--muted)">Status</span>
+              <span class="label-caps" style="color:var(--muted)">Status</span>
               <p>${c.status}</p>
             </div>
             <a class="arrow" href="/contact" style="margin-top:8px">Questions about this page? Contact us <span class="chev" aria-hidden="true">→</span></a>

@@ -75,7 +75,7 @@ waitForServer(50).then(() => {
   const manifest = [];
   try {
     for (const route of ROUTES) {
-      const url = local + BASE + route;
+      const url = local + BASE + route + '?pgstatic=1';
       if (process.env.PG_DEBUG) console.error('render', url);
       let dom;
       try {
@@ -120,5 +120,6 @@ function postProcess(dom, local) {
     // The rendered document is not the live one: the runtime re-renders on boot.
     .replace(/<div id="page">/, '<div id="page" data-prerendered>')
     .replace(new RegExp(local.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), ORIGIN)
-    .replace(/<html([^>]*) class="reduce-motion"/, '<html$1');
+    .replace(/<html([^>]*) class="reduce-motion"/, '<html$1')
+    .replace(/<html([^>]*) class="([^"]*)\bis-static\b([^"]*)"/, '<html$1 class="$2$3"');
 }

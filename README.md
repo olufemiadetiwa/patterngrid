@@ -337,6 +337,17 @@ Open questions for the founder are in `docs/copy-review.md` §4 (business
 email, form destination, engagement formats, pricing line, band labels,
 service name, Insights timing, legal pages).
 
+## Stand-out pass (ninth pass)
+
+A designer's review of the eighth pass (`docs/ux/standout-review.md`)
+asked for the deliverable to be the hero everywhere, a visual language derived
+from the nine-cell mark, and passive lists turned into evidence. Implemented in
+full; record in `docs/ux/handoff.md` (Pass 9). Highlights: scene-led service
+heroes, a 20-second guided walkthrough on the home hero, scene thumbnails in
+place of stock previews, the grid texture and cells device, one closing
+component with the three next steps, industry measures that open their real
+definitions, self-hosted fonts.
+
 ## UX pass (eighth pass)
 
 A deep UI/UX review (`docs/ux/brief.md`) was executed in full on branch

@@ -8,6 +8,32 @@
 
   var shell = (PG.shell = {});
 
+  /* One closing for every page: the headline from content, the same two
+     actions, and the three steps that follow an enquiry — the last thing a
+     visitor sees is the same low-friction next step everywhere. */
+  var NEXT_STEPS = ['We read your enquiry', 'We reply to arrange a short conversation', 'We suggest a sensible next step'];
+  shell.nextSteps = NEXT_STEPS;
+  PG.closing = function (o) {
+    o = o || {};
+    var href = '/contact' + (o.service ? '?service=' + o.service : '');
+    return html`
+      <section class="closing-band${o.tone === 'dark' ? ' is-dark' : ''}" aria-labelledby="close-h2">
+        <div class="wrap closing-inner" data-reveal="rise">
+          <div class="stack stack-16">
+            <h2 id="close-h2" class="h2-sm" style="max-width:18ch">${o.h || 'What would you like to understand?'}</h2>
+            ${when(!!o.p, function () { return html`<p class="body muted" style="max-width:34em">${o.p}</p>`; })}
+            <div class="row" style="gap:16px 28px;margin-top:8px">
+              <a class="btn" href="${href}">${o.cta || 'Request a consultation'}</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <ol class="next-steps" aria-label="What happens next">
+            ${each(NEXT_STEPS, function (t, i) { return html`<li>${C.cells(i, '')}<span>${t}</span></li>`; })}
+          </ol>
+        </div>
+      </section>`;
+  };
+
   var state = {
     menu: null,          // 'services' | 'industries' | 'about' | null
     drawerOpen: false,

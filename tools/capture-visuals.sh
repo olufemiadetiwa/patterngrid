@@ -15,10 +15,10 @@ for pair in $ROUTES; do
     if [ "$w" -lt 500 ]; then
       # Headless Chrome's window cannot go below ~500 px: frame the page at the exact width instead.
       "$CH" --headless=new --disable-gpu --hide-scrollbars --window-size="600,$h" --timeout=12000 \
-        --screenshot="$OUT/$name-$w.png" "$BASE/__frame?w=$w&h=$h&src=$path" >/dev/null 2>&1 &
+        --screenshot="$OUT/$name-$w.png" "$BASE/__frame?w=$w&h=$h&src=$path%3Fpgstatic%3D1" >/dev/null 2>&1 &
     else
       "$CH" --headless=new --disable-gpu --hide-scrollbars --window-size="$w,$h" --timeout=9000 \
-        --screenshot="$OUT/$name-$w.png" "$BASE$path" >/dev/null 2>&1 &
+        --screenshot="$OUT/$name-$w.png" "$BASE$path?pgstatic=1" >/dev/null 2>&1 &
     fi
   done
   wait

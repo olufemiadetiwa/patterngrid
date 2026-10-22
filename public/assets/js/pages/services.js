@@ -28,11 +28,11 @@
     return html`
       ${PG.hero('services')}
 
-      <section style="padding:0 0 clamp(72px,9vw,144px)">
+      <section style="padding:clamp(40px,5vw,72px) 0 clamp(72px,9vw,144px)">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:380px">
           <p class="lede">${ov.intro}</p>
           <div class="stack stack-16">
-            <h2 style="font-size:clamp(26px,2.6vw,40px);font-weight:600;line-height:1.1;letter-spacing:-.02em">${ov.situationsHeading}</h2>
+            <h2 class="h2-sm">${ov.situationsHeading}</h2>
             <div class="rows">
               ${each(ov.situations, function (s) {
                 var t = find(s.slug) || {};
@@ -66,7 +66,7 @@
                 <article class="compare-card">
                   <div class="row between" style="gap:12px">
                     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy)"><path d="${PG.icon(s.icon)}"/></svg>
-                    <span class="idx">${s.index}</span>
+                    <span class="num-cell">${C.cells(PG.services.indexOf(s))}${s.index}</span>
                   </div>
                   <h3>${s.title}</h3>
                   <p class="outcome">${s.outcomeText || f.text}</p>
@@ -98,7 +98,7 @@
       <section class="bg-paper" style="padding:clamp(72px,9vw,144px) 0">
         <div class="wrap autogrid" data-reveal="rise" style="--min:380px;align-items:center">
           <div class="stack stack-18">
-            <h2 style="font-size:clamp(28px,3.4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${ov.mapHeading}</h2>
+            <h2 class="h2-sm" style="text-wrap:balance">${ov.mapHeading}</h2>
             <p style="font-size:18px;line-height:1.6;max-width:32em">${ov.mapText}</p>
             <p class="small muted" style="max-width:36em">Strategy sets the order. Engineering supplies the checked data that reporting and automation depend on. Capability Building keeps your own team able to run all of it.</p>
           </div>
@@ -136,19 +136,16 @@
         <h3 class="h3">${stage.name}</h3>
         <p class="body">${stage.activity}</p>
         <div class="stack stack-6">
-          <span class="lbl" style="color:var(--muted)">What you get at the end of this stage</span>
+          <span class="label-caps" style="color:var(--muted)">What you get at the end of this stage</span>
           <p style="font-size:17px;font-weight:500;line-height:1.45">${stage.output}</p>
         </div>
         ${when(hasFeedback, function () { return html`<p class="feedback-note">${svc.feedback.label}</p>`; })}
       </div>
-      <div aria-label="Stage output preview" class="stage-doc">
-        <span class="lbl" style="color:var(--muted)">Sample of the output · ${stage.name}</span>
-        <div class="doc">
-          ${each(stage.preview, function (p) {
-            return html`
-              <div style="display:grid;grid-template-columns:8px minmax(0,1fr);gap:12px;align-items:center;font-size:15px">
-                <span aria-hidden="true" style="width:8px;height:8px;background:var(--navy);border-radius:1px"></span><span>${p}</span>
-              </div>`;
+      <div aria-label="Stage output preview" class="doc-mini">
+        <div class="dm-bar"><span class="scene-id">${C.cells(index)}${stage.output.replace(/\.$/, '')}</span><span class="scene-tag">Sample</span></div>
+        <div class="dm-rows">
+          ${each(stage.preview, function (p, i) {
+            return html`<div><span>${p}</span>${PG.scene.chip(i === 0 ? 'ok' : 'neutral', i === 0 ? 'Agreed' : 'Drafted')}</div>`;
           })}
         </div>
       </div>`;
@@ -191,16 +188,16 @@
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px">
           <div class="stack stack-20">
             <span class="eyebrow">What this is</span>
-            <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em;text-wrap:balance">${svc.heading}</h2>
+            <h2 class="h2" style="text-wrap:balance">${svc.heading}</h2>
             ${each(svc.intro, function (p) { return html`<p class="body">${p}</p>`; })}
           </div>
           <div class="stack stack-28" style="border-top:1px solid var(--rule);padding-top:24px">
             <div class="stack stack-12">
-              <span class="lbl" style="color:var(--muted)">This is useful when</span>
+              <span class="label-caps" style="color:var(--muted)">This is useful when</span>
               <ul class="ticks">${each(svc.situations, function (x) { return html`<li>${x}</li>`; })}</ul>
             </div>
             <div class="stack stack-8" style="background:var(--paper);border-radius:var(--radius);padding:20px 22px">
-              <span class="lbl" style="color:var(--muted)">What you are working towards</span>
+              <span class="label-caps" style="color:var(--muted)">What you are working towards</span>
               <p style="font-size:18px;line-height:1.45;font-weight:500">${svc.outcomeText}</p>
             </div>
           </div>
@@ -212,14 +209,14 @@
           <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
             <div class="stack stack-16">
               <span class="eyebrow">Worked example</span>
-              <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">${svc.example.question}</h2>
+              <h2 class="h2-sm" style="text-wrap:balance">${svc.example.question}</h2>
             </div>
             <div class="stack stack-14">
               <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
                 ${each(svc.example.steps, function (t, i) {
                   return html`
                     <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
-                      <span class="lbl" style="color:var(--muted);padding-top:3px">0${i + 1}</span><span>${t}</span>
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">0${i + 1}</span><span>${t}</span>
                     </li>`;
                 })}
               </ol>
@@ -234,7 +231,7 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
           <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
             <div class="stack stack-14">
-              <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em">What you receive</h2>
+              <h2 class="h2">What you receive</h2>
             </div>
             <p class="small muted" style="max-width:36em;line-height:1.55">${PG.deliverablesLine}</p>
           </div>
@@ -256,7 +253,7 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
           <div class="stack stack-14" style="max-width:720px">
             <span class="eyebrow">How we work</span>
-            <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em">How the work runs: five stages, each ending in something you can see.</h2>
+            <h2 class="h2">How the work runs: five stages, each ending in something you can see.</h2>
           </div>
           <div role="tablist" aria-label="Approach stages" data-stage-tabs class="stepper">
             ${each(svc.approach, function (st, i) {
@@ -284,20 +281,26 @@
           <div class="row between end" style="gap:16px 48px">
             <div class="stack stack-14" style="max-width:760px">
               <span class="eyebrow eyebrow-dark">How your information becomes an answer</span>
-              <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.06;letter-spacing:-.03em;text-wrap:balance">${svc.flow.title}</h2>
+              <h2 class="h2" style="text-wrap:balance">${svc.flow.title}</h2>
             </div>
             <button type="button" class="toggle toggle-dark" data-replay-flow style="height:40px">Replay</button>
           </div>
 
           <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
-            <span class="lbl" style="color:rgba(255,255,255,.6)">${svc.flow.bandTitle}</span>
+            <span class="label-caps" style="color:rgba(255,255,255,.6)">${svc.flow.bandTitle}</span>
             ${each(svc.flow.band, function (b) {
               return html`<span class="band-chip">${b}</span>`;
             })}
           </div>
 
+          <div class="flow-strip" aria-label="Flow summary">
+            ${each(nodes.slice().sort(function (a, b) { return a.col - b.col || a.row - b.row; }), function (n, i, arr) {
+              return html`<span class="node ${n.kind}">${n.label}</span>${when(i < arr.length - 1 && arr[i + 1].col !== n.col, function () { return html`<span class="arr" aria-hidden="true">→</span>`; })}`;
+            })}
+          </div>
+
           <details class="flow-details" data-flow-details>
-          <summary>Open the full flow diagram <span class="chev down" aria-hidden="true">↓</span></summary>
+          <summary><span class="summary-btn">Open the full diagram <span class="chev down" aria-hidden="true">↓</span></span></summary>
           <div class="flow-wrap">
             <div class="flow flow-paper" data-flow>
               <svg class="flow-svg" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" data-flow-svg>
@@ -402,7 +405,7 @@
                 return html`
                   <a class="stack stack-4" href="/work/${relatedWork.slug}"
                      style="padding:16px 18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
-                    <span class="lbl" style="color:var(--muted)">Illustrative scenario</span>
+                    <span class="label-caps" style="color:var(--muted)">Illustrative scenario</span>
                     <span style="font-weight:600;font-size:16px">${relatedWork.title}</span>
                   </a>`;
               })}
@@ -414,20 +417,7 @@
 
   function closing(svc) {
     var ov = PG.servicesOverview || { closing: {} };
-    return html`
-      <section style="padding:0 0 clamp(96px,10vw,160px)">
-        <div class="wrap row between" data-reveal="rise"
-             style="padding-top:clamp(56px,7vw,96px);border-top:1px solid var(--rule);gap:32px 64px">
-          <div class="stack stack-14" style="max-width:640px">
-            <h2 style="font-size:clamp(32px,4.4vw,68px);font-weight:650;line-height:1;letter-spacing:-.035em;text-wrap:balance">${svc ? svc.closing : ov.closing.h}</h2>
-            ${when(!svc, function () { return html`<p class="small muted" style="font-size:17px;line-height:1.55;max-width:34em">${ov.closing.p}</p>`; })}
-          </div>
-          <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact${svc ? '?service=' + svc.slug : ''}">${svc ? svc.cta : 'Send us your question'}</a>
-            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>`;
+    return svc ? PG.closing({ h: svc.closing, cta: svc.cta, service: svc.slug }) : PG.closing({ h: ov.closing.h, p: ov.closing.p, cta: 'Send us your question' });
   }
 
   /* -------------------------------------------------------------- module */
@@ -471,7 +461,7 @@
 
       /* --- workspace scenes ------------------------------------------ */
       C.qsa('[data-scene]', root).forEach(function (host) {
-        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { compact: host.hasAttribute('data-scene-compact') }));
+        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { compact: host.hasAttribute('data-scene-compact'), preview: host.hasAttribute('data-scene-preview'), plainHeading: host.classList.contains('hero-scene') }));
       });
 
       /* Jump links and the deliverables button scroll to a section. */

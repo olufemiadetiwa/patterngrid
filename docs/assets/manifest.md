@@ -9,17 +9,11 @@ All photographs are stock imagery used as illustrative context. None shows Patte
 | `lagos-aerial` | /industries | hero | Obinna Okerekeocha | Aerial view of Lagos city buildings in daylight | 50% 50% / 50% 50% | d 229 KiB (q74) · 1200 117 KiB (q78) · m 124 KiB (q74) |
 | `lagos-bridge-traffic` | /industries/financial-services | section photo (CDN) | Vitalis Nwenyi | Traffic on a Lagos bridge leading toward the cityscape | 50% 55% / 50% 55% | CDN |
 | `lagos-civic-towers` | /industries/financial-services | hero, section photo (CDN) | Nupo Deyon Daniel | Civic Towers, Lekki, Lagos under a blue sky | 50% 40% / 50% 40% | d 150 KiB (q82) · 1200 68 KiB (q82) · m 136 KiB (q82) |
-| `lagos-skyline` | /about | hero | Stephen Olatunde | Lagos skyline in daylight | 50% 50% / 50% 50% | d 191 KiB (q82) · 1200 104 KiB (q82) · m 116 KiB (q82) |
 | `wh-pallets` | /industries/fmcg-distribution | section photo (CDN) | Ashley | A warehouse floor filled with boxes and pallets | 50% 50% / 50% 50% | CDN |
-| `wh-racks` | /industries/retail-ecommerce | hero, section photo (CDN) | Robin | A picking cart beside tall storage racks in a fulfilment warehouse | 50% 50% / 50% 50% | d 206 KiB (q74) · 1200 112 KiB (q74) · m 137 KiB (q66) |
-| `wh-tablet` | /services/ai-automation | hero | Rodrigo Rodrigues | A warehouse worker in a high-visibility vest reviewing a work item on a tablet | 50% 40% / 50% 40% | d 113 KiB (q82) · 1200 50 KiB (q82) · m 55 KiB (q82) |
+| `wh-racks` | /industries/retail-ecommerce | hero, section photo (CDN) | Robin | A picking cart beside tall storage racks in a fulfilment warehouse | 50% 50% / 50% 50% | d 204 KiB (q74) · 1200 112 KiB (q74) · m 136 KiB (q66) |
 | `wh-tablet-2` | /industries/fmcg-distribution | hero, section photo (CDN) | Rodrigo Rodrigues | A warehouse worker looking up at stock while holding a tablet | 58% 38% / 72% 40% | d 72 KiB (q82) · 1200 38 KiB (q82) · m 61 KiB (q82) |
 | `wh-ladder` | /industries/retail-ecommerce | section photo (CDN) | Kseniia Ilinykh | A worker on a ladder checking stock in a warehouse | 60% 45% / 68% 45% | CDN |
-| `team-laptops` | /services/capability-building | hero | Annie Spratt | A small group learning around a laptop | 50% 45% / 50% 45% | d 136 KiB (q82) · 1200 64 KiB (q82) · m 79 KiB (q82) |
-| `team-talking` | /approach | hero | Redd Francisco | Two colleagues in conversation at a table | 50% 40% / 50% 40% | d 204 KiB (q82) · 1200 95 KiB (q82) · m 128 KiB (q82) |
-| `team-focus` | /services/data-ai-strategy | hero | Annie Spratt | A working session photographed from the side with selective focus | 50% 45% / 50% 45% | d 163 KiB (q82) · 1200 57 KiB (q82) · m 63 KiB (q82) |
+| `team-talking` | /approach | hero | Redd Francisco | Two colleagues in conversation at a table | 50% 40% / 50% 40% | d 204 KiB (q82) · 1200 95 KiB (q82) · m 127 KiB (q82) |
 | `team-table` | /services | hero | Christina Morillo | A team seated at a long wooden table with laptops, examining a shared question | 50% 45% / 50% 45% | d 163 KiB (q82) · 1200 86 KiB (q82) · m 96 KiB (q82) |
-| `team-review` | /services/business-intelligence | hero | Christina Morillo | People at a conference table listening to a colleague speak | 50% 45% / 50% 45% | d 138 KiB (q82) · 1200 66 KiB (q82) · m 74 KiB (q82) |
-| `team-whiteboard` | /industries/technology | hero, section photo (CDN) | Austin Distel | A product team working with laptops beside a whiteboard | 50% 45% / 50% 45% | d 227 KiB (q66) · 1200 111 KiB (q74) · m 123 KiB (q74) |
+| `team-whiteboard` | /industries/technology | hero, section photo (CDN) | Austin Distel | A product team working with laptops beside a whiteboard | 50% 45% / 50% 45% | d 227 KiB (q66) · 1200 110 KiB (q74) · m 124 KiB (q74) |
 | `team-white` | /industries/technology | section photo (CDN) | Sable Flow | A team gathered around a white table in a modern workspace | 50% 45% / 50% 45% | CDN |
-| `technician` | /services/data-engineering | hero | Valentin Lacoste | A technician working on a server rack | 50% 45% / 50% 45% | d 187 KiB (q82) · 1200 71 KiB (q82) · m 105 KiB (q82) |

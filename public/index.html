@@ -16,7 +16,10 @@
     var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
+    if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
     document.write(
+      '<link rel="preload" href="' + base + '/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>' +
+      '<link rel="stylesheet" href="' + base + '/assets/css/fonts.css">' +
       '<link rel="stylesheet" href="' + base + '/assets/css/site.css">' +
       '<link rel="icon" href="' + base + '/favicon.svg" type="image/svg+xml">' +
       '<link rel="manifest" href="' + base + '/manifest.webmanifest">'
@@ -24,10 +27,7 @@
   })();
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap">
 
 </head>
 <body>
@@ -42,7 +42,7 @@
     <div id="page"></div>
   </main>
 
-  <footer class="site-footer" id="footer"></footer>
+  <footer class="site-footer grid-field" id="footer"></footer>
 </div>
 
 <noscript>

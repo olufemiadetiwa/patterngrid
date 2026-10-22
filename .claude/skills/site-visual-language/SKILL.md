@@ -19,7 +19,7 @@ Authorities, in order: `docs/ux/brief.md` (the October 2026 deep UX review — f
   - Mount with `PG.scene.mount(host, name, opts)` on a `[data-scene="name"]` element (returns a disposer for `cleanup`); render statically with `PG.scene.render(name, opts)`.
   - `opts.compact` (overview columns: no side drawer on delivery/sources, status line instead); `opts.preview` (home sticky card: static, no drawers); `opts.industry` (lineage scene).
   - Controls are `data-act="key:value"` buttons/inputs; the mount repaints the body with a 160 ms settle + 240 ms enter (none under reduced motion). Layouts respond to the scene's own width with `@container scene` queries, so one scene works full-bleed, in a column and on a phone.
-- Capture tool: `tools/capture-visuals.sh <base-url> <out-dir>` — full-page headless Chrome captures at 1440 and 390 for the scene routes (used for `docs/visuals/before|after`).
+- Capture tool: `tools/capture-visuals.sh <base-url> <out-dir>` (`npm run capture`) — full-page headless Chrome captures at 1440 and 390 (phone widths are framed through `/__frame` because headless Chrome cannot go below ~500 px). Captures and the static build load pages with `?pgstatic=1`, which adds `html.is-static` and skips entrance animations.
 - Content model: `content.js` and `service-content.js`. Scenes read sample data from `PG.scene.data` so the same figures appear everywhere.
 
 ## Tokens
@@ -31,7 +31,7 @@ Scene surfaces (cool neutrals, distinct from the warm page paper):
 Depth: `--shadow-1` (resting card) · `--shadow-2` (raised drawer). Never larger.
 Chart: `--bar #D7E3EB` (context) · `--bar-on #2E6E8E` (selected) · `--trend #38A0C3`.
 
-Type: Geist. Scene UI text 13–15 px; values 28–44 px at weight 600, tabular numerals; labels 11 px uppercase 0.12 em (`.label-caps`). Mono (`--mono`) only for record ids, code and counters.
+Type: Geist, self-hosted (`assets/fonts/*.woff2`, preloaded, `Geist Fallback` metric-matched to Arial). Scene UI text 13–15 px; values 28–44 px at weight 600, tabular numerals; labels 11 px uppercase 0.12 em (`.label-caps`). Two label roles only: `.eyebrow` (teal sentence case, opens a section) and `.label-caps` (data labels). Headings use `.h2`, `.h2-sm`, `.h3` — no inline clamps. Mono (`--mono`) only for record ids, code and counters.
 
 Radius by role: `--radius-sm 4px` chips and keys · `--radius 6px` controls and inner surfaces · `--radius-lg 12px` cards · `--radius-xl 16px` scene frames. Fine 1 px rules. No glass, no large shadows (`--shadow-2` is the ceiling), no gradients except the hero scrim. Content width `--wrap 1360px`.
 
@@ -52,12 +52,19 @@ Scene families: **performance** (metric → trace → action), **delivery** (ini
 
 Tokens: `--dur-1 150ms` control feedback · `--dur-2 220ms` panels and selection · `--dur-3 300ms` drawers · `--dur-4 550ms` data explanation and the one-time hero entrance; travel `--travel-sm 6px` / `--travel-md 12px`; easings `--ease` and `--ease-io`. Route change fades 120 ms. Scene repaints settle the body 160 ms, patch, enter 240 ms — the frame and controls stay in place and focus is restored after the real render. Reveals are opacity plus 12 px rise, nothing else; no image zoom, no clip reveals, no scroll-driven word colouring, no slideshow. One photograph may settle from 1.02× over 10 s once, desktop only. The home sequence has a user-started Replay; a click or key press takes over from the scroll observer. `html.reduce-motion` and `prefers-reduced-motion` show every final state immediately.
 
+## The mark as a system
+
+The nine-cell mark is the brand's visual idea and it appears as three things: a faint grid texture (`.grid-field`, 4.5 % white lines at 96 px, masked to one corner) on navy and ink fields; the **cells device** (`C.cells(n)` — nine cells, cell n lit, wraps past nine) as section numbering (`.num-cell`), the scene title glyph, the next-steps list and sample cards; and the wordmark glyph. Never a wash, never on photographs, never more than one texture per screen.
+
 ## Page openings
 
-- Home: `.hero-home` — category eyebrow, H1, one supporting sentence, two actions, beside the interactive BI decision workspace on a navy field. No photograph.
-- Services, industries, about, approach: `.hero-photo` — one pre-cropped local photograph (`npm run images`), eyebrow, H1, supporting sentence, two actions. Height follows content (floor only above 720 px).
-- Work, founder, insights: a photo-less compact hero (same markup, navy field).
-- Contact, assessment, legal, 404, work detail: `.page-intro` — typographic, the task starts in the first screen.
+- Home: `.hero-home` — category eyebrow, H1, one supporting sentence, two actions and the guided walkthrough (`walkthrough:` label in content; 21 s, six states, any click takes over), beside the interactive BI decision workspace on the navy grid field. No photograph.
+- Services: the same scene-led hero (`scene:` in the hero content, `.is-service`), with that service's workspace in compact preview form. No photographs on service pages.
+- Industries, approach: `.hero-photo` — one pre-cropped local photograph (`npm run images`), eyebrow, H1, lead, two actions.
+- About, work, insights: a photo-less compact hero on the grid field.
+- Contact, assessment, legal, 404, work detail, founder: `.page-intro` — typographic, the task starts in the first screen.
+
+Every page ends with `PG.closing({h, p, cta, service})`: one headline, the same two actions and the three next steps. Thumbnails of scenes (`PG.scene.render(name, {thumb:true, plainHeading:true})`) stand in for photography wherever a deliverable is previewed (home, work index). Lists become evidence: industry measures open their definition from `PG.scene.industries`; stage outputs render as `.doc-mini`; the assessment intro shows a sample result card.
 
 Order on a service page: hero → example (the scene) → what you receive → approach → flow diagram (disclosure) → technology → questions → closing.
 

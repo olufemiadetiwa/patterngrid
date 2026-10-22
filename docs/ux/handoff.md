@@ -67,3 +67,39 @@ npm run deploy       # build:pages and publish dist/ to gh-pages
 1. An approved enquiry destination (form service or small serverless relay) — [`contact-integration.md`](contact-integration.md).
 2. An approved founder portrait, and sector photography for retail and distribution if wanted.
 3. A verified business email for the footer (none has been added).
+
+
+---
+
+## Pass 9 — stand-out (22 October 2026)
+
+Implements [`standout-review.md`](standout-review.md) in full on the same branch.
+
+| Item | Done | Notes |
+|---|---|---|
+| A1 Scene-led service heroes | ✓ | `scene:` key on the five service heroes; the hero renders that workspace in compact preview form beside the copy. No photographs on service pages; the Columbia frame is gone. |
+| A2 Mark-derived system | ✓ | `.grid-field` texture on navy/ink fields (home and service heroes, photo-less heroes, footer); `C.cells(n)` device as section numbering, scene glyph, next steps and sample cards. |
+| A3 Guided walkthrough | ✓ | "Watch how it works · 20 s" steps Performance → Trace → Beverages → Snacks → Assign → assigned over 21 s with a progress line; Stop/Replay; any click or key in the scene takes over. Verified: state advances, take-over resets the button. |
+| A4 Thumbnail mode | ✓ | `thumb:true` renders bar + body only (KPI+bars, two source tiles, flowline, timeline rows, skill rows) at native size in a `surface-2` frame; home and work index. |
+| A5 Sequence on paper | ✓ | Full-width scene, stage rail, narrative as four cards under the scene (phone: active only); Replay kept; scroll observer removed. |
+| A6 One closing | ✓ | `PG.closing()` on every route: headline, two actions, three next steps. |
+| B1 Flow strip | ✓ | Node chips with arrows above a real button `Open the full diagram`. |
+| B2 Stage outputs | ✓ | `.doc-mini` document with the output name, cells glyph and Agreed/Drafted chips. |
+| B3 Industry definitions | ✓ | Accordion opens the matching workspace metric (definition, period, unit, source, owner) with "Open in the workspace"; unmatched measures keep the generic note. |
+| B4 Phone rails | ✓ | Source tiles scroll-snap; steppers scroll; FMCG at 390 px: 9,000 → 6,400 px. |
+| B5 About | ✓ | Photo-less hero "Built around the decision.", founder first, then commitments (numbered with cells), then the path. |
+| B6 Founder | ✓ | Typographic intro with breadcrumb; "How she defines a measure" drawer using the shared sample definition. |
+| B7 Assessment | ✓ | Sample result card (58 · Connected · five dimension bars) beside Start. |
+| B8 Contact | ✓ | Bounded `surface-1` fields. |
+| B9 Work detail | ✓ | Enable → status chips; limitation → drawer. |
+| C1 Headings | ✓ | Inline heading clamps replaced by `.h2/.h2-sm/.h3` (one remains in the AI scene body). |
+| C2 Labels | ✓ | `.eyebrow-caps` and `.lbl` folded into `.label-caps`; CSS removed. |
+| C3 Card hover | ✓ | One rule for compare, industry and work cards. |
+| C4 Copy | ✓ | "nothing is sent or saved" everywhere. |
+| C5 theme-color | ✓ | Set per route in `hero.mount`. |
+| C6 Fonts | ✓ | Geist and Geist Mono latin subsets self-hosted and preloaded; Google Fonts removed; metric-matched fallback. |
+| D Guidelines | ✓ | Placeholders end with …; summary styled as a button; footer text contrast raised to .72; segmented buttons 40 px. |
+
+Not done: new photography for retail and distribution (needs sourced assets); screen-reader pass.
+
+Verification on this pass: 19 routes render with no console errors; heading order intact (hero scenes use styled paragraphs); no horizontal overflow at 390 or 1363; walkthrough and take-over verified; industry definitions verified on FMCG; `npm test` 11/11; static build regenerated with `?pgstatic=1` so prerendered pages carry no mid-animation state.
