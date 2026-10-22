@@ -1207,11 +1207,11 @@ section[id^="svc-"], [id^="f-"] { scroll-margin-top: calc(var(--header-h) + 64px
 .work-detail { display: grid; grid-template-columns: minmax(0, 7fr) minmax(260px, 4fr); gap: 40px clamp(40px, 6vw, 96px); align-items: start; }
 .work-aside { position: sticky; top: calc(var(--header-h) + 24px); }
 @media (max-width: 959px) { .work-detail { grid-template-columns: 1fr; } .work-aside { position: static; } }
-.founder-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px 64px; max-width: 840px; }
-.founder-page:has(.portrait) { grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); max-width: none; align-items: start; }
-.founder-page .portrait { grid-column: 1; grid-row: 1 / span 2; position: sticky; top: calc(var(--header-h) + 24px); }
-.founder-page:has(.portrait) > .stack { grid-column: 2; }
-@media (max-width: 959px) { .founder-page:has(.portrait) { grid-template-columns: 1fr; } .founder-page .portrait { grid-column: 1; grid-row: auto; position: static; max-width: 260px; } .founder-page:has(.portrait) > .stack { grid-column: 1; } }
+.founder-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px clamp(48px, 7vw, 120px); max-width: 840px; }
+.founder-page:has(.portrait-stage) { grid-template-columns: minmax(0, 1fr) clamp(300px, 30vw, 400px); max-width: none; align-items: start; }
+.founder-page .portrait-stage { grid-column: 2; grid-row: 1 / span 2; position: sticky; top: calc(var(--header-h) + 32px); }
+.founder-page:has(.portrait-stage) > .stack { grid-column: 1; }
+@media (max-width: 959px) { .founder-page:has(.portrait-stage) { grid-template-columns: 1fr; } .founder-page .portrait-stage { grid-column: 1; grid-row: auto; order: 9; position: static; max-width: 360px; } .founder-page:has(.portrait-stage) > .stack { grid-column: 1; } }
 .founder-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; border-top: 1px solid var(--rule); padding-top: 24px; }
 .founder-facts > div { display: flex; flex-direction: column; gap: 4px; }
 .founder-facts dt { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
