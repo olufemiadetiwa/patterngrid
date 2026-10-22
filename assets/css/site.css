@@ -1526,3 +1526,4 @@ button.portrait:focus-visible { outline: 2px solid var(--focus); outline-offset:
 .pipe.lg .pipe-link { margin-top: 24px; width: 36px; }
 .pipe.lg .pipe-group { gap: 9px; }
 @media (max-width: 599px) { .pipe { flex-direction: column; gap: 8px; } .pipe-link { width: 28px; height: 20px; margin: 0 0 0 6px; } .pipe-link::before { left: 50%; right: auto; top: 2px; bottom: 2px; width: 1px; height: auto; } }
+@media (min-width: 960px) { .pipe.on-dark { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; } .pipe.on-dark .tags { flex-wrap: nowrap; } }

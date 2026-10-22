@@ -298,7 +298,7 @@
           </div>
 
           <div class="pipe on-dark" aria-label="Flow summary">
-            ${each([1, 2, 3, 4].map(function (c) { return nodes.filter(function (n) { return n.col === c; }); }).filter(function (g) { return g.length; }), function (g, i, arr) {
+            ${each(['input', 'process', 'gate', 'output', 'exception', 'use'].map(function (k) { return nodes.filter(function (n) { return n.kind === k; }); }).filter(function (g) { return g.length; }), function (g, i, arr) {
               return html`<span class="pipe-group"><small>${KIND_LABEL[g[0].kind] || ''}</small><span class="tags">${each(g, function (n) { return html`<span class="tag${n.kind === 'gate' ? ' is-accent' : n.kind === 'exception' ? ' is-warn' : n.kind === 'output' ? ' is-solid' : ''}">${n.label}</span>`; })}</span></span>${when(i < arr.length - 1, function () { return html`<i class="pipe-link" aria-hidden="true"></i>`; })}`;
             })}
           </div>
