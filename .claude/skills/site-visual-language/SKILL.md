@@ -13,7 +13,7 @@ Authorities, in order: `docs/ux/brief.md` (the October 2026 deep UX review — f
 
 - Plain HTML/CSS/JS. No framework, no build step. Templates are tagged `html\`\`` strings in `public/assets/js/pages/*.js`; the runtime is `core.js`.
 - One stylesheet: `public/assets/css/site.css`. Tokens live in `:root`. Add new tokens there, never inline hex values in page modules.
-- Scene components: `public/assets/js/scenes.js` (`PG.scene.*`). Reuse them; do not hand-build a workspace in a page module.
+- Report components: `public/assets/js/scenes.js` (`PG.scene.*`). Reuse them; do not hand-build a report in a page module.
   - Primitives: `frame`, `kpi`, `bars`, `drawer` (renders `.action-drawer` — `.drawer` is the mobile nav), `records`, `chip`.
   - Scenes: `PG.scene.defs.{bi,strategy,engineering,ai,capability,lineage}`, each `{init, render(state, opts), act(state, key, value, el)}`.
   - Mount with `PG.scene.mount(host, name, opts)` on a `[data-scene="name"]` element (returns a disposer for `cleanup`); render statically with `PG.scene.render(name, opts)`.
@@ -40,18 +40,11 @@ Radius by role: `--radius-sm 4px` chips and keys · `--radius 6px` controls and 
 
 Small labels are **tags** (`.tag`, in a `.tags` row): low-contrast filled pills, 28 px, 12.5 px medium, no outline. Variants `is-accent` (teal tint), `is-solid` (navy / white on dark), `is-warn` (amber), `is-dark` (white 9 % on navy). Never draw a boxed, outlined chip. A data flow is a **pipe** (`.pipe` > `.pipe-group` with a `small` label and `.tags`, joined by `.pipe-link` hairlines with an accent node dot), not arrows between boxes; `pipe.lg` on detail pages, `pipe.on-dark` on ink bands. Sources → pipeline → outputs is the standard grouping.
 
-## Scene grammar
+## Report canvases (the explanatory visuals)
 
-Every explanatory visual is a **workspace scene**: a framed, product-like surface with
-1. a title bar (wordmark glyph, scene name, an `Illustrative demo` tag),
-2. a stepper or tabs when the scene has stages,
-3. a body of layered surfaces: metric panel, chart, source tiles, record previews, timeline, dependency rows,
-4. a linked **drawer** that names the next action and its owner,
-5. a footer line stating the chain (`Measure → evidence → accountable action`) and `Sample data · local interactions only`.
+Pattern Grid is a consultancy; its visuals show **the deliverable, not a product**. Every example is a **report canvas** (`.report`, built from `PG.scene.report/card/colChart/hBars/matrix/defRow/callout`): a title line with a sentence subtitle naming the demo dataset ("Week 36 · demo data: a Lagos FMCG distributor"), slicer chips, a row of KPI cards with sparklines, one large chart or a dense matrix on a 7:3 grid with a callout, page tabs along the bottom (Overview · Variance · Definitions…), and a caption *outside* the canvas. Dark ink canvas, one accent, semantic green/amber/red only for variance, tabular mono numbers at 12–13 px.
 
-Rules: the static first state must tell the whole story; every visible control has a visible result; sample numbers must agree across stages (a breakdown sums to its total; a prerequisite toggled off changes downstream readiness); conceptual scenes carry the `Illustrative demo` tag and never imply a live system or a client.
-
-Scene families: **performance** (metric → trace → action), **delivery** (initiatives, owners, dependencies, timeline), **sources** (system tiles with record previews → shared definition → resulting view), **review** (work item → checks → human decision), **capability** (role → guided → independent).
+Never: window title bars, "Illustrative demo" pills inside the frame, numbered wizard steps, task-pane drawers with site buttons, status-bar footers, marketing copy inside the canvas, nested cards, tilted or device-framed mock-ups. Interaction is report interaction — switch a page tab, click a bar or a cell, select a row — and every click has a visible result. Sample numbers must agree across pages and with `PG.scene.data`; a matrix cell that opens a definition shows period, unit, source and owner. Thumbnails (`thumb:true`) show the head, cards and first visual only. Real anonymised client report pages replace rendered canvases wherever the client has consented.
 
 ## Motion
 

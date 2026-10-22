@@ -75,59 +75,31 @@
 
   /* ------------------------------------------------------------ markup */
 
+  /* The four stages of the sequence as pages of one report canvas. */
   function stagePanel(stage) {
-    var groups = groupsFor(stage);
-    var s = STAGES[stage];
-
-    return html`
-      <span class="label-caps" style="color:var(--muted)">Stage ${stage + 1} · ${s.caption}</span>
-
-      ${when(stage <= 1, function () {
-        return html`
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px">
-            ${each(groups, function (g) {
-              return html`
-                <div class="seq-group${g.on ? ' on' : ''}">
-                  <span class="gt">${g.title}</span>
-                  ${each(g.rows, function (r) { return html`<span class="gr${r.hl ? ' hl' : ''}">${r.text}</span>`; })}
-                </div>`;
-            })}
-          </div>`;
-      })}
-
-      ${when(stage === 1, function () { return html`<pre class="code">${ALIGN_SQL}</pre>`; })}
-
-      ${when(stage >= 2, function () {
-        return html`
-          <div class="stack stack-10">
-            <div style="display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1fr);gap:12px;font-size:12px;color:var(--muted)">
-              <span>Location</span><span>Sales index</span><span>Availability</span>
-            </div>
-            ${each(LOCS, function (l) {
-              return html`
-                <div class="seq-bar${l.hl ? ' hl' : ''}">
-                  <span class="n">${l.name}</span>
-                  <span style="display:flex;align-items:center;gap:8px">
-                    <span class="b" style="width:${l.sales * 0.9}%"></span>
-                    <span class="num" style="color:var(--slate)">${l.sales}</span>
-                  </span>
-                  <span style="display:flex;align-items:center;gap:8px">
-                    <span class="b" style="width:${l.avail * 0.9}%"></span>
-                    <span class="num" style="color:var(--slate)">${l.avail}%</span>
-                  </span>
-                </div>`;
-            })}
-          </div>`;
-      })}
-
-      ${when(stage === 3, function () {
-        return html`
-          <div class="seq-q">
-            <span class="eyebrow">Question to investigate</span>
-            <p class="h3">Is availability limiting sales here?</p>
-            <p class="small muted">Surulere shows both the lowest sales index (61) and the lowest availability (41%). The connected view raises the question; it does not prove the cause or claim a result.</p>
-          </div>`;
-      })}`;
+    var R = PG.scene;
+    if (stage === 0) {
+      return html`<div class="rp-cards">${R.card({ label: 'Sources', value: '3', delta: 'Sales · Stock · Distribution' })}${R.card({ label: 'Keys that differ', value: '3', delta: 'outlet code · location code · drop code', tone: 'warn' })}${R.card({ label: 'Records · W36 · SKU 4471', value: '12', delta: '4 locations' })}</div>
+        <div class="rp-grid three">
+          ${R.matrix({ title: 'Sales · rep sell-out app', head: ['Outlet', 'Units'], rows: PG.scene.data.locations.map(function (l) { return { hl: !!l.hl, cells: ['OUT-' + l.outlet, String(l.sales === 100 ? 312 : l.sales === 96 ? 299 : l.sales === 61 ? 190 : 278)] }; }) })}
+          ${R.matrix({ title: 'Stock · warehouse file', head: ['Location', 'Availability'], rows: PG.scene.data.locations.map(function (l) { return { hl: !!l.hl, cells: ['LOC-' + l.loc, { t: l.avail + '%', shade: 1 - l.avail / 100 }] }; }) })}
+          ${R.matrix({ title: 'Distribution · route planner', head: ['Drop', 'Deliveries'], rows: PG.scene.data.locations.map(function (l) { return { hl: !!l.hl, cells: ['DROP-' + l.drop, String(l.hl ? 1 : 3)] }; }) })}
+        </div>`;
+    }
+    if (stage === 1) {
+      return html`${R.matrix({ title: 'One location id across three systems · product 4471 · W36', wide: true, head: ['Location', 'Sales key', 'Stock key', 'Drop key', 'Units', 'Availability', 'Deliveries'], rows: PG.scene.data.locations.map(function (l) { return { hl: !!l.hl, cells: [l.name, 'OUT-' + l.outlet, 'LOC-' + l.loc, 'DROP-' + l.drop, String(l.sales === 100 ? 312 : l.sales === 96 ? 299 : l.sales === 61 ? 190 : 278), { t: l.avail + '%', shade: 1 - l.avail / 100 }, String(l.hl ? 1 : 3)] }; }) })}
+        <pre class="code rp-code">${ALIGN_SQL}</pre>`;
+    }
+    if (stage === 2) {
+      return html`<div class="rp-grid">
+        ${R.hBars({ title: 'Sales index by location · W36 (Ikeja = 100)', rows: PG.scene.data.locations.map(function (l) { return [l.name, l.sales]; }), highlight: 2, fmt: function (v) { return String(v); } })}
+        ${R.hBars({ title: 'Availability by location · last count', rows: PG.scene.data.locations.map(function (l) { return [l.name, l.avail]; }), highlight: 2, fmt: function (v) { return v + '%'; } })}
+      </div>`;
+    }
+    return html`<div class="rp-grid">
+      ${R.matrix({ title: 'Where sales and availability fall together', wide: true, head: ['Location', 'Sales index', 'Availability', 'Deliveries', 'Read as'], rows: PG.scene.data.locations.map(function (l) { return { hl: !!l.hl, cells: [l.name, String(l.sales), { t: l.avail + '%', shade: 1 - l.avail / 100 }, String(l.hl ? 1 : 3), l.hl ? { t: 'Lowest sales and lowest availability', tone: 'warn' } : 'In range'] }; }) })}
+      ${R.callout({ chip: 'Question, not a conclusion', chipTone: 'warn', title: 'Is availability limiting sales in Surulere?', text: 'Surulere shows the lowest sales index (61) and the lowest availability (41%), with one delivery in the week. The connected view raises the question; whether low availability is causing low sales is for the team to investigate.', rows: [['Owner', 'Sales operations lead'], ['Due', 'Next weekly review']] })}
+    </div>`;
   }
 
   /* Five entry points framed around the visitor's problem. Readable without
@@ -192,22 +164,20 @@
           </div>
 
           <div class="seq-wrap">
-            <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
-              <div class="scene-bar">
-                <span class="scene-id">${C.cells(1)}Connected view</span>
-                <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay style="height:32px">Replay</button></span>
+            <figure class="report seq-panel" role="group" aria-label="Connected view — sample report">
+              <div class="rp-head">
+                <div class="rp-title"><b>Connected view</b><span>Product 4471 · W36 · demo data: a Lagos FMCG distributor</span></div>
+                <div class="rp-slicers"><span class="rp-slicer">Week <b>36</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Product <b>4471</b><i aria-hidden="true">▾</i></span></div>
               </div>
-              <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs>
+              <div role="tabpanel" id="seq-panel" class="seq-body rp-body" data-seq-body aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
+              <div role="tablist" aria-label="Stages" class="rp-tabs" data-stage-tabs>
                 ${each(STAGES, function (t, i) {
-                  return html`<button type="button" role="tab" class="scene-step"
-                    data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
-                    aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}"><span class="n">${i + 1}</span>${t.name}</button>`;
+                  return html`<button type="button" role="tab" class="rp-tab" data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel" aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}">${i + 1} · ${t.name}</button>`;
                 })}
+                <button type="button" class="rp-tab rp-replay" data-replay>Replay</button>
               </div>
-              <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body
-                   aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
-              <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · nothing is sent or saved</span></div>
-            </div>
+              <figcaption class="rp-caption">Sample report pages · demo data · connecting the data does not prove a cause; it shows where to look next</figcaption>
+            </figure>
             <div class="seq-narrative" data-seq-narrative>
               ${each(STAGES, function (st, i) {
                 return html`

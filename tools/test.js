@@ -108,7 +108,7 @@ test('strategy readiness cascades only through real dependencies', () => {
   const PG = load('');
   const def = PG.scene.defs.strategy;
   const s = def.init();
-  const chips = (o) => [...o.matchAll(/class="chip-state (ok|warn)">([^<]+)</g)].map((m) => m[2]);
+  const chips = (o) => [...o.matchAll(/class="chip-state (ok|warn)">([^<]+)</g)].map((m) => m[2]).filter((t) => /Complete|Ready|Foundation/.test(t));
   assert.deepEqual(chips(def.render(s, {}).value).slice(0, 4), ['Complete', 'Ready to sequence', 'Foundation needed', 'Foundation needed']);
   def.act(s, 'toggle', 'src', { checked: true });
   assert.deepEqual(chips(def.render(s, {}).value).slice(0, 4), ['Complete', 'Complete', 'Ready to sequence', 'Foundation needed'], 'reporting unlocks; the assistant still waits for reporting');
@@ -141,8 +141,13 @@ test('every scene has a thumbnail form; heroes are photographic with a statement
   for (const name of ['bi', 'strategy', 'engineering', 'ai', 'capability']) {
     const out = PG.scene.render(name, { thumb: true, plainHeading: true }).value;
     assert.ok(/scene-thumb/.test(out), name + ' renders as a thumbnail');
-    assert.ok(!/role="tablist"/.test(out) && !/scene-foot/.test(out), name + ' thumbnail has no stepper or footer');
-    assert.ok(!/<h3>/.test(out), name + ' thumbnail keeps the heading outline');
+    assert.ok(!/role="tablist"/.test(out) && !/rp-caption/.test(out), name + ' thumbnail has no page tabs or caption');
+    assert.ok(!/<h[1-6]/.test(out), name + ' thumbnail carries no headings');
+  }
+  for (const name of ['bi', 'strategy', 'engineering', 'ai', 'capability']) {
+    const full = PG.scene.render(name, {}).value;
+    assert.ok(/class="report/.test(full) && /rp-caption/.test(full), name + ' renders as a captioned report canvas');
+    assert.ok(!/Illustrative demo/i.test(full) && !/scene-bar/.test(full), name + ' has no app chrome');
   }
   for (const s of PG.services) {
     const h = PG.heroes['services/' + s.slug];

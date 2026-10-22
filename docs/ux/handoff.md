@@ -138,3 +138,14 @@ The founder's direction: the site is Nigerian and African, and the stock set rea
 | Home, Industries, Financial services | Lagos bridge / aerial / Civic Towers | Unchanged (already Nigerian places) |
 
 Crops were checked at desktop (16:9) and phone (3:4) on a contact sheet; focal points recorded in `content.js`. Provenance and credits in `docs/assets/manifest.md`. Still open: an approved photograph of the founder's own team or clients would replace the remaining stock use entirely.
+
+
+---
+
+## Pass 12 — report canvases replace the workspace scenes (22 October 2026)
+
+The founder's reaction to the scenes: "screenshots of a SaaS tool that does not exist". Two research passes agreed (survey of 12 consultancy sites; critique of the rendered scenes): the medium was fine, the wrapper was the problem — window title bars, "Illustrative demo" pills, wizard steps, task-pane drawers, status-bar footers, nested cards and marketing copy inside the frame. Stock "analytics" imagery would have been worse; the credible modern pattern (P3 Adaptive) is a code-rendered **report page on a named fictional dataset**; the strongest proof is a real anonymised client page, which the founder will source later.
+
+Rebuilt `scenes.js` as report canvases (same `PG.scene` API, same data): dark ink canvas, title line with the demo dataset named, slicer chips, KPI cards with sparklines, one large chart or a dense matrix on a 7:3 grid with a callout, page tabs along the bottom, caption outside. Pages: **Commercial performance** (Overview · Variance · Actions · Definitions), **Delivery roadmap**, **Platform monitor** (Loads · Mapping · Resulting view), **Review log** (Queue · Item), **Capability baseline**, and per-industry **performance** pages (Overview · Sources · Definitions); the home sequence is the same canvas with four pages. Interaction is report interaction (tabs, bars, matrix cells, rows); the readiness toggle, the held-record trace, approve/return and assign are kept; thumbnails show head, cards and the first visual. Walkthrough rescripted for the new pages. Verified: all routes, no console errors, no overflow at 390, keyboard tabs keep focus, tests 13/13.
+
+When client screenshots arrive: add them to the two case-study pages full-bleed with "Shown with client permission; figures redacted"; the rendered canvases stay for the illustrative scenarios and industries.

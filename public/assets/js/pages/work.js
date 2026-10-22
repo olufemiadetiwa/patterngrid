@@ -206,7 +206,7 @@
               <span class="label-caps">The question</span>
               <h2 class="h3" style="max-width:26ch;text-wrap:balance">${question.p}</h2>
             </div>
-            <p class="small slate" style="max-width:40em">The deliverable, working. Use the controls; nothing is sent or saved.</p>
+            <p class="small slate" style="max-width:40em">The deliverable as a sample report page on demo data. Use the pages and figures; nothing is sent or saved.</p>
           </div>
           <div data-scene="${SCENES[item.slug] || 'bi'}"></div>
         </div>

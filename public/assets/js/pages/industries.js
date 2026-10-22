@@ -94,7 +94,7 @@
             <div class="stack stack-16">
               <p class="label-caps">Your data sources</p>
               <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced back to the system it came from.</p>
+              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from. Below, a sample page for this sector on demo data.</p>
             </div>
             <div class="stack stack-14">
               <p class="small slate" style="max-width:36em">${grid.note || ind.serviceNote}</p>
