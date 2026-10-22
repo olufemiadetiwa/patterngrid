@@ -46,7 +46,7 @@ const ROUTES = [
   '/about', '/about/precious-celestine', '/approach', '/assessment', '/contact', '/privacy', '/terms'
 ];
 if (PG.articles.some((a) => a.published)) ROUTES.push('/insights');
-module.exports = { ROUTES };
+module.exports = { ROUTES, postProcess };
 if (require.main !== module) return;
 
 /* ----------------------------------------------------------- copy public */
@@ -105,12 +105,16 @@ waitForServer(50).then(() => {
 }).catch((e) => { serverProc.kill(); console.error(e.message); process.exit(1); });
 
 function postProcess(dom, local) {
+  /* Only real rendered tags are removed (href/src starting with "/" or
+     "http"); the inline loader's JavaScript strings, which also contain these
+     paths, must survive — the loader re-creates the tags on load. */
   return dom
-    // The loader scripts re-create these on load; keep one copy only.
-    .replace(/<link rel="stylesheet" href="[^"]*\/assets\/css\/site\.css">/g, '')
-    .replace(/<link rel="icon" href="[^"]*\/favicon\.svg"[^>]*>/g, '')
-    .replace(/<link rel="manifest" href="[^"]*\/manifest\.webmanifest">/g, '')
-    .replace(/<script src="[^"]*\/assets\/js\/[^"]*"><\/script>/g, '')
+    .replace(/<link rel="stylesheet" href="(?=[\/h])[^"]*\/assets\/css\/(?:site|fonts)\.css">/g, '')
+    .replace(/<link rel="preload" href="(?=[\/h])[^"]*\/assets\/fonts\/[^"]*"[^>]*>/g, '')
+    .replace(/<link rel="icon" href="(?=[\/h])[^"]*\/favicon\.svg"[^>]*>/g, '')
+    .replace(/<link rel="manifest" href="(?=[\/h])[^"]*\/assets\/js\/[^"]*">/g, '')
+    .replace(/<link rel="manifest" href="(?=[\/h])[^"]*\/manifest\.webmanifest">/g, '')
+    .replace(/<script src="(?=[\/h])[^"]*\/assets\/js\/[^"]*"><\/script>/g, '')
     // Hero preloads are route-specific and useful: keep them.
     // Reveal and image-load state: everything visible, nothing mid-animation.
     .replace(/ class="([^"]*)\bis-armed\b([^"]*)"/g, ' class="$1$2"')

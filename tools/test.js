@@ -161,3 +161,17 @@ test('the nine-cell device lights one cell and carries no text for assistive tec
   assert.ok(/aria-hidden="true"/.test(out));
   assert.equal((PG.core.cells(13).value.match(/<i class="on">/g) || []).length, 1, 'wraps past nine');
 });
+
+test('static post-processing strips rendered tags but keeps the loader that re-creates them', () => {
+  const { postProcess } = require('./build-static.js');
+  const shell = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'), 'utf8');
+  const rendered = shell.replace('</script>\n\n<link rel="preconnect"', '</script><link rel="stylesheet" href="http://localhost:1/assets/css/fonts.css"><link rel="stylesheet" href="http://localhost:1/assets/css/site.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">\n\n<link rel="preconnect"')
+    .replace('<div id="page"></div>', '<div id="page"><section>hi</section></div>')
+    .replace('</body>', '<script src="/assets/js/core.js"></script></body>');
+  const out = postProcess(rendered, 'http://localhost:1');
+  assert.ok(/\/assets\/css\/site\.css">' \+/.test(out), 'the loader string for site.css survives');
+  assert.ok(/'\/assets\/js\/' \+ f \+ '\.js"/.test(out), 'the loader string for scripts survives');
+  assert.ok(!/<link rel="stylesheet" href="http:\/\/localhost:1\/assets\/css\/site\.css">/.test(out), 'rendered stylesheet tag removed');
+  assert.ok(!/<script src="\/assets\/js\/core\.js"><\/script>/.test(out), 'rendered script tag removed');
+  assert.ok(/data-prerendered/.test(out));
+});
