@@ -295,7 +295,6 @@
     return html`
       <section class="sec-sm bg-paper" aria-labelledby="founder-h2">
         <div class="wrap founder-block${hasPhoto ? ' has-photo' : ''}" data-reveal="rise">
-          ${when(hasPhoto, function () { return C.portrait(f); })}
           <div class="stack stack-20">
             <span class="eyebrow">Founder</span>
             <h2 id="founder-h2" class="h2-sm">${f.name}</h2>
@@ -304,6 +303,7 @@
             <p class="small slate" style="max-width:36em">Her experience covers reporting systems, analytical models and data platforms for finance, commercial, investment-technology and distribution teams. Pattern Grid's client engagements, including Ledrop and Drinks.NG, are written up under Work &amp; demos.</p>
             <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
           </div>
+          ${when(hasPhoto, function () { return html`<div class="portrait-stage">${C.cells(4)}${C.portrait(f)}</div>`; })}
         </div>
       </section>`;
   }

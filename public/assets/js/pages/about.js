@@ -21,7 +21,6 @@
       <section id="about-people" class="sec-sm bg-paper">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
           <div class="founder-block${f.photo ? ' has-photo' : ''}">
-            ${when(!!f.photo, function () { return C.portrait(f); })}
             <div class="stack stack-16">
               <span class="eyebrow">Leadership</span>
               <h2 class="h2-sm">${f.name}</h2>
@@ -29,6 +28,7 @@
               <p class="body">${f.bio}</p>
               <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
             </div>
+            ${when(!!f.photo, function () { return html`<div class="portrait-stage">${C.cells(4)}${C.portrait(f)}</div>`; })}
           </div>
           ${when(showTeam, function () { return html`
           <div class="team-grid">
