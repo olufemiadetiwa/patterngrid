@@ -272,12 +272,11 @@ window.PG.team = {
   reservedSlots: 3
 };
 
-// Case studies: work delivered by the founder as a Business Intelligence and
-// Data consultant, written up from her project notes. Third person, no
-// invented figures; each names the client as supplied.
+// Case studies: Pattern Grid engagements, written up from the project
+// records. No invented figures; each names the client as supplied.
 window.PG.cases = [
   { slug: 'ledrop-distribution-visibility', client: 'Ledrop', title: 'Connecting sales and field data to improve distribution visibility',
-    industry: 'Drinks importation and distribution', role: 'Business Intelligence and Data Consultant',
+    industry: 'Drinks importation and distribution', role: 'Business Intelligence and Data consulting, delivered by Pattern Grid',
     focus: ['Data integration', 'Data standardisation', 'Sales reporting', 'Distribution gaps', 'Menu listing gaps', 'Out-of-stock reporting'],
     tools: ['Uwanjani', 'QuickBooks', 'Azure', 'Azure Data Factory', 'Power BI'],
     sources: ['Uwanjani (field)', 'QuickBooks (sales)'], pipeline: 'Azure Data Factory', outputs: ['Sales by customer, product, period', 'Distribution and menu gaps', 'Out-of-stock reporting'],
@@ -290,7 +289,7 @@ window.PG.cases = [
       ['Limited distribution visibility', 'The business needed a structured way to identify outlets where relevant Ledrop products were absent.'],
       ['Limited menu listing visibility', 'Field observations needed to become clear reporting on missing product listings.'],
       ['Fragmented out-of-stock reporting', 'Reported stock gaps needed organising so teams could see which outlets and products required follow-up.']],
-    solutionIntro: 'Precious developed a Business Intelligence solution that integrated data from Uwanjani and QuickBooks, standardised key business records, and translated the combined information into Power BI reporting.',
+    solutionIntro: 'Pattern Grid developed a Business Intelligence solution that integrated data from Uwanjani and QuickBooks, standardised key business records, and translated the combined information into Power BI reporting.',
     solution: [
       ['Integrate the data through Azure', 'Azure handled the extract, transform and load process, with Azure Data Factory pipelines bringing both platforms into a structured reporting environment: a repeatable way to prepare sales and field information for analysis.'],
       ['Standardise product and customer naming', 'Product nomenclature was aligned so variations referring to the same product analyse consistently, and customer and outlet names were harmonised so sales transactions connect to field records without splitting one customer or product into several reporting categories.'],
@@ -306,20 +305,20 @@ window.PG.cases = [
       ['Better visibility into reported out-of-stock issues', 'Out-of-stock observations organised into accessible reporting.'],
       ['Repeatable data preparation', 'Azure Data Factory pipelines support ongoing reporting and reduce reliance on one-off data preparation.']],
     services: ['data-engineering', 'business-intelligence'] },
-  { slug: 'party-drinks-connected-reporting', client: 'Party Drinks (drinks.ng)', title: 'Integrating sales, inventory, fulfilment and marketing reporting',
-    industry: 'Drinks retail, distribution and e-commerce', role: 'Business Intelligence and Data Consultant',
+  { slug: 'party-drinks-connected-reporting', client: 'Drinks.NG', title: 'Integrating sales, inventory, fulfilment and marketing reporting',
+    industry: 'Drinks retail, distribution and e-commerce', role: 'Business Intelligence and Data consulting, delivered by Pattern Grid',
     focus: ['Automated data integration', 'Multichannel sales reporting', 'Inventory reporting', 'Fulfilment visibility', 'Marketing KPIs'],
     tools: ['Cin7', 'Google Analytics', 'SENRI', 'Azure CLI', 'Power BI'],
     sources: ['Cin7 (sales, inventory, orders)', 'SENRI (field sales)', 'Google Analytics (web)'], pipeline: 'Azure CLI ETL', outputs: ['Sales by channel, product, customer', 'Inventory days and value', 'Fulfilment status', 'Marketing KPIs'],
-    summary: 'Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Party Drinks a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.',
-    problem: ['Party Drinks operated across distribution, retail and e-commerce channels, with business data spread across Cin7, SENRI and Google Analytics. Each platform captured a different part of the business: sales transactions, inventory records, field sales activity and website performance.', 'The business needed a connected reporting environment to understand performance across channels and monitor the relationship between sales, stock availability, fulfilment and marketing activity.'],
+    summary: 'Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Drinks.NG a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.',
+    problem: ['Drinks.NG operated across distribution, retail and e-commerce channels, with business data spread across Cin7, SENRI and Google Analytics. Each platform captured a different part of the business: sales transactions, inventory records, field sales activity and website performance.', 'The business needed a connected reporting environment to understand performance across channels and monitor the relationship between sales, stock availability, fulfilment and marketing activity.'],
     challenges: [
       ['Fragmented sales reporting', 'Distribution, retail and e-commerce sales needed consolidating while keeping each channel visible.'],
       ['Disconnected inventory and sales information', 'Inventory records needed analysing alongside product sales to understand availability and movement.'],
       ['Limited fulfilment visibility', 'Order and fulfilment information needed organising to monitor progress and outstanding orders.'],
       ['Separate marketing and commercial reporting', 'Website activity and marketing KPIs needed to sit beside e-commerce sales performance.'],
       ['Repeated data preparation', 'Data from three platforms needed an automated extraction and transformation process.']],
-    solutionIntro: 'Precious developed an automated data integration and Business Intelligence solution that brought together information from Cin7, Google Analytics and SENRI.',
+    solutionIntro: 'Pattern Grid developed an automated data integration and Business Intelligence solution that brought together information from Cin7, Google Analytics and SENRI.',
     solution: [
       ['Automate data integration', 'Azure CLI was used in the extract, transform and load workflow to automate the movement and preparation of data from the three platforms into structured datasets for reporting.'],
       ['Build multichannel sales reporting', 'Sales data was organised to give both a consolidated view and the ability to examine distribution, retail and e-commerce individually, by product, customer and period.'],

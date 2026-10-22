@@ -27,10 +27,8 @@
   function caseCard(c) {
     return html`
       <a href="/work/${c.slug}" class="case-card">
-        <span class="case-top">
-          <span class="label-caps">Case study · ${c.industry}</span>
-          <span class="case-client">${c.client}</span>
-        </span>
+        <span class="label-caps">Pattern Grid engagement · ${c.industry}</span>
+        <span class="case-client">${c.client}</span>
         <span class="t">${c.title}</span>
         <span class="d">${c.summary}</span>
         <span class="case-flow" aria-label="Data flow">
@@ -51,10 +49,10 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
           <div class="section-head">
             <div class="stack stack-14">
-              <span class="eyebrow">Case studies</span>
-              <h2 class="h2-sm">Work delivered for named clients.</h2>
+              <span class="eyebrow">Client engagements</span>
+              <h2 class="h2-sm">Work delivered by Pattern Grid.</h2>
             </div>
-            <p class="lead">Two projects delivered by Precious Chinenye Celestine as a Business Intelligence and Data consultant, written up from the project records: the problem, what was built, and what it made possible. No figures are claimed that the records do not support.</p>
+            <p class="lead">Two engagements written up from the project records: the problem, what was built, and what it made possible. No figures are claimed that the records do not support.</p>
           </div>
           <div class="case-grid">${each(PG.cases || [], caseCard)}</div>
         </div>
@@ -100,12 +98,12 @@
             <a href="/work">Work &amp; demos</a><span aria-hidden="true">/</span>
             <span aria-current="page">${c.client}</span>
           </nav>
-          <span class="eyebrow">Case study · ${c.industry}</span>
-          <h1>${c.client}: ${c.title.charAt(0).toLowerCase() + c.title.slice(1)}</h1>
+          <span class="eyebrow">Pattern Grid engagement · ${c.industry}</span>
+          <h1 class="case-h1"><span class="client">${c.client}</span><span class="sub">${c.title}</span></h1>
           <p class="lead">${c.summary}</p>
           <dl class="case-facts">
             <div><dt>Client</dt><dd>${c.client}</dd></div>
-            <div><dt>Role</dt><dd>${c.role}</dd></div>
+            <div><dt>Delivered by</dt><dd>${c.role}</dd></div>
             <div><dt>Focus</dt><dd>${c.focus.join(' · ')}</dd></div>
             <div><dt>Tools and platforms</dt><dd>${c.tools.join(' · ')}</dd></div>
           </dl>
@@ -266,11 +264,11 @@
       var c = p.slug && findCase(p.slug);
       if (c) {
         return {
-          title: c.client + ' case study',
+          title: c.client + ' — ' + c.title,
           desc: c.summary,
           heroKey: 'work',
           crumbs: [{ name: 'Work & demos', path: '/work' }, { name: c.client, path: '/work/' + c.slug }],
-          schema: { '@context': 'https://schema.org', '@type': 'CreativeWork', name: c.client + ': ' + c.title, abstract: c.summary, about: c.industry, creator: { '@type': 'Person', name: 'Precious Chinenye Celestine' } }
+          schema: { '@context': 'https://schema.org', '@type': 'CreativeWork', name: c.client + ': ' + c.title, abstract: c.summary, about: c.industry, creator: { '@type': 'Organization', name: 'Pattern Grid' } }
         };
       }
       var item = p.slug && find(p.slug);

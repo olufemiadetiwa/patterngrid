@@ -130,7 +130,7 @@
             <div class="stack stack-12" style="border-top:1px solid var(--rule);padding-top:24px">
               <span class="label-caps">Selected experience</span>
               <p class="body">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses.</p>
-              <p class="small muted">This experience comes from previous roles and personal projects, not from work delivered by Pattern Grid. Client work will be labelled as such when it is published.</p>
+              <p class="small muted">Earlier experience comes from previous roles and personal projects. Pattern Grid's own client engagements are written up under Work &amp; demos.</p>
             </div>
           </div>
           <div class="stack stack-16">

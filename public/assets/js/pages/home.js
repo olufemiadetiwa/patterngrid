@@ -301,7 +301,7 @@
             <h2 id="founder-h2" class="h2-sm">${f.name}</h2>
             <p class="small muted">${f.role} · Known professionally as ${f.alias}</p>
             <p class="body">${f.bio}</p>
-            <p class="small slate" style="max-width:36em">Her experience covers reporting systems, analytical models and data platforms for finance, commercial, investment-technology and distribution teams. That experience comes from previous roles and personal projects; Pattern Grid's own client work will be labelled as such when it is published.</p>
+            <p class="small slate" style="max-width:36em">Her experience covers reporting systems, analytical models and data platforms for finance, commercial, investment-technology and distribution teams. Pattern Grid's client engagements, including Ledrop and Drinks.NG, are written up under Work &amp; demos.</p>
             <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
