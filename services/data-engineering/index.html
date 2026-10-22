@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en-GB" class=" "><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Engineering &amp; Platforms — Pattern Grid</title>
+<meta name="description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI.">
+<meta name="theme-color" content="#07131C">
+<meta name="color-scheme" content="light">
+<script>
+  /* Base path: empty on any root host; "/<repo>" on a GitHub project page.
+     The stylesheet is written from here rather than as a static relative tag,
+     because the preload scanner resolves relative URLs before any <base>
+     exists and would request them under a deep link's own path. */
+  (function () {
+    var base = "/patterngrid";
+    if (base === '/') base = '';
+    window.PG_BASE = base;
+    if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
+    document.write(
+      '<link rel="preload" href="' + base + '/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>' +
+      '<link rel="stylesheet" href="' + base + '/assets/css/fonts.css">' +
+      '' +
+      '' +
+      ''
+    );
+  })();
+</script><link rel="preload" href="/patterngrid/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin=""><link rel="stylesheet" href="/patterngrid/assets/css/fonts.css">
+
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
+
+<link rel="preload" as="image" href="/patterngrid/assets/img/hero/technician-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="technician"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/technician-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="technician"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/services/data-engineering"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Data Engineering &amp; Platforms — Pattern Grid"><meta property="og:description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/services/data-engineering"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Data Engineering &amp; Platforms — Pattern Grid"><meta name="twitter:description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI."><meta property="og:image" content="https://images.unsplash.com/photo-1785682117346-4b114502e9b8?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1785682117346-4b114502e9b8?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Data Engineering &amp; Platforms"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","alternateName":"Ada Africa","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://olufemiadetiwa.github.io/patterngrid/services"},{"@type":"ListItem","position":3,"name":"Data Engineering & Platforms","item":"https://olufemiadetiwa.github.io/patterngrid/services/data-engineering"}]}</script><script type="application/ld+json" id="ld-page">{"@context":"https://schema.org","@type":"Service","name":"Data Engineering & Platforms","serviceType":"Data Engineering & Platforms","description":"Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI.","provider":{"@type":"Organization","name":"Pattern Grid","url":"https://olufemiadetiwa.github.io/patterngrid"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Data Engineering & Platforms deliverables","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Source and integration blueprint","description":"A documented view of the systems, data interfaces and refresh requirements, including access dependencies and the rules for bringing information together."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Implemented data pipelines","description":"Repeatable ingestion and transformation workflows for the agreed sources, with scheduling, failure handling and clear ownership of the operating process."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Data warehouse or lakehouse","description":"Data structures designed around the required analysis, with consistent keys, documented transformations and a clear path from raw inputs to usable outputs."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Data quality controls","description":"Checks for agreed completeness, validity and reconciliation rules, with exceptions recorded visibly and routed to an owner for investigation and resolution."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Who can see what, and where each number comes from","description":"A view of who can access which information and how important outputs connect to their source data, transformations and agreed ownership responsibilities."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Operating guide and runbooks","description":"Deployment guidance, monitoring definitions and practical runbooks so the operating team can understand routine tasks, investigate failures and manage agreed changes."}}]}}</script></head>
+<body>
+
+<div class="app">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header" id="header">
+      <div class="header-inner">
+        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+          <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          
+        <button type="button" class="nav-item" data-menu="services" aria-expanded="false" aria-haspopup="true" aria-current="page">
+          Services <span class="caret" aria-hidden="true">▾</span>
+        </button>
+          
+        <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
+          Industries <span class="caret" aria-hidden="true">▾</span>
+        </button>
+          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work &amp; demos</a>
+          
+          
+        <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
+          About <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        </nav>
+
+        <div class="header-actions">
+          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+        </div>
+
+        <div class="mobile-actions">
+          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
+        </div>
+      </div>
+      
+      
+      </header>
+  <div id="drawer"></div>
+
+  <main id="main" tabindex="-1">
+    <div id="page" data-prerendered>
+      
+      <div class="hero-unit" data-hero="services/data-engineering">
+        <section class="hero hero-photo" aria-label="Build on trusted data." style="--hero-h:clamp(500px, 72svh, 800px);--hero-h1:var(--h1)">
+          
+        <div class="hero-slide" data-slide="" style="--focal:50% 45%;--focal-m:50% 45%;background-image:url('data:image/webp;base64,UklGRt4AAABXRUJQVlA4INIAAADQBACdASogABIAPwFqrE8rJiQiMAgBYCAJQBe6AxF3J8sgnH5aPwAtaDwBUhCaAAD9xPEKcyM4LGo9RqAHUzeN7XzqVwpqaEsHXnpLGBr5d8snCKI4HOc/f5fx6B15delNnrZDPchah+jJEWY9nBqfW+rmOWoQ8D1MNvi1zF4VGvSuebJEThrzst4ALK5jOP2212IBmBVCEhET2TdzsXKxsVqG1vo5zOEuMQLi+RgNnamm9s4SS3kcXFGEZUmH9nbLXgkugFDBvDmRuq24grcAAAA=')">
+          <picture>
+            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/technician-m.webp" width="900" height="1200">
+            <img src="/patterngrid/assets/img/hero/technician-d.webp" srcset="/patterngrid/assets/img/hero/technician-d1200.webp 1200w, /patterngrid/assets/img/hero/technician-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A technician working on a server rack" decoding="async" fetchpriority="high" class="is-loaded">
+          </picture>
+        </div>
+          <div class="hero-scrim" aria-hidden="true"></div>
+          <div class="hero-inner">
+      <span class="hero-eyebrow">Data Engineering &amp; Platforms</span>
+      <h1><span class="ln"><span style="--d:80ms">Build on</span></span><span class="ln"><span style="--d:150ms">trusted data.</span></span></h1>
+      <p class="hero-lead">Connect your ERP, CRM, finance and spreadsheet data so it arrives on schedule, is checked, and can be traced back to its source by the people who use it.</p>
+      
+          <div class="hero-cta">
+            <a class="btn btn-accent" href="/patterngrid/contact?service=data-engineering">Discuss your data platform</a>
+            
+            <a class="secondary" href="#svc-artifact">See a source workspace <span aria-hidden="true">→</span></a>
+          </div>
+          </div>
+        </section>
+        
+            <section class="statement is-dark is-in" data-statement="" aria-label="In short">
+              <div class="statement-inner">
+                <p><span data-w="0" style="--i: 0; color: rgb(255, 255, 255);">Reliable</span> <span data-w="1" style="--i: 1; color: rgb(255, 255, 255);">intelligence</span> <span data-w="2" style="--i: 2; color: rgb(255, 255, 255);">begins</span> <span data-w="3" style="--i: 3; color: rgb(255, 255, 255);">beneath</span> <span data-w="4" style="--i: 4; color: rgb(255, 255, 255);">the</span> <span data-w="5" style="--i: 5; color: rgb(255, 255, 255);">dashboard.</span> <span data-w="6" style="--i: 6; color: rgb(255, 255, 255);">We</span> <span data-w="7" style="--i: 7; color: rgb(255, 255, 255);">connect</span> <span data-w="8" style="--i: 8; color: rgb(255, 255, 255);">systems,</span> <span data-w="9" style="--i: 9; color: rgb(255, 255, 255);">improve</span> <span data-w="10" style="--i: 10; color: rgb(255, 255, 255);">data</span> <span data-w="11" style="--i: 11; color: rgb(255, 255, 255);">quality</span> <span data-w="12" style="--i: 12; color: rgb(255, 255, 255);">and</span> <span data-w="13" style="--i: 13; color: rgb(255, 255, 255);">create</span> <span data-w="14" style="--i: 14; color: rgb(56, 160, 195);" data-strong="1">dependable</span> <span data-w="15" style="--i: 15; color: rgb(56, 160, 195);" data-strong="1">foundations</span> <span data-w="16" style="--i: 16; color: rgb(255, 255, 255);">for</span> <span data-w="17" style="--i: 17; color: rgb(255, 255, 255);">reporting,</span> <span data-w="18" style="--i: 18; color: rgb(255, 255, 255);">analytics</span> <span data-w="19" style="--i: 19; color: rgb(255, 255, 255);">and</span> <span data-w="20" style="--i: 20; color: rgb(255, 255, 255);">AI.</span> </p>
+              </div>
+            </section>
+      </div>
+
+      <nav class="subnav" aria-label="On this page">
+        <div class="subnav-inner">
+          <div class="crumbs">
+            <a href="/patterngrid/">Home</a><span aria-hidden="true">/</span>
+            <a href="/patterngrid/services">Services</a><span aria-hidden="true">/</span>
+            <span aria-current="page">Data Engineering &amp; Platforms</span>
+          </div>
+          <div class="row" style="gap:4px;flex-wrap:nowrap">
+            <button type="button" class="subnav-jump" data-jump="svc-overview">Overview</button><button type="button" class="subnav-jump" data-jump="svc-artifact">Example</button><button type="button" class="subnav-jump" data-jump="svc-deliverables">Deliverables</button><button type="button" class="subnav-jump" data-jump="svc-approach">Approach</button><button type="button" class="subnav-jump" data-jump="svc-technology">Technology</button><button type="button" class="subnav-jump" data-jump="svc-questions">Questions</button>
+          </div>
+        </div>
+      </nav>
+
+      <section id="svc-overview" class="sec-sm">
+        <div class="is-in wrap autogrid start is-in" data-reveal="rise" style="--min:400px">
+          <div class="stack stack-20">
+            <span class="eyebrow">What this is</span>
+            <h2 class="h2" style="text-wrap:balance">Make the path from source to answer dependable.</h2>
+            <p class="body">When reporting depends on manual exports, copied spreadsheets and undocumented fixes, every change creates another opportunity for the numbers to drift. The result is a fragile process that becomes harder to maintain as the business grows.</p><p class="body">We build the data pipelines and platform behind your reporting. We connect the sources you agree, record every step the data goes through, check it as it arrives, and shape it so reports and automation can use it. We also agree who keeps it running once we have left.</p>
+          </div>
+          <div class="stack stack-28" style="border-top:1px solid var(--rule);padding-top:24px">
+            <div class="stack stack-12">
+              <span class="label-caps" style="color:var(--muted)">This is useful when</span>
+              <ul class="ticks"><li>ERP, CRM and finance data remain separate</li><li>Reporting relies on repeated file handling</li><li>Pipelines fail without clear ownership</li><li>The current data estate cannot support a new analytical requirement</li></ul>
+            </div>
+            <div class="stack stack-8" style="background:var(--paper);border-radius:var(--radius);padding:20px 22px">
+              <span class="label-caps" style="color:var(--muted)">What you are working towards</span>
+              <p style="font-size:18px;line-height:1.45;font-weight:500">Data that arrives on schedule, has been checked, shows where it came from, and has a named person keeping it running.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-artifact" class="sec-sm" style="padding-top:0">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
+            <div class="stack stack-16">
+              <span class="eyebrow">Worked example</span>
+              <h2 class="h2-sm" style="text-wrap:balance">Can sales, inventory and customer information support the same commercial view?</h2>
+            </div>
+            <div class="stack stack-14">
+              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
+                
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">01</span><span>Product, customer and period keys are agreed as the shared identifiers across the three sources.</span>
+                    </li>
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">02</span><span>A stock record for an outlet code that does not exist in the customer master fails validation and is held in the exception queue with a named owner.</span>
+                    </li>
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">03</span><span>Once corrected, the record is revalidated and the curated model exposes one documented commercial view that BI can consume.</span>
+                    </li>
+              </ol>
+              <p class="fine">Sample deliverable · Source workspace. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+            </div>
+          </div>
+          <div data-scene="engineering">
+      <div class="scene" data-scene-frame="" role="group" aria-label="Source workspace — illustrative demo">
+        <div class="scene-bar">
+          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Source workspace</span>
+          <span class="scene-tag">Illustrative demo</span>
+        </div>
+        
+        <div class="scene-body" data-scene-body="">
+        <div class="scene-head"><div><span class="label-caps">Three systems, one location</span><h3>Every record keeps its source. One key joins them.</h3></div><span class="scene-meta">Select a source to see what it contributes</span></div>
+        <div class="src-grid">
+          <button type="button" class="src-tile" data-act="src:sales" aria-pressed="false">
+              <span class="src-sys"><b>Sales</b><small>ERP sell-out</small></span>
+              <ul class="recs"><li><span class="mono">OUT-0031</span><span>SKU 4471 · W36</span><b class="num">312</b></li><li><span class="mono">OUT-0207</span><span>SKU 4471 · W36</span><b class="num">299</b></li><li><span class="mono">OUT-0118</span><span>SKU 4471 · W36</span><b class="num">190</b></li></ul>
+              <span class="src-fields"><code class="key">outlet_code</code><code class="">sku</code><code class="">units</code><code class="">week</code></span>
+            </button><button type="button" class="src-tile on" data-act="src:stock" aria-pressed="true">
+              <span class="src-sys"><b>Stock</b><small>Warehouse file</small></span>
+              <ul class="recs"><li><span class="mono">LOC-E-0031</span><span>Item 4471 · W36</span><b class="num">92%</b></li><li><span class="mono">LOC-E-0207</span><span>Item 4471 · W36</span><b class="num">88%</b></li><li><span class="mono">LOC-E-0118</span><span>Item 4471 · W36</span><b class="num">41%</b></li></ul>
+              <span class="src-fields"><code class="key">loc_code</code><code class="">item</code><code class="">avail_pct</code><code class="">week</code></span>
+            </button><button type="button" class="src-tile" data-act="src:dist" aria-pressed="false">
+              <span class="src-sys"><b>Distribution</b><small>Route planner</small></span>
+              <ul class="recs"><li><span class="mono">DROP-0031</span><span>Route E · W36</span><b class="num">3</b></li><li><span class="mono">DROP-0207</span><span>Route E · W36</span><b class="num">3</b></li><li><span class="mono">DROP-0118</span><span>Route E · W36</span><b class="num">1</b></li></ul>
+              <span class="src-fields"><code class="key">drop_code</code><code class="">route</code><code class="">deliveries</code><code class="">week</code></span>
+            </button>
+        </div>
+        <div class="join">
+          <div class="join-model surface">
+            <span class="label-caps">Shared model · location 0118 → Surulere</span>
+            <div class="join-row"><span>loc_code</span><i class="arr" aria-hidden="true"></i><span class="on">location_id</span></div>
+            <div class="join-row"><span>avail_pct</span><i class="arr" aria-hidden="true"></i><span class="on">availability</span></div>
+            <span class="scene-meta">Stock contributes 4 fields; loc_code is standardised to one location id with a quality check on the way in.</span>
+          </div>
+          <div class="join-view surface">
+            <span class="label-caps">Resulting view · W36</span>
+            <div class="view-rows">
+              <div class=""><span>Ikeja</span><span class="num ">100</span><span class="num on">92%</span><span class="num ">3</span></div><div class=""><span>Lekki</span><span class="num ">96</span><span class="num on">88%</span><span class="num ">3</span></div><div class="hl"><span>Surulere</span><span class="num ">61</span><span class="num on">41%</span><span class="num ">1</span></div><div class=""><span>Ikorodu</span><span class="num ">89</span><span class="num on">85%</span><span class="num ">3</span></div>
+            </div>
+            <span class="scene-meta">sales index · availability · deliveries</span>
+          </div>
+          
+      <aside class="action-drawer" aria-live="polite">
+        <span class="chip-state warn">6 of 7 checks passed</span>
+        <h4>One record was held.</h4>
+        <p>The quality gate holds anything that cannot be joined and tells a named owner. Everything else loaded on schedule at 06:22.</p>
+        <dl class="action-drawer-rows"><div><dt>Loaded</dt><dd>ERP orders · CRM outlets · Stock file</dd></div><div><dt>Held</dt><dd>1 stock record</dd></div></dl>
+        
+        <button type="button" class="btn action-drawer-cta" data-act="held:1">Trace the held record<span class="chev" aria-hidden="true">→</span></button>
+        
+      </aside>
+        </div>
+        </div>
+        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Source records → shared keys → one view</span><span>Sample data · nothing is sent or saved</span></div>
+      </div></div>
+        </div>
+      </section>
+
+      <section id="svc-deliverables" class="bg-paper sec-sm">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <h2 class="h2">What you receive</h2>
+            </div>
+            <p class="small muted" style="max-width:36em;line-height:1.55">We agree the exact deliverables with you around your priorities, your systems and where you are starting from.</p>
+          </div>
+          <div class="deliverables">
+            
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v5 M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 8v4 M12 12l-6 4 M12 12l6 4"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Source and integration blueprint</h3>
+                  <p class="small slate" style="line-height:1.55">A documented view of the systems, data interfaces and refresh requirements, including access dependencies and the rules for bringing information together.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5v4H4Z M15 14h5v4h-5Z M9 8h3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h-1 M4 14h5v4H4Z"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Implemented data pipelines</h3>
+                  <p class="small slate" style="line-height:1.55">Repeatable ingestion and transformation workflows for the agreed sources, with scheduling, failure handling and clear ownership of the operating process.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Data warehouse or lakehouse</h3>
+                  <p class="small slate" style="line-height:1.55">Data structures designed around the required analysis, with consistent keys, documented transformations and a clear path from raw inputs to usable outputs.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3Z M9 12l2 2 4-4"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Data quality controls</h3>
+                  <p class="small slate" style="line-height:1.55">Checks for agreed completeness, validity and reconciliation rules, with exceptions recorded visibly and routed to an owner for investigation and resolution.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11a4 4 0 1 0-3.9-3 M11.5 8.5L4 16v4h4l1.5-1.5v-2h2l1.5-1.5 M15 7a1 1 0 1 0 0 .1"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Who can see what, and where each number comes from</h3>
+                  <p class="small slate" style="line-height:1.55">A view of who can access which information and how important outputs connect to their source data, transformations and agreed ownership responsibilities.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H5V4Z M19 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6V4Z"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Operating guide and runbooks</h3>
+                  <p class="small slate" style="line-height:1.55">Deployment guidance, monitoring definitions and practical runbooks so the operating team can understand routine tasks, investigate failures and manage agreed changes.</p>
+                </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-approach" class="sec-sm">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
+          <div class="stack stack-14" style="max-width:720px">
+            <span class="eyebrow">How we work</span>
+            <h2 class="h2">How the work runs: five stages, each ending in something you can see.</h2>
+          </div>
+          <div role="tablist" aria-label="Approach stages" data-stage-tabs="" class="stepper">
+            
+                <button type="button" role="tab" class="stage-tab" data-stage="0" id="svc-tab-0" aria-controls="svc-stage-panel" aria-selected="true" tabindex="0">
+                  <span class="meta"><span>01</span><span>→</span></span>
+                  <span class="nm">Discover</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="1" id="svc-tab-1" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>02</span><span>→</span></span>
+                  <span class="nm">Design</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="2" id="svc-tab-2" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>03</span><span>→</span></span>
+                  <span class="nm">Build</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="3" id="svc-tab-3" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>04</span><span>↺ Build</span></span>
+                  <span class="nm">Validate</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="4" id="svc-tab-4" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>05</span><span>■</span></span>
+                  <span class="nm">Hand over</span>
+                </button>
+          </div>
+          <div role="tabpanel" id="svc-stage-panel" data-stage-panel="" aria-labelledby="svc-tab-0" class="autogrid" style="--min:320px;--gap:32px;--gap-x:clamp(40px,5vw,80px);padding-top:8px;align-items:start">
+            
+      <div class="stack stack-18">
+        <h3 class="h3">Discover</h3>
+        <p class="body">Inventory sources, interfaces, volumes and refresh needs.</p>
+        <div class="stack stack-6">
+          <span class="label-caps" style="color:var(--muted)">What you get at the end of this stage</span>
+          <p style="font-size:17px;font-weight:500;line-height:1.45">A written agreement of what each source will supply, how often, and in what form.</p>
+        </div>
+        
+      </div>
+      <div aria-label="Stage output preview" class="doc-mini">
+        <div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>A written agreement of what each source will supply, how often, and in what form</span><span class="scene-tag">Sample</span></div>
+        <div class="dm-rows">
+          <div><span>Source contract</span><span class="chip-state ok">Agreed</span></div><div><span>Interface list</span><span class="chip-state neutral">Drafted</span></div><div><span>Refresh requirements</span><span class="chip-state neutral">Drafted</span></div>
+        </div>
+      </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-flow" class="bg-ink sec-sm">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
+          <div class="row between end" style="gap:16px 48px">
+            <div class="stack stack-14" style="max-width:760px">
+              <span class="eyebrow eyebrow-dark">How your information becomes an answer</span>
+              <h2 class="h2" style="text-wrap:balance">From disconnected sources to a trusted data foundation.</h2>
+            </div>
+            <button type="button" class="toggle toggle-dark" data-replay-flow="" style="height:40px">Replay</button>
+          </div>
+
+          <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
+            <span class="label-caps" style="color:rgba(255,255,255,.6)">Governance</span>
+            <span class="band-chip">Access</span><span class="band-chip">Lineage</span><span class="band-chip">Monitoring</span><span class="band-chip">Ownership</span>
+          </div>
+
+          <div class="flow-strip" aria-label="Flow summary">
+            <span class="node input">ERP</span><span class="node input">CRM</span><span class="node input">Operational files</span><span class="arr" aria-hidden="true">→</span><span class="node process">Data arrives</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Quality checks</span><span class="arr" aria-hidden="true">→</span><span class="node output">Checked, organised data</span><span class="node exception">Exception queue</span><span class="arr" aria-hidden="true">→</span><span class="node use">Business Intelligence</span><span class="node use">AI and operational applications</span>
+          </div>
+
+          <details class="flow-details" data-flow-details="">
+          <summary><span class="summary-btn">Open the full diagram <span class="chev down" aria-hidden="true">↓</span></span></summary>
+          <div class="flow-wrap">
+            <div class="flow flow-paper" data-flow="">
+              <svg class="flow-svg" aria-hidden="true" viewBox="0 0 889.625 458.28125" preserveAspectRatio="none" data-flow-svg="">
+                <defs>
+                  <marker id="pg-arr-n" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="rgba(255,255,255,0.7)"></path></marker>
+                  <marker id="pg-arr-e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#FFD08A"></path></marker>
+                  <marker id="pg-arr-f" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#38A0C3"></path></marker>
+                </defs>
+                <g data-flow-edges=""><path d="M152.921875 89.046875 C180.921875 89.046875 180.921875 238.890625 208.921875 238.890625" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="184" stroke-dashoffset="184" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 0ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M152.921875 238.890625 C180.921875 238.890625 180.921875 238.890625 208.921875 238.890625" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="64" stroke-dashoffset="64" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 220ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M152.921875 378.984375 C180.921875 378.984375 180.921875 238.890625 208.921875 238.890625" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="174" stroke-dashoffset="174" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 440ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M328.84375 238.890625 C356.84375 238.890625 356.84375 238.890625 384.84375 238.890625" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="64" stroke-dashoffset="64" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 660ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M504.765625 238.890625 C532.765625 238.890625 532.765625 89.046875 560.765625 89.046875" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="184" stroke-dashoffset="184" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 880ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="532.765625" y="155.96875" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="rgba(255,255,255,0.8)" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Passes checks</text><path d="M504.765625 238.890625 C532.765625 238.890625 532.765625 378.984375 560.765625 378.984375" fill="none" stroke="#FFD08A" stroke-width="1.5" stroke-dasharray="174" stroke-dashoffset="174" marker-end="url(#pg-arr-e)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 1100ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="532.765625" y="300.9375" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#FFD08A" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Fails a check</text><path d="M620.7265625 425.28125 C620.7265625 469.28125 444.8046875 329.1875 444.8046875 285.1875" fill="none" stroke="#38A0C3" stroke-width="1.5" stroke-dasharray="5 5" stroke-dashoffset="0" marker-end="url(#pg-arr-f)" style="opacity:1;animation:pgFade 500ms ease 1520ms both;transition:opacity 300ms,stroke-width 300ms"></path><text x="532.765625" y="463.28125" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#38A0C3" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Corrected and revalidated</text><path d="M680.6875 89.046875 C708.6875 89.046875 708.6875 89.046875 736.6875 89.046875" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="64" stroke-dashoffset="64" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 1540ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M680.6875 89.046875 C708.6875 89.046875 708.6875 238.890625 736.6875 238.890625" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="184" stroke-dashoffset="184" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 1760ms forwards;transition:opacity 300ms,stroke-width 300ms"></path></g>
+              </svg>
+              <div class="flow-nodes" data-flow-nodes="" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+                
+                    <button type="button" class="flow-node kind-input" data-flow-node="erp" aria-pressed="false" style="grid-column:1;grid-row:1">
+                      <span class="k">Input</span>
+                      <span class="l">ERP</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-input" data-flow-node="crm" aria-pressed="false" style="grid-column:1;grid-row:2">
+                      <span class="k">Input</span>
+                      <span class="l">CRM</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-input" data-flow-node="files" aria-pressed="false" style="grid-column:1;grid-row:3">
+                      <span class="k">Input</span>
+                      <span class="l">Operational files</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-process" data-flow-node="int" aria-pressed="false" style="grid-column:2;grid-row:2">
+                      <span class="k">Process</span>
+                      <span class="l">Data arrives</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-gate" data-flow-node="gate" aria-pressed="false" style="grid-column:3;grid-row:2">
+                      <span class="k">Decision</span>
+                      <span class="l">Quality checks</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-output" data-flow-node="cur" aria-pressed="false" style="grid-column:4;grid-row:1">
+                      <span class="k">Output</span>
+                      <span class="l">Checked, organised data</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-exception" data-flow-node="exc" aria-pressed="false" style="grid-column:4;grid-row:3">
+                      <span class="k">Exception</span>
+                      <span class="l">Exception queue</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-use" data-flow-node="bi" aria-pressed="false" style="grid-column:5;grid-row:1">
+                      <span class="k">Used by</span>
+                      <span class="l">Business Intelligence</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-use" data-flow-node="ai" aria-pressed="false" style="grid-column:5;grid-row:2">
+                      <span class="k">Used by</span>
+                      <span class="l">AI and operational applications</span>
+                      
+                    </button>
+              </div>
+            </div>
+            <aside class="flow-aside" aria-live="polite" data-flow-aside="">
+              <span class="eyebrow eyebrow-dark">Select any box</span>
+              <span style="font-weight:600;font-size:17px">From disconnected sources to a trusted data foundation.</span>
+              <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.8)">Select any box to read what happens there. Solid lines move forward, amber lines are exceptions, dashed lines go back for correction.</p>
+            </aside>
+          </div>
+
+          <div class="row" style="gap:12px 24px;padding-top:20px">
+            <span class="flow-legend"><span>— forward</span><span style="color:var(--amber)">— exception</span><span style="color:var(--accent)">- - feedback</span></span>
+          </div>
+
+          <ol class="flow-steps">
+            <li>ERP → Data arrives.</li><li>CRM → Data arrives.</li><li>Operational files → Data arrives.</li><li>Data arrives → Quality checks.</li><li>Quality checks → Checked, organised data (Passes checks).</li><li>Quality checks → Exception queue (Fails a check) — exception route.</li><li>Exception queue → Quality checks (Corrected and revalidated) — feedback.</li><li>Checked, organised data → Business Intelligence.</li><li>Checked, organised data → AI and operational applications.</li>
+          </ol>
+          </details>
+        </div>
+      </section>
+
+      <section id="svc-technology" class="bg-paper" style="padding:clamp(56px,7vw,112px) 0">
+        <div class="is-in wrap autogrid start is-in" data-reveal="rise" style="--min:340px;--gap:32px">
+          <div class="stack stack-14">
+            <span class="eyebrow">Technology</span>
+            <h2 class="h2-sm">Technology shaped around your environment</h2>
+            <p class="small slate" style="font-size:16px;line-height:1.6;max-width:32em">We select tools around the problem, your existing estate and the people who will operate the solution.</p>
+            
+          </div>
+          <div class="stack" style="border-top:1px solid var(--rule-strong)">
+            
+                <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                  <span style="font-weight:600;font-size:16px;line-height:1.35">Microsoft Fabric</span>
+                  <span class="small slate">An option for connected data engineering, storage and analytical workloads within a shared platform.</span>
+                </div>
+                <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                  <span style="font-weight:600;font-size:16px;line-height:1.35">Azure</span>
+                  <span class="small slate">Cloud services selected for the agreed integration, storage, access and operating requirements.</span>
+                </div>
+                <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                  <span style="font-weight:600;font-size:16px;line-height:1.35">SQL</span>
+                  <span class="small slate">Queries, transformations, data modelling and validation against agreed business rules.</span>
+                </div>
+                <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="M12 3v5 M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 8v4 M12 12l-6 4 M12 12l6 4"></path></svg>
+                  <span style="font-weight:600;font-size:16px;line-height:1.35">APIs and source connectors</span>
+                  <span class="small slate">Controlled integration with your actual applications and data interfaces.</span>
+                </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-questions" class="sec-sm">
+        <div class="is-in wrap autogrid start is-in" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:clamp(40px,5vw,80px)">
+          <div class="stack stack-18">
+            <span class="eyebrow">How we would measure success</span>
+            <p class="small muted">Agreed with you before work starts. These are the measures, not results we are claiming.</p>
+            <ul class="rows" style="list-style:none">
+              <li style="padding:12px 0;font-size:16px">Completed loads within the required freshness window</li><li style="padding:12px 0;font-size:16px">Reconciliation variance</li><li style="padding:12px 0;font-size:16px">Unresolved exceptions</li><li style="padding:12px 0;font-size:16px">Recovery time</li><li style="padding:12px 0;font-size:16px">Completeness of runbooks and operating ownership</li>
+            </ul>
+          </div>
+          <div class="stack stack-18">
+            <span class="eyebrow">Common questions</span>
+            <div class="stack" style="border-top:1px solid var(--rule)">
+              <details class="faq"><summary>Can you work with our existing systems?</summary><p>Yes. We start from the systems you already have. We would only suggest replacing or migrating one when the requirement and the business case justify it.</p></details><details class="faq"><summary>Will the data update in real time?</summary><p>Refresh frequency depends on the decision, the source interfaces and the operating cost. A daily or scheduled process may be appropriate; real time is not assumed.</p></details><details class="faq"><summary>Who maintains the platform?</summary><p>That is agreed with you during the engagement and written into the handover: who owns it, who monitors it, who supports it.</p></details>
+            </div>
+          </div>
+          <div class="stack stack-18">
+            <span class="eyebrow">Related services</span>
+            <div class="stack stack-10">
+              
+                  <a class="related-link" href="/patterngrid/services/business-intelligence">
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16 M7 16v-5 M12 16V7 M17 16v-8"></path></svg>
+                    <span class="stack" style="gap:2px">
+                      <span style="font-weight:600;font-size:16px">Business Intelligence</span>
+                      <span class="fine">Clearer business visibility.</span>
+                    </span>
+                    <span aria-hidden="true" style="color:var(--teal)">→</span>
+                  </a>
+                  <a class="related-link" href="/patterngrid/services/ai-automation">
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5v4H4Z M15 14h5v4h-5Z M9 8h3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h-1 M4 14h5v4H4Z"></path></svg>
+                    <span class="stack" style="gap:2px">
+                      <span style="font-weight:600;font-size:16px">AI &amp; Automation</span>
+                      <span class="fine">Less repetitive work.</span>
+                    </span>
+                    <span aria-hidden="true" style="color:var(--teal)">→</span>
+                  </a>
+              
+                  <a class="stack stack-4" href="/patterngrid/work/distribution-intelligence" style="padding:16px 18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
+                    <span class="label-caps" style="color:var(--muted)">Illustrative scenario</span>
+                    <span style="font-weight:600;font-size:16px">Distribution intelligence from warehouse to outlet</span>
+                  </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="closing-band" aria-labelledby="close-h2">
+        <div class="is-in wrap closing-inner is-in" data-reveal="rise">
+          <div class="stack stack-16">
+            <h2 id="close-h2" class="h2-sm" style="max-width:18ch">Build a foundation your teams can rely on.</h2>
+            
+            <div class="row" style="gap:16px 28px;margin-top:8px">
+              <a class="btn" href="/patterngrid/contact?service=data-engineering">Discuss your data platform with us</a>
+              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <ol class="next-steps" aria-label="What happens next">
+            <li><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We read your enquiry</span></li><li><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We reply to arrange a short conversation</span></li><li><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We suggest a sensible next step</span></li>
+          </ol>
+        </div>
+      </section></div>
+  </main>
+
+  <footer class="site-footer grid-field" id="footer">
+      <div class="footer-inner">
+        <div class="footer-cols">
+          <div>
+            <div class="brand" style="cursor:default"><span class="glyph" aria-hidden="true" style="color:#fff"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span></div>
+            <p style="margin-top:16px;font-size:16px;color:rgba(255,255,255,.75);line-height:1.5;max-width:30ch">The data systems behind better business decisions.</p>
+            <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,.6);max-width:32ch">Data and AI consulting for African and international organisations.</p>
+          </div>
+          <div>
+            <p class="footer-head">SERVICES</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+            </div>
+          </div>
+          <div>
+            <p class="footer-head">INDUSTRIES</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+            </div>
+          </div>
+          <div>
+            <p class="footer-head">ABOUT</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/about">About</a>
+              <a href="/patterngrid/approach">Our Approach</a>
+              <a href="/patterngrid/work">Work &amp; demos</a>
+              
+              <a href="/patterngrid/assessment">Readiness assessment</a>
+              <a href="/patterngrid/contact">Request a consultation</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Pattern Grid</span>
+          <div class="row" style="gap:24px">
+            <a href="/patterngrid/privacy">Privacy</a>
+            <a href="/patterngrid/terms">Terms</a>
+            <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
+              <span class="sw" aria-hidden="true"></span>Reduce motion: off
+            </button>
+          </div>
+        </div>
+      </div></footer>
+</div>
+
+<noscript>
+  <div style="max-width:720px;margin:120px auto;padding:0 24px">
+    <h1 style="font-size:32px;font-weight:600;letter-spacing:-.02em">Pattern Grid</h1>
+    <p style="margin-top:16px;line-height:1.6">Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions. This site needs JavaScript to display its pages. Email us and we will answer any question directly.</p>
+  </div>
+</noscript>
+
+<script>
+  /* Scripts are written with the resolved base for the same reason as the
+     stylesheet above; document.write during parsing keeps them in order. */
+  (function () {
+    var b = window.PG_BASE || '';
+    ['config', 'content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
+      document.write('<script src="' + b + '/assets/js/' + f + '.js"><\/script>');
+    });
+  })();
+</script>
+
+
+</body></html>

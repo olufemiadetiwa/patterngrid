@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://olufemiadetiwa.github.io/patterngrid/sitemap.xml

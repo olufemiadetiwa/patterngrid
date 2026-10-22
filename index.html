@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
-<head>
+<html lang="en-GB" class=" "><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pattern Grid — Data, AI and Business Intelligence Consulting</title>
@@ -13,37 +12,488 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
+    var base = "/patterngrid";
     if (base === '/') base = '';
     window.PG_BASE = base;
+    if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
     document.write(
-      '<base href="' + base + '/">' +
-      '<link rel="stylesheet" href="' + base + '/assets/css/site.css">' +
-      '<link rel="icon" href="' + base + '/favicon.svg" type="image/svg+xml">' +
-      '<link rel="manifest" href="' + base + '/manifest.webmanifest">'
+      '<link rel="preload" href="' + base + '/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>' +
+      '<link rel="stylesheet" href="' + base + '/assets/css/fonts.css">' +
+      '' +
+      '' +
+      ''
     );
   })();
-</script>
+</script><link rel="preload" href="/patterngrid/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin=""><link rel="stylesheet" href="/patterngrid/assets/css/fonts.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-</head>
+<link rel="preload" as="image" href="/patterngrid/assets/img/hero/lagos-bridge-night-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="lagos-bridge-night"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/lagos-bridge-night-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="lagos-bridge-night"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Pattern Grid — Data, AI and Business Intelligence Consulting"><meta property="og:description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Pattern Grid — Data, AI and Business Intelligence Consulting"><meta name="twitter:description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions."><meta property="og:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Pattern Grid"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","alternateName":"Ada Africa","jobTitle":"Founder & Lead Consultant"}}</script></head>
 <body>
 
 <div class="app">
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header" id="header"></header>
+  <header class="site-header" id="header">
+      <div class="header-inner">
+        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+          <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          
+        <button type="button" class="nav-item" data-menu="services" aria-expanded="false" aria-haspopup="true">
+          Services <span class="caret" aria-hidden="true">▾</span>
+        </button>
+          
+        <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
+          Industries <span class="caret" aria-hidden="true">▾</span>
+        </button>
+          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work &amp; demos</a>
+          
+          
+        <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
+          About <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        </nav>
+
+        <div class="header-actions">
+          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+        </div>
+
+        <div class="mobile-actions">
+          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
+        </div>
+      </div>
+      
+      
+      </header>
   <div id="drawer"></div>
 
   <main id="main" tabindex="-1">
-    <div id="page"></div>
+    <div id="page" data-prerendered>
+        
+      <div class="hero-unit" data-hero="home">
+        <section class="hero hero-photo" aria-label="See what matters." style="--hero-h:clamp(560px, 86svh, 900px);--hero-h1:var(--h1-home)">
+          
+        <div class="hero-slide" data-slide="" style="--focal:50% 60%;--focal-m:62% 55%;background-image:url('data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAwCdASogABIAPwFoqk8rJaOiMAgBYCAJZwAAcbN8czJ6vvQk6pIAAP7wV0T+mMG4hM2POkpShgHjhChIB9MJLGwh/OD5PWWEl2srfFOPpCAA')">
+          <picture>
+            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/lagos-bridge-night-m.webp" width="900" height="1200">
+            <img src="/patterngrid/assets/img/hero/lagos-bridge-night-d.webp" srcset="/patterngrid/assets/img/hero/lagos-bridge-night-d1200.webp 1200w, /patterngrid/assets/img/hero/lagos-bridge-night-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Lagos, Nigeria: a bridge over the lagoon at night with the city lit behind it" decoding="async" fetchpriority="high" class="is-loaded">
+          </picture>
+        </div>
+          <div class="hero-scrim" aria-hidden="true"></div>
+          <div class="hero-inner">
+      <span class="hero-eyebrow">Data, AI and business intelligence consulting</span>
+      <h1><span class="ln"><span style="--d:80ms">See what</span></span><span class="ln"><span style="--d:150ms">matters.</span></span></h1>
+      <p class="hero-lead">Pattern Grid helps organisations connect their data, build reporting people trust and introduce practical AI and automation, with a named owner for every number.</p>
+      
+          <div class="hero-cta">
+            <a class="btn btn-accent" href="/patterngrid/contact">Discuss your project</a>
+            
+            <a class="secondary" href="/patterngrid/services">See the five services <span aria-hidden="true">→</span></a>
+          </div>
+          </div>
+        </section>
+        
+            <section class="statement is-in" data-statement="" aria-label="In short">
+              <div class="statement-inner">
+                <p><span data-w="0" style="--i: 0; color: rgb(7, 19, 28);">Pattern</span> <span data-w="1" style="--i: 1; color: rgb(7, 19, 28);">Grid</span> <span data-w="2" style="--i: 2; color: rgb(7, 19, 28);">connects</span> <span data-w="3" style="--i: 3; color: rgb(7, 19, 28);">your</span> <span data-w="4" style="--i: 4; color: rgb(7, 19, 28);">data,</span> <span data-w="5" style="--i: 5; color: rgb(7, 19, 28);">analytics</span> <span data-w="6" style="--i: 6; color: rgb(7, 19, 28);">and</span> <span data-w="7" style="--i: 7; color: rgb(7, 19, 28);">AI</span> <span data-w="8" style="--i: 8; color: rgb(7, 19, 28);">so</span> <span data-w="9" style="--i: 9; color: rgb(7, 19, 28);">your</span> <span data-w="10" style="--i: 10; color: rgb(7, 19, 28);">organisation</span> <span data-w="11" style="--i: 11; color: rgb(7, 19, 28);">can</span> <span data-w="12" style="--i: 12; color: rgb(23, 100, 125);" data-strong="1">see</span> <span data-w="13" style="--i: 13; color: rgb(23, 100, 125);" data-strong="1">what</span> <span data-w="14" style="--i: 14; color: rgb(23, 100, 125);" data-strong="1">matters,</span> <span data-w="15" style="--i: 15; color: rgb(7, 19, 28);">understand</span> <span data-w="16" style="--i: 16; color: rgb(7, 19, 28);">what</span> <span data-w="17" style="--i: 17; color: rgb(7, 19, 28);">is</span> <span data-w="18" style="--i: 18; color: rgb(7, 19, 28);">changing</span> <span data-w="19" style="--i: 19; color: rgb(7, 19, 28);">and</span> <span data-w="20" style="--i: 20; color: rgb(23, 100, 125);" data-strong="1">decide</span> <span data-w="21" style="--i: 21; color: rgb(23, 100, 125);" data-strong="1">what</span> <span data-w="22" style="--i: 22; color: rgb(23, 100, 125);" data-strong="1">comes</span> <span data-w="23" style="--i: 23; color: rgb(23, 100, 125);" data-strong="1">next.</span> </p>
+              </div>
+            </section>
+      </div>
+        
+      <section class="sec-sm" aria-labelledby="cap-h2">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <span class="eyebrow">Choose the problem</span>
+              <h2 class="h2-sm" id="cap-h2">Start with what is in front of you.</h2>
+            </div>
+            <p class="body muted" style="max-width:34em">Five services that build on each other. Pick the one that matches the problem; we add the next step only if it is needed.</p>
+          </div>
+          <div class="svc-cards">
+            
+                <a class="svc-card" href="/patterngrid/services/data-ai-strategy">
+                  <span class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M14.8 9.2l-1.6 4.4-4.4 1.6 1.6-4.4 4.4-1.6Z"></path></svg>
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>01</span>
+                  </span>
+                  <span class="stack stack-8">
+                    <span class="when">“We have initiatives but no shared priorities”</span>
+                    <span class="t">Data &amp; AI Strategy</span>
+                    <span class="d">Decide which data and AI projects to fund first, and in what order. You get a roadmap with an owner for every step.</span>
+                  </span>
+                  <span class="outs"><span>Current-state assessment</span><span>Opportunity portfolio</span><span>Delivery roadmap</span></span>
+                  <span class="go">Read about Data &amp; AI Strategy <span class="chev" aria-hidden="true">→</span></span>
+                </a>
+                <a class="svc-card" href="/patterngrid/services/data-engineering">
+                  <span class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>02</span>
+                  </span>
+                  <span class="stack stack-8">
+                    <span class="when">“Our systems are disconnected”</span>
+                    <span class="t">Data Engineering &amp; Platforms</span>
+                    <span class="d">Connect your ERP, CRM, finance and spreadsheet data so it arrives on schedule, is checked, and can be traced back to its source.</span>
+                  </span>
+                  <span class="outs"><span>Data pipelines</span><span>Tested data models</span><span>Operating guide</span></span>
+                  <span class="go">Read about Data Engineering &amp; Platforms <span class="chev" aria-hidden="true">→</span></span>
+                </a>
+                <a class="svc-card" href="/patterngrid/services/business-intelligence">
+                  <span class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16 M7 16v-5 M12 16V7 M17 16v-8"></path></svg>
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>03</span>
+                  </span>
+                  <span class="stack stack-8">
+                    <span class="when">“Teams report different numbers”</span>
+                    <span class="t">Business Intelligence</span>
+                    <span class="d">Give every important number one definition, one owner and one source, so finance, sales and operations stop arguing about which figure is right.</span>
+                  </span>
+                  <span class="outs"><span>KPI dictionary</span><span>Reporting suite</span><span>Where each number comes from</span></span>
+                  <span class="go">Read about Business Intelligence <span class="chev" aria-hidden="true">→</span></span>
+                </a>
+                <a class="svc-card" href="/patterngrid/services/ai-automation">
+                  <span class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5v4H4Z M15 14h5v4h-5Z M9 8h3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h-1 M4 14h5v4H4Z"></path></svg>
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>04</span>
+                  </span>
+                  <span class="stack stack-8">
+                    <span class="when">“Repetitive work consumes the team”</span>
+                    <span class="t">AI &amp; Automation</span>
+                    <span class="d">Automate one repetitive task at a time. Every output is checked, anything unusual is held for a person, and someone named signs it off.</span>
+                  </span>
+                  <span class="outs"><span>Workflow blueprint</span><span>Tested pilot</span><span>Sign-off rules</span></span>
+                  <span class="go">Read about AI &amp; Automation <span class="chev" aria-hidden="true">→</span></span>
+                </a>
+                <a class="svc-card" href="/patterngrid/services/capability-building">
+                  <span class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H5V4Z M19 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6V4Z"></path></svg>
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>05</span>
+                  </span>
+                  <span class="stack stack-8">
+                    <span class="when">“Our teams cannot sustain what has been built”</span>
+                    <span class="t">Capability Building</span>
+                    <span class="d">Train your leaders, analysts and technical team on the reports and systems they will actually use, so the work does not depend on us afterwards.</span>
+                  </span>
+                  <span class="outs"><span>Skills baseline</span><span>Role-based learning</span><span>Handover to your team</span></span>
+                  <span class="go">Read about Capability Building <span class="chev" aria-hidden="true">→</span></span>
+                </a>
+            <a class="svc-card is-aside" href="/patterngrid/assessment">
+              <span class="stack stack-8">
+                <span class="when">Not sure which problem comes first?</span>
+                <span class="t">Take the readiness assessment</span>
+                <span class="d">Eight questions, no email needed. You get a score, your weakest areas and up to three suggested next steps.</span>
+              </span>
+              <span class="go">Start the assessment <span class="chev" aria-hidden="true">→</span></span>
+            </a>
+          </div>
+        </div>
+      </section>
+        
+      <section class="sec-sm bg-paper" aria-labelledby="seq-h2">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(28px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="eyebrow">One question, followed through</span>
+              <h2 class="h2-sm" id="seq-h2">Where is performance slipping?</h2>
+            </div>
+            <p class="lead">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
+          </div>
+
+          <div class="seq-wrap">
+            <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
+              <div class="scene-bar">
+                <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Connected view</span>
+                <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay="" style="height:32px">Replay</button></span>
+              </div>
+              <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs="">
+                <button type="button" role="tab" class="scene-step" data-stage="0" id="seq-tab-0" aria-controls="seq-panel" aria-selected="true" tabindex="0"><span class="n">1</span>Sources</button><button type="button" role="tab" class="scene-step" data-stage="1" id="seq-tab-1" aria-controls="seq-panel" aria-selected="false" tabindex="-1"><span class="n">2</span>Align</button><button type="button" role="tab" class="scene-step" data-stage="2" id="seq-tab-2" aria-controls="seq-panel" aria-selected="false" tabindex="-1"><span class="n">3</span>Compare</button><button type="button" role="tab" class="scene-step" data-stage="3" id="seq-tab-3" aria-controls="seq-panel" aria-selected="false" tabindex="-1"><span class="n">4</span>Question</button>
+              </div>
+              <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body="" aria-labelledby="seq-tab-0">
+      <span class="label-caps" style="color:var(--muted)">Stage 1 · Three separate sources</span>
+
+      
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px">
+            
+                <div class="seq-group">
+                  <span class="gt">Sales</span>
+                  <span class="gr">Outlet 0031 · SKU 4471 · 312 units</span><span class="gr">Outlet 0118 · SKU 4471 · 190 units</span><span class="gr">Outlet 0207 · SKU 4471 · 299 units</span><span class="gr">Outlet 0342 · SKU 4471 · 278 units</span>
+                </div>
+                <div class="seq-group">
+                  <span class="gt">Stock</span>
+                  <span class="gr">Loc E-0031 · Item 4471 · 92% avail</span><span class="gr">Loc E-0118 · Item 4471 · 41% avail</span><span class="gr">Loc E-0207 · Item 4471 · 88% avail</span><span class="gr">Loc E-0342 · Item 4471 · 85% avail</span>
+                </div>
+                <div class="seq-group">
+                  <span class="gt">Distribution</span>
+                  <span class="gr">Route E-1 · Drop 0031 · 3 deliveries</span><span class="gr">Route E-4 · Drop 0118 · 1 delivery</span><span class="gr">Route E-2 · Drop 0207 · 3 deliveries</span><span class="gr">Route E-3 · Drop 0342 · 3 deliveries</span>
+                </div>
+          </div>
+
+      
+
+      
+
+      </div>
+              <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · nothing is sent or saved</span></div>
+            </div>
+            <div class="seq-narrative" data-seq-narrative="">
+              
+                  <button type="button" class="seq-stage is-active" data-seq-step="0">
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>01</span>
+                    <span class="t">Sources</span>
+                    <span class="c">Three systems describe the same business in three different ways. Sales counts units by outlet code, Stock reports availability by location, Distribution logs deliveries by route.</span>
+                  </button>
+                  <button type="button" class="seq-stage" data-seq-step="1">
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>02</span>
+                    <span class="t">Align</span>
+                    <span class="c">Each record is mapped to a common product and location. Outlet 0118, location E-0118 and drop 0118 become one place: Surulere.</span>
+                  </button>
+                  <button type="button" class="seq-stage" data-seq-step="2">
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>03</span>
+                    <span class="t">Compare</span>
+                    <span class="c">With one model, sales and availability can sit side by side. One location has both lower sales and lower availability.</span>
+                  </button>
+                  <button type="button" class="seq-stage" data-seq-step="3">
+                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>04</span>
+                    <span class="t">Question</span>
+                    <span class="c">The connected view shows where to look next. Whether low availability is causing low sales is for the team to investigate. It is not a conclusion.</span>
+                  </button>
+            </div>
+            <a class="arrow" href="/patterngrid/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+        
+      <section class="sec-sm bg-paper" aria-labelledby="ind-h2">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <span class="eyebrow">Industries</span>
+              <h2 class="h2-sm" id="ind-h2">Better questions begin with business context.</h2>
+            </div>
+            <p class="body muted" style="max-width:34em">A distributor, a bank and a software product measure success differently. Each page shows the sector's own question, measures and source systems.</p>
+          </div>
+          <div class="ind-cards">
+            
+                <a class="ind-card" href="/patterngrid/industries/financial-services">
+                  <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 40%;--focal-m:50% 40%;background-image:url('https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="Civic Towers, Lekki, Lagos under a blue sky" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Nupo Deyon Daniel</span></div>
+                  <span class="stack stack-6">
+                    <span class="t">Financial Services &amp; Fintech</span>
+                    <span class="q">Where are customer activity, revenue and operational performance moving apart?</span>
+                    <span class="m">Active customers · Transaction value and volume · Revenue by product</span>
+                  </span>
+                </a>
+                <a class="ind-card" href="/patterngrid/industries/fmcg-distribution">
+                  <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:58% 38%;--focal-m:72% 40%;background-image:url('https://images.unsplash.com/photo-1781559818983-4180d744416a?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1781559818983-4180d744416a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1781559818983-4180d744416a?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1781559818983-4180d744416a?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1781559818983-4180d744416a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1781559818983-4180d744416a?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="A warehouse worker looking up at stock while holding a tablet" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Rodrigo Rodrigues</span></div>
+                  <span class="stack stack-6">
+                    <span class="t">FMCG &amp; Distribution</span>
+                    <span class="q">Where are stock availability, outlet coverage and sales performance falling out of step?</span>
+                    <span class="m">Sales by channel and territory · Active outlets · Stock availability</span>
+                  </span>
+                </a>
+                <a class="ind-card" href="/patterngrid/industries/retail-ecommerce">
+                  <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 50%;--focal-m:50% 50%;background-image:url('https://images.unsplash.com/photo-1789130963347-cc572f0e9be0?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1789130963347-cc572f0e9be0?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1789130963347-cc572f0e9be0?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1789130963347-cc572f0e9be0?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1789130963347-cc572f0e9be0?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1789130963347-cc572f0e9be0?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="A picking cart beside tall storage racks in a fulfilment warehouse" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Robin</span></div>
+                  <span class="stack stack-6">
+                    <span class="t">Retail &amp; Ecommerce</span>
+                    <span class="q">Which products and customer behaviours create sustainable value?</span>
+                    <span class="m">Conversion · Average order value · Repeat purchase</span>
+                  </span>
+                </a>
+                <a class="ind-card" href="/patterngrid/industries/technology">
+                  <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 45%;--focal-m:50% 45%;background-image:url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="A product team working with laptops beside a whiteboard" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Austin Distel</span></div>
+                  <span class="stack stack-6">
+                    <span class="t">Technology</span>
+                    <span class="q">Which behaviours lead to continued use, and where does the experience break down?</span>
+                    <span class="m">Activation · Feature adoption · Cohort retention</span>
+                  </span>
+                </a>
+          </div>
+        </div>
+      </section>
+        
+      <section class="sec-sm" aria-labelledby="work-h2">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="row between end" style="gap:16px 48px">
+            <div class="stack stack-14" style="max-width:720px">
+              <span class="eyebrow">Work &amp; demos</span>
+              <h2 class="h2-sm" id="work-h2">Two client projects, three worked demos.</h2>
+            </div>
+            <a class="arrow" href="/patterngrid/work">All work <span class="chev" aria-hidden="true">→</span></a>
+          </div>
+          <div class="case-grid">
+      <a href="/patterngrid/work/ledrop-distribution-visibility" class="case-card">
+        <span class="label-caps">Pattern Grid engagement · Drinks importation and distribution</span>
+        <span class="case-client">Ledrop</span>
+        <span class="t">Connecting sales and field data to improve distribution visibility</span>
+        <span class="d">Sales and field data held in two platforms, with inconsistent product and customer names, became one reporting foundation in Power BI, giving Ledrop clearer visibility into sales, distribution gaps, menu listings and reported out-of-stock issues.</span>
+        <span class="case-flow" aria-label="Data flow">
+          <span class="node">Uwanjani (field)</span><span class="node">QuickBooks (sales)</span>
+          <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure Data Factory</span>
+          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        </span>
+        <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
+      </a>
+      <a href="/patterngrid/work/party-drinks-connected-reporting" class="case-card">
+        <span class="label-caps">Pattern Grid engagement · Drinks retail, distribution and e-commerce</span>
+        <span class="case-client">Drinks.NG</span>
+        <span class="t">Integrating sales, inventory, fulfilment and marketing reporting</span>
+        <span class="d">Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Drinks.NG a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.</span>
+        <span class="case-flow" aria-label="Data flow">
+          <span class="node">Cin7 (sales, inventory, orders)</span><span class="node">SENRI (field sales)</span><span class="node">Google Analytics (web)</span>
+          <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure CLI ETL</span>
+          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        </span>
+        <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
+      </a></div>
+          <div class="work-cards">
+            
+                <a href="/patterngrid/work/executive-performance" class="work-card">
+                  <span class="work-preview" aria-hidden="true" inert="">
+      <div class="scene scene-thumb" data-scene-frame="" role="group" aria-label="Decision workspace — illustrative demo">
+        <div class="scene-bar">
+          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>Decision workspace</span>
+          <span class="scene-tag">Illustrative demo</span>
+        </div>
+        
+        <div class="scene-body" data-scene-body=""><div class="surface">
+      <div class="kpi">
+        <span class="kpi-l">Week 36 net sales</span>
+        <span class="kpi-v num">9.6m</span>
+        <span class="kpi-d"><b class="warn">0.4m below plan</b> · Plan 10.0m</span>
+      </div>
+      <div class="bars" role="img" aria-label="Net sales by week">
+        <div class="bars-plot" style="--n:6">
+          <div class="bar" style="--h:81.8%"><span class="bv num">9.1</span><span class="bl">W31</span></div><div class="bar" style="--h:84.5%"><span class="bv num">9.4</span><span class="bl">W32</span></div><div class="bar" style="--h:88.1%"><span class="bv num">9.8</span><span class="bl">W33</span></div><div class="bar" style="--h:90.8%"><span class="bv num">10.1</span><span class="bl">W34</span></div><div class="bar" style="--h:92.6%"><span class="bv num">10.3</span><span class="bl">W35</span></div><div class="bar on" style="--h:86.3%"><span class="bv num">9.6</span><span class="bl">W36</span></div>
+          <span class="bars-plan" style="--y:89.9%"><i>plan 10.0</i></span>
+        </div>
+        <span class="bars-cap">Weekly net sales · sample units (m)</span>
+      </div></div></div>
+        
+      </div></span>
+                  <span class="stack stack-8" style="padding:4px 2px 0">
+                    <span class="label-caps">Illustrative · Cross-functional reporting</span>
+                    <span class="t">A consistent view of executive performance</span>
+                    <span class="d">Which numbers can leadership take into the meeting?</span>
+                    <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
+                  </span>
+                </a>
+                <a href="/patterngrid/work/distribution-intelligence" class="work-card">
+                  <span class="work-preview" aria-hidden="true" inert="">
+      <div class="scene scene-thumb" data-scene-frame="" role="group" aria-label="Source workspace — illustrative demo">
+        <div class="scene-bar">
+          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Source workspace</span>
+          <span class="scene-tag">Illustrative demo</span>
+        </div>
+        
+        <div class="scene-body" data-scene-body=""><div class="src-grid"><div class="src-tile"><span class="src-sys"><b>Sales</b><small>ERP sell-out</small></span><ul class="recs"><li><span class="mono">OUT-0031</span><span>SKU 4471 · W36</span><b class="num">312</b></li><li><span class="mono">OUT-0207</span><span>SKU 4471 · W36</span><b class="num">299</b></li></ul><span class="src-fields"><code class="key">outlet_code</code><code class="">sku</code><code class="">units</code></span></div><div class="src-tile on"><span class="src-sys"><b>Stock</b><small>Warehouse file</small></span><ul class="recs"><li><span class="mono">LOC-E-0031</span><span>Item 4471 · W36</span><b class="num">92%</b></li><li><span class="mono">LOC-E-0207</span><span>Item 4471 · W36</span><b class="num">88%</b></li></ul><span class="src-fields"><code class="key">loc_code</code><code class="">item</code><code class="">avail_pct</code></span></div></div></div>
+        
+      </div></span>
+                  <span class="stack stack-8" style="padding:4px 2px 0">
+                    <span class="label-caps">Illustrative · FMCG &amp; Distribution</span>
+                    <span class="t">Distribution intelligence from warehouse to outlet</span>
+                    <span class="d">Where is outlet demand outpacing available stock?</span>
+                    <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
+                  </span>
+                </a>
+                <a href="/patterngrid/work/reporting-workflow" class="work-card">
+                  <span class="work-preview" aria-hidden="true" inert="">
+      <div class="scene scene-thumb" data-scene-frame="" role="group" aria-label="Review workspace — illustrative demo">
+        <div class="scene-bar">
+          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>Review workspace</span>
+          <span class="scene-tag">Illustrative demo</span>
+        </div>
+        
+        <div class="scene-body" data-scene-body=""><div class="surface flowline"><div class="fl-step done"><span class="label-caps">1 · Input</span><p>Scheduled trigger · W36</p></div><div class="fl-step done"><span class="label-caps">2 · Proposed</span><p>Net sales 9.6m against plan 10.0m (−4%). Snacks returns account for −0.3m.</p></div><div class="fl-step done"><span class="label-caps">3 · Checks</span><p>Passed · all figures W36 · references resolve</p></div><div class="fl-step now"><span class="label-caps">4 · Human review</span><p>Awaiting reviewer decision</p></div></div></div>
+        
+      </div></span>
+                  <span class="stack stack-8" style="padding:4px 2px 0">
+                    <span class="label-caps">Illustrative · AI &amp; Automation</span>
+                    <span class="t">A reporting workflow with human review</span>
+                    <span class="d">Can a recurring report be prepared with less manual effort and a person still in control?</span>
+                    <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
+                  </span>
+                </a>
+          </div>
+        </div>
+      </section>
+        
+      <section class="sec-sm bg-paper" aria-labelledby="founder-h2">
+        <div class="is-in wrap founder-block has-photo is-in" data-reveal="rise">
+          <button type="button" class="portrait is-mono" data-portrait="" aria-pressed="false" aria-label="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio. Shown in black and white; colour on hover" style="--ar:4 / 5;background-image:url('data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYAB4APwFwr1CrJqQisBgIAWAgCWYAyRMsBUgGyaUQlkYoZ5+dNUdaaEM6IAD++up8eB1CNcZ6LNwTrOjRD73egkCxupRx3tdVNFPrbNtNBwzhab8Cd/Dsm3pp6ra3RLY3vYaHtmnP8DwsLDQpWNuM5rkegd7V+UkY6EfHjl2tdDSm2TMKym+4rdy6tm1Wn42sbmB0WkgmMIl4AAA=')"><picture><source media="(max-width: 720px)" srcset="/patterngrid/assets/img/people/founder-2025-m.webp"><img src="/patterngrid/assets/img/people/founder-2025-d.webp" width="1200" height="1500" alt="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio" loading="lazy" decoding="async" class="is-loaded"></picture><span class="portrait-hint" aria-hidden="true">Hover for colour</span></button>
+          <div class="stack stack-20">
+            <span class="eyebrow">Founder</span>
+            <h2 id="founder-h2" class="h2-sm">Precious Chinenye Celestine</h2>
+            <p class="small muted">Founder &amp; Lead Consultant · Known professionally as Ada Africa</p>
+            <p class="body">Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.</p>
+            <p class="small slate" style="max-width:36em">Her experience covers reporting systems, analytical models and data platforms for finance, commercial, investment-technology and distribution teams. Pattern Grid's client engagements, including Ledrop and Drinks.NG, are written up under Work &amp; demos.</p>
+            <a class="arrow" href="/patterngrid/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+        
+      <section class="closing-band" aria-labelledby="close-h2">
+        <div class="is-in wrap closing-inner is-in" data-reveal="rise">
+          <div class="stack stack-16">
+            <h2 id="close-h2" class="h2-sm" style="max-width:18ch">What would you like to understand?</h2>
+            <p class="body muted" style="max-width:34em">Tell us the decision you want to improve. We reply to arrange a short conversation, then suggest a sensible next step.</p>
+            <div class="row" style="gap:16px 28px;margin-top:8px">
+              <a class="btn" href="/patterngrid/contact">Request a consultation</a>
+              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <ol class="next-steps" aria-label="What happens next">
+            <li><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We read your enquiry</span></li><li><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We reply to arrange a short conversation</span></li><li><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We suggest a sensible next step</span></li>
+          </ol>
+        </div>
+      </section></div>
   </main>
 
-  <footer class="site-footer" id="footer"></footer>
+  <footer class="site-footer grid-field" id="footer">
+      <div class="footer-inner">
+        <div class="footer-cols">
+          <div>
+            <div class="brand" style="cursor:default"><span class="glyph" aria-hidden="true" style="color:#fff"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span></div>
+            <p style="margin-top:16px;font-size:16px;color:rgba(255,255,255,.75);line-height:1.5;max-width:30ch">The data systems behind better business decisions.</p>
+            <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,.6);max-width:32ch">Data and AI consulting for African and international organisations.</p>
+          </div>
+          <div>
+            <p class="footer-head">SERVICES</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+            </div>
+          </div>
+          <div>
+            <p class="footer-head">INDUSTRIES</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+            </div>
+          </div>
+          <div>
+            <p class="footer-head">ABOUT</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/about">About</a>
+              <a href="/patterngrid/approach">Our Approach</a>
+              <a href="/patterngrid/work">Work &amp; demos</a>
+              
+              <a href="/patterngrid/assessment">Readiness assessment</a>
+              <a href="/patterngrid/contact">Request a consultation</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Pattern Grid</span>
+          <div class="row" style="gap:24px">
+            <a href="/patterngrid/privacy">Privacy</a>
+            <a href="/patterngrid/terms">Terms</a>
+            <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
+              <span class="sw" aria-hidden="true"></span>Reduce motion: off
+            </button>
+          </div>
+        </div>
+      </div></footer>
 </div>
 
 <noscript>
@@ -58,10 +508,11 @@
      stylesheet above; document.write during parsing keeps them in order. */
   (function () {
     var b = window.PG_BASE || '';
-    ['content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
+    ['config', 'content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
       document.write('<script src="' + b + '/assets/js/' + f + '.js"><\/script>');
     });
   })();
 </script>
-</body>
-</html>
+
+
+</body></html>

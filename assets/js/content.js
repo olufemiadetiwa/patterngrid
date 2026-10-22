@@ -180,60 +180,84 @@ window.PG.img = (function () {
   };
 })();
 
-// ---- Hero + opening statement per route. **bold** marks the emphasised phrase. ----
+// ---- Heroes: category, headline, supporting sentence, two actions, one image. ----
+// `images[0]` is the only frame rendered; the array form is kept for the image build.
+const CTA = { label: 'Request a consultation', href: '/contact' };
+const cta = (label, service) => ({ label, href: '/contact' + (service ? '?service=' + service : '') });
 window.PG.heroes = {
-  'home': { size: 'home', lines: ['See what', 'matters.'], images: ['lagos-bridge-night', 'wh-forklift', 'arch-tunnel'], tone: 'light',
+  'home': { size: 'home', eyebrow: 'Data, AI and business intelligence consulting', lines: ['See what', 'matters.'], images: ['lagos-bridge-night'], tone: 'light',
+    lead: 'Pattern Grid helps organisations connect their data, build reporting people trust and introduce practical AI and automation, with a named owner for every number.',
     statement: 'Pattern Grid connects your data, analytics and AI so your organisation can **see what matters**, understand what is changing and **decide what comes next**.',
-    action: { label: 'See the five services', href: '#/services' }, secondary: { label: 'Book a consultation', href: '#/contact' } },
-  'services': { size: 'marketing', lines: ['Build better', 'intelligence.'], images: ['arch-spiral', 'team-table'], tone: 'light',
-    statement: 'From the first business question to the systems behind the answer, we bring **strategy, engineering and analysis** together to make intelligence useful.', action: { label: 'Book a consultation', href: '#/contact' } },
-  'services/data-ai-strategy': { size: 'marketing', lines: ['Know your', 'next move.'], images: ['team-focus', 'lagos-aerial-2'], tone: 'dark',
-    statement: 'Start with the decisions your business needs to make. We help you choose **clear priorities**, assess what is possible and build a roadmap your teams can use.', action: { label: 'Discuss your data strategy with us', href: '#/contact' } },
-  'services/data-engineering': { size: 'marketing', lines: ['Build on', 'trusted data.'], images: ['net-cables', 'arch-pathway'], tone: 'dark',
-    statement: 'Reliable intelligence begins beneath the dashboard. We connect systems, improve data quality and create **dependable foundations** for reporting, analytics and AI.', action: { label: 'Discuss your data platform with us', href: '#/contact' } },
-  'services/business-intelligence': { size: 'marketing', lines: ['Make performance', 'clear.'], images: ['team-review', 'aerial-vehicles'], tone: 'dark',
-    statement: 'Bring your most important measures into one shared view. Help teams **understand performance**, investigate the reasons and decide where to act.', action: { label: 'Discuss your reporting with us', href: '#/contact' } },
-  'services/ai-automation': { size: 'marketing', lines: ['Put intelligence', 'to work.'], images: ['wh-racks', 'wh-tablet'], tone: 'dark',
-    statement: 'Apply AI where it serves a clear purpose. Reduce repetitive work, support better judgement and keep **people in control** of decisions that matter.', action: { label: 'Discuss an automation idea with us', href: '#/contact' } },
-  'services/capability-building': { size: 'marketing', lines: ['Make knowledge', 'last.'], images: ['team-laptops', 'team-talking'], tone: 'dark',
-    statement: 'Systems create lasting value when people can use them confidently. We build **practical skills**, shared understanding and the ability to keep improving after delivery.', action: { label: 'Discuss training for your team', href: '#/contact' } },
-  'industries': { size: 'marketing', lines: ['Intelligence', 'in context.'], images: ['lagos-aerial', 'wh-pallets'], tone: 'light',
-    statement: 'Every sector has different pressures. We connect data to the **customers, operations and decisions** that shape your business, with the context needed to make it useful.', action: { label: 'Book a consultation', href: '#/contact' } },
-  'industries/financial-services': { size: 'marketing', lines: ['See the', 'full picture.'], images: ['lagos-civic-towers', 'lagos-bridge-traffic'], tone: 'dark',
-    statement: 'Connect customer, transaction and operational data to understand performance, investigate exceptions and give teams a **more dependable view** of the business.', action: { label: 'Discuss your financial services data', href: '#/contact' } },
-  'industries/fmcg-distribution': { size: 'marketing', lines: ['See every', 'movement.'], images: ['wh-tablet-2', 'wh-ladder'], tone: 'dark',
-    statement: 'Bring sales, stock and distribution into a connected view so teams can **spot gaps earlier**, understand availability and act with better information.', action: { label: 'Discuss your stock and sales data', href: '#/contact' } },
-  'industries/retail-ecommerce': { size: 'marketing', lines: ['Know what', 'drives demand.'], images: ['lagos-highway', 'wh-racks'], tone: 'dark',
-    statement: 'Understand how customers, products and channels perform together. Use **clearer evidence** to guide assortment, inventory and the next commercial decision.', action: { label: 'Discuss your retail data', href: '#/contact' } },
-  'industries/technology': { size: 'marketing', lines: ['Understand what', 'keeps users.'], images: ['team-white', 'team-whiteboard'], tone: 'dark',
-    statement: 'Connect product behaviour with commercial performance. See where users find value, where they leave and which questions deserve **closer attention**.', action: { label: 'Discuss your product data', href: '#/contact' } },
-  'work': { size: 'marketing', lines: ['See the', 'thinking work.'], images: ['lagos-tanks', 'wh-ladder'], tone: 'light',
-    statement: 'Explore the questions we address, the systems we design and the reasoning behind them. **Client work and illustrative demonstrations** are identified clearly throughout.', action: { label: 'Book a consultation', href: '#/contact' } },
-  'work/executive-performance': { size: 'utility', lines: [], images: ['team-review', 'lagos-civic-towers'], tone: 'light', statement: '', action: null },
-  'work/distribution-intelligence': { size: 'utility', lines: [], images: ['wh-pallets', 'wh-forklift'], tone: 'light', statement: '', action: null },
-  'work/reporting-workflow': { size: 'utility', lines: [], images: ['wh-tablet', 'net-cables-2'], tone: 'light', statement: '', action: null },
-  'insights': { size: 'marketing', lines: ['Ask better', 'questions.'], images: ['arch-skylight', 'arch-concrete'], tone: 'light',
-    statement: 'Clear thinking starts with a useful question. Explore practical perspectives on **data, analytics and AI**, written for the people making business decisions.', action: { label: 'Take the readiness assessment', href: '#/assessment' } },
-  'about': { size: 'marketing', lines: ['Clarity is', 'our purpose.'], images: ['lagos-skyline', 'arch-white'], tone: 'light',
-    statement: 'Pattern Grid helps organisations build the foundations for **better decisions**, bringing business understanding, technical care and practical thinking to the same table.', action: { label: 'Meet the founder', href: '#/about/precious-celestine' } },
-  'founder': { size: 'marketing', lines: ['Precious', 'Chinenye', 'Celestine.'], images: ['arch-interior', 'arch-slanted'], tone: 'light',
-    statement: 'Meet **Precious Chinenye Celestine**, professionally known as **Ada Africa**, the founder of Pattern Grid. Explore her perspective on data, intelligence and the decisions that shape organisations.', action: { label: 'Discuss your business question with us', href: '#/contact' } },
-  'approach': { size: 'marketing', lines: ['From complexity', 'to clarity.'], images: ['aerial-highway', 'arch-windows'], tone: 'dark',
-    statement: 'Begin with a business question. Establish the right foundations. Build what is useful, test it with the people who need it and **keep improving**.', action: { label: 'Take the readiness assessment', href: '#/assessment' } },
-  'assessment': { size: 'compact', lines: ['Find your', 'next priority.'], images: ['arch-highrise', 'team-meeting'], tone: 'light',
-    statement: 'Take a structured look at your data, systems and ways of working. Identify **practical priorities** and the questions worth exploring with your team.', action: { label: 'Start the assessment', href: '#/assessment', event: 'pg-start-assessment' } },
-  'contact': { size: 'compact', lines: ['Start with', 'a question.'], images: ['team-pens', 'arch-skylight'], tone: 'light',
-    statement: 'Tell us what you are trying to understand, improve or build. We will start with **your business question** and explore a useful next step.', action: { label: 'Tell us about your project', href: '#/contact', event: 'pg-focus-form' } },
-  'privacy': { size: 'utility', lines: ['Your privacy', 'matters.'], images: ['arch-concrete', 'arch-interior'], tone: 'light',
-    statement: 'Understand what information we collect, why we use it and the **choices available to you**.', action: { label: 'Contact us about privacy', href: '#/contact' } },
-  'terms': { size: 'utility', lines: ['Clear terms', 'of use.'], images: ['arch-pathway', 'arch-windows'], tone: 'light',
-    statement: 'Read the terms that apply when you use **this website and its content**.', action: { label: 'Contact us', href: '#/contact' } },
-  'notfound': { size: 'utility', lines: ['Find your', 'way back.'], images: ['arch-tunnel', 'arch-spiral'], tone: 'light', statement: '', action: { label: 'Go to the home page', href: '#/' }, secondary: { label: 'Explore services', href: '#/services' } }
+    action: { label: 'Discuss your project', href: '/contact' }, secondary: { label: 'See the five services', href: '/services' } },
+  'services': { size: 'marketing', eyebrow: 'Services', lines: ['Start with the problem.', 'Build what solves it.'], images: ['team-table'], tone: 'light',
+    lead: 'Five services that build on each other: a clear plan, data you can rely on, reporting people trust, automation with a person in control, and a team that can run it.',
+    statement: 'From the first business question to the systems behind the answer, we bring **strategy, engineering and analysis** together to make intelligence useful.',
+    action: CTA, secondary: { label: 'Take the readiness assessment', href: '/assessment' } },
+  'services/data-ai-strategy': { size: 'marketing', eyebrow: 'Data & AI Strategy', lines: ['Know your', 'next move.'], images: ['team-focus'], tone: 'dark',
+    lead: 'Decide which data and AI projects to fund first, and in what order. You get a roadmap with an owner, a prerequisite and an acceptance test for every step.',
+    statement: 'Start with the decisions your business needs to make. We help you choose **clear priorities**, assess what is possible and build a roadmap your teams can use.',
+    action: cta('Discuss your data strategy', 'data-ai-strategy'), secondary: { label: 'See the delivery roadmap', href: '#svc-artifact' } },
+  'services/data-engineering': { size: 'marketing', eyebrow: 'Data Engineering & Platforms', lines: ['Build on', 'trusted data.'], images: ['technician'], tone: 'dark',
+    lead: 'Connect your ERP, CRM, finance and spreadsheet data so it arrives on schedule, is checked, and can be traced back to its source by the people who use it.',
+    statement: 'Reliable intelligence begins beneath the dashboard. We connect systems, improve data quality and create **dependable foundations** for reporting, analytics and AI.',
+    action: cta('Discuss your data platform', 'data-engineering'), secondary: { label: 'See a source workspace', href: '#svc-artifact' } },
+  'services/business-intelligence': { size: 'marketing', eyebrow: 'Business Intelligence', lines: ['Make performance', 'clear.'], images: ['team-review'], tone: 'dark',
+    lead: 'Give every important number one definition, one owner and one source, so finance, sales and operations stop arguing about which figure is right and decide what to do.',
+    statement: 'Bring your most important measures into one shared view. Help teams **understand performance**, investigate the reasons and decide where to act.',
+    action: cta('Discuss your reporting', 'business-intelligence'), secondary: { label: 'See the decision workspace', href: '#svc-artifact' } },
+  'services/ai-automation': { size: 'marketing', eyebrow: 'AI & Automation', lines: ['Put intelligence', 'to work.'], images: ['net-cables-2'], tone: 'dark',
+    lead: 'Automate one repetitive task with clear limits: rules check the inputs, AI drafts a proposal, and a named person approves what is released.',
+    statement: 'Apply AI where it serves a clear purpose. Reduce repetitive work, support better judgement and keep **people in control** of decisions that matter.',
+    action: cta('Discuss an automation idea', 'ai-automation'), secondary: { label: 'See the review workflow', href: '#svc-artifact' } },
+  'services/capability-building': { size: 'marketing', eyebrow: 'Capability Building', lines: ['Make knowledge', 'last.'], images: ['team-laptops'], tone: 'dark',
+    lead: 'Your team takes the system over with evidence they can run it: a baseline, guided practice on real work, and independent use checked by a reviewer.',
+    statement: 'Systems create lasting value when people can use them confidently. We build **practical skills**, shared understanding and the ability to keep improving after delivery.',
+    action: cta('Discuss training for your team', 'capability-building'), secondary: { label: 'See the capability plan', href: '#svc-artifact' } },
+  'industries': { size: 'marketing', eyebrow: 'Industries', lines: ['Intelligence', 'in context.'], images: ['lagos-aerial'], tone: 'light',
+    lead: 'Every sector measures different things. We connect data to the customers, operations and decisions that shape your business, with the definitions agreed first.',
+    statement: 'Every sector has different pressures. We connect data to the **customers, operations and decisions** that shape your business, with the context needed to make it useful.',
+    action: CTA, secondary: { label: 'See the five services', href: '/services' } },
+  'industries/financial-services': { size: 'marketing', eyebrow: 'Financial services & fintech', lines: ['See the', 'full picture.'], images: ['lagos-civic-towers'], tone: 'dark',
+    lead: 'Connect customer, transaction and operational data so teams can investigate performance with consistent definitions and traceable information.',
+    statement: 'Connect customer, transaction and operational data to understand performance, investigate exceptions and give teams a **more dependable view** of the business.',
+    action: cta('Discuss your financial services data'), secondary: { label: 'See a source workspace', href: '#ind-sources' } },
+  'industries/fmcg-distribution': { size: 'marketing', eyebrow: 'FMCG & distribution', lines: ['See what moves.', 'Understand what does not.'], images: ['wh-tablet-2'], tone: 'dark',
+    lead: 'Connect sales, stock, outlets and distribution activity to understand commercial performance across the route to market, with sell-in and sell-out kept distinct.',
+    statement: 'Bring sales, stock and distribution into a connected view so teams can **spot gaps earlier**, understand availability and act with better information.',
+    action: cta('Discuss your stock and sales data'), secondary: { label: 'See a source workspace', href: '#ind-sources' } },
+  'industries/retail-ecommerce': { size: 'marketing', eyebrow: 'Retail & ecommerce', lines: ['Know what', 'drives demand.'], images: ['wh-racks'], tone: 'dark',
+    lead: 'Bring product, customer, sales and inventory information together to understand what people buy, where they return and what affects margin.',
+    statement: 'Understand how customers, products and channels perform together. Use **clearer evidence** to guide assortment, inventory and the next commercial decision.',
+    action: cta('Discuss your retail data'), secondary: { label: 'See a source workspace', href: '#ind-sources' } },
+  'industries/technology': { size: 'marketing', eyebrow: 'Technology', lines: ['Understand what', 'keeps users.'], images: ['team-whiteboard'], tone: 'dark',
+    lead: 'Connect product behaviour, customer information and commercial performance to evaluate adoption, retention and operational priorities.',
+    statement: 'Connect product behaviour with commercial performance. See where users find value, where they leave and which questions deserve **closer attention**.',
+    action: cta('Discuss your product data'), secondary: { label: 'See a source workspace', href: '#ind-sources' } },
+  'work': { size: 'marketing', eyebrow: 'Work & demos', lines: ['The work,', 'shown working.'], images: ['team-meeting'], tone: 'light',
+    lead: 'Two client case studies written up from the project records, and three illustrative scenarios built with sample data. Each is labelled for what it is.',
+    statement: 'Explore the questions we address, the systems we design and the reasoning behind them. **Client work and illustrative demonstrations** are identified clearly throughout.',
+    action: CTA, secondary: null },
+  'about': { size: 'marketing', eyebrow: 'About Pattern Grid', lines: ['Clarity is', 'our purpose.'], images: ['lagos-skyline'], tone: 'light',
+    lead: 'An African-founded data and AI consultancy with an international outlook, led by Precious Chinenye Celestine. We help organisations build the foundations for better decisions.',
+    statement: 'Pattern Grid helps organisations build the foundations for **better decisions**, bringing business understanding, technical care and practical thinking to the same table.',
+    action: { label: 'Meet the founder', href: '/about/precious-celestine' }, secondary: { label: 'Our approach', href: '/approach' } },
+  'founder': { size: 'compact', eyebrow: 'Founder', lines: ['Precious Chinenye', 'Celestine.'], images: [], tone: 'light',
+    lead: 'Founder and lead consultant, known professionally as Ada Africa. A data and AI professional and business intelligence consultant.',
+    action: { label: 'Discuss your business question', href: '/contact' }, secondary: null },
+  'approach': { size: 'marketing', eyebrow: 'Our approach', lines: ['From question', 'to action.'], images: ['team-talking'], tone: 'dark',
+    lead: 'Begin with a business question. Establish the data foundation, build the useful view, put the workflow in someone\'s hands, and hand over.',
+    statement: 'Begin with a business question. Establish the right foundations. Build what is useful, test it with the people who need it and **keep improving**.',
+    action: { label: 'Take the readiness assessment', href: '/assessment' }, secondary: CTA },
+  'assessment': { size: 'compact', eyebrow: 'Readiness assessment', lines: ['Find your', 'next priority.'], images: [], tone: 'light', lead: '', action: null },
+  'contact': { size: 'compact', eyebrow: 'Contact', lines: ['Request a', 'consultation.'], images: [], tone: 'light', lead: '', action: null },
+  'insights': { size: 'compact', eyebrow: 'Insights', lines: ['Ask better', 'questions.'], images: [], tone: 'light', lead: 'Articles are in preparation. Until they are published, the worked examples on the service pages are the most useful reading on this site.', action: { label: 'See a worked example', href: '/services/business-intelligence#svc-artifact' } },
+  'privacy': { size: 'compact', eyebrow: 'Legal', lines: ['Privacy', 'notice.'], images: [], tone: 'light', lead: '', action: null },
+  'terms': { size: 'compact', eyebrow: 'Legal', lines: ['Terms', 'of use.'], images: [], tone: 'light', lead: '', action: null },
+  'notfound': { size: 'compact', eyebrow: 'Page not found', lines: ['That page', 'is not here.'], images: [], tone: 'light', lead: '', action: null }
 };
 // Photography used elsewhere on pages
-window.PG.services.forEach((s, i) => { s.photo = ['team-focus', 'net-cables', 'team-review', 'wh-racks', 'team-laptops'][i]; s.photo2 = ['lagos-aerial-2', 'arch-pathway', 'aerial-vehicles', 'wh-tablet', 'team-talking'][i]; });
-window.PG.industries.forEach((s, i) => { s.photo = ['lagos-civic-towers', 'wh-pallets', 'lagos-highway', 'team-white'][i]; s.photo2 = ['lagos-bridge-traffic', 'wh-tablet-2', 'wh-racks', 'team-whiteboard'][i]; });
-window.PG.work.forEach((w, i) => { w.photo = ['team-review', 'wh-pallets', 'wh-tablet'][i]; });
+// Section photography: one supporting image per industry (the hero's), none on work (the deliverables are shown instead).
+window.PG.industries.forEach((s, i) => { s.photo = ['lagos-civic-towers', 'wh-tablet-2', 'wh-racks', 'team-whiteboard'][i]; s.photo2 = ['lagos-bridge-traffic', 'wh-pallets', 'wh-ladder', 'team-white'][i]; });
 
 // People. Portraits are approved photographs only; a null photo renders a reserved
 // frame, never a stock face or a generated likeness. Add team members here as
@@ -241,12 +265,76 @@ window.PG.work.forEach((w, i) => { w.photo = ['team-review', 'wh-pallets', 'wh-t
 window.PG.team = {
   founder: {
     name: 'Precious Chinenye Celestine', alias: 'Ada Africa', role: 'Founder & Lead Consultant',
-    photo: null, photoAlt: 'Precious Chinenye Celestine, founder of Pattern Grid',
+    photo: 'founder-2025', photoAlt: 'Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio',
     bio: 'Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.'
   },
   members: [],
   reservedSlots: 3
 };
+
+// Case studies: Pattern Grid engagements, written up from the project
+// records. No invented figures; each names the client as supplied.
+window.PG.cases = [
+  { slug: 'ledrop-distribution-visibility', client: 'Ledrop', title: 'Connecting sales and field data to improve distribution visibility',
+    industry: 'Drinks importation and distribution', role: 'Business Intelligence and Data consulting, delivered by Pattern Grid',
+    focus: ['Data integration', 'Data standardisation', 'Sales reporting', 'Distribution gaps', 'Menu listing gaps', 'Out-of-stock reporting'],
+    tools: ['Uwanjani', 'QuickBooks', 'Azure', 'Azure Data Factory', 'Power BI'],
+    sources: ['Uwanjani (field)', 'QuickBooks (sales)'], pipeline: 'Azure Data Factory', outputs: ['Sales by customer, product, period', 'Distribution and menu gaps', 'Out-of-stock reporting'],
+    summary: 'Sales and field data held in two platforms, with inconsistent product and customer names, became one reporting foundation in Power BI, giving Ledrop clearer visibility into sales, distribution gaps, menu listings and reported out-of-stock issues.',
+    problem: ['Ledrop\u2019s sales and field operations data were held across two platforms: Uwanjani and QuickBooks. Each captured important business information, but differences in how products and customers were recorded made it difficult to connect the data and produce consistent reports.', 'The same product or customer could appear under different names, which complicated matching records, consolidating sales and comparing field observations with business transactions. Beyond sales reporting, management needed to understand where products were missing, where menu listings could be improved, and which outlets had reported out-of-stock situations.'],
+    challenges: [
+      ['Disconnected data sources', 'Sales and field information lived in separate platforms, making consolidated analysis difficult.'],
+      ['Inconsistent product names', 'Variations in product nomenclature complicated matching and reporting across systems.'],
+      ['Inconsistent customer names', 'Differences in customer and outlet naming made it harder to connect sales records with field observations.'],
+      ['Limited distribution visibility', 'The business needed a structured way to identify outlets where relevant Ledrop products were absent.'],
+      ['Limited menu listing visibility', 'Field observations needed to become clear reporting on missing product listings.'],
+      ['Fragmented out-of-stock reporting', 'Reported stock gaps needed organising so teams could see which outlets and products required follow-up.']],
+    solutionIntro: 'Pattern Grid developed a Business Intelligence solution that integrated data from Uwanjani and QuickBooks, standardised key business records, and translated the combined information into Power BI reporting.',
+    solution: [
+      ['Integrate the data through Azure', 'Azure handled the extract, transform and load process, with Azure Data Factory pipelines bringing both platforms into a structured reporting environment: a repeatable way to prepare sales and field information for analysis.'],
+      ['Standardise product and customer naming', 'Product nomenclature was aligned so variations referring to the same product analyse consistently, and customer and outlet names were harmonised so sales transactions connect to field records without splitting one customer or product into several reporting categories.'],
+      ['Build consistent sales reporting', 'Reporting structures and measures were developed to analyse sales by customer, product and reporting period on the standardised data.'],
+      ['Develop distribution and menu-listing gap analysis', 'Field observations were turned into reporting on distribution gaps (outlets where relevant Ledrop products were not observed), menu-listing gaps (products missing from outlet menus) and competitor-based opportunities (observed competitor products compared with the expected Ledrop equivalents).'],
+      ['Organise out-of-stock reporting', 'Out-of-stock observations captured through field activity were organised so the products and outlets associated with availability issues are easy to identify.'],
+      ['Present the insights in Power BI', 'Sales and field analyses were brought into Power BI dashboards that let users explore performance and gaps by product, customer or outlet, and reporting period.']],
+    achieved: [
+      ['Connected sales and field information', 'An integrated reporting foundation using data from both platforms, so business transactions can be analysed alongside field observations.'],
+      ['Standardised product and customer records', 'Naming aligned across both platforms, reducing inconsistencies in how records are grouped and improving the reliability of cross-platform analysis.'],
+      ['More consistent sales reporting', 'Performance analysed with consistent product and customer definitions.'],
+      ['Clearer distribution and menu-listing gaps', 'Missing product presence and menu listings visible at outlet level, giving commercial teams a practical basis for prioritising follow-up.'],
+      ['Better visibility into reported out-of-stock issues', 'Out-of-stock observations organised into accessible reporting.'],
+      ['Repeatable data preparation', 'Azure Data Factory pipelines support ongoing reporting and reduce reliance on one-off data preparation.']],
+    services: ['data-engineering', 'business-intelligence'] },
+  { slug: 'party-drinks-connected-reporting', client: 'Drinks.NG', title: 'Integrating sales, inventory, fulfilment and marketing reporting',
+    industry: 'Drinks retail, distribution and e-commerce', role: 'Business Intelligence and Data consulting, delivered by Pattern Grid',
+    focus: ['Automated data integration', 'Multichannel sales reporting', 'Inventory reporting', 'Fulfilment visibility', 'Marketing KPIs'],
+    tools: ['Cin7', 'Google Analytics', 'SENRI', 'Azure CLI', 'Power BI'],
+    sources: ['Cin7 (sales, inventory, orders)', 'SENRI (field sales)', 'Google Analytics (web)'], pipeline: 'Azure CLI ETL', outputs: ['Sales by channel, product, customer', 'Inventory days and value', 'Fulfilment status', 'Marketing KPIs'],
+    summary: 'Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Drinks.NG a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.',
+    problem: ['Drinks.NG operated across distribution, retail and e-commerce channels, with business data spread across Cin7, SENRI and Google Analytics. Each platform captured a different part of the business: sales transactions, inventory records, field sales activity and website performance.', 'The business needed a connected reporting environment to understand performance across channels and monitor the relationship between sales, stock availability, fulfilment and marketing activity.'],
+    challenges: [
+      ['Fragmented sales reporting', 'Distribution, retail and e-commerce sales needed consolidating while keeping each channel visible.'],
+      ['Disconnected inventory and sales information', 'Inventory records needed analysing alongside product sales to understand availability and movement.'],
+      ['Limited fulfilment visibility', 'Order and fulfilment information needed organising to monitor progress and outstanding orders.'],
+      ['Separate marketing and commercial reporting', 'Website activity and marketing KPIs needed to sit beside e-commerce sales performance.'],
+      ['Repeated data preparation', 'Data from three platforms needed an automated extraction and transformation process.']],
+    solutionIntro: 'Pattern Grid developed an automated data integration and Business Intelligence solution that brought together information from Cin7, Google Analytics and SENRI.',
+    solution: [
+      ['Automate data integration', 'Azure CLI was used in the extract, transform and load workflow to automate the movement and preparation of data from the three platforms into structured datasets for reporting.'],
+      ['Build multichannel sales reporting', 'Sales data was organised to give both a consolidated view and the ability to examine distribution, retail and e-commerce individually, by product, customer and period.'],
+      ['Structure inventory reporting', 'Inventory records were prepared alongside sales, with product-level measures for available quantity, average daily units sold and estimated inventory days, to assess stock coverage and flag products needing replenishment or review.'],
+      ['Improve fulfilment visibility', 'Order and fulfilment records joined the reporting framework so fulfilment status and orders needing attention can be monitored, connecting sales reporting with the operational process.'],
+      ['Develop marketing KPI reporting', 'Google Analytics data and marketing inputs were prepared to report on acquisition, engagement and campaign effectiveness, with acquisition cost and return on advertising spend calculated where cost and attribution data were available.'],
+      ['Create Power BI dashboards', 'Users can explore sales across channels, review inventory, monitor fulfilment and assess marketing KPIs with structured measures and filters.']],
+    achieved: [
+      ['Automated data preparation across three platforms', 'A repeatable ETL workflow replaced separate, one-off extraction and preparation.'],
+      ['Consolidated visibility across sales channels', 'Distribution, retail and e-commerce analysed within one framework, each still visible on its own.'],
+      ['Better visibility into inventory and stock movement', 'Stock information connected to product sales: availability, inventory value and estimated coverage.'],
+      ['Clearer fulfilment reporting', 'Outstanding fulfilment and orders needing operational follow-up are identifiable.'],
+      ['Structured marketing performance measurement', 'Acquisition sources, engagement and commercial performance in one consistent framework, where supporting data was available.'],
+      ['A reusable Business Intelligence foundation', 'Automated workflows, structured datasets and Power BI measures that support ongoing reporting and future analysis.']],
+    services: ['data-engineering', 'business-intelligence', 'ai-automation'] }
+];
 
 // Icon fallback so pages never depend on service-content.js load order
 window.PG.icons = window.PG.icons || {};

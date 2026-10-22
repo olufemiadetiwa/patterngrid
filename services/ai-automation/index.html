@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-GB" class=" "><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI &amp; Automation — Pattern Grid</title>
+<meta name="description" content="Identify practical opportunities, test them against real requirements and introduce automation with appropriate controls.">
+<meta name="theme-color" content="#07131C">
+<meta name="color-scheme" content="light">
+<script>
+  /* Base path: empty on any root host; "/<repo>" on a GitHub project page.
+     The stylesheet is written from here rather than as a static relative tag,
+     because the preload scanner resolves relative URLs before any <base>
+     exists and would request them under a deep link's own path. */
+  (function () {
+    var base = "/patterngrid";
+    if (base === '/') base = '';
+    window.PG_BASE = base;
+    if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
+    document.write(
+      '<link rel="preload" href="' + base + '/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>' +
+      '<link rel="stylesheet" href="' + base + '/assets/css/fonts.css">' +
+      '' +
+      '' +
+      ''
+    );
+  })();
+</script><link rel="preload" href="/patterngrid/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin=""><link rel="stylesheet" href="/patterngrid/assets/css/fonts.css">
+
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
+
+<link rel="preload" as="image" href="/patterngrid/assets/img/hero/net-cables-2-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="net-cables-2"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/net-cables-2-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="net-cables-2"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/services/ai-automation"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="AI &amp; Automation — Pattern Grid"><meta property="og:description" content="Identify practical opportunities, test them against real requirements and introduce automation with appropriate controls."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/services/ai-automation"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AI &amp; Automation — Pattern Grid"><meta name="twitter:description" content="Identify practical opportunities, test them against real requirements and introduce automation with appropriate controls."><meta property="og:image" content="https://images.unsplash.com/photo-1744868562210-fffb7fa882d9?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1744868562210-fffb7fa882d9?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="AI &amp; Automation"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","alternateName":"Ada Africa","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://olufemiadetiwa.github.io/patterngrid/services"},{"@type":"ListItem","position":3,"name":"AI & Automation","item":"https://olufemiadetiwa.github.io/patterngrid/services/ai-automation"}]}</script><script type="application/ld+json" id="ld-page">{"@context":"https://schema.org","@type":"Service","name":"AI & Automation","serviceType":"AI & Automation","description":"Identify practical opportunities, test them against real requirements and introduce automation with appropriate controls.","provider":{"@type":"Organization","name":"Pattern Grid","url":"https://olufemiadetiwa.github.io/patterngrid"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"AI & Automation deliverables","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Opportunity and process assessment","description":"A review of the task, existing process, inputs and effort, identifying where rules, integration or AI assistance could make a useful difference."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Workflow and control blueprint","description":"A clear design for triggers, steps, system connections and decision points, including where a person approves, corrects or takes over the work."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Pilot with agreed limits","description":"A working implementation of an agreed use case, with defined inputs and limits so its behaviour can be evaluated before wider deployment decisions."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Evaluation and test pack","description":"Representative test cases and results covering output quality, failure modes and operating requirements, with an explicit basis for deciding what happens next."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Connections, sign-off steps and exception routes","description":"The agreed connections, access boundaries, approval steps and exception routes that make the workflow usable within the surrounding business process."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Operating and improvement guide","description":"Guidance for monitoring the workflow, reviewing outputs, handling failures and managing changes, with ownership and an improvement backlog clearly documented."}}]}}</script></head>
+<body>
+
+<div class="app">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header" id="header">
+      <div class="header-inner">
+        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+          <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          
+        <button type="button" class="nav-item" data-menu="services" aria-expanded="false" aria-haspopup="true" aria-current="page">
+          Services <span class="caret" aria-hidden="true">▾</span>
+        </button>
+          
+        <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
+          Industries <span class="caret" aria-hidden="true">▾</span>
+        </button>
+          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work &amp; demos</a>
+          
+          
+        <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
+          About <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        </nav>
+
+        <div class="header-actions">
+          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+        </div>
+
+        <div class="mobile-actions">
+          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
+        </div>
+      </div>
+      
+      
+      </header>
+  <div id="drawer"></div>
+
+  <main id="main" tabindex="-1">
+    <div id="page" data-prerendered>
+      
+      <div class="hero-unit" data-hero="services/ai-automation">
+        <section class="hero hero-photo" aria-label="Put intelligence to work." style="--hero-h:clamp(500px, 72svh, 800px);--hero-h1:var(--h1)">
+          
+        <div class="hero-slide" data-slide="" style="--focal:50% 50%;--focal-m:50% 50%;background-image:url('data:image/webp;base64,UklGRtQAAABXRUJQVlA4IMgAAABQBQCdASogABIAPwForlGrJSQisBgIAWAgCWIAtsgvpQJ1IjUBm56UCr+vTk1B3HShV+AA+fdj3Qjlz0wYUHR6F6mBlc/kYI6R5VrNbSeJVwltV+jc5ioKdehXIfRG4x4F8RHr8toVHI3kSN8r7/cxD3fS0JRfsjKE4uV3wSoHmaI6bxRm7GHlQHMYgzV3s7SoSY8j6kg5Tv4Xd8ZjOXa09NflGGqOdL5suxaXc3oGtH96KzQwpw5ml2Wa/ABsBL6R5A5txgAAAA==')">
+          <picture>
+            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/net-cables-2-m.webp" width="900" height="1200">
+            <img src="/patterngrid/assets/img/hero/net-cables-2-d.webp" srcset="/patterngrid/assets/img/hero/net-cables-2-d1200.webp 1200w, /patterngrid/assets/img/hero/net-cables-2-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Yellow and green network cables connected in order" decoding="async" fetchpriority="high" class="is-loaded">
+          </picture>
+        </div>
+          <div class="hero-scrim" aria-hidden="true"></div>
+          <div class="hero-inner">
+      <span class="hero-eyebrow">AI &amp; Automation</span>
+      <h1><span class="ln"><span style="--d:80ms">Put intelligence</span></span><span class="ln"><span style="--d:150ms">to work.</span></span></h1>
+      <p class="hero-lead">Automate one repetitive task with clear limits: rules check the inputs, AI drafts a proposal, and a named person approves what is released.</p>
+      
+          <div class="hero-cta">
+            <a class="btn btn-accent" href="/patterngrid/contact?service=ai-automation">Discuss an automation idea</a>
+            
+            <a class="secondary" href="#svc-artifact">See the review workflow <span aria-hidden="true">→</span></a>
+          </div>
+          </div>
+        </section>
+        
+            <section class="statement is-dark is-in" data-statement="" aria-label="In short">
+              <div class="statement-inner">
+                <p><span data-w="0" style="--i: 0; color: rgb(255, 255, 255);">Apply</span> <span data-w="1" style="--i: 1; color: rgb(255, 255, 255);">AI</span> <span data-w="2" style="--i: 2; color: rgb(255, 255, 255);">where</span> <span data-w="3" style="--i: 3; color: rgb(255, 255, 255);">it</span> <span data-w="4" style="--i: 4; color: rgb(255, 255, 255);">serves</span> <span data-w="5" style="--i: 5; color: rgb(255, 255, 255);">a</span> <span data-w="6" style="--i: 6; color: rgb(255, 255, 255);">clear</span> <span data-w="7" style="--i: 7; color: rgb(255, 255, 255);">purpose.</span> <span data-w="8" style="--i: 8; color: rgb(255, 255, 255);">Reduce</span> <span data-w="9" style="--i: 9; color: rgb(255, 255, 255);">repetitive</span> <span data-w="10" style="--i: 10; color: rgb(255, 255, 255);">work,</span> <span data-w="11" style="--i: 11; color: rgb(255, 255, 255);">support</span> <span data-w="12" style="--i: 12; color: rgb(255, 255, 255);">better</span> <span data-w="13" style="--i: 13; color: rgb(255, 255, 255);">judgement</span> <span data-w="14" style="--i: 14; color: rgb(255, 255, 255);">and</span> <span data-w="15" style="--i: 15; color: rgb(255, 255, 255);">keep</span> <span data-w="16" style="--i: 16; color: rgb(56, 160, 195);" data-strong="1">people</span> <span data-w="17" style="--i: 17; color: rgb(56, 160, 195);" data-strong="1">in</span> <span data-w="18" style="--i: 18; color: rgb(56, 160, 195);" data-strong="1">control</span> <span data-w="19" style="--i: 19; color: rgb(255, 255, 255);">of</span> <span data-w="20" style="--i: 20; color: rgb(255, 255, 255);">decisions</span> <span data-w="21" style="--i: 21; color: rgb(255, 255, 255);">that</span> <span data-w="22" style="--i: 22; color: rgb(255, 255, 255);">matter.</span> </p>
+              </div>
+            </section>
+      </div>
+
+      <nav class="subnav" aria-label="On this page">
+        <div class="subnav-inner">
+          <div class="crumbs">
+            <a href="/patterngrid/">Home</a><span aria-hidden="true">/</span>
+            <a href="/patterngrid/services">Services</a><span aria-hidden="true">/</span>
+            <span aria-current="page">AI &amp; Automation</span>
+          </div>
+          <div class="row" style="gap:4px;flex-wrap:nowrap">
+            <button type="button" class="subnav-jump" data-jump="svc-overview">Overview</button><button type="button" class="subnav-jump" data-jump="svc-artifact">Example</button><button type="button" class="subnav-jump" data-jump="svc-deliverables">Deliverables</button><button type="button" class="subnav-jump" data-jump="svc-approach">Approach</button><button type="button" class="subnav-jump" data-jump="svc-technology">Technology</button><button type="button" class="subnav-jump" data-jump="svc-questions">Questions</button>
+          </div>
+        </div>
+      </nav>
+
+      <section id="svc-overview" class="sec-sm">
+        <div class="is-in wrap autogrid start is-in" data-reveal="rise" style="--min:400px">
+          <div class="stack stack-20">
+            <span class="eyebrow">What this is</span>
+            <h2 class="h2" style="text-wrap:balance">Build a useful workflow around a well-defined task.</h2>
+            <p class="body">Some work needs a reliable rule. Other work involves interpreting a document, finding relevant information or preparing a draft that a person will review. Choosing the right approach matters more than putting AI into every step.</p><p class="body">We help you pick one task worth automating, build a pilot with clear limits, and connect it to the systems and people involved. We define what goes in, check what comes out, and make it explicit where a person takes over. The pilot's job is to show what works, where it fails and what it would take to run it properly.</p>
+          </div>
+          <div class="stack stack-28" style="border-top:1px solid var(--rule);padding-top:24px">
+            <div class="stack stack-12">
+              <span class="label-caps" style="color:var(--muted)">This is useful when</span>
+              <ul class="ticks"><li>Reporting involves repeated manual steps</li><li>Teams re-enter information between systems</li><li>Finding internal knowledge takes too long</li><li>An AI idea needs a realistic test before wider deployment</li></ul>
+            </div>
+            <div class="stack stack-8" style="background:var(--paper);border-radius:var(--radius);padding:20px 22px">
+              <span class="label-caps" style="color:var(--muted)">What you are working towards</span>
+              <p style="font-size:18px;line-height:1.45;font-weight:500">A workflow that saves real time, has a named owner, shows you anything it could not handle, and has been tested before it goes live.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-artifact" class="sec-sm" style="padding-top:0">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
+            <div class="stack stack-16">
+              <span class="eyebrow">Worked example</span>
+              <h2 class="h2-sm" style="text-wrap:balance">Can a weekly performance briefing be assembled with less repeated preparation?</h2>
+            </div>
+            <div class="stack stack-14">
+              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
+                
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">01</span><span>A scheduled process collects approved metrics and checks that every figure belongs to the same reporting period.</span>
+                    </li>
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">02</span><span>A draft briefing links each statement to the measure it describes. Where a figure is missing, the statement is flagged rather than written around.</span>
+                    </li>
+                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
+                      <span class="label-caps" style="color:var(--muted);padding-top:3px">03</span><span>The business owner reviews the draft. The missing-data example stops at review; it does not become a polished but unsupported answer.</span>
+                    </li>
+              </ol>
+              <p class="fine">Sample deliverable · Review workspace. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+            </div>
+          </div>
+          <div data-scene="ai">
+      <div class="scene" data-scene-frame="" role="group" aria-label="Review workspace — illustrative demo">
+        <div class="scene-bar">
+          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>Review workspace</span>
+          <span class="scene-tag">Illustrative demo</span>
+        </div>
+        
+        <div class="scene-body" data-scene-body="">
+        <div class="scene-head"><div><span class="label-caps">Work item</span><h3>Automation drafts. A person decides.</h3></div>
+          <div class="scene-seg" role="group" aria-label="Sample"><button type="button" class="on" data-act="item:w36" aria-pressed="true">Normal week</button><button type="button" class="" data-act="item:w36b" aria-pressed="false">Missing source</button></div></div>
+        <div class="scene-grid">
+          <div class="surface flowline">
+            <div class="fl-step done"><span class="label-caps">1 · Input</span><p>Scheduled trigger · Monday 07:00 · Reporting period W36</p><small>Sales W36 · Stock W36 · Finance ledger W36</small></div>
+            <div class="fl-step done"><span class="label-caps">2 · Proposed</span><p>Net sales 9.6m against plan 10.0m (−4%). Snacks returns account for −0.3m.</p><small>Labelled: Proposed · not verified</small></div>
+            <div class="fl-step done"><span class="label-caps">3 · Checks</span><p>Passed · all figures W36 · references resolve</p></div>
+            <div class="fl-step now"><span class="label-caps">4 · Human review</span><p>Awaiting reviewer decision</p><small>Reviewer · Commercial finance lead</small></div>
+          </div>
+          
+      <aside class="action-drawer" aria-live="polite">
+        <span class="chip-state neutral">Awaiting reviewer decision</span>
+        <h4>Your call, reviewer.</h4>
+        <p>The checks passed and every statement links to its measure. Approve the release, or send it back with a reason.</p>
+        
+        <div class="row" style="gap:8px"><button type="button" class="btn btn-sm" data-act="decide:approve">Approve release</button><button type="button" class="btn btn-ghost btn-sm" data-act="decide:return">Return for correction</button></div>
+        
+        
+      </aside>
+        </div>
+        </div>
+        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Proposed → checked → human decision</span><span>Sample data · nothing is sent or saved</span></div>
+      </div></div>
+        </div>
+      </section>
+
+      <section id="svc-deliverables" class="bg-paper sec-sm">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <h2 class="h2">What you receive</h2>
+            </div>
+            <p class="small muted" style="max-width:36em;line-height:1.55">We agree the exact deliverables with you around your priorities, your systems and where you are starting from.</p>
+          </div>
+          <div class="deliverables">
+            
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z M20 20l-4-4"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Opportunity and process assessment</h3>
+                  <p class="small slate" style="line-height:1.55">A review of the task, existing process, inputs and effort, identifying where rules, integration or AI assistance could make a useful difference.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5v4H4Z M15 14h5v4h-5Z M9 8h3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h-1 M4 14h5v4H4Z"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Workflow and control blueprint</h3>
+                  <p class="small slate" style="line-height:1.55">A clear design for triggers, steps, system connections and decision points, including where a person approves, corrects or takes over the work.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4 M16 8l4 4-4 4 M13.5 5l-3 14"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Pilot with agreed limits</h3>
+                  <p class="small slate" style="line-height:1.55">A working implementation of an agreed use case, with defined inputs and limits so its behaviour can be evaluated before wider deployment decisions.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6v3H9Z M7 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-1 M8.5 12h7 M8.5 16h5"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Evaluation and test pack</h3>
+                  <p class="small slate" style="line-height:1.55">Representative test cases and results covering output quality, failure modes and operating requirements, with an explicit basis for deciding what happens next.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3Z M9 12l2 2 4-4"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Connections, sign-off steps and exception routes</h3>
+                  <p class="small slate" style="line-height:1.55">The agreed connections, access boundaries, approval steps and exception routes that make the workflow usable within the surrounding business process.</p>
+                </div>
+                <div class="deliverable">
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H5V4Z M19 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6V4Z"></path></svg>
+                  <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">Operating and improvement guide</h3>
+                  <p class="small slate" style="line-height:1.55">Guidance for monitoring the workflow, reviewing outputs, handling failures and managing changes, with ownership and an improvement backlog clearly documented.</p>
+                </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-approach" class="sec-sm">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
+          <div class="stack stack-14" style="max-width:720px">
+            <span class="eyebrow">How we work</span>
+            <h2 class="h2">How the work runs: five stages, each ending in something you can see.</h2>
+          </div>
+          <div role="tablist" aria-label="Approach stages" data-stage-tabs="" class="stepper">
+            
+                <button type="button" role="tab" class="stage-tab" data-stage="0" id="svc-tab-0" aria-controls="svc-stage-panel" aria-selected="true" tabindex="0">
+                  <span class="meta"><span>01</span><span>→</span></span>
+                  <span class="nm">Select</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="1" id="svc-tab-1" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>02</span><span>→</span></span>
+                  <span class="nm">Design</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="2" id="svc-tab-2" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>03</span><span>→</span></span>
+                  <span class="nm">Prototype</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="3" id="svc-tab-3" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>04</span><span>↺ Prototype</span></span>
+                  <span class="nm">Evaluate</span>
+                </button>
+                <button type="button" role="tab" class="stage-tab" data-stage="4" id="svc-tab-4" aria-controls="svc-stage-panel" aria-selected="false" tabindex="-1">
+                  <span class="meta"><span>05</span><span>■</span></span>
+                  <span class="nm">Integrate</span>
+                </button>
+          </div>
+          <div role="tabpanel" id="svc-stage-panel" data-stage-panel="" aria-labelledby="svc-tab-0" class="autogrid" style="--min:320px;--gap:32px;--gap-x:clamp(40px,5vw,80px);padding-top:8px;align-items:start">
+            
+      <div class="stack stack-18">
+        <h3 class="h3">Select</h3>
+        <p class="body">Establish the task, process owner and baseline effort.</p>
+        <div class="stack stack-6">
+          <span class="label-caps" style="color:var(--muted)">What you get at the end of this stage</span>
+          <p style="font-size:17px;font-weight:500;line-height:1.45">A bounded use-case brief.</p>
+        </div>
+        
+      </div>
+      <div aria-label="Stage output preview" class="doc-mini">
+        <div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>A bounded use-case brief</span><span class="scene-tag">Sample</span></div>
+        <div class="dm-rows">
+          <div><span>Task and owner</span><span class="chip-state ok">Agreed</span></div><div><span>Baseline effort</span><span class="chip-state neutral">Drafted</span></div><div><span>Limits of the pilot</span><span class="chip-state neutral">Drafted</span></div>
+        </div>
+      </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-flow" class="bg-ink sec-sm">
+        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(36px,4vw,56px)">
+          <div class="row between end" style="gap:16px 48px">
+            <div class="stack stack-14" style="max-width:760px">
+              <span class="eyebrow eyebrow-dark">How your information becomes an answer</span>
+              <h2 class="h2" style="text-wrap:balance">How a request becomes an approved action, with a person deciding.</h2>
+            </div>
+            <button type="button" class="toggle toggle-dark" data-replay-flow="" style="height:40px">Replay</button>
+          </div>
+
+          <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
+            <span class="label-caps" style="color:rgba(255,255,255,.6)">Accountability</span>
+            <span class="band-chip">Process owner</span><span class="band-chip">Reviewer</span><span class="band-chip">Monitoring</span>
+          </div>
+
+          <div class="flow-strip" aria-label="Flow summary">
+            <span class="node input">Request or event</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Authorised workflow</span><span class="node input">Approved records and documents</span><span class="arr" aria-hidden="true">→</span><span class="node process">Proposed output</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Validation checks</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Accountable review</span><span class="node exception">Correction path</span><span class="arr" aria-hidden="true">→</span><span class="node use">Approved action · recorded</span>
+          </div>
+
+          <details class="flow-details" data-flow-details="">
+          <summary><span class="summary-btn">Open the full diagram <span class="chev down" aria-hidden="true">↓</span></span></summary>
+          <div class="flow-wrap">
+            <div class="flow flow-paper" data-flow="">
+              <svg class="flow-svg" aria-hidden="true" viewBox="0 0 889.625 696.953125" preserveAspectRatio="none" data-flow-svg="">
+                <defs>
+                  <marker id="pg-arr-n" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="rgba(255,255,255,0.7)"></path></marker>
+                  <marker id="pg-arr-e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#FFD08A"></path></marker>
+                  <marker id="pg-arr-f" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#38A0C3"></path></marker>
+                </defs>
+                <g data-flow-edges=""><path d="M123.59375 117.34375 C151.59375 117.34375 151.59375 117.34375 179.59375 117.34375" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="64" stroke-dashoffset="64" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 0ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M270.203125 117.34375 C298.203125 117.34375 298.203125 347.5234375 326.203125 347.5234375" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="272" stroke-dashoffset="272" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 220ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M270.203125 578.65625 C298.203125 578.65625 298.203125 347.5234375 326.203125 347.5234375" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="273" stroke-dashoffset="273" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 440ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="298.203125" y="455.08984375" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="rgba(255,255,255,0.8)" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Evidence</text><path d="M416.796875 347.5234375 C444.796875 347.5234375 444.796875 347.515625 472.796875 347.515625" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="64" stroke-dashoffset="64" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 660ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><path d="M563.40625 347.515625 C591.40625 347.515625 591.40625 117.34375 619.40625 117.34375" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="272" stroke-dashoffset="272" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 880ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="591.40625" y="224.4296875" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="rgba(255,255,255,0.8)" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Checks pass</text><path d="M563.40625 347.515625 C591.40625 347.515625 591.40625 578.65625 619.40625 578.65625" fill="none" stroke="#FFD08A" stroke-width="1.5" stroke-dasharray="274" stroke-dashoffset="274" marker-end="url(#pg-arr-e)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 1100ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="591.40625" y="455.0859375" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#FFD08A" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Missing evidence or failed check</text><path d="M710.015625 117.34375 C738.015625 117.34375 738.015625 117.34375 766.015625 117.34375" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="64" stroke-dashoffset="64" marker-end="url(#pg-arr-n)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 1320ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="738.015625" y="109.34375" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="rgba(255,255,255,0.8)" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Approved</text><path d="M710.015625 117.34375 C664.7109375 117.34375 664.7109375 578.65625 619.40625 578.65625" fill="none" stroke="#FFD08A" stroke-width="1.5" stroke-dasharray="541" stroke-dashoffset="541" marker-end="url(#pg-arr-e)" style="opacity:1;animation:pgTrace 750ms cubic-bezier(0.22,1,0.36,1) 1540ms forwards;transition:opacity 300ms,stroke-width 300ms"></path><text x="664.7109375" y="340" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#FFD08A" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Returned</text><path d="M664.7109375 634.703125 C664.7109375 678.703125 371.5 509.359375 371.5 465.359375" fill="none" stroke="#38A0C3" stroke-width="1.5" stroke-dasharray="5 5" stroke-dashoffset="0" marker-end="url(#pg-arr-f)" style="opacity:1;animation:pgFade 500ms ease 1960ms both;transition:opacity 300ms,stroke-width 300ms"></path><text x="518.10546875" y="672.703125" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#38A0C3" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:1">Corrected and re-proposed</text></g>
+              </svg>
+              <div class="flow-nodes" data-flow-nodes="" style="grid-template-columns:repeat(6,minmax(0,1fr))">
+                
+                    <button type="button" class="flow-node kind-input" data-flow-node="req" aria-pressed="false" style="grid-column:1;grid-row:1">
+                      <span class="k">Input</span>
+                      <span class="l">Request or event</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-gate" data-flow-node="auth" aria-pressed="false" style="grid-column:2;grid-row:1">
+                      <span class="k">Decision</span>
+                      <span class="l">Authorised workflow</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-input" data-flow-node="src" aria-pressed="false" style="grid-column:2;grid-row:3">
+                      <span class="k">Input</span>
+                      <span class="l">Approved records and documents</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-process" data-flow-node="prep" aria-pressed="false" style="grid-column:3;grid-row:2">
+                      <span class="k">Process</span>
+                      <span class="l">Proposed output</span>
+                      <span class="s">Rule-based or AI-assisted · labelled “Proposed”</span>
+                    </button>
+                    <button type="button" class="flow-node kind-gate" data-flow-node="chk" aria-pressed="false" style="grid-column:4;grid-row:2">
+                      <span class="k">Decision</span>
+                      <span class="l">Validation checks</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-gate" data-flow-node="rev" aria-pressed="false" style="grid-column:5;grid-row:1">
+                      <span class="k">Decision</span>
+                      <span class="l">Accountable review</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-exception" data-flow-node="exc" aria-pressed="false" style="grid-column:5;grid-row:3">
+                      <span class="k">Exception</span>
+                      <span class="l">Correction path</span>
+                      
+                    </button>
+                    <button type="button" class="flow-node kind-use" data-flow-node="act" aria-pressed="false" style="grid-column:6;grid-row:1">
+                      <span class="k">Used by</span>
+                      <span class="l">Approved action · recorded</span>
+                      
+                    </button>
+              </div>
+            </div>
+            <aside class="flow-aside" aria-live="polite" data-flow-aside="">
+              <span class="eyebrow eyebrow-dark">Select any box</span>
+              <span style="font-weight:600;font-size:17px">How a request becomes an approved action, with a person deciding.</span>
+              <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.8)">Select any box to read what happens there. Solid lines move forward, amber lines are exceptions, dashed lines go back for correction.</p>
+            </aside>
+          </div>
+
+          <div class="row" style="gap:12px 24px;padding-top:20px">
+            <span class="flow-legend"><span>— forward</span><span style="color:var(--amber)">— exception</span><span style="color:var(--accent)">- - feedback</span></span>
+          </div>
+
+          <ol class="flow-steps">
+            <li>Request or event → Authorised workflow.</li><li>Authorised workflow → Proposed output.</li><li>Approved records and documents → Proposed output (Evidence).</li><li>Proposed output → Validation checks.</li><li>Validation checks → Accountable review (Checks pass).</li><li>Validation checks → Correction path (Missing evidence or failed check) — exception route.</li><li>Accountable review → Approved action · recorded (Approved).</li><li>Accountable review → Correction path (Returned) — exception route.</li><li>Correction path → Proposed output (Corrected and re-proposed) — feedback.</li>
+          </ol>
+          </details>
+        </div>
+      </section>
+
+      <section id="svc-technology" class="bg-paper" style="padding:clamp(56px,7vw,112px) 0">
+        <div class="is-in wrap autogrid start is-in" data-reveal="rise" style="--min:340px;--gap:32px">
+          <div class="stack stack-14">
+            <span class="eyebrow">Technology</span>
+            <h2 class="h2-sm">Technology shaped around your environment</h2>
+            <p class="small slate" style="font-size:16px;line-height:1.6;max-width:32em">We select tools around the problem, your existing estate and the people who will operate the solution.</p>
+            
+          </div>
+          <div class="stack" style="border-top:1px solid var(--rule-strong)">
+            
+                <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                  <span style="font-weight:600;font-size:16px;line-height:1.35">Azure and SQL</span>
+                  <span class="small slate">Hosting, integration and access to controlled business records where appropriate.</span>
+                </div>
+                <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="M12 3v5 M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 8v4 M12 12l-6 4 M12 12l6 4"></path></svg>
+                  <span style="font-weight:600;font-size:16px;line-height:1.35">Application APIs</span>
+                  <span class="small slate">Controlled connection to the systems where an approved result needs to be used.</span>
+                </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-questions" class="sec-sm">
+        <div class="is-in wrap autogrid start is-in" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:clamp(40px,5vw,80px)">
+          <div class="stack stack-18">
+            <span class="eyebrow">How we would measure success</span>
+            <p class="small muted">Agreed with you before work starts. These are the measures, not results we are claiming.</p>
+            <ul class="rows" style="list-style:none">
+              <li style="padding:12px 0;font-size:16px">Manual handling time</li><li style="padding:12px 0;font-size:16px">Completion time</li><li style="padding:12px 0;font-size:16px">Proportion of outputs passing the agreed checks</li><li style="padding:12px 0;font-size:16px">Exception rate</li><li style="padding:12px 0;font-size:16px">Reviewer correction effort</li><li style="padding:12px 0;font-size:16px">Operating cost</li>
+            </ul>
+          </div>
+          <div class="stack stack-18">
+            <span class="eyebrow">Common questions</span>
+            <div class="stack" style="border-top:1px solid var(--rule)">
+              <details class="faq"><summary>Do we need AI for every automation?</summary><p>No. If a clear rule can do the job, we use the rule.</p></details><details class="faq"><summary>How are errors handled?</summary><p>The design includes agreed checks, exception routes and review responsibilities. Evaluation should identify both the useful behaviour and the cases that need intervention.</p></details><details class="faq"><summary>What makes a good first pilot?</summary><p>A bounded task with available information, a clear owner and a practical way to compare the result with the current process.</p></details>
+            </div>
+          </div>
+          <div class="stack stack-18">
+            <span class="eyebrow">Related services</span>
+            <div class="stack stack-10">
+              
+                  <a class="related-link" href="/patterngrid/services/data-ai-strategy">
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M14.8 9.2l-1.6 4.4-4.4 1.6 1.6-4.4 4.4-1.6Z"></path></svg>
+                    <span class="stack" style="gap:2px">
+                      <span style="font-weight:600;font-size:16px">Data &amp; AI Strategy</span>
+                      <span class="fine">A practical roadmap.</span>
+                    </span>
+                    <span aria-hidden="true" style="color:var(--teal)">→</span>
+                  </a>
+                  <a class="related-link" href="/patterngrid/services/data-engineering">
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+                    <span class="stack" style="gap:2px">
+                      <span style="font-weight:600;font-size:16px">Data Engineering &amp; Platforms</span>
+                      <span class="fine">Data you can rely on.</span>
+                    </span>
+                    <span aria-hidden="true" style="color:var(--teal)">→</span>
+                  </a>
+              
+                  <a class="stack stack-4" href="/patterngrid/work/reporting-workflow" style="padding:16px 18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
+                    <span class="label-caps" style="color:var(--muted)">Illustrative scenario</span>
+                    <span style="font-weight:600;font-size:16px">A reporting workflow with human review</span>
+                  </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="closing-band" aria-labelledby="close-h2">
+        <div class="is-in wrap closing-inner is-in" data-reveal="rise">
+          <div class="stack stack-16">
+            <h2 id="close-h2" class="h2-sm" style="max-width:18ch">Choose one useful task. Build the evidence.</h2>
+            
+            <div class="row" style="gap:16px 28px;margin-top:8px">
+              <a class="btn" href="/patterngrid/contact?service=ai-automation">Discuss an automation idea with us</a>
+              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <ol class="next-steps" aria-label="What happens next">
+            <li><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We read your enquiry</span></li><li><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We reply to arrange a short conversation</span></li><li><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sr-only"></span><span>We suggest a sensible next step</span></li>
+          </ol>
+        </div>
+      </section></div>
+  </main>
+
+  <footer class="site-footer grid-field" id="footer">
+      <div class="footer-inner">
+        <div class="footer-cols">
+          <div>
+            <div class="brand" style="cursor:default"><span class="glyph" aria-hidden="true" style="color:#fff"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span></div>
+            <p style="margin-top:16px;font-size:16px;color:rgba(255,255,255,.75);line-height:1.5;max-width:30ch">The data systems behind better business decisions.</p>
+            <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,.6);max-width:32ch">Data and AI consulting for African and international organisations.</p>
+          </div>
+          <div>
+            <p class="footer-head">SERVICES</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+            </div>
+          </div>
+          <div>
+            <p class="footer-head">INDUSTRIES</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+            </div>
+          </div>
+          <div>
+            <p class="footer-head">ABOUT</p>
+            <div class="stack stack-10">
+              <a href="/patterngrid/about">About</a>
+              <a href="/patterngrid/approach">Our Approach</a>
+              <a href="/patterngrid/work">Work &amp; demos</a>
+              
+              <a href="/patterngrid/assessment">Readiness assessment</a>
+              <a href="/patterngrid/contact">Request a consultation</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Pattern Grid</span>
+          <div class="row" style="gap:24px">
+            <a href="/patterngrid/privacy">Privacy</a>
+            <a href="/patterngrid/terms">Terms</a>
+            <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
+              <span class="sw" aria-hidden="true"></span>Reduce motion: off
+            </button>
+          </div>
+        </div>
+      </div></footer>
+</div>
+
+<noscript>
+  <div style="max-width:720px;margin:120px auto;padding:0 24px">
+    <h1 style="font-size:32px;font-weight:600;letter-spacing:-.02em">Pattern Grid</h1>
+    <p style="margin-top:16px;line-height:1.6">Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions. This site needs JavaScript to display its pages. Email us and we will answer any question directly.</p>
+  </div>
+</noscript>
+
+<script>
+  /* Scripts are written with the resolved base for the same reason as the
+     stylesheet above; document.write during parsing keeps them in order. */
+  (function () {
+    var b = window.PG_BASE || '';
+    ['config', 'content', 'service-content', 'local-images', 'core', 'seo', 'hero', 'scenes', 'shell', 'pages/home', 'pages/services', 'pages/industries', 'pages/work', 'pages/insights', 'pages/about', 'pages/assessment', 'pages/contact', 'pages/legal', 'pages/not-found', 'app'].forEach(function (f) {
+      document.write('<script src="' + b + '/assets/js/' + f + '.js"><\/script>');
+    });
+  })();
+</script>
+
+
+</body></html>
