@@ -36,6 +36,10 @@ Type: Geist, self-hosted (`assets/fonts/*.woff2`, preloaded, `Geist Fallback` me
 
 Radius by role: `--radius-sm 4px` chips and keys · `--radius 6px` controls and inner surfaces · `--radius-lg 12px` cards · `--radius-xl 16px` scene frames. Fine 1 px rules. No glass, no large shadows (`--shadow-2` is the ceiling), no gradients except the hero scrim. Content width `--wrap 1360px`.
 
+## Tags and pipes
+
+Small labels are **tags** (`.tag`, in a `.tags` row): low-contrast filled pills, 28 px, 12.5 px medium, no outline. Variants `is-accent` (teal tint), `is-solid` (navy / white on dark), `is-warn` (amber), `is-dark` (white 9 % on navy). Never draw a boxed, outlined chip. A data flow is a **pipe** (`.pipe` > `.pipe-group` with a `small` label and `.tags`, joined by `.pipe-link` hairlines with an accent node dot), not arrows between boxes; `pipe.lg` on detail pages, `pipe.on-dark` on ink bands. Sources → pipeline → outputs is the standard grouping.
+
 ## Scene grammar
 
 Every explanatory visual is a **workspace scene**: a framed, product-like surface with
