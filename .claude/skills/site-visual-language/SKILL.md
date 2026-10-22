@@ -58,13 +58,11 @@ The nine-cell mark is the brand's visual idea and it appears as three things: a 
 
 ## Page openings
 
-- Home: `.hero-home` — category eyebrow, H1, one supporting sentence, two actions and the guided walkthrough (`walkthrough:` label in content; 21 s, six states, any click takes over), beside the interactive BI decision workspace on the navy grid field. No photograph.
-- Services: the same scene-led hero (`scene:` in the hero content, `.is-service`), with that service's workspace in compact preview form. No photographs on service pages.
-- Industries, approach: `.hero-photo` — one pre-cropped local photograph (`npm run images`), eyebrow, H1, lead, two actions.
-- About, work, insights: a photo-less compact hero on the grid field.
-- Contact, assessment, legal, 404, work detail, founder: `.page-intro` — typographic, the task starts in the first screen.
+Pattern Grid is a consultancy, not a product company: a hero never shows a product screenshot. Marketing pages open with **one full-bleed photograph, a strong two-line headline, a one-sentence subtext and two actions** (`.hero-photo`; home uses the `home` size and the brand line "See what matters."), followed by the **centred statement** (`.statement`) that fills in word by word on scroll — the second sentence of the pitch, with one emphasised phrase. Utility pages (contact, assessment, legal, 404, work detail, founder) open typographically with `.page-intro`.
 
-Every page ends with `PG.closing({h, p, cta, service})`: one headline, the same two actions and the three next steps. Thumbnails of scenes (`PG.scene.render(name, {thumb:true, plainHeading:true})`) stand in for photography wherever a deliverable is previewed (home, work index). Lists become evidence: industry measures open their definition from `PG.scene.industries`; stage outputs render as `.doc-mini`; the assessment intro shows a sample result card.
+The workspace scenes stay below the fold as worked examples; the guided walkthrough (`PG.scene.walk`, `PG.scene.BI_WALK`) lives on the services overview example, never in a hero. Thumbnails of scenes stand in for previews on home and the work index.
+
+Every page ends with `PG.closing({h, p, cta, service})`: one headline, the same two actions and the three next steps. Thumbnails: `PG.scene.render(name, {thumb:true, plainHeading:true})`. Lists become evidence: industry measures open their definition from `PG.scene.industries`; stage outputs render as `.doc-mini`; the assessment intro shows a sample result card.
 
 Order on a service page: hero → example (the scene) → what you receive → approach → flow diagram (disclosure) → technology → questions → closing.
 

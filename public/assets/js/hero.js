@@ -9,11 +9,13 @@
   var html = C.html, each = C.each, when = C.when, raw = C.raw;
 
   var SIZES = {
-    marketing: 'clamp(460px, 62svh, 720px)',
+    home: 'clamp(560px, 86svh, 900px)',
+    marketing: 'clamp(500px, 72svh, 800px)',
     compact: 'clamp(380px, 48svh, 560px)'
   };
   var H1 = {
-    marketing: 'var(--h1-compact)',
+    home: 'var(--h1-home)',
+    marketing: 'var(--h1)',
     compact: 'var(--h1-utility)'
   };
 
@@ -99,7 +101,7 @@
     var size = h.size || 'marketing';
     var images = h.images || [];
 
-    if (size === 'home' || h.scene) {
+    if (h.scene) {
       return html`
         <div class="hero-unit" data-hero="${key}">
           <section class="hero hero-home grid-field${size !== 'home' ? ' is-service' : ''}" aria-label="${(h.lines || []).join(' ')}">
@@ -119,6 +121,17 @@
           <div class="hero-scrim" aria-hidden="true"></div>
           <div class="hero-inner">${copy(h, rm, opts)}</div>
         </section>
+        ${when(!!h.statement, function () {
+          var words = C.tokenise(h.statement);
+          return html`
+            <section class="statement${h.tone === 'dark' ? ' is-dark' : ''}" data-statement aria-label="In short">
+              <div class="statement-inner">
+                <p>${each(words, function (w, i) {
+                  return html`<span data-w="${i}"${raw(w.strong ? ' data-strong="1"' : '')}>${w.text} </span>`;
+                })}</p>
+              </div>
+            </section>`;
+        })}
       </div>`;
   };
 
@@ -150,6 +163,44 @@
       e.preventDefault();
       window.dispatchEvent(new CustomEvent(a.getAttribute('data-hero-event')));
     });
+
+    /* The statement fills in word by word as it passes through the viewport;
+       complete at once under reduced motion. */
+    var stEl = unit.querySelector('[data-statement]');
+    if (stEl) {
+      var h = heroFor(unit.getAttribute('data-hero'));
+      var spans = C.qsa('[data-w]', stEl);
+      var dark = h.tone === 'dark';
+      var startC = dark ? '#9AA4AC' : '#646B70';
+      var endC = dark ? '#FFFFFF' : '#07131C';
+      var emC = dark ? '#38A0C3' : '#17647D';
+      var N = spans.length;
+      var lastP = -1;
+      var paint = function (p) {
+        if (Math.abs(p - lastP) < 0.003) return;
+        lastP = p;
+        spans.forEach(function (sp, i) {
+          var t = Math.max(0, Math.min(1, p * (N + 4) - i));
+          sp.style.color = C.mix(startC, sp.hasAttribute('data-strong') ? emC : endC, t);
+        });
+      };
+      var raf = null;
+      var measure = function () {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = null;
+          var r = stEl.querySelector('p').getBoundingClientRect();
+          var vh = window.innerHeight || 800;
+          paint(Math.max(0, Math.min(1, (vh * 0.9 - r.top) / (vh * 0.65 - r.height * 0.15))));
+        });
+      };
+      var repaint = function () { lastP = -1; if (C.motion.reduced || document.documentElement.classList.contains('is-static')) paint(1); else measure(); };
+      repaint();
+      on(window, 'scroll', measure, { passive: true });
+      on(window, 'resize', measure);
+      on(window, 'pg-motion', repaint);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (live === inst) repaint(); });
+    }
   };
 
   /* Map a route to its hero key and fetch the first frame into cache. */

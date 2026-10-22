@@ -582,6 +582,34 @@
     return function () { host.removeEventListener('click', onEvent); host.removeEventListener('change', onEvent); host.removeEventListener('keydown', onKey); clearTimeout(swapT); delete host._pgScene; };
   };
 
+  /* A guided walkthrough over a mounted scene: a script of [ms, key, value]
+     steps, a progress line, and a button that starts, stops and replays.
+     Any click or key press inside the scene takes over. */
+  scene.walk = function (host, btn, progress, script, total) {
+    if (!host || !btn) return function () {};
+    var timers = []; var walking = false;
+    var idle = '<span class="play" aria-hidden="true">▶</span>' + C.esc(btn.getAttribute('data-walk-label') || 'Watch how it works');
+    function stop(label) {
+      walking = false; timers.forEach(clearTimeout); timers = [];
+      btn.setAttribute('aria-pressed', 'false'); btn.innerHTML = label || ('<span class="play" aria-hidden="true">▶</span>Replay the walkthrough');
+      if (progress) { progress.hidden = true; progress.firstElementChild.style.setProperty('--p', '0%'); }
+    }
+    function start() {
+      var d = host._pgScene; if (!d) return;
+      stop(); walking = true;
+      btn.setAttribute('aria-pressed', 'true'); btn.innerHTML = '<span class="play" aria-hidden="true">❚❚</span>Stop';
+      d.reset();
+      if (progress) { progress.hidden = false; }
+      script.forEach(function (st) { timers.push(setTimeout(function () { if (st[1]) d.act(st[1], st[2]); if (progress) progress.firstElementChild.style.setProperty('--p', Math.round(st[0] / total * 100) + '%'); }, st[0])); });
+      timers.push(setTimeout(function () { if (progress) progress.firstElementChild.style.setProperty('--p', '100%'); stop(); }, total));
+    }
+    var onBtn = function () { walking ? stop() : start(); };
+    var onTake = function (e) { if (walking && e.target.closest('[data-act]')) stop(); };
+    btn.addEventListener('click', onBtn); host.addEventListener('click', onTake); host.addEventListener('keydown', onTake);
+    return function () { btn.removeEventListener('click', onBtn); host.removeEventListener('click', onTake); host.removeEventListener('keydown', onTake); stop(idle); };
+  };
+  scene.BI_WALK = { script: [[0, null], [5000, 'step', '1'], [10000, 'line', '0'], [13000, 'line', '1'], [16000, 'step', '2'], [19000, 'assign', '']], total: 21000 };
+
   /* A static render for places that cannot host interaction (previews). */
   scene.render = function (name, opts) { var def = defs[name]; opts = opts || {}; return raw(renderDef(def, Object.assign(def.init(), opts.state || {}), opts)); };
 })();

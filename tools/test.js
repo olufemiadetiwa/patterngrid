@@ -133,7 +133,7 @@ test('static route list matches the router and excludes unpublished pages', () =
   assert.equal(new Set(ROUTES).size, ROUTES.length, 'no duplicates');
 });
 
-test('every scene has a thumbnail form and service heroes are scene-led', () => {
+test('every scene has a thumbnail form; heroes are photographic with a statement', () => {
   const PG = load('');
   for (const name of ['bi', 'strategy', 'engineering', 'ai', 'capability']) {
     const out = PG.scene.render(name, { thumb: true, plainHeading: true }).value;
@@ -143,10 +143,11 @@ test('every scene has a thumbnail form and service heroes are scene-led', () => 
   }
   for (const s of PG.services) {
     const h = PG.heroes['services/' + s.slug];
-    assert.ok(h.scene && PG.scene.defs[h.scene], s.slug + ' hero names a scene');
-    assert.equal(h.images.length, 0, s.slug + ' hero has no photograph');
+    assert.ok(!h.scene, s.slug + ' hero is photographic, not a product screenshot');
+    assert.ok(h.images.length === 1 && PG.img.reg[h.images[0]], s.slug + ' hero has one registered photograph');
+    assert.ok(h.statement && /\*\*/.test(h.statement), s.slug + ' carries a statement with an emphasised phrase');
   }
-  assert.ok(PG.heroes.home.walkthrough, 'home hero offers the walkthrough');
+  assert.ok(PG.scene.BI_WALK.total > 0, 'the walkthrough script exists');
 });
 
 test('the nine-cell device lights one cell and carries no text for assistive tech', () => {

@@ -486,11 +486,11 @@ a, button, summary, label, input, select, textarea, [role="tab"] { touch-action:
   font-size: var(--hero-h1, var(--h1));
   color: var(--white);
   text-wrap: balance;
-  max-width: 13ch;
+  max-width: 12ch;
 }
 .hero h1 .ln { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .hero h1 .ln > span { display: block; animation: pgLineIn var(--dur-4) var(--ease) both; animation-delay: var(--d, 0ms); }
-.hero-lead { font-size: clamp(17px, 1.3vw, 20px); line-height: 1.55; color: rgba(255, 255, 255, 0.9); max-width: 36em; }
+.hero-lead { font-size: clamp(18px, 1.45vw, 22px); line-height: 1.5; color: rgba(255, 255, 255, 0.92); max-width: 34em; }
 
 .hero-cta {
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px;
@@ -1391,3 +1391,15 @@ a:hover .cells > i.on, button:hover .cells > i.on { opacity: 1; }
 /* Static renders (captures, prerender) skip entrance animations. */
 .is-static .hero h1 .ln > span, .is-static .hero-cta, .is-static .hero-scene, .is-static .mega { animation: none !important; }
 .is-static [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+/* ------------------------------------------------------------ statement -- */
+/* The centred statement after a hero: fills in word by word on scroll. */
+.statement { background: var(--paper); color: var(--ink); }
+.statement.is-dark { background: var(--ink); color: var(--white); }
+.statement-inner { max-width: var(--wrap); margin-inline: auto; padding: clamp(72px, 9vw, 144px) var(--gutter) clamp(64px, 8vw, 128px); display: flex; flex-direction: column; align-items: center; }
+.statement p { font-size: var(--statement); font-weight: 520; line-height: 1.16; letter-spacing: -0.025em; max-width: 22ch; text-wrap: balance; text-align: center; }
+.statement p span { transition: color 140ms linear; }
+.reduce-motion .statement p span, .is-static .statement p span { transition: none; }
+.walk-btn.on-light { border-color: var(--rule-strong); background: var(--white); color: var(--navy); height: 48px; }
+.walk-btn.on-light:hover { border-color: var(--navy); background: var(--white); }
+.walk-progress.on-light { background: var(--surface-2); max-width: 420px; }

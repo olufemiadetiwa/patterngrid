@@ -77,9 +77,9 @@ Implements [`standout-review.md`](standout-review.md) in full on the same branch
 
 | Item | Done | Notes |
 |---|---|---|
-| A1 Scene-led service heroes | ✓ | `scene:` key on the five service heroes; the hero renders that workspace in compact preview form beside the copy. No photographs on service pages; the Columbia frame is gone. |
-| A2 Mark-derived system | ✓ | `.grid-field` texture on navy/ink fields (home and service heroes, photo-less heroes, footer); `C.cells(n)` device as section numbering, scene glyph, next steps and sample cards. |
-| A3 Guided walkthrough | ✓ | "Watch how it works · 20 s" steps Performance → Trace → Beverages → Snacks → Assign → assigned over 21 s with a progress line; Stop/Replay; any click or key in the scene takes over. Verified: state advances, take-over resets the button. |
+| A1 Scene-led service heroes | reverted | Tried, then reverted on the founder's direction: a workspace in the hero reads as a SaaS product. Heroes are one full-bleed photograph with a strong headline and subtext, followed by the centred scroll-animated statement (restored from the original design). The Columbia frame is still gone (AI page uses the cabling photograph). |
+| A2 Mark-derived system | ✓ | `.grid-field` texture on photo-less heroes and the footer; `C.cells(n)` device as section numbering, scene glyph, next steps and sample cards. |
+| A3 Guided walkthrough | ✓ (moved) | On the services overview example, not the hero. "Watch how it works · 20 s" steps Performance → Trace → Beverages → Snacks → Assign → assigned over 21 s with a progress line; Stop/Replay; any click or key in the scene takes over. Verified: state advances, take-over resets the button. |
 | A4 Thumbnail mode | ✓ | `thumb:true` renders bar + body only (KPI+bars, two source tiles, flowline, timeline rows, skill rows) at native size in a `surface-2` frame; home and work index. |
 | A5 Sequence on paper | ✓ | Full-width scene, stage rail, narrative as four cards under the scene (phone: active only); Replay kept; scroll observer removed. |
 | A6 One closing | ✓ | `PG.closing()` on every route: headline, two actions, three next steps. |

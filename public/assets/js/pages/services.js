@@ -89,9 +89,13 @@
               <span class="eyebrow">One worked example</span>
               <h2 class="h2-sm">From a trusted measure to an accountable action.</h2>
             </div>
-            <p class="body muted" style="max-width:34em">A reporting workspace with sample data. Trace the figure to its sources, read the agreed definition, then assign a follow-up with an owner. Every service page has its own example.</p>
+            <div class="stack stack-12">
+              <p class="body muted" style="max-width:34em">A reporting workspace with sample data. Trace the figure to its sources, read the agreed definition, then assign a follow-up with an owner. Every service page has its own example.</p>
+              <button type="button" class="walk-btn on-light" data-walkthrough data-walk-label="Watch how it works · 20 s" aria-pressed="false"><span class="play" aria-hidden="true">▶</span>Watch how it works · 20 s</button>
+              <div class="walk-progress on-light" data-walk-progress hidden aria-hidden="true"><i></i></div>
+            </div>
           </div>
-          <div data-scene="bi"></div>
+          <div data-scene="bi" data-walk-host></div>
         </div>
       </section>
 
@@ -460,6 +464,8 @@
       var s = this._state;
 
       /* --- workspace scenes ------------------------------------------ */
+      var walkBtn = root.querySelector('[data-walkthrough]');
+      if (walkBtn) cleanup(PG.scene.walk(root.querySelector('[data-walk-host]'), walkBtn, root.querySelector('[data-walk-progress]'), PG.scene.BI_WALK.script, PG.scene.BI_WALK.total));
       C.qsa('[data-scene]', root).forEach(function (host) {
         cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { compact: host.hasAttribute('data-scene-compact'), preview: host.hasAttribute('data-scene-preview'), plainHeading: host.classList.contains('hero-scene') }));
       });

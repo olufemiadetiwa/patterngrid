@@ -341,40 +341,6 @@
         cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { plainHeading: host.classList.contains('hero-scene') }));
       });
 
-      /* --- guided walkthrough: four states, ~20 s, any click takes over --- */
-      var walkBtn = root.querySelector('[data-walkthrough]');
-      var heroHost = root.querySelector('.hero-scene');
-      var progress = root.querySelector('[data-walk-progress]');
-      var walkT = [];
-      var walking = false;
-      function stopWalk() {
-        walking = false;
-        walkT.forEach(clearTimeout); walkT = [];
-        if (walkBtn) { walkBtn.setAttribute('aria-pressed', 'false'); walkBtn.innerHTML = '<span class="play" aria-hidden="true">▶</span>Replay the walkthrough'; }
-        if (progress) { progress.hidden = true; progress.firstElementChild.style.setProperty('--p', '0%'); }
-      }
-      function at(ms, fn) { walkT.push(setTimeout(fn, ms)); }
-      function startWalk() {
-        var d = heroHost && heroHost._pgScene; if (!d) return;
-        stopWalk();
-        walking = true;
-        walkBtn.setAttribute('aria-pressed', 'true');
-        walkBtn.innerHTML = '<span class="play" aria-hidden="true">❚❚</span>Stop';
-        d.reset();
-        if (progress) { progress.hidden = false; progress.firstElementChild.style.setProperty('--p', '0%'); }
-        var steps = [[0, null], [5000, ['step', '1']], [10000, ['line', '0']], [13000, ['line', '1']], [16000, ['step', '2']], [19000, ['assign', '']]];
-        steps.forEach(function (st) { at(st[0], function () { if (st[1]) d.act(st[1][0], st[1][1]); if (progress) progress.firstElementChild.style.setProperty('--p', Math.round(st[0] / 21000 * 100) + '%'); }); });
-        at(21000, function () { if (progress) progress.firstElementChild.style.setProperty('--p', '100%'); walking = false; walkBtn.setAttribute('aria-pressed', 'false'); walkBtn.innerHTML = '<span class="play" aria-hidden="true">▶</span>Replay the walkthrough'; });
-      }
-      if (walkBtn && heroHost) {
-        var onWalk = function () { walking ? stopWalk() : startWalk(); };
-        var onTake = function (e) { if (walking && e.target.closest('[data-act]')) stopWalk(); };
-        walkBtn.addEventListener('click', onWalk);
-        heroHost.addEventListener('click', onTake);
-        heroHost.addEventListener('keydown', onTake);
-        cleanup(function () { walkBtn.removeEventListener('click', onWalk); heroHost.removeEventListener('click', onTake); heroHost.removeEventListener('keydown', onTake); stopWalk(); });
-      }
-
       /* --- four-stage sequence -------------------------------------- */
       var tabs = C.qsa('[data-stage]', root);
       var seqBody = root.querySelector('[data-seq-body]');
