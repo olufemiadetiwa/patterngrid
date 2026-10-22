@@ -91,7 +91,7 @@
 
   C.route('/work', page('work'));
   C.route('/work/:slug', function (params, ctx) {
-    var hit = (PG.work || []).some(function (s) { return s.slug === params.slug; });
+    var hit = (PG.work || []).concat(PG.cases || []).some(function (s) { return s.slug === params.slug; });
     transition(hit ? PG.pages.work : PG.pages.notFound, params, ctx);
   });
 

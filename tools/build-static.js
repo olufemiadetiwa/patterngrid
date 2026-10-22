@@ -42,7 +42,7 @@ const PG = global.window.PG;
 const ROUTES = [
   '/', '/services', ...PG.services.map((s) => `/services/${s.slug}`),
   '/industries', ...PG.industries.map((i) => `/industries/${i.slug}`),
-  '/work', ...PG.work.map((w) => `/work/${w.slug}`),
+  '/work', ...(PG.cases || []).map((c) => `/work/${c.slug}`), ...PG.work.map((w) => `/work/${w.slug}`),
   '/about', '/about/precious-celestine', '/approach', '/assessment', '/contact', '/privacy', '/terms'
 ];
 if (PG.articles.some((a) => a.published)) ROUTES.push('/insights');

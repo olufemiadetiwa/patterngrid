@@ -234,7 +234,7 @@ window.PG.heroes = {
     statement: 'Connect product behaviour with commercial performance. See where users find value, where they leave and which questions deserve **closer attention**.',
     action: cta('Discuss your product data'), secondary: { label: 'See a source workspace', href: '#ind-sources' } },
   'work': { size: 'marketing', eyebrow: 'Work & demos', lines: ['The work,', 'shown working.'], images: ['team-meeting'], tone: 'light',
-    lead: 'Three illustrative scenarios built with sample data, each with the question, the inputs, the interactive deliverable and what it is designed to make possible. None is a client project.',
+    lead: 'Two client case studies written up from the project records, and three illustrative scenarios built with sample data. Each is labelled for what it is.',
     statement: 'Explore the questions we address, the systems we design and the reasoning behind them. **Client work and illustrative demonstrations** are identified clearly throughout.',
     action: CTA, secondary: null },
   'about': { size: 'marketing', eyebrow: 'About Pattern Grid', lines: ['Clarity is', 'our purpose.'], images: ['lagos-skyline'], tone: 'light',
@@ -265,12 +265,77 @@ window.PG.industries.forEach((s, i) => { s.photo = ['lagos-civic-towers', 'wh-ta
 window.PG.team = {
   founder: {
     name: 'Precious Chinenye Celestine', alias: 'Ada Africa', role: 'Founder & Lead Consultant',
-    photo: null, photoAlt: 'Precious Chinenye Celestine, founder of Pattern Grid',
+    photo: 'founder-2025', photoAlt: 'Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio',
     bio: 'Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.'
   },
   members: [],
   reservedSlots: 3
 };
+
+// Case studies: work delivered by the founder as a Business Intelligence and
+// Data consultant, written up from her project notes. Third person, no
+// invented figures; each names the client as supplied.
+window.PG.cases = [
+  { slug: 'ledrop-distribution-visibility', client: 'Ledrop', title: 'Connecting sales and field data to improve distribution visibility',
+    industry: 'Drinks importation and distribution', role: 'Business Intelligence and Data Consultant',
+    focus: ['Data integration', 'Data standardisation', 'Sales reporting', 'Distribution gaps', 'Menu listing gaps', 'Out-of-stock reporting'],
+    tools: ['Uwanjani', 'QuickBooks', 'Azure', 'Azure Data Factory', 'Power BI'],
+    sources: ['Uwanjani (field)', 'QuickBooks (sales)'], pipeline: 'Azure Data Factory', outputs: ['Sales by customer, product, period', 'Distribution and menu gaps', 'Out-of-stock reporting'],
+    summary: 'Sales and field data held in two platforms, with inconsistent product and customer names, became one reporting foundation in Power BI, giving Ledrop clearer visibility into sales, distribution gaps, menu listings and reported out-of-stock issues.',
+    problem: ['Ledrop\u2019s sales and field operations data were held across two platforms: Uwanjani and QuickBooks. Each captured important business information, but differences in how products and customers were recorded made it difficult to connect the data and produce consistent reports.', 'The same product or customer could appear under different names, which complicated matching records, consolidating sales and comparing field observations with business transactions. Beyond sales reporting, management needed to understand where products were missing, where menu listings could be improved, and which outlets had reported out-of-stock situations.'],
+    challenges: [
+      ['Disconnected data sources', 'Sales and field information lived in separate platforms, making consolidated analysis difficult.'],
+      ['Inconsistent product names', 'Variations in product nomenclature complicated matching and reporting across systems.'],
+      ['Inconsistent customer names', 'Differences in customer and outlet naming made it harder to connect sales records with field observations.'],
+      ['Limited distribution visibility', 'The business needed a structured way to identify outlets where relevant Ledrop products were absent.'],
+      ['Limited menu listing visibility', 'Field observations needed to become clear reporting on missing product listings.'],
+      ['Fragmented out-of-stock reporting', 'Reported stock gaps needed organising so teams could see which outlets and products required follow-up.']],
+    solutionIntro: 'Precious developed a Business Intelligence solution that integrated data from Uwanjani and QuickBooks, standardised key business records, and translated the combined information into Power BI reporting.',
+    solution: [
+      ['Integrate the data through Azure', 'Azure handled the extract, transform and load process, with Azure Data Factory pipelines bringing both platforms into a structured reporting environment: a repeatable way to prepare sales and field information for analysis.'],
+      ['Standardise product and customer naming', 'Product nomenclature was aligned so variations referring to the same product analyse consistently, and customer and outlet names were harmonised so sales transactions connect to field records without splitting one customer or product into several reporting categories.'],
+      ['Build consistent sales reporting', 'Reporting structures and measures were developed to analyse sales by customer, product and reporting period on the standardised data.'],
+      ['Develop distribution and menu-listing gap analysis', 'Field observations were turned into reporting on distribution gaps (outlets where relevant Ledrop products were not observed), menu-listing gaps (products missing from outlet menus) and competitor-based opportunities (observed competitor products compared with the expected Ledrop equivalents).'],
+      ['Organise out-of-stock reporting', 'Out-of-stock observations captured through field activity were organised so the products and outlets associated with availability issues are easy to identify.'],
+      ['Present the insights in Power BI', 'Sales and field analyses were brought into Power BI dashboards that let users explore performance and gaps by product, customer or outlet, and reporting period.']],
+    achieved: [
+      ['Connected sales and field information', 'An integrated reporting foundation using data from both platforms, so business transactions can be analysed alongside field observations.'],
+      ['Standardised product and customer records', 'Naming aligned across both platforms, reducing inconsistencies in how records are grouped and improving the reliability of cross-platform analysis.'],
+      ['More consistent sales reporting', 'Performance analysed with consistent product and customer definitions.'],
+      ['Clearer distribution and menu-listing gaps', 'Missing product presence and menu listings visible at outlet level, giving commercial teams a practical basis for prioritising follow-up.'],
+      ['Better visibility into reported out-of-stock issues', 'Out-of-stock observations organised into accessible reporting.'],
+      ['Repeatable data preparation', 'Azure Data Factory pipelines support ongoing reporting and reduce reliance on one-off data preparation.']],
+    services: ['data-engineering', 'business-intelligence'] },
+  { slug: 'party-drinks-connected-reporting', client: 'Party Drinks (drinks.ng)', title: 'Integrating sales, inventory, fulfilment and marketing reporting',
+    industry: 'Drinks retail, distribution and e-commerce', role: 'Business Intelligence and Data Consultant',
+    focus: ['Automated data integration', 'Multichannel sales reporting', 'Inventory reporting', 'Fulfilment visibility', 'Marketing KPIs'],
+    tools: ['Cin7', 'Google Analytics', 'SENRI', 'Azure CLI', 'Power BI'],
+    sources: ['Cin7 (sales, inventory, orders)', 'SENRI (field sales)', 'Google Analytics (web)'], pipeline: 'Azure CLI ETL', outputs: ['Sales by channel, product, customer', 'Inventory days and value', 'Fulfilment status', 'Marketing KPIs'],
+    summary: 'Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Party Drinks a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.',
+    problem: ['Party Drinks operated across distribution, retail and e-commerce channels, with business data spread across Cin7, SENRI and Google Analytics. Each platform captured a different part of the business: sales transactions, inventory records, field sales activity and website performance.', 'The business needed a connected reporting environment to understand performance across channels and monitor the relationship between sales, stock availability, fulfilment and marketing activity.'],
+    challenges: [
+      ['Fragmented sales reporting', 'Distribution, retail and e-commerce sales needed consolidating while keeping each channel visible.'],
+      ['Disconnected inventory and sales information', 'Inventory records needed analysing alongside product sales to understand availability and movement.'],
+      ['Limited fulfilment visibility', 'Order and fulfilment information needed organising to monitor progress and outstanding orders.'],
+      ['Separate marketing and commercial reporting', 'Website activity and marketing KPIs needed to sit beside e-commerce sales performance.'],
+      ['Repeated data preparation', 'Data from three platforms needed an automated extraction and transformation process.']],
+    solutionIntro: 'Precious developed an automated data integration and Business Intelligence solution that brought together information from Cin7, Google Analytics and SENRI.',
+    solution: [
+      ['Automate data integration', 'Azure CLI was used in the extract, transform and load workflow to automate the movement and preparation of data from the three platforms into structured datasets for reporting.'],
+      ['Build multichannel sales reporting', 'Sales data was organised to give both a consolidated view and the ability to examine distribution, retail and e-commerce individually, by product, customer and period.'],
+      ['Structure inventory reporting', 'Inventory records were prepared alongside sales, with product-level measures for available quantity, average daily units sold and estimated inventory days, to assess stock coverage and flag products needing replenishment or review.'],
+      ['Improve fulfilment visibility', 'Order and fulfilment records joined the reporting framework so fulfilment status and orders needing attention can be monitored, connecting sales reporting with the operational process.'],
+      ['Develop marketing KPI reporting', 'Google Analytics data and marketing inputs were prepared to report on acquisition, engagement and campaign effectiveness, with acquisition cost and return on advertising spend calculated where cost and attribution data were available.'],
+      ['Create Power BI dashboards', 'Users can explore sales across channels, review inventory, monitor fulfilment and assess marketing KPIs with structured measures and filters.']],
+    achieved: [
+      ['Automated data preparation across three platforms', 'A repeatable ETL workflow replaced separate, one-off extraction and preparation.'],
+      ['Consolidated visibility across sales channels', 'Distribution, retail and e-commerce analysed within one framework, each still visible on its own.'],
+      ['Better visibility into inventory and stock movement', 'Stock information connected to product sales: availability, inventory value and estimated coverage.'],
+      ['Clearer fulfilment reporting', 'Outstanding fulfilment and orders needing operational follow-up are identifiable.'],
+      ['Structured marketing performance measurement', 'Acquisition sources, engagement and commercial performance in one consistent framework, where supporting data was available.'],
+      ['A reusable Business Intelligence foundation', 'Automated workflows, structured datasets and Power BI measures that support ongoing reporting and future analysis.']],
+    services: ['data-engineering', 'business-intelligence', 'ai-automation'] }
+];
 
 // Icon fallback so pages never depend on service-content.js load order
 window.PG.icons = window.PG.icons || {};

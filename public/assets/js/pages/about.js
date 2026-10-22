@@ -118,7 +118,7 @@
 
       <section class="sec-xs">
         <div class="wrap founder-page" data-reveal="rise">
-          ${when(!!f.photo, function () { return C.portrait(f); })}
+          ${when(!!f.photo, function () { return C.portrait(f, { eager: true }); })}
           <div class="stack stack-24">
             <p class="lede">Precious Chinenye Celestine is a data and AI professional and business intelligence consultant. Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution. At Pattern Grid, she brings these disciplines together around the business questions clients need to answer.</p>
             <dl class="founder-facts">

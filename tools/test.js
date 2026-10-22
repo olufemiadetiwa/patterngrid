@@ -126,6 +126,9 @@ test('contact validation', () => {
 
 test('static route list matches the router and excludes unpublished pages', () => {
   const { ROUTES } = require('./build-static.js');
+  const PGc = load('');
+  for (const c of PGc.cases) assert.ok(ROUTES.includes('/work/' + c.slug), c.slug + ' case study is built');
+  for (const c of PGc.cases) assert.ok(!/\bI\b|\bmy\b/i.test(JSON.stringify(c).replace(/Power BI/g, '')), c.slug + ' is written in the third person');
   const app = fs.readFileSync(path.join(JS, 'app.js'), 'utf8');
   const fixed = [...app.matchAll(/C\.route\('([^':]+)'/g)].map((m) => m[1]).filter((r) => !r.includes(':') && r !== '/404' && r !== '/insights');
   for (const r of fixed) assert.ok(ROUTES.includes(r), r + ' is built');

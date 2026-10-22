@@ -127,7 +127,7 @@
             <section class="statement${h.tone === 'dark' ? ' is-dark' : ''}" data-statement aria-label="In short">
               <div class="statement-inner">
                 <p>${each(words, function (w, i) {
-                  return html`<span data-w="${i}"${raw(w.strong ? ' data-strong="1"' : '')}>${w.text} </span>`;
+                  return html`<span data-w="${i}" style="--i:${i}"${raw(w.strong ? ' data-strong="1"' : '')}>${w.text}</span> `;
                 })}</p>
               </div>
             </section>`;
@@ -196,6 +196,17 @@
       };
       var repaint = function () { lastP = -1; if (C.motion.reduced || document.documentElement.classList.contains('is-static')) paint(1); else measure(); };
       repaint();
+      /* Words rise into place, staggered, the first time the statement is seen. */
+      var reveal = function () { requestAnimationFrame(function () { requestAnimationFrame(function () { stEl.classList.add('is-in'); }); }); };
+      if (C.motion.reduced || document.documentElement.classList.contains('is-static') || !('IntersectionObserver' in window)) stEl.classList.add('is-in');
+      else {
+        stEl.classList.add('is-armed');
+        /* Armed first, revealed on a later frame, so the stagger plays even when the statement is already on screen. */
+        var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { reveal(); io.disconnect(); } }, { threshold: 0.15 });
+        io.observe(stEl);
+        inst.observers = [io];
+        inst.timers = [setTimeout(reveal, 3000)];
+      }
       on(window, 'scroll', measure, { passive: true });
       on(window, 'resize', measure);
       on(window, 'pg-motion', repaint);
@@ -228,6 +239,8 @@
   PG.hero.unmount = function () {
     if (!live) return;
     live.listeners.forEach(function (l) { l[0].removeEventListener(l[1], l[2], l[3]); });
+    (live.observers || []).forEach(function (o) { o.disconnect(); });
+    (live.timers || []).forEach(clearTimeout);
     live = null;
   };
 })();

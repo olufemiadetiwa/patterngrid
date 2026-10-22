@@ -263,10 +263,11 @@
           <div class="row between end" style="gap:16px 48px">
             <div class="stack stack-14" style="max-width:720px">
               <span class="eyebrow">Work &amp; demos</span>
-              <h2 class="h2-sm" id="work-h2">Three worked scenarios, built with sample data.</h2>
+              <h2 class="h2-sm" id="work-h2">Two client projects, three worked demos.</h2>
             </div>
-            <a class="arrow" href="/work">All scenarios <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/work">All work <span class="chev" aria-hidden="true">→</span></a>
           </div>
+          <div class="case-grid">${each(PG.cases || [], PG.caseCard)}</div>
           <div class="work-cards">
             ${each(PG.work, function (w) {
               var meta = WORK_META[w.slug] || ['', '', ''];

@@ -15,7 +15,8 @@
     "capture": "tools/capture-visuals.sh",
     "reference": "python3 -m http.server 8781 --directory design-source/runnable",
     "compare": "node tools/compare.js",
-    "build:reference": "node tools/make-reference.js"
+    "build:reference": "node tools/make-reference.js",
+    "portraits": "node tools/build-portraits.js"
   },
   "engines": {
     "node": ">=18"

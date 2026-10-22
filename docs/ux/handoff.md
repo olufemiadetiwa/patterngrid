@@ -103,3 +103,13 @@ Implements [`standout-review.md`](standout-review.md) in full on the same branch
 Not done: new photography for retail and distribution (needs sourced assets); screen-reader pass.
 
 Verification on this pass: 19 routes render with no console errors; heading order intact (hero scenes use styled paragraphs); no horizontal overflow at 390 or 1363; walkthrough and take-over verified; industry definitions verified on FMCG; `npm test` 11/11; static build regenerated with `?pgstatic=1` so prerendered pages carry no mid-animation state.
+
+
+---
+
+## Pass 10 — founder portrait, case studies, statement motion (22 October 2026)
+
+- **Statement under the hero**: words now rise into place with a 34 ms stagger the first time the section is seen (armed, then revealed on a later frame so it also plays when already on screen), on top of the scroll-driven colour fill. Reduced motion and static renders show the final state.
+- **Founder portrait**: of the four photographs supplied, `IMG_7940` (grey backdrop, black lace dress, arms crossed, direct gaze) is used — the most composed and the one that reads best in black and white; `IMG_7939` is a close second; the brown-backdrop stool portrait is more casual and the close-up is 720 px. Built as 4:5 WebP at 1200 and 720 (`npm run portraits`, source kept in `design-source/people/`). Rendered **black and white by default, colour on click** (`button.portrait`, `aria-pressed`, hint label on hover/touch) on the home founder block, About and the founder page; the text-led layouts switch to the photo layouts automatically.
+- **Work**: recommendation adopted — one Work & demos index with two sections (case studies first, illustrative scenarios second) and a **dedicated page per case study** (`/work/ledrop-distribution-visibility`, `/work/party-drinks-connected-reporting`), so each can be linked and featured. Both are written up in the third person from the supplied documents without adding figures, labelled "delivered by Precious Chinenye Celestine as a Business Intelligence and Data consultant". Template: typographic intro with client/role/focus/tools, a data-flow strip (sources → pipeline → outputs), the problem with its challenges, what was built as delivered steps, what it made possible, relevant services, closing. Home features the two case studies above the demos; both routes are in the static build and sitemap.
+- **Needs the founder's confirmation before deploy**: naming Ledrop and Party Drinks (drinks.ng) publicly, and that the work may be described under Pattern Grid (the pages say it was delivered by Precious as a consultant). The founder page still says prior experience did not come from Pattern Grid; both statements are consistent, but check the wording you want.

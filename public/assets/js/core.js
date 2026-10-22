@@ -140,6 +140,16 @@
      photograph exists yet. Never a stock face. */
   core.portrait = function (person, o) {
     o = o || {};
+    var local = person && person.photo && PG.localPeople && PG.localPeople[person.photo];
+    if (local) {
+      /* Black and white by default; the frame is a button that shows the
+         colour photograph. The state is announced through aria-pressed. */
+      return raw(
+        '<button type="button" class="portrait is-mono" data-portrait aria-pressed="false" aria-label="' + esc((person.photoAlt || person.name || 'Portrait') + '. Show in colour') +
+        '" style="--ar:' + esc(o.ar || '4 / 5') + ';background-image:url(\'' + local.lqip + '\')">' +
+        '<picture><source media="(max-width: 720px)" srcset="' + esc(core.href(local.m)) + '"><img src="' + esc(core.href(local.d)) + '" width="' + local.w + '" height="' + local.h + '" alt="' + esc(person.photoAlt || person.name || '') + '" loading="' + (o.eager ? 'eager' : 'lazy') + '" decoding="async"></picture>' +
+        '<span class="portrait-hint" aria-hidden="true">' + (o.hint || 'Tap for colour') + '</span></button>');
+    }
     if (person && person.photo) {
       return core.frame(PG.img.get(person.photo), { ar: o.ar || '4 / 5', sizes: o.sizes || '(min-width: 960px) 40vw, 100vw', cls: 'portrait' });
     }
@@ -152,8 +162,16 @@
   };
 
   /* Flags framed images as loaded so they fade in; safe to call repeatedly. */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-portrait]');
+    if (!b) return;
+    var mono = b.classList.toggle('is-mono');
+    b.setAttribute('aria-pressed', mono ? 'false' : 'true');
+    var hint = b.querySelector('.portrait-hint'); if (hint) hint.textContent = mono ? 'Tap for colour' : 'Tap for black and white';
+  });
+
   core.armImages = function (root) {
-    qsa('.frame img:not([data-armed])', root).forEach(function (img) {
+    qsa('.frame img:not([data-armed]), .portrait img:not([data-armed])', root).forEach(function (img) {
       img.setAttribute('data-armed', '1');
       var done = function () { img.classList.add('is-loaded'); };
       if (img.complete && img.naturalWidth > 0) { done(); return; }

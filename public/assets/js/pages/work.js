@@ -24,28 +24,159 @@
     return PG.closing({ h: 'Have a similar question in your business?' });
   }
 
+  function caseCard(c) {
+    return html`
+      <a href="/work/${c.slug}" class="case-card">
+        <span class="case-top">
+          <span class="label-caps">Case study · ${c.industry}</span>
+          <span class="case-client">${c.client}</span>
+        </span>
+        <span class="t">${c.title}</span>
+        <span class="d">${c.summary}</span>
+        <span class="case-flow" aria-label="Data flow">
+          ${each(c.sources, function (x) { return html`<span class="node">${x}</span>`; })}
+          <span class="arr" aria-hidden="true">→</span><span class="node etl">${c.pipeline}</span>
+          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        </span>
+        <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
+      </a>`;
+  }
+  PG.caseCard = caseCard;
+
   function overview() {
     return html`
       ${PG.hero('work')}
 
-      <section class="sec-sm">
-        <div class="wrap work-cards" data-reveal="rise" style="gap:32px">
-          ${each(PG.work, function (w) {
-            return html`
-              <a href="/work/${w.slug}" class="work-card">
-                <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(SCENES[w.slug] || 'bi', { thumb: true, plainHeading: true })}</span>
-                <span class="stack stack-8" style="padding:4px 2px 0">
-                  <span class="label-caps">Illustrative scenario · ${w.sector}</span>
-                  <span class="h3 t">${w.title}</span>
-                  <span class="d">${w.summary}</span>
-                  <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
-                </span>
-              </a>`;
-          })}
+      <section class="sec-sm" id="work-cases">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="eyebrow">Case studies</span>
+              <h2 class="h2-sm">Work delivered for named clients.</h2>
+            </div>
+            <p class="lead">Two projects delivered by Precious Chinenye Celestine as a Business Intelligence and Data consultant, written up from the project records: the problem, what was built, and what it made possible. No figures are claimed that the records do not support.</p>
+          </div>
+          <div class="case-grid">${each(PG.cases || [], caseCard)}</div>
+        </div>
+      </section>
+
+      <section class="sec-sm bg-paper" id="work-demos">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="eyebrow">Illustrative scenarios</span>
+              <h2 class="h2-sm">Three worked demos, built with sample data.</h2>
+            </div>
+            <p class="lead">Each shows how we think: the question, the inputs, the interactive deliverable and what it is designed to make possible. None is a client project and none claims a result.</p>
+          </div>
+          <div class="work-cards" style="gap:32px">
+            ${each(PG.work, function (w) {
+              return html`
+                <a href="/work/${w.slug}" class="work-card">
+                  <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(SCENES[w.slug] || 'bi', { thumb: true, plainHeading: true })}</span>
+                  <span class="stack stack-8" style="padding:4px 2px 0">
+                    <span class="label-caps">Illustrative scenario · ${w.sector}</span>
+                    <span class="t" style="font-size:clamp(20px,1.8vw,26px)">${w.title}</span>
+                    <span class="d">${w.summary}</span>
+                    <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
+                  </span>
+                </a>`;
+            })}
+          </div>
         </div>
       </section>
 
       ${closing()}`;
+  }
+
+  /* A case study: the problem, what was built, what it made possible. */
+  function caseDetail(c) {
+    var svcs = c.services.map(function (slug) { return (PG.services || []).find(function (s) { return s.slug === slug; }); }).filter(Boolean);
+    return html`
+      <section class="page-intro">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a><span aria-hidden="true">/</span>
+            <a href="/work">Work &amp; demos</a><span aria-hidden="true">/</span>
+            <span aria-current="page">${c.client}</span>
+          </nav>
+          <span class="eyebrow">Case study · ${c.industry}</span>
+          <h1>${c.client}: ${c.title.charAt(0).toLowerCase() + c.title.slice(1)}</h1>
+          <p class="lead">${c.summary}</p>
+          <dl class="case-facts">
+            <div><dt>Client</dt><dd>${c.client}</dd></div>
+            <div><dt>Role</dt><dd>${c.role}</dd></div>
+            <div><dt>Focus</dt><dd>${c.focus.join(' · ')}</dd></div>
+            <div><dt>Tools and platforms</dt><dd>${c.tools.join(' · ')}</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="sec-xs">
+        <div class="wrap stack" data-reveal="rise" style="gap:16px">
+          <span class="label-caps">How the data moved</span>
+          <div class="case-flow lg" aria-label="Data flow">
+            ${each(c.sources, function (x) { return html`<span class="node">${x}</span>`; })}
+            <span class="arr" aria-hidden="true">→</span><span class="node etl">${c.pipeline}</span>
+            <span class="arr" aria-hidden="true">→</span>
+            ${each(c.outputs, function (x) { return html`<span class="node out">${x}</span>`; })}
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-sm" id="case-problem">
+        <div class="wrap case-split" data-reveal="rise">
+          <div class="stack stack-16">
+            <span class="num-cell">${C.cells(0)}01</span>
+            <h2 class="h2-sm">The problem</h2>
+            ${each(c.problem, function (t) { return html`<p class="body">${t}</p>`; })}
+          </div>
+          <div class="stack stack-12">
+            <span class="label-caps">The main challenges</span>
+            <div class="case-list">
+              ${each(c.challenges, function (ch) { return html`<div><b>${ch[0]}</b><span>${ch[1]}</span></div>`; })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-sm bg-paper" id="case-solution">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="num-cell">${C.cells(1)}02</span>
+              <h2 class="h2-sm">What was built</h2>
+            </div>
+            <p class="lead">${c.solutionIntro}</p>
+          </div>
+          <div class="case-steps">
+            ${each(c.solution, function (st, i) {
+              return html`<div class="doc-mini"><div class="dm-bar"><span class="scene-id">${C.cells(i + 2)}${st[0]}</span>${PG.scene.chip('ok', 'Delivered')}</div><p class="dm-body">${st[1]}</p></div>`;
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-sm" id="case-achieved">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="num-cell">${C.cells(2)}03</span>
+              <h2 class="h2-sm">What it made possible</h2>
+            </div>
+            <p class="lead">Outcomes as recorded in the project notes; no performance figures are claimed.</p>
+          </div>
+          <div class="case-list cols">
+            ${each(c.achieved, function (a) { return html`<div><b>${a[0]}</b><span>${a[1]}</span></div>`; })}
+          </div>
+          <div class="row" style="gap:8px;border-top:1px solid var(--rule);padding-top:20px">
+            <span class="label-caps" style="margin-right:8px">Relevant services</span>
+            ${each(svcs, function (r) { return html`<a class="tag-link" href="/services/${r.slug}">${r.title} →</a>`; })}
+          </div>
+        </div>
+      </section>
+
+      ${PG.closing({ h: 'Have a similar question in your business?', p: 'Tell us how your sales, stock or field data is held today. We reply to arrange a short conversation.' })}`;
   }
 
   function detail(item) {
@@ -124,11 +255,24 @@
   function find(slug) {
     return (PG.work || []).find(function (w) { return w.slug === slug; });
   }
+  function findCase(slug) {
+    return (PG.cases || []).find(function (c) { return c.slug === slug; });
+  }
 
   PG.pages = PG.pages || {};
 
   PG.pages.work = {
     meta: function (p) {
+      var c = p.slug && findCase(p.slug);
+      if (c) {
+        return {
+          title: c.client + ' case study',
+          desc: c.summary,
+          heroKey: 'work',
+          crumbs: [{ name: 'Work & demos', path: '/work' }, { name: c.client, path: '/work/' + c.slug }],
+          schema: { '@context': 'https://schema.org', '@type': 'CreativeWork', name: c.client + ': ' + c.title, abstract: c.summary, about: c.industry, creator: { '@type': 'Person', name: 'Precious Chinenye Celestine' } }
+        };
+      }
       var item = p.slug && find(p.slug);
       if (!item) {
         return {
@@ -156,6 +300,8 @@
     },
 
     render: function (p) {
+      var c = p.slug && findCase(p.slug);
+      if (c) return caseDetail(c);
       var item = p.slug && find(p.slug);
       return item ? detail(item) : overview();
     },
