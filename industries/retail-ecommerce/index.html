@@ -158,7 +158,7 @@
             <div class="stack stack-16">
               <p class="label-caps">Your data sources</p>
               <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced back to the system it came from.</p>
+              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from. Below, a sample page for this sector on demo data.</p>
             </div>
             <div class="stack stack-14">
               <p class="small slate" style="max-width:36em">Attribution and period assumptions are stated with the view. Marketplace returns are the next question to investigate.</p>
@@ -168,45 +168,40 @@
             </div>
           </div>
           <div data-scene="lineage" data-scene-industry="retail-ecommerce">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Source workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Source workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
+      <figure class="report" data-scene-frame="" role="group" aria-label="Retail &amp; Ecommerce · performance">
+        <div class="rp-head">
+          <div class="rp-title"><b>Retail &amp; Ecommerce · performance</b><span>week 36 · demo data for a Nigerian retail business</span></div>
+          <div class="rp-slicers"><span class="rp-slicer">Period <b>week 36</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Channel <b>All</b><i aria-hidden="true">▾</i></span></div>
         </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
+      <div class="rp-card on" data-act="metric:0">
+        <span class="rp-card-l">Conversion · Marketplace</span>
+        <span class="rp-card-v num">1.9%</span>
+        <span class="rp-card-d ">definition agreed · Ecommerce manager</span>
         
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">Retail &amp; Ecommerce</span><h3>Each system stays as it is. One definition links them.</h3></div><span class="scene-meta">Select a source, then any figure</span></div>
-        <div class="src-grid five">
-          <button type="button" class="src-tile on" data-act="src:0" aria-pressed="true"><span class="src-sys"><b>Store</b><small>Store POS</small></span><ul class="recs"><li><span class="mono">STO-014</span><span>Ticket 88213 · 18.40</span></li><li><span class="mono">STO-021</span><span>Ticket 88214 · 12.10</span></li></ul><span class="src-fields"><code class="key">store_id</code><code class="">ticket_id</code><code class="">net_value</code></span></button><button type="button" class="src-tile" data-act="src:1" aria-pressed="false"><span class="src-sys"><b>Ecommerce</b><small>Web platform</small></span><ul class="recs"><li><span class="mono">ORD-55120</span><span>Web · completed</span></li><li><span class="mono">ORD-55121</span><span>Marketplace · completed</span></li></ul><span class="src-fields"><code class="key">order_id</code><code class="">session_id</code><code class="">channel</code><code class="">status</code></span></button><button type="button" class="src-tile" data-act="src:2" aria-pressed="false"><span class="src-sys"><b>Payments</b><small>Payment gateway</small></span><ul class="recs"><li><span class="mono">PAY-90311</span><span>captured · 24.10</span></li><li><span class="mono">PAY-90312</span><span>captured · 21.60</span></li></ul><span class="src-fields"><code class="key">payment_id</code><code class="">order_id</code><code class="">captured</code><code class="">amount</code></span></button><button type="button" class="src-tile" data-act="src:3" aria-pressed="false"><span class="src-sys"><b>Inventory</b><small>Warehouse system</small></span><ul class="recs"><li><span class="mono">SKU-4471</span><span>on hand 312 · returned 9</span></li><li><span class="mono">SKU-4472</span><span>on hand 88 · returned 14</span></li></ul><span class="src-fields"><code class="key">sku</code><code class="">on_hand</code><code class="">returned_qty</code></span></button><button type="button" class="src-tile" data-act="src:4" aria-pressed="false"><span class="src-sys"><b>Customer</b><small>CRM</small></span><ul class="recs"><li><span class="mono">CUS-7781</span><span>repeat</span></li><li><span class="mono">CUS-7782</span><span>new</span></li></ul><span class="src-fields"><code class="key">customer_id</code><code class="">first_order_on</code><code class="">repeat_flag</code></span></button>
-        </div>
-        <div class="join">
-          <div class="join-model surface">
-            <span class="label-caps">What Store contributes</span>
-            <div class="join-row"><span>store_id</span><i class="arr" aria-hidden="true"></i><span class="on">channel_id</span></div>
-            <div class="join-row"><span>ticket_id</span><i class="arr" aria-hidden="true"></i><span class="on">average_order_value</span></div><div class="join-row"><span>ticket_id</span><i class="arr" aria-hidden="true"></i><span class="on">return_rate</span></div>
-            <span class="scene-meta">Store feeds Average order value and Return rate. The key is standardised to one channel id with a quality check on the way in.</span>
-          </div>
-          <div class="join-view surface">
-            <span class="label-caps">Resulting view · channel · week 36</span>
-            <div class="view-rows inspect">
-              <div class="vh"><span>channel</span><span class="">Conversion</span><span class="on">Average order value</span><span class="on">Return rate</span></div>
-              <div class=""><span>Stores</span><button type="button" class="num" data-act="metric:0" aria-label="Stores Conversion: —. Open the definition" aria-pressed="false">—</button><button type="button" class="num on" data-act="metric:1" aria-label="Stores Average order value: 18.40. Open the definition" aria-pressed="false">18.40</button><button type="button" class="num on" data-act="metric:2" aria-label="Stores Return rate: 3.1%. Open the definition" aria-pressed="false">3.1%</button></div><div class=""><span>Ecommerce</span><button type="button" class="num" data-act="metric:0" aria-label="Ecommerce Conversion: 2.4%. Open the definition" aria-pressed="false">2.4%</button><button type="button" class="num on" data-act="metric:1" aria-label="Ecommerce Average order value: 24.10. Open the definition" aria-pressed="false">24.10</button><button type="button" class="num on" data-act="metric:2" aria-label="Ecommerce Return rate: 9.8%. Open the definition" aria-pressed="false">9.8%</button></div><div class="hl"><span>Marketplace</span><button type="button" class="num" data-act="metric:0" aria-label="Marketplace Conversion: 1.9%. Open the definition" aria-pressed="false">1.9%</button><button type="button" class="num on" data-act="metric:1" aria-label="Marketplace Average order value: 21.60. Open the definition" aria-pressed="false">21.60</button><button type="button" class="num on" data-act="metric:2" aria-label="Marketplace Return rate: 11.2%. Open the definition" aria-pressed="false">11.2%</button></div><div class=""><span>Wholesale</span><button type="button" class="num" data-act="metric:0" aria-label="Wholesale Conversion: —. Open the definition" aria-pressed="false">—</button><button type="button" class="num on" data-act="metric:1" aria-label="Wholesale Average order value: 412.00. Open the definition" aria-pressed="false">412.00</button><button type="button" class="num on" data-act="metric:2" aria-label="Wholesale Return rate: 0.8%. Open the definition" aria-pressed="false">0.8%</button></div>
-            </div>
-            <span class="scene-meta">Any figure opens its definition, period, unit, source and owner.</span>
-          </div>
-          
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state ok">Traceable</span>
-        <h4>Which products and customer behaviours create sustainable value?</h4>
-        <p>Every figure in the view is calculated from the sample records in these systems, with its definition, period and owner agreed before it goes into a report.</p>
-        <dl class="action-drawer-rows"><div><dt>Sources</dt><dd>Store · Ecommerce · Payments · Inventory · Customer</dd></div><div><dt>Agreed first</dt><dd>Definition · period · unit · owner</dd></div></dl>
+      </div>
+      <div class="rp-card" data-act="metric:1">
+        <span class="rp-card-l">Average order value · Marketplace</span>
+        <span class="rp-card-v num">21.60</span>
+        <span class="rp-card-d ">definition agreed · Commercial finance lead</span>
         
+      </div>
+      <div class="rp-card" data-act="metric:2">
+        <span class="rp-card-l">Return rate · Marketplace</span>
+        <span class="rp-card-v num">11.2%</span>
+        <span class="rp-card-d ">definition agreed · Operations lead</span>
         
-        
-      </aside>
-        </div></div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Source systems → agreed definition → inspectable figure</span><span>Sample data · nothing is sent or saved</span></div>
-      </div></div>
+      </div></div><div class="rp-grid">
+      <div class="rp-visual wide">
+        <div class="rp-visual-t">Channel · week 36 · select any figure to open its definition</div>
+        <table class="rp-matrix">
+          <thead><tr><th class="">channel</th><th class="num">Conversion</th><th class="num">Average order value</th><th class="num">Return rate</th></tr></thead>
+          <tbody><tr class=""><td class="">Stores</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="Stores Conversion: —. Open the definition">—</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="Stores Average order value: 18.40. Open the definition">18.40</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="Stores Return rate: 3.1%. Open the definition">3.1%</button></td></tr><tr class=""><td class="">Ecommerce</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="Ecommerce Conversion: 2.4%. Open the definition">2.4%</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="Ecommerce Average order value: 24.10. Open the definition">24.10</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="Ecommerce Return rate: 9.8%. Open the definition">9.8%</button></td></tr><tr class="hl"><td class="">Marketplace</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="Marketplace Conversion: 1.9%. Open the definition">1.9%</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="Marketplace Average order value: 21.60. Open the definition">21.60</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="Marketplace Return rate: 11.2%. Open the definition">11.2%</button></td></tr><tr class=""><td class="">Wholesale</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="Wholesale Conversion: —. Open the definition">—</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="Wholesale Average order value: 412.00. Open the definition">412.00</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="Wholesale Return rate: 0.8%. Open the definition">0.8%</button></td></tr></tbody>
+        </table>
+      </div><aside class="rp-callout"><span class="chip-state ok">Definition</span><b>Conversion</b><p>Completed orders divided by eligible sessions on the same channel in the same week. Store tickets have no session, so stores show no conversion rather than a made-up one.</p><dl><div><dt>Period</dt><dd>Week 36</dd></div><div><dt>Unit</dt><dd>%</dd></div><div><dt>Source</dt><dd>Ecommerce</dd></div><div><dt>Owner</dt><dd>Ecommerce manager</dd></div></dl></aside></div></div>
+        <div class="rp-tabs" role="tablist" aria-label="Retail &amp; Ecommerce · performance pages"><button type="button" role="tab" class="rp-tab" data-act="tab:0" aria-selected="true" tabindex="0">Overview</button><button type="button" role="tab" class="rp-tab" data-act="tab:1" aria-selected="false" tabindex="-1">Sources</button><button type="button" role="tab" class="rp-tab" data-act="tab:2" aria-selected="false" tabindex="-1">Definitions</button></div>
+        <figcaption class="rp-caption">Sample report page · demo data · Which products and customer behaviours create sustainable value?</figcaption>
+      </figure></div>
           <p class="small slate" style="max-width:40em;border-top:1px solid var(--rule);padding-top:16px">Product, customer and channel analysis is Data Engineering and Business Intelligence work. A typical decision: look at availability alongside demand before changing the range or the stock levels.</p>
         </div>
       </section>

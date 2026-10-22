@@ -95,39 +95,54 @@
               <span class="label-caps">The question</span>
               <h2 class="h3" style="max-width:26ch;text-wrap:balance">Can a recurring management report be prepared with less manual effort while a person still approves what is published?</h2>
             </div>
-            <p class="small slate" style="max-width:40em">The deliverable, working. Use the controls; nothing is sent or saved.</p>
+            <p class="small slate" style="max-width:40em">The deliverable as a sample report page on demo data. Use the pages and figures; nothing is sent or saved.</p>
           </div>
           <div data-scene="ai">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Review workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>Review workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
+      <figure class="report" data-scene-frame="" role="group" aria-label="Review log">
+        <div class="rp-head">
+          <div class="rp-title"><b>Review log</b><span>W36 · demo data</span></div>
+          <div class="rp-slicers"><span class="rp-slicer">Week <b>36</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Workflow <b>Weekly briefing</b><i aria-hidden="true">▾</i></span></div>
         </div>
-        
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">Work item</span><h3>Automation drafts. A person decides.</h3></div>
-          <div class="scene-seg" role="group" aria-label="Sample"><button type="button" class="on" data-act="item:w36" aria-pressed="true">Normal week</button><button type="button" class="" data-act="item:w36b" aria-pressed="false">Missing source</button></div></div>
-        <div class="scene-grid">
-          <div class="surface flowline">
-            <div class="fl-step done"><span class="label-caps">1 · Input</span><p>Scheduled trigger · Monday 07:00 · Reporting period W36</p><small>Sales W36 · Stock W36 · Finance ledger W36</small></div>
-            <div class="fl-step done"><span class="label-caps">2 · Proposed</span><p>Net sales 9.6m against plan 10.0m (−4%). Snacks returns account for −0.3m.</p><small>Labelled: Proposed · not verified</small></div>
-            <div class="fl-step done"><span class="label-caps">3 · Checks</span><p>Passed · all figures W36 · references resolve</p></div>
-            <div class="fl-step now"><span class="label-caps">4 · Human review</span><p>Awaiting reviewer decision</p><small>Reviewer · Commercial finance lead</small></div>
-          </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
           
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state neutral">Awaiting reviewer decision</span>
-        <h4>Your call, reviewer.</h4>
-        <p>The checks passed and every statement links to its measure. Approve the release, or send it back with a reason.</p>
+      <div class="rp-card">
+        <span class="rp-card-l">Items this week</span>
+        <span class="rp-card-v num">4</span>
+        <span class="rp-card-d ">2 briefings · 1 alert · 1 held</span>
         
-        <div class="row" style="gap:8px"><button type="button" class="btn btn-sm" data-act="decide:approve">Approve release</button><button type="button" class="btn btn-ghost btn-sm" data-act="decide:return">Return for correction</button></div>
+      </div>
+          
+      <div class="rp-card">
+        <span class="rp-card-l">Checks passed</span>
+        <span class="rp-card-v num">10 / 11</span>
+        <span class="rp-card-d warn">1 source missing</span>
         
+      </div>
+          
+      <div class="rp-card">
+        <span class="rp-card-l">Decided by a person</span>
+        <span class="rp-card-v num">4 / 4</span>
+        <span class="rp-card-d ok">reviewer recorded on every item</span>
         
-      </aside>
+      </div>
+          
+      <div class="rp-card">
+        <span class="rp-card-l">Released without review</span>
+        <span class="rp-card-v num">0</span>
+        <span class="rp-card-d ok">by design</span>
+        
+      </div>
         </div>
-        </div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Proposed → checked → human decision</span><span>Sample data · nothing is sent or saved</span></div>
+      <div class="rp-visual wide">
+        <div class="rp-visual-t">Weekly briefings · proposed by automation, checked by rules, decided by a person</div>
+        <table class="rp-matrix">
+          <thead><tr><th class="">Item</th><th class="num">Sources</th><th class="num">Checks</th><th class="num">Reviewer</th><th class="num">Status</th></tr></thead>
+          <tbody><tr class="hl"><td class="" data-cell="item:w36"><button type="button" data-act="item:w36" aria-label="Weekly briefing · W36">Weekly briefing · W36</button></td><td class="num">Sales · Stock · Ledger</td><td class="num">3/3 passed</td><td class="num">Commercial finance lead</td><td class="num neutral">Awaiting reviewer decision</td></tr><tr class=""><td class="" data-cell="item:w36b"><button type="button" data-act="item:w36b" aria-label="Weekly briefing · W36 (ledger late)">Weekly briefing · W36 (ledger late)</button></td><td class="num">Sales · Stock · —</td><td class="num">2/3 · ledger missing</td><td class="num">Commercial finance lead</td><td class="num warn">Stopped at review</td></tr><tr class=""><td class="">Weekly briefing · W35</td><td class="num">Sales · Stock · Ledger</td><td class="num">3/3 passed</td><td class="num">Commercial finance lead</td><td class="num ok">Approved · Mon 09:12</td></tr><tr class=""><td class="">Stock alert · Territory East</td><td class="num">Stock · Outlets</td><td class="num">2/2 passed</td><td class="num">Supply chain data owner</td><td class="num ok">Sent · owner assigned</td></tr></tbody>
+        </table>
       </div></div>
+        <div class="rp-tabs" role="tablist" aria-label="Review log pages"><button type="button" role="tab" class="rp-tab" data-act="tab:0" aria-selected="true" tabindex="0">Queue</button><button type="button" role="tab" class="rp-tab" data-act="tab:1" aria-selected="false" tabindex="-1">Item</button></div>
+        <figcaption class="rp-caption">Sample review log · demo data · automation proposes, rules check, a named person decides</figcaption>
+      </figure></div>
         </div>
       </section>
 
@@ -154,16 +169,7 @@
               <div class="stack stack-8"><div><span class="chip-state ok">Less manual assembly of recurring reports</span></div><div><span class="chip-state ok">A visible record of checks and approvals</span></div><div><span class="chip-state ok">Clear separation of automated, assisted and human steps</span></div></div>
               <p class="fine">What the system is built to make possible, not a measured result.</p>
             </div>
-            
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state warn">Limitation</span>
-        <h4>What this does not prove</h4>
-        <p>The AI step drafts commentary from checked figures only. A missing source stops the item at review; nothing is released without its evidence.</p>
-        
-        
-        
-        
-      </aside>
+            <aside class="rp-callout"><span class="chip-state warn">Limitation</span><b>What this does not prove</b><p>The AI step drafts commentary from checked figures only. A missing source stops the item at review; nothing is released without its evidence.</p></aside>
             <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:16px">
               <span class="label-caps">Technology (illustrative options)</span>
               <p class="small slate">Rule-based checks in SQL · An approved model service for the labelled drafting step (option) · Power Automate-style approval routing (option)</p>

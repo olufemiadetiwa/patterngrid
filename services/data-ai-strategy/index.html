@@ -158,58 +158,76 @@
                       <span class="label-caps" style="color:var(--muted);padding-top:3px">03</span><span>The sequence becomes: agree the metric definitions (Finance lead) → integrate the two sources (Data owner) → rebuild the executive dashboards → pilot the assistant on the checked figures.</span>
                     </li>
               </ol>
-              <p class="fine">Sample deliverable · Delivery workspace. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+              <p class="fine">Below: a sample delivery roadmap on demo data, rendered the way we build them. Not a client result; the pages and figures respond, nothing is sent anywhere.</p>
             </div>
           </div>
           <div data-scene="strategy">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Delivery workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>Delivery workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
-        </div>
-        
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">Phased roadmap</span><h3>Four initiatives, in the order they can succeed.</h3></div>
-          <label class="scene-toggle"><input type="checkbox" data-act="toggle:src"><span>Try it: mark source integration complete</span></label></div>
-        <div class="scene-grid wide">
-          <div class="surface">
-            <div class="tl-head"><span>Initiative</span><span>Owner</span><span class="tl-phases"><i>Phase 1</i><i>Phase 2</i><i>Phase 3</i></span><span>Status</span></div>
-            <button type="button" class="tl-row" data-act="sel:defs" aria-pressed="false">
-                <span class="tl-name">Metric definitions</span>
-                <span class="tl-owner">Finance lead</span>
-                <span class="tl-phases"><i class="tl-bar p1 ok"></i></span>
-                <span><span class="chip-state ok">Complete</span></span>
-              </button><button type="button" class="tl-row" data-act="sel:src" aria-pressed="false">
-                <span class="tl-name">Source integration<small>needs metric definitions</small></span>
-                <span class="tl-owner">Data owner</span>
-                <span class="tl-phases"><i class="tl-bar p1 ok"></i></span>
-                <span><span class="chip-state ok">Ready to sequence</span></span>
-              </button><button type="button" class="tl-row on" data-act="sel:rep" aria-pressed="true">
-                <span class="tl-name">Weekly commercial reporting<small>needs metric definitions, source integration</small></span>
-                <span class="tl-owner">Commercial finance lead</span>
-                <span class="tl-phases"><i class="tl-bar p2 warn"></i></span>
-                <span><span class="chip-state warn">Foundation needed</span></span>
-              </button><button type="button" class="tl-row" data-act="sel:ai" aria-pressed="false">
-                <span class="tl-name">AI reporting assistant<small>needs weekly commercial reporting</small></span>
-                <span class="tl-owner">Process owner</span>
-                <span class="tl-phases"><i class="tl-bar p3 warn"></i></span>
-                <span><span class="chip-state warn">Foundation needed</span></span>
-              </button>
-          </div>
+      <figure class="report" data-scene-frame="" role="group" aria-label="Delivery roadmap">
+        <div class="rp-head">
+          <div class="rp-title"><b>Delivery roadmap</b><span>Q4 plan · demo data</span></div>
           
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state warn">Foundation needed</span>
-        <h4>Weekly commercial reporting</h4>
-        
-        <dl class="action-drawer-rows"><div><dt>Business question</dt><dd>Where is performance slipping this week?</dd></div><div><dt>Prerequisites</dt><dd>Metric definitions · Source integration</dd></div><div><dt>Acceptance</dt><dd>Reconciles to the ledger; used in the weekly review for four consecutive weeks.</dd></div><div><dt>Owner</dt><dd>Commercial finance lead</dd></div></dl>
-        
-        
-        <span class="action-drawer-note">Readiness changes when the prerequisites above are complete.</span>
-      </aside>
         </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Initiatives</span>
+        <span class="rp-card-v num">4</span>
+        <span class="rp-card-d ">2 foundations · 1 report · 1 assistant</span>
+        
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Ready to sequence</span>
+        <span class="rp-card-v num">1</span>
+        <span class="rp-card-d ok">prerequisites met</span>
+        
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Foundation needed</span>
+        <span class="rp-card-v num">2</span>
+        <span class="rp-card-d warn">blocked by an earlier step</span>
+        
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Decision gates</span>
+        <span class="rp-card-v num">3</span>
+        <span class="rp-card-d ">one before each phase</span>
+        
+      </div>
+      </div>
+      <label class="rp-toggle"><input type="checkbox" data-act="toggle:src"><span>Try it: mark source integration complete and watch readiness change</span></label>
+      <div class="rp-grid"><div class="rp-visual wide">
+        <div class="rp-visual-t">Four initiatives, three phases · a change in prerequisites changes readiness</div>
+        <div class="rp-roadmap">
+          <div class="rm-head"><span>Initiative</span><span>Owner</span><span class="rm-ph"><i>Phase 1 · Foundations</i><i>Phase 2 · Reporting</i><i>Phase 3 · Assisted work</i></span><span>Status</span></div>
+          <button type="button" class="rm-row" data-act="sel:defs" aria-pressed="false">
+              <span class="rm-name">Metric definitions</span>
+              <span class="rm-owner">Finance lead</span>
+              <span class="rm-ph"><i class="rm-bar p1 ok done"></i></span>
+              <span><span class="chip-state ok">Complete</span></span>
+            </button><button type="button" class="rm-row" data-act="sel:src" aria-pressed="false">
+              <span class="rm-name">Source integration<small>after metric definitions</small></span>
+              <span class="rm-owner">Data owner</span>
+              <span class="rm-ph"><i class="rm-bar p1 ok"></i></span>
+              <span><span class="chip-state ok">Ready to sequence</span></span>
+            </button><button type="button" class="rm-row on" data-act="sel:rep" aria-pressed="true">
+              <span class="rm-name">Weekly commercial reporting<small>after metric definitions and source integration</small></span>
+              <span class="rm-owner">Commercial finance lead</span>
+              <span class="rm-ph"><i class="rm-bar p2 warn"></i></span>
+              <span><span class="chip-state warn">Foundation needed</span></span>
+            </button><button type="button" class="rm-row" data-act="sel:ai" aria-pressed="false">
+              <span class="rm-name">AI reporting assistant<small>after weekly commercial reporting</small></span>
+              <span class="rm-owner">Process owner</span>
+              <span class="rm-ph"><i class="rm-bar p3 warn"></i></span>
+              <span><span class="chip-state warn">Foundation needed</span></span>
+            </button>
         </div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Business question → readiness → sequenced roadmap</span><span>Sample data · nothing is sent or saved</span></div>
-      </div></div>
+      </div><aside class="rp-callout"><span class="chip-state warn">Foundation needed</span><b>Weekly commercial reporting</b><dl><div><dt>Business question</dt><dd>Where is performance slipping this week?</dd></div><div><dt>Prerequisites</dt><dd>Metric definitions · Source integration</dd></div><div><dt>Acceptance</dt><dd>Reconciles to the ledger; used in the weekly review for four consecutive weeks.</dd></div><div><dt>Owner</dt><dd>Commercial finance lead</dd></div></dl></aside></div></div>
+        
+        <figcaption class="rp-caption">Sample roadmap · demo data · readiness is computed from the prerequisites, not typed in</figcaption>
+      </figure></div>
         </div>
       </section>
 

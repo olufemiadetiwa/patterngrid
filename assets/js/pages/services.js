@@ -90,7 +90,7 @@
               <h2 class="h2-sm">From a trusted measure to an accountable action.</h2>
             </div>
             <div class="stack stack-12">
-              <p class="body muted" style="max-width:34em">A reporting workspace with sample data. Trace the figure to its sources, read the agreed definition, then assign a follow-up with an owner. Every service page has its own example.</p>
+              <p class="body muted" style="max-width:34em">A sample report page on demo data. Open the variance page, read the agreed definition behind the figure, then assign a follow-up with an owner. Every service page has its own example.</p>
               <button type="button" class="walk-btn on-light" data-walkthrough data-walk-label="Watch how it works · 20 s" aria-pressed="false"><span class="play" aria-hidden="true">▶</span>Watch how it works · 20 s</button>
               <div class="walk-progress on-light" data-walk-progress hidden aria-hidden="true"><i></i></div>
             </div>
@@ -122,11 +122,11 @@
   var KIND_LABEL = { input: 'Input', process: 'Process', gate: 'Decision', output: 'Output', exception: 'Exception', use: 'Used by' };
 
   var SCENE_TITLES = {
-    'data-ai-strategy': 'Delivery workspace',
-    'data-engineering': 'Source workspace',
-    'business-intelligence': 'Decision workspace',
-    'ai-automation': 'Review workspace',
-    'capability-building': 'Capability workspace'
+    'data-ai-strategy': 'delivery roadmap',
+    'data-engineering': 'platform monitor',
+    'business-intelligence': 'commercial performance report',
+    'ai-automation': 'review log',
+    'capability-building': 'capability baseline'
   };
 
   /* ------------------------------------------------------- stage / flow */
@@ -224,7 +224,7 @@
                     </li>`;
                 })}
               </ol>
-              <p class="fine">Sample deliverable · ${SCENE_TITLES[svc.slug]}. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+              <p class="fine">Below: a sample ${SCENE_TITLES[svc.slug]} on demo data, rendered the way we build them. Not a client result; the pages and figures respond, nothing is sent anywhere.</p>
             </div>
           </div>
           <div data-scene="${SCENE_OF[svc.slug]}"></div>

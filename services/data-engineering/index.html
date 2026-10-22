@@ -158,61 +158,55 @@
                       <span class="label-caps" style="color:var(--muted);padding-top:3px">03</span><span>Once corrected, the record is revalidated and the curated model exposes one documented commercial view that BI can consume.</span>
                     </li>
               </ol>
-              <p class="fine">Sample deliverable · Source workspace. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+              <p class="fine">Below: a sample platform monitor on demo data, rendered the way we build them. Not a client result; the pages and figures respond, nothing is sent anywhere.</p>
             </div>
           </div>
           <div data-scene="engineering">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Source workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Source workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
+      <figure class="report" data-scene-frame="" role="group" aria-label="Platform monitor">
+        <div class="rp-head">
+          <div class="rp-title"><b>Platform monitor</b><span>W36 · demo data: a Lagos FMCG distributor</span></div>
+          <div class="rp-slicers"><span class="rp-slicer">Run <b>Mon 06:00</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Source <b>All</b><i aria-hidden="true">▾</i></span></div>
         </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
         
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">Three systems, one location</span><h3>Every record keeps its source. One key joins them.</h3></div><span class="scene-meta">Select a source to see what it contributes</span></div>
-        <div class="src-grid">
-          <button type="button" class="src-tile" data-act="src:sales" aria-pressed="false">
-              <span class="src-sys"><b>Sales</b><small>ERP sell-out</small></span>
-              <ul class="recs"><li><span class="mono">OUT-0031</span><span>SKU 4471 · W36</span><b class="num">312</b></li><li><span class="mono">OUT-0207</span><span>SKU 4471 · W36</span><b class="num">299</b></li><li><span class="mono">OUT-0118</span><span>SKU 4471 · W36</span><b class="num">190</b></li></ul>
-              <span class="src-fields"><code class="key">outlet_code</code><code class="">sku</code><code class="">units</code><code class="">week</code></span>
-            </button><button type="button" class="src-tile on" data-act="src:stock" aria-pressed="true">
-              <span class="src-sys"><b>Stock</b><small>Warehouse file</small></span>
-              <ul class="recs"><li><span class="mono">LOC-E-0031</span><span>Item 4471 · W36</span><b class="num">92%</b></li><li><span class="mono">LOC-E-0207</span><span>Item 4471 · W36</span><b class="num">88%</b></li><li><span class="mono">LOC-E-0118</span><span>Item 4471 · W36</span><b class="num">41%</b></li></ul>
-              <span class="src-fields"><code class="key">loc_code</code><code class="">item</code><code class="">avail_pct</code><code class="">week</code></span>
-            </button><button type="button" class="src-tile" data-act="src:dist" aria-pressed="false">
-              <span class="src-sys"><b>Distribution</b><small>Route planner</small></span>
-              <ul class="recs"><li><span class="mono">DROP-0031</span><span>Route E · W36</span><b class="num">3</b></li><li><span class="mono">DROP-0207</span><span>Route E · W36</span><b class="num">3</b></li><li><span class="mono">DROP-0118</span><span>Route E · W36</span><b class="num">1</b></li></ul>
-              <span class="src-fields"><code class="key">drop_code</code><code class="">route</code><code class="">deliveries</code><code class="">week</code></span>
-            </button>
-        </div>
-        <div class="join">
-          <div class="join-model surface">
-            <span class="label-caps">Shared model · location 0118 → Surulere</span>
-            <div class="join-row"><span>loc_code</span><i class="arr" aria-hidden="true"></i><span class="on">location_id</span></div>
-            <div class="join-row"><span>avail_pct</span><i class="arr" aria-hidden="true"></i><span class="on">availability</span></div>
-            <span class="scene-meta">Stock contributes 4 fields; loc_code is standardised to one location id with a quality check on the way in.</span>
-          </div>
-          <div class="join-view surface">
-            <span class="label-caps">Resulting view · W36</span>
-            <div class="view-rows">
-              <div class=""><span>Ikeja</span><span class="num ">100</span><span class="num on">92%</span><span class="num ">3</span></div><div class=""><span>Lekki</span><span class="num ">96</span><span class="num on">88%</span><span class="num ">3</span></div><div class="hl"><span>Surulere</span><span class="num ">61</span><span class="num on">41%</span><span class="num ">1</span></div><div class=""><span>Ikorodu</span><span class="num ">89</span><span class="num on">85%</span><span class="num ">3</span></div>
-            </div>
-            <span class="scene-meta">sales index · availability · deliveries</span>
-          </div>
-          
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state warn">6 of 7 checks passed</span>
-        <h4>One record was held.</h4>
-        <p>The quality gate holds anything that cannot be joined and tells a named owner. Everything else loaded on schedule at 06:22.</p>
-        <dl class="action-drawer-rows"><div><dt>Loaded</dt><dd>ERP orders · CRM outlets · Stock file</dd></div><div><dt>Held</dt><dd>1 stock record</dd></div></dl>
+      <div class="rp-card">
+        <span class="rp-card-l">Sources loaded</span>
+        <span class="rp-card-v num">3 / 3</span>
+        <span class="rp-card-d ok">by 06:22 · on schedule</span>
         
-        <button type="button" class="btn action-drawer-cta" data-act="held:1">Trace the held record<span class="chev" aria-hidden="true">→</span></button>
+      </div>
         
-      </aside>
-        </div>
-        </div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Source records → shared keys → one view</span><span>Sample data · nothing is sent or saved</span></div>
-      </div></div>
+      <div class="rp-card">
+        <span class="rp-card-l">Records loaded</span>
+        <span class="rp-card-v num">14,208</span>
+        <span class="rp-card-d ">W36</span>
+        <span class="rp-spark" aria-hidden="true"><i style="--h:91%" class=""></i><i style="--h:94%" class=""></i><i style="--h:97%" class=""></i><i style="--h:99%" class=""></i><i style="--h:99%" class=""></i><i style="--h:100%" class="on"></i></span>
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Checks passed</span>
+        <span class="rp-card-v num">26 / 27</span>
+        <span class="rp-card-d warn">1 record held · owner notified</span>
+        
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Traceable to source</span>
+        <span class="rp-card-v num">100%</span>
+        <span class="rp-card-d ok">every row keeps its system and key</span>
+        
+      </div>
+      </div><div class="rp-grid">
+      <div class="rp-visual wide">
+        <div class="rp-visual-t">Loads this morning</div>
+        <table class="rp-matrix">
+          <thead><tr><th class="">Source</th><th class="num">System</th><th class="num">Loaded at</th><th class="num">Rows</th><th class="num">Checks</th><th class="num">Status</th></tr></thead>
+          <tbody><tr class=""><td class="" data-cell="src:sales"><button type="button" data-act="src:sales" aria-label="ERP orders">ERP orders</button></td><td class="num">ERP sell-out</td><td class="num">06:10</td><td class="num">12,418</td><td class="num">12/12</td><td class="num ok">Loaded</td></tr><tr class=""><td class="" data-cell="src:dist"><button type="button" data-act="src:dist" aria-label="CRM outlets">CRM outlets</button></td><td class="num">Outlet master</td><td class="num">06:14</td><td class="num">1,206</td><td class="num">8/8</td><td class="num ok">Loaded</td></tr><tr class="hl"><td class="" data-cell="src:stock"><button type="button" data-act="src:stock" aria-label="Stock file">Stock file</button></td><td class="num">Warehouse file</td><td class="num">06:22</td><td class="num">584</td><td class="num">6/7</td><td class="num warn">1 held</td></tr></tbody>
+        </table>
+      </div><aside class="rp-callout"><span class="chip-state warn">6 of 7 checks passed</span><b>One stock record was held.</b><p>The quality gate holds anything that cannot be joined and tells a named owner. Everything else loaded on schedule.</p><button type="button" class="rp-btn" data-act="held:1">Trace the held record</button></aside></div></div>
+        <div class="rp-tabs" role="tablist" aria-label="Platform monitor pages"><button type="button" role="tab" class="rp-tab" data-act="tab:0" aria-selected="true" tabindex="0">Loads</button><button type="button" role="tab" class="rp-tab" data-act="tab:1" aria-selected="false" tabindex="-1">Mapping</button><button type="button" role="tab" class="rp-tab" data-act="tab:2" aria-selected="false" tabindex="-1">Resulting view</button></div>
+        <figcaption class="rp-caption">Sample platform monitor · demo data · a held record names an owner instead of loading as unknown</figcaption>
+      </figure></div>
         </div>
       </section>
 

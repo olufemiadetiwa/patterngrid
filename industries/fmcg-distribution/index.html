@@ -158,7 +158,7 @@
             <div class="stack stack-16">
               <p class="label-caps">Your data sources</p>
               <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced back to the system it came from.</p>
+              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from. Below, a sample page for this sector on demo data.</p>
             </div>
             <div class="stack stack-14">
               <p class="small slate" style="max-width:36em">Sell-in (shipments to distributors) and sell-out (retail demand) are kept visibly distinct. East shows the availability gap.</p>
@@ -168,45 +168,40 @@
             </div>
           </div>
           <div data-scene="lineage" data-scene-industry="fmcg-distribution">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Source workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Source workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
+      <figure class="report" data-scene-frame="" role="group" aria-label="FMCG &amp; Distribution · performance">
+        <div class="rp-head">
+          <div class="rp-title"><b>FMCG &amp; Distribution · performance</b><span>week 36 · demo data for a Nigerian fmcg business</span></div>
+          <div class="rp-slicers"><span class="rp-slicer">Period <b>week 36</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Territory <b>All</b><i aria-hidden="true">▾</i></span></div>
         </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
+      <div class="rp-card on" data-act="metric:0">
+        <span class="rp-card-l">Sell-in · East</span>
+        <span class="rp-card-v num">9,800</span>
+        <span class="rp-card-d ">definition agreed · Commercial finance lead</span>
         
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">FMCG &amp; Distribution</span><h3>Each system stays as it is. One definition links them.</h3></div><span class="scene-meta">Select a source, then any figure</span></div>
-        <div class="src-grid five">
-          <button type="button" class="src-tile on" data-act="src:0" aria-pressed="true"><span class="src-sys"><b>Sales</b><small>Rep sell-out app</small></span><ul class="recs"><li><span class="mono">OUT-0031</span><span>SKU 4471 · 312 units</span></li><li><span class="mono">OUT-0118</span><span>SKU 4471 · 190 units</span></li></ul><span class="src-fields"><code class="key">outlet_code</code><code class="">sku</code><code class="">units</code><code class="">week</code></span></button><button type="button" class="src-tile" data-act="src:1" aria-pressed="false"><span class="src-sys"><b>Inventory</b><small>Warehouse file</small></span><ul class="recs"><li><span class="mono">LOC-E-0031</span><span>in stock · W36</span></li><li><span class="mono">LOC-E-0118</span><span>out of stock · W36</span></li></ul><span class="src-fields"><code class="key">loc_code</code><code class="">sku</code><code class="">in_stock</code><code class="">counted_at</code></span></button><button type="button" class="src-tile" data-act="src:2" aria-pressed="false"><span class="src-sys"><b>Outlets</b><small>Outlet master</small></span><ul class="recs"><li><span class="mono">OUT-0031</span><span>North · open market</span></li><li><span class="mono">OUT-0118</span><span>East · supermarket</span></li></ul><span class="src-fields"><code class="key">outlet_id</code><code class="">territory</code><code class="">channel</code></span></button><button type="button" class="src-tile" data-act="src:3" aria-pressed="false"><span class="src-sys"><b>Distribution</b><small>Route planner</small></span><ul class="recs"><li><span class="mono">DROP-0031</span><span>Route E · 3</span></li><li><span class="mono">DROP-0118</span><span>Route E · 1</span></li></ul><span class="src-fields"><code class="key">drop_code</code><code class="">route</code><code class="">deliveries</code></span></button><button type="button" class="src-tile" data-act="src:4" aria-pressed="false"><span class="src-sys"><b>Finance</b><small>ERP invoices</small></span><ul class="recs"><li><span class="mono">INV-1189</span><span>Dist N-04 · 2,400 units</span></li><li><span class="mono">INV-1190</span><span>Dist E-02 · 1,800 units</span></li></ul><span class="src-fields"><code class="key">invoice_id</code><code class="">distributor_id</code><code class="">units</code><code class="">net_value</code></span></button>
-        </div>
-        <div class="join">
-          <div class="join-model surface">
-            <span class="label-caps">What Sales contributes</span>
-            <div class="join-row"><span>outlet_code</span><i class="arr" aria-hidden="true"></i><span class="on">territory_id</span></div>
-            <div class="join-row"><span>sku</span><i class="arr" aria-hidden="true"></i><span class="on">sell_out</span></div>
-            <span class="scene-meta">Sales feeds Sell-out. The key is standardised to one territory id with a quality check on the way in.</span>
-          </div>
-          <div class="join-view surface">
-            <span class="label-caps">Resulting view · territory · week 36</span>
-            <div class="view-rows inspect">
-              <div class="vh"><span>territory</span><span class="">Sell-in</span><span class="on">Sell-out</span><span class="">Availability</span></div>
-              <div class=""><span>North</span><button type="button" class="num" data-act="metric:0" aria-label="North Sell-in: 12,400. Open the definition" aria-pressed="false">12,400</button><button type="button" class="num on" data-act="metric:1" aria-label="North Sell-out: 11,980. Open the definition" aria-pressed="false">11,980</button><button type="button" class="num" data-act="metric:2" aria-label="North Availability: 92%. Open the definition" aria-pressed="false">92%</button></div><div class="hl"><span>East</span><button type="button" class="num" data-act="metric:0" aria-label="East Sell-in: 9,800. Open the definition" aria-pressed="false">9,800</button><button type="button" class="num on" data-act="metric:1" aria-label="East Sell-out: 9,120. Open the definition" aria-pressed="false">9,120</button><button type="button" class="num" data-act="metric:2" aria-label="East Availability: 41%. Open the definition" aria-pressed="false">41%</button></div><div class=""><span>West</span><button type="button" class="num" data-act="metric:0" aria-label="West Sell-in: 10,150. Open the definition" aria-pressed="false">10,150</button><button type="button" class="num on" data-act="metric:1" aria-label="West Sell-out: 9,870. Open the definition" aria-pressed="false">9,870</button><button type="button" class="num" data-act="metric:2" aria-label="West Availability: 88%. Open the definition" aria-pressed="false">88%</button></div><div class=""><span>Central</span><button type="button" class="num" data-act="metric:0" aria-label="Central Sell-in: 8,300. Open the definition" aria-pressed="false">8,300</button><button type="button" class="num on" data-act="metric:1" aria-label="Central Sell-out: 8,010. Open the definition" aria-pressed="false">8,010</button><button type="button" class="num" data-act="metric:2" aria-label="Central Availability: 85%. Open the definition" aria-pressed="false">85%</button></div>
-            </div>
-            <span class="scene-meta">Any figure opens its definition, period, unit, source and owner.</span>
-          </div>
-          
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state ok">Traceable</span>
-        <h4>Where are stock availability, outlet coverage and sales performance falling out of step?</h4>
-        <p>Every figure in the view is calculated from the sample records in these systems, with its definition, period and owner agreed before it goes into a report.</p>
-        <dl class="action-drawer-rows"><div><dt>Sources</dt><dd>Sales · Inventory · Outlets · Distribution · Finance</dd></div><div><dt>Agreed first</dt><dd>Definition · period · unit · owner</dd></div></dl>
+      </div>
+      <div class="rp-card" data-act="metric:1">
+        <span class="rp-card-l">Sell-out · East</span>
+        <span class="rp-card-v num">9,120</span>
+        <span class="rp-card-d ">definition agreed · Sales operations lead</span>
         
+      </div>
+      <div class="rp-card" data-act="metric:2">
+        <span class="rp-card-l">Availability · East</span>
+        <span class="rp-card-v num">41%</span>
+        <span class="rp-card-d ">definition agreed · Supply chain data owner</span>
         
-        
-      </aside>
-        </div></div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Source systems → agreed definition → inspectable figure</span><span>Sample data · nothing is sent or saved</span></div>
-      </div></div>
+      </div></div><div class="rp-grid">
+      <div class="rp-visual wide">
+        <div class="rp-visual-t">Territory · week 36 · select any figure to open its definition</div>
+        <table class="rp-matrix">
+          <thead><tr><th class="">territory</th><th class="num">Sell-in</th><th class="num">Sell-out</th><th class="num">Availability</th></tr></thead>
+          <tbody><tr class=""><td class="">North</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="North Sell-in: 12,400. Open the definition">12,400</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="North Sell-out: 11,980. Open the definition">11,980</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="North Availability: 92%. Open the definition">92%</button></td></tr><tr class="hl"><td class="">East</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="East Sell-in: 9,800. Open the definition">9,800</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="East Sell-out: 9,120. Open the definition">9,120</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="East Availability: 41%. Open the definition">41%</button></td></tr><tr class=""><td class="">West</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="West Sell-in: 10,150. Open the definition">10,150</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="West Sell-out: 9,870. Open the definition">9,870</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="West Availability: 88%. Open the definition">88%</button></td></tr><tr class=""><td class="">Central</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="Central Sell-in: 8,300. Open the definition">8,300</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="Central Sell-out: 8,010. Open the definition">8,010</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="Central Availability: 85%. Open the definition">85%</button></td></tr></tbody>
+        </table>
+      </div><aside class="rp-callout"><span class="chip-state ok">Definition</span><b>Sell-in</b><p>Units invoiced to distributors in the week. Shipments, not consumer demand: a distributor can hold stock that has not sold.</p><dl><div><dt>Period</dt><dd>Week 36 (Mon–Sun, invoice date)</dd></div><div><dt>Unit</dt><dd>units</dd></div><div><dt>Source</dt><dd>Finance</dd></div><div><dt>Owner</dt><dd>Commercial finance lead</dd></div></dl></aside></div></div>
+        <div class="rp-tabs" role="tablist" aria-label="FMCG &amp; Distribution · performance pages"><button type="button" role="tab" class="rp-tab" data-act="tab:0" aria-selected="true" tabindex="0">Overview</button><button type="button" role="tab" class="rp-tab" data-act="tab:1" aria-selected="false" tabindex="-1">Sources</button><button type="button" role="tab" class="rp-tab" data-act="tab:2" aria-selected="false" tabindex="-1">Definitions</button></div>
+        <figcaption class="rp-caption">Sample report page · demo data · Where are stock availability, outlet coverage and sales performance falling out of step?</figcaption>
+      </figure></div>
           <p class="small slate" style="max-width:40em;border-top:1px solid var(--rule);padding-top:16px">Stock, sales and route-to-market questions run through the Data Engineering pipeline and the Business Intelligence investigation example. Product, outlet and period are the keys everything is joined on.</p>
         </div>
       </section>

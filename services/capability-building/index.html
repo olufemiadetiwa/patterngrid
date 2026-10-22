@@ -158,38 +158,55 @@
                       <span class="label-caps" style="color:var(--muted);padding-top:3px">03</span><span>Remaining gaps lead to further practice; documented independent tasks become part of the handover evidence.</span>
                     </li>
               </ol>
-              <p class="fine">Sample deliverable · Capability workspace. Illustrative figures, not a client result; the controls work but nothing is sent anywhere.</p>
+              <p class="fine">Below: a sample capability baseline on demo data, rendered the way we build them. Not a client result; the pages and figures respond, nothing is sent anywhere.</p>
             </div>
           </div>
           <div data-scene="capability">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Capability workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></span>Capability workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
+      <figure class="report" data-scene-frame="" role="group" aria-label="Capability baseline">
+        <div class="rp-head">
+          <div class="rp-title"><b>Capability baseline</b><span>Month 3 · demo data</span></div>
+          <div class="rp-slicers"><span class="rp-slicer">Programme <b>Reporting handover</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Role <b>All</b><i aria-hidden="true">▾</i></span></div>
         </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
         
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">Role-to-task progress</span><h3>Proof your team can do the work without us.</h3></div>
-          <div class="scene-seg" role="group" aria-label="Role"><button type="button" class="" data-act="role:0" aria-pressed="false">Leader</button><button type="button" class="on" data-act="role:1" aria-pressed="true">Analyst</button><button type="button" class="" data-act="role:2" aria-pressed="false">Engineer</button></div></div>
-        <div class="scene-grid">
-          <div class="surface">
-            <div class="skill-head"><span>Task</span><span>Baseline</span><span>Guided practice</span><span>Independent</span></div>
-            <button type="button" class="skill-row on" data-act="task:0" aria-pressed="true"><span>Update a measure</span><span class="seg done"></span><span class="seg done"></span><span class="seg done last"></span></button><button type="button" class="skill-row" data-act="task:1" aria-pressed="false"><span>Reconcile a report to source</span><span class="seg done"></span><span class="seg done"></span><span class="seg done last"></span></button><button type="button" class="skill-row" data-act="task:2" aria-pressed="false"><span>Add a drill path</span><span class="seg done"></span><span class="seg done last"></span><span class="seg "></span></button>
-          </div>
-          
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state ok">Independent</span>
-        <h4>Update a measure</h4>
-        <p>Demonstrated on a real work sample and checked by a reviewer. Attendance alone never moves someone here.</p>
-        <dl class="action-drawer-rows"><div><dt>Role</dt><dd>Analyst</dd></div><div><dt>Evidence</dt><dd>an updated measure and a reconciled report checked by a reviewer</dd></div></dl>
+      <div class="rp-card">
+        <span class="rp-card-l">Tasks in scope</span>
+        <span class="rp-card-v num">9</span>
+        <span class="rp-card-d ">3 roles</span>
         
+      </div>
         
-        <span class="action-drawer-note">Illustrative roles and tasks; individual results are never published.</span>
-      </aside>
-        </div>
-        </div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Baseline → guided practice → independent use</span><span>Sample data · nothing is sent or saved</span></div>
-      </div></div>
+      <div class="rp-card">
+        <span class="rp-card-l">Independent</span>
+        <span class="rp-card-v num">6 / 9</span>
+        <span class="rp-card-d ok">demonstrated on real work, checked</span>
+        
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Still guided</span>
+        <span class="rp-card-v num">3 / 9</span>
+        <span class="rp-card-d warn">next: a work sample without help</span>
+        
+      </div>
+        
+      <div class="rp-card">
+        <span class="rp-card-l">Reviewed by</span>
+        <span class="rp-card-v num">Named</span>
+        <span class="rp-card-d ">attendance alone never counts</span>
+        
+      </div>
+      </div><div class="rp-grid">
+      <div class="rp-visual wide">
+        <div class="rp-visual-t">Role × task · baseline → guided practice → independent</div>
+        <table class="rp-matrix">
+          <thead><tr><th class="">Role · task</th><th class="num">Baseline</th><th class="num">Guided</th><th class="num">Independent</th></tr></thead>
+          <tbody><tr class=""><td class="" data-cell="pick:0:0"><button type="button" data-act="pick:0:0" aria-label="Leader · Explain a KPI variance">Leader · Explain a KPI variance</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num ok">●</td></tr><tr class=""><td class="" data-cell="pick:0:1"><button type="button" data-act="pick:0:1" aria-label="Leader · Challenge a definition in review">Leader · Challenge a definition in review</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num muted">○</td></tr><tr class=""><td class="" data-cell="pick:0:2"><button type="button" data-act="pick:0:2" aria-label="Leader · Assign and track a follow-up action">Leader · Assign and track a follow-up action</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num ok">●</td></tr><tr class="hl"><td class="" data-cell="pick:1:0"><button type="button" data-act="pick:1:0" aria-label="Analyst · Update a measure">Analyst · Update a measure</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num ok">●</td></tr><tr class=""><td class="" data-cell="pick:1:1"><button type="button" data-act="pick:1:1" aria-label="Analyst · Reconcile a report to source">Analyst · Reconcile a report to source</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num ok">●</td></tr><tr class=""><td class="" data-cell="pick:1:2"><button type="button" data-act="pick:1:2" aria-label="Analyst · Add a drill path">Analyst · Add a drill path</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num muted">○</td></tr><tr class=""><td class="" data-cell="pick:2:0"><button type="button" data-act="pick:2:0" aria-label="Engineer · Investigate a failed load">Engineer · Investigate a failed load</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num ok">●</td></tr><tr class=""><td class="" data-cell="pick:2:1"><button type="button" data-act="pick:2:1" aria-label="Engineer · Resolve an exception queue item">Engineer · Resolve an exception queue item</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num ok">●</td></tr><tr class=""><td class="" data-cell="pick:2:2"><button type="button" data-act="pick:2:2" aria-label="Engineer · Deploy a model change">Engineer · Deploy a model change</button></td><td class="num ok">●</td><td class="num ok">●</td><td class="num muted">○</td></tr></tbody>
+        </table>
+      </div><aside class="rp-callout"><span class="chip-state ok">Independent</span><b>Analyst · Update a measure</b><p>Demonstrated on a real work sample and checked by a reviewer.</p><dl><div><dt>Evidence</dt><dd>an updated measure and a reconciled report checked by a reviewer</dd></div></dl></aside></div></div>
+        
+        <figcaption class="rp-caption">Sample baseline · illustrative roles and tasks · individual results are never published</figcaption>
+      </figure></div>
         </div>
       </section>
 

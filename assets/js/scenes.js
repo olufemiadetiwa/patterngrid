@@ -37,305 +37,334 @@
 
   /* ------------------------------------------------------------ primitives */
 
-  function frame(o) {
-    return html`
-      <div class="scene${o.compact ? ' scene-compact' : ''}${o.thumb ? ' scene-thumb' : ''}${o.dark ? ' scene-dark' : ''}" data-scene-frame role="group" aria-label="${o.title} — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id">${C.cells(o.cell || 4)}${o.title}</span>
-          <span class="scene-tag">Illustrative demo</span>
-        </div>
-        ${when(!!o.steps && !o.thumb, function () {
-          return html`<div class="scene-steps" role="tablist" aria-label="${o.title} stages">${each(o.steps, function (st, i) {
-            return html`<button type="button" role="tab" class="scene-step" data-act="step:${i}" aria-selected="${i === o.step ? 'true' : 'false'}" tabindex="${i === o.step ? '0' : '-1'}"><span class="n">${i + 1}</span>${st}</button>`;
-          })}</div>`;
-        })}
-        <div class="scene-body" data-scene-body>${o.body}</div>
-        ${when(!o.thumb, function () { return html`<div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>${o.chain}</span><span>Sample data · nothing is sent or saved</span></div>`; })}
-      </div>`;
-  }
+
+  /* ------------------------------------------------------------ primitives
+     A report canvas, not an application: a title line, optional slicer
+     chips, a row of KPI cards, visuals on a dense grid, page tabs along
+     the bottom, and a caption outside the canvas. Numbers are tabular,
+     labels are plain sentences, nothing apologises for itself. */
 
   function chip(tone, text) { return html`<span class="chip-state ${tone}">${text}</span>`; }
 
-  function kpi(o) {
+  function report(o) {
+    var thumb = !!o.thumb;
     return html`
-      <div class="kpi">
-        <span class="kpi-l">${o.label}</span>
-        <span class="kpi-v num">${o.value}</span>
-        <span class="kpi-d"><b class="${o.tone || ''}">${o.delta}</b>${when(!!o.meta, function () { return html` · ${o.meta}`; })}</span>
+      <figure class="report${thumb ? ' scene-thumb' : ''}${o.compact ? ' is-compact' : ''}" data-scene-frame role="group" aria-label="${o.title}">
+        <div class="rp-head">
+          <div class="rp-title"><b>${o.title}</b>${when(!!o.sub, function () { return html`<span>${o.sub}</span>`; })}</div>
+          ${when(!!o.slicers && !thumb, function () { return html`<div class="rp-slicers">${each(o.slicers, function (s) { return html`<span class="rp-slicer">${s[0]} <b>${s[1]}</b><i aria-hidden="true">▾</i></span>`; })}</div>`; })}
+        </div>
+        <div class="rp-body" data-scene-body>${o.body}</div>
+        ${when(!!o.tabs && !thumb, function () {
+          return html`<div class="rp-tabs" role="tablist" aria-label="${o.title} pages">${each(o.tabs, function (t, i) {
+            return html`<button type="button" role="tab" class="rp-tab" data-act="tab:${i}" aria-selected="${i === o.tab ? 'true' : 'false'}" tabindex="${i === o.tab ? '0' : '-1'}">${t}</button>`;
+          })}</div>`;
+        })}
+        ${when(!thumb, function () { return html`<figcaption class="rp-caption">${o.caption || 'Sample report page · demo data'}</figcaption>`; })}
+      </figure>`;
+  }
+
+  function card(o) {
+    var tone = o.tone || '';
+    return html`
+      <div class="rp-card${o.on ? ' on' : ''}" ${raw(o.act ? 'data-act="' + C.esc(o.act) + '"' : '')}>
+        <span class="rp-card-l">${o.label}</span>
+        <span class="rp-card-v num">${o.value}</span>
+        ${when(o.delta != null, function () { return html`<span class="rp-card-d ${tone}">${o.delta}</span>`; })}
+        ${when(!!o.spark, function () { return html`<span class="rp-spark" aria-hidden="true">${each(o.spark, function (v, i, arr) { var mx = Math.max.apply(null, arr); return html`<i style="--h:${Math.round(v / mx * 100)}%" class="${i === arr.length - 1 ? 'on' : ''}"></i>`; })}</span>`; })}
       </div>`;
   }
 
-  function bars(o) {
-    var max = Math.max.apply(null, o.values) * 1.08;
+  function colChart(o) {
+    var max = Math.max.apply(null, o.values.concat([o.plan || 0])) * 1.12;
+    var y = function (v) { return (v / max * 100).toFixed(1); };
     return html`
-      <div class="bars" role="img" aria-label="${o.aria}">
-        <div class="bars-plot" style="--n:${o.values.length}">
+      <div class="rp-visual" style="${o.style || ''}">
+        <div class="rp-visual-t">${o.title}</div>
+        <div class="rp-chart" role="img" aria-label="${o.aria}" style="--n:${o.values.length}">
+          ${when(o.plan != null, function () { return html`<span class="rp-plan" style="--y:${y(o.plan)}%"><i>plan ${o.plan.toFixed(1)}</i></span>`; })}
           ${each(o.values, function (v, i) {
             var on = i === o.highlight;
-            return html`<div class="bar${on ? ' on' : ''}" style="--h:${(v / max * 100).toFixed(1)}%"><span class="bv num">${v.toFixed(1)}</span><span class="bl">${o.labels[i]}</span></div>`;
+            return html`<button type="button" class="rp-bar${on ? ' on' : ''}" style="--h:${y(v)}%" data-act="${o.act ? o.act + ':' + i : ''}" aria-label="${o.labels[i]}: ${v.toFixed(1)}"><span class="rp-bv num">${v.toFixed(1)}</span><span class="rp-bl">${o.labels[i]}</span></button>`;
           })}
-          ${when(o.plan != null, function () { return html`<span class="bars-plan" style="--y:${(o.plan / max * 100).toFixed(1)}%"><i>plan ${o.plan.toFixed(1)}</i></span>`; })}
+          ${when(!!o.note, function () { return html`<div class="rp-note" style="--x:${o.note.x}%;--y:${o.note.y}%"><b>${o.note.h}</b><span>${o.note.t}</span></div>`; })}
         </div>
-        <span class="bars-cap">${o.caption}</span>
       </div>`;
   }
 
-  function drawer(o) {
+  function hBars(o) {
+    var max = Math.max.apply(null, o.rows.map(function (r) { return Math.abs(r[1]); })) || 1;
     return html`
-      <aside class="action-drawer${o.raised ? ' raised' : ''}" aria-live="polite">
-        ${when(!!o.chip, function () { return chip(o.chipTone || 'warn', o.chip); })}
-        <h4>${o.title}</h4>
-        ${when(!!o.text, function () { return html`<p>${o.text}</p>`; })}
-        ${when(!!(o.rows && o.rows.length), function () {
-          return html`<dl class="action-drawer-rows">${each(o.rows, function (r) { return html`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`; })}</dl>`;
-        })}
-        ${when(!!o.extra, function () { return o.extra; })}
-        ${when(!!o.action, function () {
-          return html`<button type="button" class="btn action-drawer-cta" data-act="${o.action.act}" ${raw(o.action.disabled ? 'disabled' : '')}>${o.action.label}<span class="chev" aria-hidden="true">→</span></button>`;
-        })}
-        ${when(!!o.note, function () { return html`<span class="action-drawer-note">${o.note}</span>`; })}
-      </aside>`;
+      <div class="rp-visual">
+        <div class="rp-visual-t">${o.title}</div>
+        <div class="rp-hbars">
+          ${each(o.rows, function (r, i) {
+            var on = i === o.highlight;
+            return html`<button type="button" class="rp-hbar${on ? ' on' : ''}${r[1] < 0 ? ' neg' : ''}" data-act="${o.act ? o.act + ':' + i : ''}" aria-pressed="${on ? 'true' : 'false'}"><span>${r[0]}</span><span class="rp-track"><i style="--w:${(Math.abs(r[1]) / max * 100).toFixed(0)}%"></i></span><b class="num">${o.fmt ? o.fmt(r[1]) : r[1]}</b></button>`;
+          })}
+        </div>
+      </div>`;
   }
 
-  function records(list) {
-    return html`<ul class="recs">${each(list, function (r) { return html`<li><span class="mono">${r[0]}</span><span>${r[1]}</span>${when(r[2] != null, function () { return html`<b class="num">${r[2]}</b>`; })}</li>`; })}</ul>`;
+  /* Matrix visual: dense rows, numeric columns right-aligned in mono, optional
+     shading per cell (`shade` = 0..1) and a highlighted row. */
+  function matrix(o) {
+    return html`
+      <div class="rp-visual${o.wide ? ' wide' : ''}">
+        ${when(!!o.title, function () { return html`<div class="rp-visual-t">${o.title}</div>`; })}
+        <table class="rp-matrix">
+          <thead><tr>${each(o.head, function (h, i) { return html`<th class="${i ? 'num' : ''}">${h}</th>`; })}</tr></thead>
+          <tbody>${each(o.rows, function (r) {
+            return html`<tr class="${r.hl ? 'hl' : ''}${r.cls ? ' ' + r.cls : ''}">${each(r.cells, function (c, i) {
+              var v = typeof c === 'object' && c !== null ? c : { t: c };
+              return html`<td class="${i ? 'num' : ''}${v.tone ? ' ' + v.tone : ''}" ${raw(v.shade != null ? 'style="--s:' + v.shade + '"' : '')} ${raw(v.act ? 'data-cell="' + C.esc(v.act) + '"' : '')}>${v.act ? html`<button type="button" data-act="${v.act}" aria-label="${v.aria || v.t}">${v.t}</button>` : v.t}</td>`;
+            })}</tr>`;
+          })}</tbody>
+        </table>
+      </div>`;
   }
 
-  scene.frame = frame; scene.chip = chip; scene.kpi = kpi; scene.bars = bars; scene.drawer = drawer; scene.records = records;
+  /* A definition row, the consultancy's actual product. */
+  function defRow(m) {
+    return html`<div class="rp-def"><b>${m.name}</b><p>${m.definition}</p><dl><div><dt>Period</dt><dd>${m.period}</dd></div><div><dt>Unit</dt><dd>${m.unit}</dd></div><div><dt>Source</dt><dd>${m.source}</dd></div><div><dt>Owner</dt><dd>${m.owner}</dd></div></dl></div>`;
+  }
+
+  /* A callout outside any chart: a hairline, a bold line and a note. */
+  function callout(o) {
+    return html`<aside class="rp-callout${o.tone ? ' ' + o.tone : ''}">${when(!!o.chip, function () { return chip(o.chipTone || 'neutral', o.chip); })}<b>${o.title}</b>${when(!!o.text, function () { return html`<p>${o.text}</p>`; })}${when(!!(o.rows && o.rows.length), function () { return html`<dl>${each(o.rows, function (r) { return html`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`; })}</dl>`; })}${when(!!o.extra, function () { return o.extra; })}${when(!!o.action, function () { return html`<button type="button" class="rp-btn" data-act="${o.action.act}" ${raw(o.action.disabled ? 'disabled' : '')}>${o.action.label}</button>`; })}</aside>`;
+  }
+
+  scene.chip = chip; scene.report = report; scene.card = card; scene.colChart = colChart; scene.hBars = hBars; scene.matrix = matrix; scene.defRow = defRow; scene.callout = callout;
+  /* Kept for pages that still use the older names. */
+  scene.drawer = callout;
+  function fmt1(v) { return (v > 0 ? '+' : '') + v.toFixed(1); }
+
 
   /* -------------------------------------------------------------- scenes */
-
   var defs = {};
 
-  /* Performance: metric → trace → accountable action. */
+  /* Commercial performance report: overview, variance, actions, definitions. */
+  var BI_DEFS = [
+    { name: 'Net sales', definition: D.definition, period: 'Week 36, Monday to Sunday, by invoice date', unit: 'sample units (m)', source: D.ledgers.join(' · '), owner: D.owner },
+    { name: 'Variance to plan', definition: 'Net sales less the plan agreed at the start of the quarter, for the same week and the same product lines. Shown in units and as a share of plan.', period: 'Week 36', unit: 'sample units (m) and %', source: 'Finance ledger · plan file', owner: D.owner },
+    { name: 'Returns', definition: 'Credit notes posted against invoices of the week, by product line. Counted when posted, not when the goods arrive back.', period: 'Week 36, by posting date', unit: 'sample units (m)', source: D.ledgers[0], owner: 'Commercial finance lead' }
+  ];
+  var BI_TABS = ['Overview', 'Variance', 'Actions', 'Definitions'];
   defs.bi = {
-    init: function () { return { step: 0, line: 1, assigned: false }; },
-    steps: ['Performance', 'Trace sources', 'Assign action'],
-    title: 'Decision workspace',
-    chain: 'Measure → evidence → accountable action',
+    init: function () { return { tab: 0, line: 1, assigned: false }; },
+    title: 'Commercial performance',
     render: function (s, o) {
-      var delta = (D.current - D.plan);
-      var pct = Math.round(delta / D.plan * 100);
+      var delta = D.current - D.plan; var pctv = Math.round(delta / D.plan * 100);
       var line = D.lines[s.line];
+      var cards = html`<div class="rp-cards">
+        ${card({ label: 'Net sales · W36', value: D.current.toFixed(1) + 'm', delta: fmt1(delta) + 'm vs plan · ' + pctv + '%', tone: 'warn', spark: D.netSales })}
+        ${card({ label: 'Gross invoiced', value: D.gross.toFixed(1) + 'm', delta: 'on plan', tone: 'ok' })}
+        ${card({ label: 'Returns', value: D.returns.toFixed(1) + 'm', delta: (D.returns / D.gross * 100).toFixed(1) + '% of gross · 118 credit notes', tone: 'warn' })}
+        ${card({ label: 'Availability · lowest', value: '41%', delta: 'Surulere · 4 locations', tone: 'warn' })}
+      </div>`;
       var body;
       if (o.thumb) {
-        body = html`<div class="surface">${kpi({ label: 'Week 36 net sales', value: D.current.toFixed(1) + 'm', delta: Math.abs(delta).toFixed(1) + 'm below plan', tone: 'warn', meta: 'Plan ' + D.plan.toFixed(1) + 'm' })}${bars({ labels: D.weeks, values: D.netSales, highlight: 5, plan: D.plan, caption: 'Weekly net sales · sample units (m)', aria: 'Net sales by week' })}</div>`;
-      } else if (s.step === 0) {
-        body = html`
-          <div class="scene-head"><div><span class="label-caps">A measure worth acting on</span><h3>Net sales, with context.</h3></div><span class="scene-meta">Sample period · W31–W36</span></div>
-          <div class="scene-grid">
-            <div class="surface">
-              ${kpi({ label: 'Week 36 net sales', value: D.current.toFixed(1) + 'm', delta: Math.abs(delta).toFixed(1) + 'm below plan', tone: 'warn', meta: 'Plan ' + D.plan.toFixed(1) + 'm' })}
-              ${bars({ labels: D.weeks, values: D.netSales, highlight: 5, plan: D.plan, caption: 'Weekly net sales · sample units (m) · zero baseline', aria: 'Net sales by week, W31 to W36, with W36 at 9.6 against a plan of 10.0' })}
-            </div>
-            ${when(!o.preview, function () { return drawer({ chip: 'Needs review', title: 'Understand the gap.', text: 'Trace the W36 figure to its source records before assigning a response.', rows: [['Reporting period', 'Week 36'], ['Source ledgers', String(D.ledgers.length)]], action: { act: 'step:1', label: 'Trace this metric' } }); })}
-          </div>
-          ${when(!!o.preview, function () { return html`<p class="scene-meta">${chip('warn', 'Needs review')} Trace the W36 figure to its source records, then assign a follow-up with an owner.</p>`; })}`;
-      } else if (s.step === 1) {
-        body = html`
-          <div class="scene-head"><div><span class="label-caps">Where the −${Math.abs(delta).toFixed(1)}m comes from</span><h3>One figure, its breakdown and its definition.</h3></div><span class="scene-meta">Variance by product line · sums to −${Math.abs(delta).toFixed(1)}</span></div>
-          <div class="scene-grid">
-            <div class="surface">
-              <div class="trace-rows" role="list">
-                ${each(D.lines, function (l, i) {
-                  var w = Math.abs(l[1]) / 0.4 * 100;
-                  return html`<button type="button" role="listitem" class="trace-row${i === s.line ? ' on' : ''}" data-act="line:${i}" aria-pressed="${i === s.line ? 'true' : 'false'}"><span>${l[0]}</span><span class="tbar"><i style="--w:${w}%"></i></span><b class="num ${l[1] < 0 ? 'warn' : ''}">${l[1] === 0 ? '0.0' : l[1].toFixed(1)}</b></button>`;
-                })}
-              </div>
-              <div class="defn"><span class="label-caps">Agreed definition</span><p>${D.definition}</p><span class="scene-meta">Owner · ${D.owner}</span></div>
-            </div>
-            ${drawer({ chip: line[1] < 0 ? 'Largest driver' : 'In line with plan', chipTone: line[1] < 0 ? 'warn' : 'ok', title: line[0] + ' · ' + (line[1] === 0 ? '0.0' : line[1].toFixed(1)) + 'm', text: line[1] < 0 ? 'Returns in ' + line[0].toLowerCase() + ' account for most of the gap. The source rows are the credit notes posted against W36 invoices.' : line[0] + ' reconciles to plan. No action suggested from this line.', rows: [['Records', line[1] < 0 ? '118 credit notes' : '—'], ['Source', D.ledgers[0]], ['Checked', 'Reconciles to ledger']], action: { act: 'step:2', label: 'Assign a follow-up' } })}
-          </div>`;
+        body = html`${cards}${colChart({ title: 'Net sales by week, sample units (m)', labels: D.weeks, values: D.netSales, plan: D.plan, highlight: 5, aria: 'Net sales by week' })}`;
+      } else if (s.tab === 0) {
+        body = html`${cards}<div class="rp-grid">
+          ${colChart({ title: 'Net sales by week, sample units (m)', labels: D.weeks, values: D.netSales, plan: D.plan, highlight: 5, aria: 'Net sales by week, W31 to W36, W36 at 9.6 against a plan of 10.0', act: 'week', note: { x: 70, y: 18, h: '−0.4m in W36', t: 'Snacks returns explain −0.3m. Open Variance.' } })}
+          ${hBars({ title: 'Variance to plan by product line (m)', rows: D.lines, highlight: s.line, act: 'line', fmt: fmt1 })}
+        </div>`;
+      } else if (s.tab === 1) {
+        body = html`<div class="rp-grid">
+          ${matrix({ title: 'Week 36 by product line, sample units (m)', wide: true, head: ['Product line', 'Gross', 'Returns', 'Net sales', 'Plan', 'Variance', 'Credit notes'], rows: D.lines.map(function (l, i) {
+            var gross = [3.1, 2.9, 2.2, 1.8][i]; var ret = [0.1, 0.3, 0.0, 0.0][i]; var net = gross - ret; var plan = net - l[1];
+            return { hl: i === s.line, cells: [{ t: l[0], act: 'line:' + i, aria: 'Select ' + l[0] }, gross.toFixed(1), { t: ret.toFixed(1), shade: ret / 0.3 }, net.toFixed(1), plan.toFixed(1), { t: fmt1(l[1]), tone: l[1] < 0 ? 'neg' : '' }, [22, 118, 4, 0][i]] };
+          }).concat([{ cls: 'total', cells: ['Total', D.gross.toFixed(1), D.returns.toFixed(1), D.current.toFixed(1), D.plan.toFixed(1), { t: fmt1(delta), tone: 'neg' }, '144'] }]) })}
+          ${callout(line[1] < 0
+            ? { chip: 'Largest driver', chipTone: 'warn', title: line[0] + ' · ' + fmt1(line[1]) + 'm', text: 'Returns in ' + line[0].toLowerCase() + ' account for most of the gap: 118 credit notes posted against W36 invoices, reconciled to the ledger.', rows: [['Source', D.ledgers[0]], ['Owner', D.owner]], action: { act: 'tab:2', label: 'Assign a follow-up' } }
+            : { chip: 'In line with plan', chipTone: 'ok', title: line[0] + ' · ' + fmt1(line[1]) + 'm', text: line[0] + ' reconciles to plan. No action suggested from this line.', rows: [['Source', D.ledgers[0]]] })}
+        </div>`;
+      } else if (s.tab === 2) {
+        body = html`<div class="rp-grid">
+          ${matrix({ title: 'Follow-up actions linked to this report', wide: true, head: ['Action', 'Evidence', 'Owner', 'Due', 'Status'], rows: [
+            { hl: true, cells: ['Are Snacks returns concentrated in a few outlets, and since which week?', 'W36 · Snacks −0.3m · 118 credit notes', D.owner, 'Next weekly review', { t: s.assigned ? 'Assigned' : 'Awaiting owner', tone: s.assigned ? 'ok' : 'warn' }] },
+            { cells: ['Confirm Beverages credit notes are timing, not demand', 'W36 · Beverages −0.1m', 'Sales operations lead', 'Next weekly review', { t: 'Assigned', tone: 'ok' }] },
+            { cells: ['Restock Surulere ahead of W38', 'Availability 41% · 1 delivery in W36', 'Supply chain data owner', 'W37', { t: 'In progress', tone: 'ok' }] }
+          ] })}
+          ${callout(s.assigned
+            ? { chip: 'Recorded', chipTone: 'ok', title: 'The action is on the agenda.', text: 'The question, its evidence and its owner travel together into the next review. Nothing here was sent anywhere.', action: { act: 'reset', label: 'Start again' } }
+            : { chip: 'Ready to assign', chipTone: 'warn', title: 'Make it someone\'s job.', text: 'An action without an owner is not an action. Assigning it records who answers at the next review.', action: { act: 'assign', label: 'Assign to ' + D.owner.toLowerCase() } })}
+        </div>`;
       } else {
-        body = html`
-          <div class="scene-head"><div><span class="label-caps">A question with an owner</span><h3>Decide who looks, and by when.</h3></div><span class="scene-meta">Linked to W36 net sales · Snacks</span></div>
-          <div class="scene-grid">
-            <div class="surface">
-              <div class="action-card${s.assigned ? ' done' : ''}">
-                <span class="label-caps">Follow-up action</span>
-                <p class="action-q">Are Snacks returns concentrated in a few outlets, and since which week?</p>
-                <dl class="action-drawer-rows"><div><dt>Owner</dt><dd>${D.owner}</dd></div><div><dt>Due</dt><dd>Next weekly review</dd></div><div><dt>Evidence linked</dt><dd>W36 net sales · Snacks −0.3m · 118 credit notes</dd></div><div><dt>Status</dt><dd>${s.assigned ? chip('ok', 'Assigned · owner recorded') : chip('warn', 'Awaiting assignment')}</dd></div></dl>
-              </div>
-            </div>
-            ${drawer({ chip: s.assigned ? 'Recorded' : 'Ready to assign', chipTone: s.assigned ? 'ok' : 'warn', title: s.assigned ? 'The action is on the agenda.' : 'Make it someone\'s job.', text: s.assigned ? 'The question, its evidence and its owner travel together into the next review. Nothing here was sent anywhere.' : 'An action without an owner is a wish. Assigning it records who answers at the next review.', action: s.assigned ? { act: 'reset', label: 'Start again' } : { act: 'assign', label: 'Assign to ' + D.owner.toLowerCase() } })}
-          </div>`;
+        body = html`<div class="rp-defs">${each(BI_DEFS, defRow)}</div>`;
       }
-      return frame({ title: defs.bi.title, steps: defs.bi.steps, step: s.step, chain: defs.bi.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 4 });
+      return report({ title: defs.bi.title, sub: 'Week 36 · demo data: a Lagos FMCG distributor', slicers: [['Week', '36'], ['Region', 'All'], ['Channel', 'All']], tabs: BI_TABS, tab: s.tab, body: body, thumb: o.thumb, compact: o.compact, caption: 'Sample report page · demo data for a Lagos FMCG distributor · every figure opens to its definition' });
     },
     act: function (s, key, val) {
-      if (key === 'step') s.step = Number(val);
-      if (key === 'line') s.line = Number(val);
+      if (key === 'tab') s.tab = Number(val);
+      if (key === 'line') { s.line = Number(val); if (s.tab === 0) s.tab = 1; }
+      if (key === 'week') s.tab = 1;
       if (key === 'assign') s.assigned = true;
-      if (key === 'reset') { s.step = 0; s.assigned = false; s.line = 1; }
+      if (key === 'reset') { s.tab = 0; s.assigned = false; s.line = 1; }
     }
   };
 
-  /* Delivery: initiatives, owners, dependencies, readiness, timeline. */
   var INITS = [
     { id: 'defs', name: 'Metric definitions', owner: 'Finance lead', phase: 1, q: 'Which definition of net sales do we report?', accept: 'One agreed definition, period rule and owner in the KPI dictionary.', needs: [] },
     { id: 'src', name: 'Source integration', owner: 'Data owner', phase: 1, q: 'Can sales and finance data be joined without manual reconciliation?', accept: 'Both sources load on schedule with reconciliation checks passing.', needs: ['defs'] },
     { id: 'rep', name: 'Weekly commercial reporting', owner: 'Commercial finance lead', phase: 2, q: 'Where is performance slipping this week?', accept: 'Reconciles to the ledger; used in the weekly review for four consecutive weeks.', needs: ['defs', 'src'] },
     { id: 'ai', name: 'AI reporting assistant', owner: 'Process owner', phase: 3, q: 'Can the weekly briefing be drafted with less manual preparation?', accept: 'Draft passes agreed checks; reviewer approval recorded for every release.', needs: ['rep'] }
   ];
+
+  /* Delivery roadmap: initiatives on a phase timeline, readiness that
+     responds to prerequisites. A plan, drawn as a plan. */
   defs.strategy = {
     init: function () { return { done: { defs: true, src: false }, sel: 'rep' }; },
-    title: 'Delivery workspace',
-    chain: 'Business question → readiness → sequenced roadmap',
+    title: 'Delivery roadmap',
     render: function (s, o) {
       function ready(it) { return it.needs.every(function (n) { return s.done[n]; }); }
-      function status(it) {
-        if (s.done[it.id]) return ['ok', 'Complete'];
-        return ready(it) ? ['ok', 'Ready to sequence'] : ['warn', 'Foundation needed'];
-      }
-      var sel = INITS.filter(function (i) { return i.id === s.sel; })[0];
-      var st = status(sel);
-      var body = html`
-        <div class="scene-head"><div><span class="label-caps">Phased roadmap</span><h3>Four initiatives, in the order they can succeed.</h3></div>
-          ${when(!o.preview, function () { return html`<label class="scene-toggle"><input type="checkbox" data-act="toggle:src" ${raw(s.done.src ? 'checked' : '')}><span>Try it: mark source integration complete</span></label>`; })}</div>
-        <div class="scene-grid wide">
-          <div class="surface">
-            <div class="tl-head"><span>Initiative</span><span>Owner</span><span class="tl-phases"><i>Phase 1</i><i>Phase 2</i><i>Phase 3</i></span><span>Status</span></div>
-            ${each(INITS, function (it) {
-              var sst = status(it);
-              return html`<button type="button" class="tl-row${it.id === s.sel ? ' on' : ''}" data-act="sel:${it.id}" aria-pressed="${it.id === s.sel ? 'true' : 'false'}">
-                <span class="tl-name">${it.name}${when(it.needs.length > 0, function () { return html`<small>needs ${it.needs.map(function (n) { return INITS.filter(function (x) { return x.id === n; })[0].name.toLowerCase(); }).join(', ')}</small>`; })}</span>
-                <span class="tl-owner">${it.owner}</span>
-                <span class="tl-phases"><i class="tl-bar p${it.phase} ${sst[0]}"></i></span>
-                <span>${chip(sst[0], sst[1])}</span>
-              </button>`;
-            })}
-          </div>
-          ${when(!o.compact, function () {
-            return drawer({ chip: st[1], chipTone: st[0], title: sel.name, rows: [['Business question', sel.q], ['Prerequisites', sel.needs.length ? sel.needs.map(function (n) { return INITS.filter(function (x) { return x.id === n; })[0].name; }).join(' · ') : 'None. This comes first.'], ['Acceptance', sel.accept], ['Owner', sel.owner]], note: st[0] === 'warn' ? 'Readiness changes when the prerequisites above are complete.' : '' });
+      function status(it) { if (s.done[it.id]) return ['ok', 'Complete']; return ready(it) ? ['ok', 'Ready to sequence'] : ['warn', 'Foundation needed']; }
+      var sel = INITS.filter(function (i) { return i.id === s.sel; })[0]; var st = status(sel);
+      var rows = html`<div class="rp-visual wide">
+        <div class="rp-visual-t">Four initiatives, three phases · a change in prerequisites changes readiness</div>
+        <div class="rp-roadmap">
+          <div class="rm-head"><span>Initiative</span><span>Owner</span><span class="rm-ph"><i>Phase 1 · Foundations</i><i>Phase 2 · Reporting</i><i>Phase 3 · Assisted work</i></span><span>Status</span></div>
+          ${each(INITS, function (it) {
+            var sst = status(it);
+            return html`<button type="button" class="rm-row${it.id === s.sel ? ' on' : ''}" data-act="sel:${it.id}" aria-pressed="${it.id === s.sel ? 'true' : 'false'}">
+              <span class="rm-name">${it.name}${when(it.needs.length > 0, function () { return html`<small>after ${it.needs.map(function (n) { return INITS.filter(function (x) { return x.id === n; })[0].name.toLowerCase(); }).join(' and ')}</small>`; })}</span>
+              <span class="rm-owner">${it.owner}</span>
+              <span class="rm-ph"><i class="rm-bar p${it.phase} ${sst[0]}${s.done[it.id] ? ' done' : ''}"></i></span>
+              <span>${chip(sst[0], sst[1])}</span>
+            </button>`;
           })}
         </div>
-        ${when(!!o.compact, function () { return html`<p class="scene-meta"><b>${sel.name}</b> · ${sel.owner} · ${st[1]}. ${st[0] === 'warn' ? 'Readiness changes when its prerequisites are complete.' : sel.q}</p>`; })}`;
-      if (o.thumb) body = html`<div class="surface">${each(INITS, function (it) { var sst = status(it); return html`<div class="tl-row"><span class="tl-name">${it.name}</span><span class="tl-phases"><i class="tl-bar p${it.phase} ${sst[0]}"></i></span><span>${chip(sst[0], sst[1])}</span></div>`; })}</div>`;
-      return frame({ title: defs.strategy.title, chain: defs.strategy.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 0 });
+      </div>`;
+      if (o.thumb) return report({ title: defs.strategy.title, body: rows, thumb: true });
+      var body = html`<div class="rp-cards">
+        ${card({ label: 'Initiatives', value: '4', delta: '2 foundations · 1 report · 1 assistant' })}
+        ${card({ label: 'Ready to sequence', value: String(INITS.filter(function (i) { return !s.done[i.id] && ready(i); }).length), delta: 'prerequisites met', tone: 'ok' })}
+        ${card({ label: 'Foundation needed', value: String(INITS.filter(function (i) { return !s.done[i.id] && !ready(i); }).length), delta: 'blocked by an earlier step', tone: 'warn' })}
+        ${card({ label: 'Decision gates', value: '3', delta: 'one before each phase' })}
+      </div>
+      <label class="rp-toggle"><input type="checkbox" data-act="toggle:src" ${raw(s.done.src ? 'checked' : '')}><span>Try it: mark source integration complete and watch readiness change</span></label>
+      <div class="rp-grid">${rows}${callout({ chip: st[1], chipTone: st[0], title: sel.name, rows: [['Business question', sel.q], ['Prerequisites', sel.needs.length ? sel.needs.map(function (n) { return INITS.filter(function (x) { return x.id === n; })[0].name; }).join(' · ') : 'None. This comes first.'], ['Acceptance', sel.accept], ['Owner', sel.owner]] })}</div>`;
+      return report({ title: defs.strategy.title, sub: 'Q4 plan · demo data', body: body, compact: o.compact, caption: 'Sample roadmap · demo data · readiness is computed from the prerequisites, not typed in' });
     },
-    act: function (s, key, val, el) {
-      if (key === 'toggle') s.done[val] = !!el.checked;
-      if (key === 'sel') s.sel = val;
-    }
+    act: function (s, key, val, el) { if (key === 'toggle') s.done[val] = el ? !!el.checked : !s.done[val]; if (key === 'sel') s.sel = val; }
   };
 
-  /* Sources: system records → shared keys → one business view. */
   var SOURCES = [
     { id: 'sales', name: 'Sales', system: 'ERP sell-out', key: 'outlet_code', fields: ['outlet_code', 'sku', 'units', 'week'], recs: D.locations.map(function (l) { return ['OUT-' + l.outlet, 'SKU 4471 · W36', l.sales === 100 ? 312 : l.sales === 96 ? 299 : l.sales === 61 ? 190 : 278]; }) },
     { id: 'stock', name: 'Stock', system: 'Warehouse file', key: 'loc_code', fields: ['loc_code', 'item', 'avail_pct', 'week'], recs: D.locations.map(function (l) { return ['LOC-' + l.loc, 'Item 4471 · W36', l.avail + '%']; }) },
     { id: 'dist', name: 'Distribution', system: 'Route planner', key: 'drop_code', fields: ['drop_code', 'route', 'deliveries', 'week'], recs: D.locations.map(function (l) { return ['DROP-' + l.drop, 'Route E · W36', l.hl ? 1 : 3]; }) }
   ];
+
+  /* Platform monitor: loads, sources and quality on one report page. */
+  var RUNS = [
+    { src: 'ERP orders', sys: 'ERP sell-out', at: '06:10', rows: '12,418', checks: '12/12', st: 'Loaded', tone: 'ok' },
+    { src: 'CRM outlets', sys: 'Outlet master', at: '06:14', rows: '1,206', checks: '8/8', st: 'Loaded', tone: 'ok' },
+    { src: 'Stock file', sys: 'Warehouse file', at: '06:22', rows: '584', checks: '6/7', st: '1 held', tone: 'warn' }
+  ];
   defs.engineering = {
-    init: function () { return { src: 'stock', held: false }; },
-    title: 'Source workspace',
-    chain: 'Source records → shared keys → one view',
+    init: function () { return { tab: 0, src: 'stock', held: false }; },
+    title: 'Platform monitor',
     render: function (s, o) {
       var cur = SOURCES.filter(function (x) { return x.id === s.src; })[0];
-      var body = html`
-        <div class="scene-head"><div><span class="label-caps">Three systems, one location</span><h3>Every record keeps its source. One key joins them.</h3></div><span class="scene-meta">Select a source to see what it contributes</span></div>
-        <div class="src-grid">
-          ${each(SOURCES, function (src) {
-            return html`<button type="button" class="src-tile${src.id === s.src ? ' on' : ''}" data-act="src:${src.id}" aria-pressed="${src.id === s.src ? 'true' : 'false'}">
-              <span class="src-sys"><b>${src.name}</b><small>${src.system}</small></span>
-              ${records(src.recs.slice(0, 3))}
-              <span class="src-fields">${each(src.fields, function (f) { return html`<code class="${f === src.key ? 'key' : ''}">${f}</code>`; })}</span>
-            </button>`;
-          })}
-        </div>
-        <div class="join${o.compact ? ' compact' : ''}">
-          ${when(!o.compact, function () { return html`<div class="join-model surface">
-            <span class="label-caps">Shared model · location 0118 → Surulere</span>
-            <div class="join-row"><span>${cur.key}</span><i class="arr" aria-hidden="true"></i><span class="on">location_id</span></div>
-            <div class="join-row"><span>${cur.fields[2]}</span><i class="arr" aria-hidden="true"></i><span class="on">${cur.id === 'sales' ? 'sales_index' : cur.id === 'stock' ? 'availability' : 'deliveries'}</span></div>
-            <span class="scene-meta">${cur.name} contributes ${cur.fields.length} fields; ${cur.key} is standardised to one location id with a quality check on the way in.</span>
-          </div>`; })}
-          ${when(!o.preview, function () { return html`<div class="join-view surface">
-            <span class="label-caps">Resulting view · W36${o.compact ? ' · ' + cur.name.toLowerCase() + ' highlighted' : ''}</span>
-            <div class="view-rows">
-              ${each(D.locations, function (l) { return html`<div class="${l.hl ? 'hl' : ''}"><span>${l.name}</span><span class="num ${s.src === 'sales' ? 'on' : ''}">${l.sales}</span><span class="num ${s.src === 'stock' ? 'on' : ''}">${l.avail}%</span><span class="num ${s.src === 'dist' ? 'on' : ''}">${l.hl ? 1 : 3}</span></div>`; })}
-            </div>
-            <span class="scene-meta">sales index · availability · deliveries</span>
-          </div>`; })}
-          ${when(!o.compact, function () { return drawer(s.held
-            ? { chip: 'Held record', chipTone: 'warn', title: 'Stock row 412 · missing product id', text: 'The record cannot join the product master, so it is held rather than loaded as an unknown product. Once the id is supplied it is revalidated against the same checks.', rows: [['Owner', 'Supply chain data owner'], ['Return path', 'Revalidate → curated stock model']], action: { act: 'held:0', label: 'Back to the loaded path' } }
-            : { chip: '6 of 7 checks passed', chipTone: 'warn', title: 'One record was held.', text: 'The quality gate holds anything that cannot be joined and tells a named owner. Everything else loaded on schedule at 06:22.', rows: [['Loaded', 'ERP orders · CRM outlets · Stock file'], ['Held', '1 stock record']], action: { act: 'held:1', label: 'Trace the held record' } }); })}
-        </div>
-        ${when(!!o.compact, function () { return html`<p class="scene-meta">${chip('warn', '6 of 7 checks passed')} One stock record was held for a named owner; everything else loaded at 06:22.</p>`; })}`;
-      if (o.thumb) body = html`<div class="src-grid">${each(SOURCES.slice(0, 2), function (src) { return html`<div class="src-tile${src.id === s.src ? ' on' : ''}"><span class="src-sys"><b>${src.name}</b><small>${src.system}</small></span>${records(src.recs.slice(0, 2))}<span class="src-fields">${each(src.fields.slice(0, 3), function (f) { return html`<code class="${f === src.key ? 'key' : ''}">${f}</code>`; })}</span></div>`; })}</div>`;
-      return frame({ title: defs.engineering.title, chain: defs.engineering.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 2 });
+      var cards = html`<div class="rp-cards">
+        ${card({ label: 'Sources loaded', value: '3 / 3', delta: 'by 06:22 · on schedule', tone: 'ok' })}
+        ${card({ label: 'Records loaded', value: '14,208', delta: 'W36', spark: [12.9, 13.4, 13.8, 14.1, 14.0, 14.2] })}
+        ${card({ label: 'Checks passed', value: '26 / 27', delta: '1 record held · owner notified', tone: 'warn' })}
+        ${card({ label: 'Traceable to source', value: '100%', delta: 'every row keeps its system and key', tone: 'ok' })}
+      </div>`;
+      var loads = matrix({ title: 'Loads this morning', wide: true, head: ['Source', 'System', 'Loaded at', 'Rows', 'Checks', 'Status'], rows: RUNS.map(function (r) { return { hl: r.tone === 'warn', cells: [{ t: r.src, act: 'src:' + (r.src === 'ERP orders' ? 'sales' : r.src === 'Stock file' ? 'stock' : 'dist') }, r.sys, r.at, r.rows, r.checks, { t: r.st, tone: r.tone }] }; }) });
+      var body;
+      if (o.thumb) body = html`${cards}${loads}`;
+      else if (s.tab === 0) body = html`${cards}<div class="rp-grid">${loads}${callout(s.held
+        ? { chip: 'Held record', chipTone: 'warn', title: 'Stock row 412 · missing product id', text: 'The record cannot join the product master, so it is held rather than loaded as an unknown product. Once the id is supplied it is revalidated against the same checks.', rows: [['Owner', 'Supply chain data owner'], ['Return path', 'Revalidate → curated stock model']], action: { act: 'held:0', label: 'Back to the loaded path' } }
+        : { chip: '6 of 7 checks passed', chipTone: 'warn', title: 'One stock record was held.', text: 'The quality gate holds anything that cannot be joined and tells a named owner. Everything else loaded on schedule.', action: { act: 'held:1', label: 'Trace the held record' } })}</div>`;
+      else if (s.tab === 1) body = html`<div class="rp-grid">
+        ${matrix({ title: 'How ' + cur.name.toLowerCase() + ' fields map to the shared model', wide: true, head: ['Source field', 'Model field', 'Rule', 'Check'], rows: [
+          { hl: true, cells: [cur.key, 'location_id', 'Standardised to one location id', { t: 'Passed', tone: 'ok' }] },
+          { cells: [cur.fields[1], cur.id === 'sales' ? 'product_id' : cur.id === 'stock' ? 'product_id' : 'route_id', 'Matched to the product master', { t: cur.id === 'stock' ? '1 held' : 'Passed', tone: cur.id === 'stock' ? 'warn' : 'ok' }] },
+          { cells: [cur.fields[2], cur.id === 'sales' ? 'units_sold' : cur.id === 'stock' ? 'availability_pct' : 'deliveries', 'Typed and range-checked', { t: 'Passed', tone: 'ok' }] },
+          { cells: [cur.fields[3], 'week', 'ISO week from the record date', { t: 'Passed', tone: 'ok' }] }
+        ] })}
+        ${callout({ chip: cur.name, chipTone: 'neutral', title: cur.system, text: cur.name + ' contributes ' + cur.fields.length + ' fields. Select another source in the loads table to see what it contributes.', rows: [['Key', cur.key], ['Sample record', cur.recs[0][0] + ' · ' + cur.recs[0][1]]] })}
+      </div>`;
+      else body = html`${matrix({ title: 'Resulting view · W36 · one row per location, every figure traceable', wide: true, head: ['Location', 'Sales index', 'Availability', 'Deliveries', 'Source keys'], rows: D.locations.map(function (l) { return { hl: !!l.hl, cells: [l.name, String(l.sales), { t: l.avail + '%', shade: 1 - l.avail / 100 }, String(l.hl ? 1 : 3), 'OUT-' + l.outlet + ' · LOC-' + l.loc + ' · DROP-' + l.drop] }; }) })}`;
+      return report({ title: defs.engineering.title, sub: 'W36 · demo data: a Lagos FMCG distributor', slicers: [['Run', 'Mon 06:00'], ['Source', 'All']], tabs: ['Loads', 'Mapping', 'Resulting view'], tab: s.tab, body: body, thumb: o.thumb, compact: o.compact, caption: 'Sample platform monitor · demo data · a held record names an owner instead of loading as unknown' });
     },
-    act: function (s, key, val) { if (key === 'src') s.src = val; if (key === 'held') s.held = val === '1'; }
+    act: function (s, key, val) { if (key === 'tab') s.tab = Number(val); if (key === 'src') { s.src = val; s.tab = 1; } if (key === 'held') s.held = val === '1'; }
   };
 
-  /* Review: a work item through checks to a human decision. */
   var ITEMS = [
     { id: 'w36', name: 'Weekly briefing · W36', src: 'Sales W36 · Stock W36 · Finance ledger W36', proposed: 'Net sales 9.6m against plan 10.0m (−4%). Snacks returns account for −0.3m.', checks: 'Passed · all figures W36 · references resolve', ok: true },
     { id: 'w36b', name: 'Weekly briefing · W36 (ledger late)', src: 'Sales W36 · Stock W36 · Finance ledger — not available', proposed: 'Draft with the net sales statement flagged: figure unavailable, ledger not yet loaded.', checks: 'Failed · required source missing', ok: false }
   ];
+
+  /* Review log: automation drafts, checks run, a person decides. */
   defs.ai = {
-    init: function () { return { item: 'w36', decision: null }; },
-    title: 'Review workspace',
-    chain: 'Proposed → checked → human decision',
+    init: function () { return { tab: 0, item: 'w36', decision: null }; },
+    title: 'Review log',
     render: function (s, o) {
       var it = ITEMS.filter(function (x) { return x.id === s.item; })[0];
       var status = !it.ok ? 'Stopped at review · missing evidence' : s.decision === 'approve' ? 'Approved for release · recorded' : s.decision === 'return' ? 'Returned for correction · recorded' : 'Awaiting reviewer decision';
       var tone = !it.ok || s.decision === 'return' ? 'warn' : s.decision === 'approve' ? 'ok' : 'neutral';
-      var body = html`
-        <div class="scene-head"><div><span class="label-caps">Work item</span><h3>Automation drafts. A person decides.</h3></div>
-          <div class="scene-seg" role="group" aria-label="Sample">${each(ITEMS, function (x) { return html`<button type="button" class="${x.id === s.item ? 'on' : ''}" data-act="item:${x.id}" aria-pressed="${x.id === s.item ? 'true' : 'false'}">${x.ok ? 'Normal week' : 'Missing source'}</button>`; })}</div></div>
-        <div class="scene-grid">
-          <div class="surface flowline">
-            <div class="fl-step done"><span class="label-caps">1 · Input</span><p>Scheduled trigger · Monday 07:00 · Reporting period W36</p><small>${it.src}</small></div>
-            <div class="fl-step done"><span class="label-caps">2 · Proposed</span><p>${it.proposed}</p><small>Labelled: Proposed · not verified</small></div>
-            <div class="fl-step ${it.ok ? 'done' : 'fail'}"><span class="label-caps">3 · Checks</span><p>${it.checks}</p></div>
-            <div class="fl-step ${s.decision || !it.ok ? 'done' : 'now'}"><span class="label-caps">4 · Human review</span><p>${status}</p><small>Reviewer · ${D.owner}</small></div>
-          </div>
-          ${when(!o.preview, function () { return drawer({ chip: status.split(' · ')[0], chipTone: tone, title: it.ok ? (s.decision ? 'Decision recorded.' : 'Your call, reviewer.') : 'Nothing is released without its evidence.', text: it.ok ? (s.decision ? 'The decision, the draft and the checks are kept together. Nothing here was sent anywhere.' : 'The checks passed and every statement links to its measure. Approve the release, or send it back with a reason.') : 'The ledger for W36 had not loaded, so the period check could not run. The item stops here until the source arrives.', extra: it.ok && !s.decision ? html`<div class="row" style="gap:8px"><button type="button" class="btn btn-sm" data-act="decide:approve">Approve release</button><button type="button" class="btn btn-ghost btn-sm" data-act="decide:return">Return for correction</button></div>` : null, action: s.decision ? { act: 'decide:', label: 'Reset the decision' } : null }); })}
-        </div>
-        ${when(!!o.preview, function () { return html`<p class="scene-meta">${chip('neutral', 'Awaiting reviewer decision')} Checks passed; a named reviewer approves or returns the draft. Nothing is released without its evidence.</p>`; })}`;
-      if (o.thumb) body = html`<div class="surface flowline"><div class="fl-step done"><span class="label-caps">1 · Input</span><p>Scheduled trigger · W36</p></div><div class="fl-step done"><span class="label-caps">2 · Proposed</span><p>${it.proposed}</p></div><div class="fl-step ${it.ok ? 'done' : 'fail'}"><span class="label-caps">3 · Checks</span><p>${it.checks}</p></div><div class="fl-step now"><span class="label-caps">4 · Human review</span><p>${status}</p></div></div>`;
-      return frame({ title: defs.ai.title, chain: defs.ai.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 6 });
+      var queue = matrix({ title: 'Weekly briefings · proposed by automation, checked by rules, decided by a person', wide: true, head: ['Item', 'Sources', 'Checks', 'Reviewer', 'Status'], rows: [
+        { hl: s.item === 'w36', cells: [{ t: 'Weekly briefing · W36', act: 'item:w36' }, 'Sales · Stock · Ledger', '3/3 passed', D.owner, { t: it.id === 'w36' ? status.split(' · ')[0] : 'Awaiting reviewer', tone: it.id === 'w36' ? tone : 'neutral' }] },
+        { hl: s.item === 'w36b', cells: [{ t: 'Weekly briefing · W36 (ledger late)', act: 'item:w36b' }, 'Sales · Stock · —', '2/3 · ledger missing', D.owner, { t: 'Stopped at review', tone: 'warn' }] },
+        { cells: ['Weekly briefing · W35', 'Sales · Stock · Ledger', '3/3 passed', D.owner, { t: 'Approved · Mon 09:12', tone: 'ok' }] },
+        { cells: ['Stock alert · Territory East', 'Stock · Outlets', '2/2 passed', 'Supply chain data owner', { t: 'Sent · owner assigned', tone: 'ok' }] }
+      ] });
+      var body;
+      if (o.thumb) body = html`<div class="rp-cards">${card({ label: 'Items this week', value: '4' })}${card({ label: 'Checks passed', value: '10 / 11', tone: 'warn' })}${card({ label: 'Released without review', value: '0', tone: 'ok' })}</div>${queue}`;
+      else if (s.tab === 0) body = html`<div class="rp-cards">
+          ${card({ label: 'Items this week', value: '4', delta: '2 briefings · 1 alert · 1 held' })}
+          ${card({ label: 'Checks passed', value: '10 / 11', delta: '1 source missing', tone: 'warn' })}
+          ${card({ label: 'Decided by a person', value: '4 / 4', delta: 'reviewer recorded on every item', tone: 'ok' })}
+          ${card({ label: 'Released without review', value: '0', delta: 'by design', tone: 'ok' })}
+        </div>${queue}`;
+      else body = html`<div class="rp-grid">
+          ${matrix({ title: it.name, wide: true, head: ['Step', 'What happened', 'Result'], rows: [
+            { cells: ['1 · Input', 'Scheduled trigger · Monday 07:00 · ' + it.src, { t: 'Done', tone: 'ok' }] },
+            { cells: ['2 · Proposed', it.proposed, { t: 'Labelled proposed, not verified', tone: 'neutral' }] },
+            { hl: !it.ok, cells: ['3 · Checks', it.checks, { t: it.ok ? 'Passed' : 'Failed', tone: it.ok ? 'ok' : 'warn' }] },
+            { hl: it.ok && !s.decision, cells: ['4 · Human review', 'Reviewer · ' + D.owner, { t: status.split(' · ')[0], tone: tone }] }
+          ] })}
+          ${callout({ chip: status.split(' · ')[0], chipTone: tone, title: it.ok ? (s.decision ? 'Decision recorded.' : 'Your call, reviewer.') : 'Nothing is released without its evidence.', text: it.ok ? (s.decision ? 'The decision, the draft and the checks are kept together. Nothing here was sent anywhere.' : 'The checks passed and every statement links to its measure. Approve the release, or send it back with a reason.') : 'The ledger for W36 had not loaded, so the period check could not run. The item stops here until the source arrives.', extra: it.ok && !s.decision ? html`<div class="rp-actions"><button type="button" class="rp-btn" data-act="decide:approve">Approve release</button><button type="button" class="rp-btn ghost" data-act="decide:return">Return for correction</button></div>` : null, action: s.decision ? { act: 'decide:', label: 'Reset the decision' } : null })}
+        </div>`;
+      return report({ title: defs.ai.title, sub: 'W36 · demo data', slicers: [['Week', '36'], ['Workflow', 'Weekly briefing']], tabs: ['Queue', 'Item'], tab: s.tab, body: body, thumb: o.thumb, compact: o.compact, caption: 'Sample review log · demo data · automation proposes, rules check, a named person decides' });
     },
-    act: function (s, key, val) { if (key === 'item') { s.item = val; s.decision = null; } if (key === 'decide') s.decision = val || null; }
+    act: function (s, key, val) { if (key === 'tab') s.tab = Number(val); if (key === 'item') { s.item = val; s.decision = null; s.tab = 1; } if (key === 'decide') s.decision = val || null; }
   };
 
-  /* Capability: a role moving from guided practice to independent use. */
   var ROLES = [
     { name: 'Leader', evidence: 'a written explanation of one KPI variance reviewed against the rubric', tasks: [['Explain a KPI variance', 3], ['Challenge a definition in review', 2], ['Assign and track a follow-up action', 3]] },
     { name: 'Analyst', evidence: 'an updated measure and a reconciled report checked by a reviewer', tasks: [['Update a measure', 3], ['Reconcile a report to source', 3], ['Add a drill path', 2]] },
     { name: 'Engineer', evidence: 'a failed load investigated and resolved using the runbook', tasks: [['Investigate a failed load', 3], ['Resolve an exception queue item', 3], ['Deploy a model change', 2]] }
   ];
   var LEVELS = ['Baseline', 'Guided practice', 'Independent'];
+
+  /* Capability baseline: who can do which task without help. */
   defs.capability = {
     init: function () { return { role: 1, task: 0 }; },
-    title: 'Capability workspace',
-    chain: 'Baseline → guided practice → independent use',
+    title: 'Capability baseline',
     render: function (s, o) {
       var role = ROLES[s.role]; var task = role.tasks[s.task];
-      var body = html`
-        <div class="scene-head"><div><span class="label-caps">Role-to-task progress</span><h3>Proof your team can do the work without us.</h3></div>
-          <div class="scene-seg" role="group" aria-label="Role">${each(ROLES, function (r, i) { return html`<button type="button" class="${i === s.role ? 'on' : ''}" data-act="role:${i}" aria-pressed="${i === s.role ? 'true' : 'false'}">${r.name}</button>`; })}</div></div>
-        <div class="scene-grid">
-          <div class="surface">
-            <div class="skill-head"><span>Task</span>${each(LEVELS, function (l) { return html`<span>${l}</span>`; })}</div>
-            ${each(role.tasks, function (t, i) {
-              return html`<button type="button" class="skill-row${i === s.task ? ' on' : ''}" data-act="task:${i}" aria-pressed="${i === s.task ? 'true' : 'false'}"><span>${t[0]}</span>${each(LEVELS, function (l, li) { return html`<span class="seg ${li < t[1] ? 'done' : ''}${li === t[1] - 1 ? ' last' : ''}"></span>`; })}</button>`;
-            })}
-          </div>
-          ${when(!o.preview, function () { return drawer({ chip: task[1] === 3 ? 'Independent' : 'Practising', chipTone: task[1] === 3 ? 'ok' : 'warn', title: task[0], text: task[1] === 3 ? 'Demonstrated on a real work sample and checked by a reviewer. Attendance alone never moves someone here.' : 'Practised with guidance. The next step is a work sample done without help, reviewed against the rubric.', rows: [['Role', role.name], ['Evidence', role.evidence]], note: 'Illustrative roles and tasks; individual results are never published.' }); })}
-        </div>
-        ${when(!!o.preview, function () { return html`<p class="scene-meta">${chip('ok', 'Independent')} Two of three analyst tasks demonstrated on real work and checked by a reviewer.</p>`; })}`;
-      if (o.thumb) body = html`<div class="surface">${each(role.tasks, function (t) { return html`<div class="skill-row"><span>${t[0]}</span>${each(LEVELS, function (l, li) { return html`<span class="seg ${li < t[1] ? 'done' : ''}${li === t[1] - 1 ? ' last' : ''}"></span>`; })}</div>`; })}</div>`;
-      return frame({ title: defs.capability.title, chain: defs.capability.chain, body: body, compact: o.compact, thumb: o.thumb, cell: 8 });
+      var all = ROLES.reduce(function (a, r) { return a.concat(r.tasks); }, []);
+      var indep = all.filter(function (t) { return t[1] === 3; }).length;
+      var cards = html`<div class="rp-cards">
+        ${card({ label: 'Tasks in scope', value: String(all.length), delta: '3 roles' })}
+        ${card({ label: 'Independent', value: indep + ' / ' + all.length, delta: 'demonstrated on real work, checked', tone: 'ok' })}
+        ${card({ label: 'Still guided', value: (all.length - indep) + ' / ' + all.length, delta: 'next: a work sample without help', tone: 'warn' })}
+        ${card({ label: 'Reviewed by', value: 'Named', delta: 'attendance alone never counts' })}
+      </div>`;
+      var grid = matrix({ title: 'Role × task · baseline → guided practice → independent', wide: true, head: ['Role · task', 'Baseline', 'Guided', 'Independent'], rows: ROLES.reduce(function (acc, r, ri) {
+        return acc.concat(r.tasks.map(function (t, ti) { return { hl: ri === s.role && ti === s.task, cells: [{ t: r.name + ' · ' + t[0], act: 'pick:' + ri + ':' + ti }, { t: '●', tone: 'ok' }, { t: t[1] >= 2 ? '●' : '○', tone: t[1] >= 2 ? 'ok' : 'muted' }, { t: t[1] >= 3 ? '●' : '○', tone: t[1] >= 3 ? 'ok' : 'muted' }] }; }));
+      }, []) });
+      var body = o.thumb ? html`${cards}${grid}` : html`${cards}<div class="rp-grid">${grid}${callout({ chip: task[1] === 3 ? 'Independent' : 'Practising', chipTone: task[1] === 3 ? 'ok' : 'warn', title: role.name + ' · ' + task[0], text: task[1] === 3 ? 'Demonstrated on a real work sample and checked by a reviewer.' : 'Practised with guidance. The next step is a work sample done without help, reviewed against the rubric.', rows: [['Evidence', role.evidence]] })}</div>`;
+      return report({ title: defs.capability.title, sub: 'Month 3 · demo data', slicers: [['Programme', 'Reporting handover'], ['Role', 'All']], body: body, thumb: o.thumb, compact: o.compact, caption: 'Sample baseline · illustrative roles and tasks · individual results are never published' });
     },
-    act: function (s, key, val) { if (key === 'role') { s.role = Number(val); s.task = 0; } if (key === 'task') s.task = Number(val); }
+    act: function (s, key, val) { if (key === 'pick') { var p = val.split(':'); s.role = Number(p[0]); s.task = Number(p[1]); } if (key === 'role') { s.role = Number(val); s.task = 0; } if (key === 'task') s.task = Number(val); }
   };
 
-  /* Industry source workspaces. Each sector has its own schemas, its own
-     measures with a definition, period, unit, source and owner, and a
-     resulting view whose figures are derived from the sample rows — so a
-     retail conversion really is orders over sessions, and sell-in and
-     sell-out stay distinct. */
   function pct(n, d) { return Math.round(n / d * 1000) / 10; }
   var IND = (scene.industries = {
     'financial-services': {
@@ -435,68 +464,35 @@
   /* Retail conversion is derived from the rows, so the test can prove it. */
   IND['retail-ecommerce'].rows.forEach(function (r) { if (r.sessions) r.conversion = pct(r.orders, r.sessions); });
 
+  /* Industry report page: the sector's own measures, a matrix of its rows,
+     the systems they come from, and every figure's definition. */
   defs.lineage = {
-    init: function () { return { src: 0, metric: -1 }; },
+    init: function () { return { tab: 0, metric: 0 }; },
     title: 'Source workspace',
-    chain: 'Source systems → agreed definition → inspectable figure',
     render: function (s, o) {
       var ind = o.industry; var M = IND[ind.slug]; if (!M) return html``;
-      var cur = M.sources[s.src];
-      var metric = s.metric >= 0 ? M.metrics[s.metric] : null;
-      var feeds = function (name) { return cur.feeds.indexOf(name) >= 0; };
-      var body = html`
-        <div class="scene-head"><div><span class="label-caps">${ind.title}</span><h3>Each system stays as it is. One definition links them.</h3></div><span class="scene-meta">Select a source, then any figure</span></div>
-        <div class="src-grid five">
-          ${each(M.sources, function (src, i) {
-            return html`<button type="button" class="src-tile${i === s.src ? ' on' : ''}" data-act="src:${i}" aria-pressed="${i === s.src ? 'true' : 'false'}"><span class="src-sys"><b>${src.name}</b><small>${src.system}</small></span>${records(src.recs)}<span class="src-fields">${each(src.fields, function (f) { return html`<code class="${f === src.key ? 'key' : ''}">${f}</code>`; })}</span></button>`;
-          })}
-        </div>
-        <div class="join">
-          <div class="join-model surface">
-            <span class="label-caps">What ${cur.name} contributes</span>
-            <div class="join-row"><span>${cur.key}</span><i class="arr" aria-hidden="true"></i><span class="on">${M.entity.split(' · ')[0].replace(/ /g, '_')}_id</span></div>
-            ${when(cur.feeds.length > 0, function () { return each(cur.feeds, function (f) { return html`<div class="join-row"><span>${cur.fields[1]}</span><i class="arr" aria-hidden="true"></i><span class="on">${f.toLowerCase().replace(/[^a-z0-9]+/g, '_')}</span></div>`; }); })}
-            <span class="scene-meta">${cur.feeds.length ? cur.name + ' feeds ' + cur.feeds.join(' and ') + '. The key is standardised to one ' + M.entity.split(' · ')[0] + ' id with a quality check on the way in.' : cur.name + ' is joined on ' + cur.key + ' and kept for context; none of the figures below is calculated from it.'}</span>
-          </div>
-          <div class="join-view surface">
-            <span class="label-caps">Resulting view · ${M.entity}</span>
-            <div class="view-rows inspect">
-              <div class="vh"><span>${M.entity.split(' · ')[0]}</span>${each(M.metrics, function (m) { return html`<span class="${feeds(m.name) ? 'on' : ''}">${m.name}</span>`; })}</div>
-              ${each(M.rows, function (r) {
-                var cells = M.cells(r);
-                return html`<div class="${r.hl ? 'hl' : ''}"><span>${r.name}</span>${each(cells, function (c, ci) {
-                  var m = M.metrics[ci];
-                  return html`<button type="button" class="num${feeds(m.name) ? ' on' : ''}${s.metric === ci ? ' sel' : ''}" data-act="metric:${ci}" aria-label="${r.name} ${m.name}: ${c}. Open the definition" aria-pressed="${s.metric === ci ? 'true' : 'false'}">${c}</button>`;
-                })}</div>`;
-              })}
-            </div>
-            <span class="scene-meta">Any figure opens its definition, period, unit, source and owner.</span>
-          </div>
-          ${drawer(metric
-            ? { chip: 'Definition', chipTone: 'ok', title: metric.name, text: metric.definition, rows: [['Period', metric.period], ['Unit', metric.unit], ['Source', metric.source], ['Owner', metric.owner]], action: { act: 'metric:-1', label: 'Back to the question' } }
-            : { chip: 'Traceable', chipTone: 'ok', title: ind.question, text: 'Every figure in the view is calculated from the sample records in these systems, with its definition, period and owner agreed before it goes into a report.', rows: [['Sources', M.sources.map(function (x) { return x.name; }).join(' · ')], ['Agreed first', 'Definition · period · unit · owner']] })}
-        </div>`;
-      return frame({ title: defs.lineage.title, chain: defs.lineage.chain, body: body, compact: o.compact, cell: 2 });
+      var ent = M.entity.split(' · ');
+      var hlRow = M.rows.filter(function (r) { return r.hl; })[0] || M.rows[0];
+      var cells0 = M.cells(hlRow);
+      var cards = html`<div class="rp-cards">${each(M.metrics, function (m, i) { return card({ label: m.name + ' · ' + hlRow.name, value: cells0[i], delta: 'definition agreed · ' + m.owner, on: s.metric === i, act: 'metric:' + i }); })}</div>`;
+      var mat = matrix({ title: M.entity.charAt(0).toUpperCase() + M.entity.slice(1) + ' · select any figure to open its definition', wide: true, head: [ent[0]].concat(M.metrics.map(function (m) { return m.name; })), rows: M.rows.map(function (r) {
+        var cs = M.cells(r); return { hl: !!r.hl, cells: [r.name].concat(cs.map(function (c, i) { return { t: c, act: 'metric:' + i, aria: r.name + ' ' + M.metrics[i].name + ': ' + c + '. Open the definition' }; })) };
+      }) });
+      var body;
+      if (o.thumb) body = html`${cards}${mat}`;
+      else if (s.tab === 0) body = html`${cards}<div class="rp-grid">${mat}${callout({ chip: 'Definition', chipTone: 'ok', title: M.metrics[s.metric].name, text: M.metrics[s.metric].definition, rows: [['Period', M.metrics[s.metric].period], ['Unit', M.metrics[s.metric].unit], ['Source', M.metrics[s.metric].source], ['Owner', M.metrics[s.metric].owner]] })}</div>`;
+      else if (s.tab === 1) body = html`${matrix({ title: 'Systems feeding this page · each stays as it is; one model links them', wide: true, head: ['System', 'Platform', 'Key', 'Fields used', 'Feeds'], rows: M.sources.map(function (src) { return { cells: [src.name, src.system, src.key, src.fields.join(' · '), src.feeds.length ? src.feeds.join(' · ') : 'context only'] }; }) })}`;
+      else body = html`<div class="rp-defs">${each(M.metrics, defRow)}</div>`;
+      return report({ title: ind.title + ' · performance', sub: ent[1] + ' · demo data for a Nigerian ' + ind.title.split(' ')[0].toLowerCase() + ' business', slicers: [['Period', ent[1]], [ent[0].charAt(0).toUpperCase() + ent[0].slice(1), 'All']], tabs: ['Overview', 'Sources', 'Definitions'], tab: s.tab, body: body, thumb: o.thumb, compact: o.compact, caption: 'Sample report page · demo data · ' + ind.question });
     },
-    act: function (s, key, val) { if (key === 'src') s.src = Number(val); if (key === 'metric') s.metric = Number(val); }
+    act: function (s, key, val) { if (key === 'tab') s.tab = Number(val); if (key === 'metric') { s.metric = Number(val); if (s.tab !== 0) s.tab = 0; } }
   };
 
   scene.defs = defs;
 
-  /* ------------------------------------------------------------- mounting */
-
-  /* Render a scene into a host and wire its controls. Returns a disposer.
-     A state change re-renders the scene, then patches only the parts that
-     changed — the stepper's selected state and the body — so the frame, title
-     bar and footer stay put, layout does not jump, and the control the
-     visitor was using keeps focus (or hands it to its replacement after the
-     real render, never before). */
-  /* Scene headings are <h3> under a section's <h2>; inside the home hero,
-     where only the <h1> precedes them, they render as styled paragraphs so
-     the heading outline stays in order. */
   function renderDef(def, s, opts) {
     var out = def.render(s, opts).value;
-    return opts.plainHeading ? out.replace(/<h3>/g, '<p class="scene-h">').replace(/<\/h3>/g, '</p>') : out;
+    return out;
   }
 
   scene.mount = function (host, name, opts) {
@@ -527,7 +523,7 @@
       if (!cur) { host.innerHTML = ''; host.appendChild(next); return; }
       var nb = next.querySelector('[data-scene-body]'), cb = cur.querySelector('[data-scene-body]');
       if (nb && cb) cb.innerHTML = nb.innerHTML;
-      var ns = next.querySelector('.scene-steps'), cs = cur.querySelector('.scene-steps');
+      var ns = next.querySelector('.rp-tabs'), cs = cur.querySelector('.rp-tabs');
       if (ns && cs) {
         var nt = ns.querySelectorAll('[role="tab"]'), ct = cs.querySelectorAll('[role="tab"]');
         for (var i = 0; i < ct.length && i < nt.length; i++) {
@@ -565,7 +561,7 @@
       var parts = el.getAttribute('data-act').split(':'); var key = parts[0], val = parts.slice(1).join(':');
       var fk = focusKey();
       def.act(s, key, val, el);
-      paint(true, fk, key === 'step');
+      paint(true, fk, key === 'tab');
     }
     function onKey(e) {
       if (!e.target.matches('[role="tab"]')) return;
@@ -573,7 +569,7 @@
       var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : e.key === 'Home' ? -99 : e.key === 'End' ? 99 : 0; if (!d) return;
       e.preventDefault();
       var n = d === -99 ? 0 : d === 99 ? tabs.length - 1 : Math.max(0, Math.min(tabs.length - 1, i + d));
-      def.act(s, 'step', n);
+      def.act(s, 'tab', n);
       paint(true, null, true);
     }
     host.addEventListener('click', onEvent); host.addEventListener('change', onEvent); host.addEventListener('keydown', onKey);
@@ -608,7 +604,7 @@
     btn.addEventListener('click', onBtn); host.addEventListener('click', onTake); host.addEventListener('keydown', onTake);
     return function () { btn.removeEventListener('click', onBtn); host.removeEventListener('click', onTake); host.removeEventListener('keydown', onTake); stop(idle); };
   };
-  scene.BI_WALK = { script: [[0, null], [5000, 'step', '1'], [10000, 'line', '0'], [13000, 'line', '1'], [16000, 'step', '2'], [19000, 'assign', '']], total: 21000 };
+  scene.BI_WALK = { script: [[0, null], [5000, 'line', '1'], [10000, 'line', '0'], [13000, 'line', '1'], [16000, 'tab', '2'], [19000, 'assign', '']], total: 21000 };
 
   /* A static render for places that cannot host interaction (previews). */
   scene.render = function (name, opts) { var def = defs[name]; opts = opts || {}; return raw(renderDef(def, Object.assign(def.init(), opts.state || {}), opts)); };

@@ -155,7 +155,7 @@
             <div class="stack stack-16">
               <p class="label-caps">Your data sources</p>
               <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced back to the system it came from.</p>
+              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from. Below, a sample page for this sector on demo data.</p>
             </div>
             <div class="stack stack-14">
               <p class="small slate" style="max-width:36em">Activation and retention use one shared definition. July's lower retention and higher support demand are surfaced together.</p>
@@ -165,45 +165,40 @@
             </div>
           </div>
           <div data-scene="lineage" data-scene-industry="technology">
-      <div class="scene" data-scene-frame="" role="group" aria-label="Source workspace — illustrative demo">
-        <div class="scene-bar">
-          <span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Source workspace</span>
-          <span class="scene-tag">Illustrative demo</span>
+      <figure class="report" data-scene-frame="" role="group" aria-label="Technology · performance">
+        <div class="rp-head">
+          <div class="rp-title"><b>Technology · performance</b><span>month · demo data for a Nigerian technology business</span></div>
+          <div class="rp-slicers"><span class="rp-slicer">Period <b>month</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Sign-up cohort <b>All</b><i aria-hidden="true">▾</i></span></div>
         </div>
+        <div class="rp-body" data-scene-body=""><div class="rp-cards">
+      <div class="rp-card on" data-act="metric:0">
+        <span class="rp-card-l">Activation · July</span>
+        <span class="rp-card-v num">58%</span>
+        <span class="rp-card-d ">definition agreed · Product analytics lead</span>
         
-        <div class="scene-body" data-scene-body="">
-        <div class="scene-head"><div><span class="label-caps">Technology</span><h3>Each system stays as it is. One definition links them.</h3></div><span class="scene-meta">Select a source, then any figure</span></div>
-        <div class="src-grid five">
-          <button type="button" class="src-tile on" data-act="src:0" aria-pressed="true"><span class="src-sys"><b>Product events</b><small>Event stream</small></span><ul class="recs"><li><span class="mono">EVT-0091</span><span>project_created · day 2</span></li><li><span class="mono">EVT-0092</span><span>report_shared · day 5</span></li></ul><span class="src-fields"><code class="">event_id</code><code class="key">user_id</code><code class="">event_name</code><code class="">occurred_at</code></span></button><button type="button" class="src-tile" data-act="src:1" aria-pressed="false"><span class="src-sys"><b>CRM</b><small>Sales CRM</small></span><ul class="recs"><li><span class="mono">ACC-3310</span><span>Team · 2026-07-03</span></li><li><span class="mono">ACC-3311</span><span>Starter · 2026-07-04</span></li></ul><span class="src-fields"><code class="key">account_id</code><code class="">plan</code><code class="">signed_up_on</code></span></button><button type="button" class="src-tile" data-act="src:2" aria-pressed="false"><span class="src-sys"><b>Billing</b><small>Subscription billing</small></span><ul class="recs"><li><span class="mono">INV-7720</span><span>Team · Jul</span></li><li><span class="mono">INV-7721</span><span>Starter · Jul</span></li></ul><span class="src-fields"><code class="key">invoice_id</code><code class="">account_id</code><code class="">amount</code><code class="">period</code></span></button><button type="button" class="src-tile" data-act="src:3" aria-pressed="false"><span class="src-sys"><b>Support</b><small>Help desk</small></span><ul class="recs"><li><span class="mono">TCK-5120</span><span>High · day 3</span></li><li><span class="mono">TCK-5121</span><span>Normal · day 9</span></li></ul><span class="src-fields"><code class="key">ticket_id</code><code class="">account_id</code><code class="">priority</code><code class="">opened_at</code></span></button><button type="button" class="src-tile" data-act="src:4" aria-pressed="false"><span class="src-sys"><b>Infrastructure</b><small>Monitoring</small></span><ul class="recs"><li><span class="mono">api</span><span>99.95% · 240 ms</span></li><li><span class="mono">web</span><span>99.98% · 180 ms</span></li></ul><span class="src-fields"><code class="key">service</code><code class="">uptime</code><code class="">p95_latency</code></span></button>
-        </div>
-        <div class="join">
-          <div class="join-model surface">
-            <span class="label-caps">What Product events contributes</span>
-            <div class="join-row"><span>user_id</span><i class="arr" aria-hidden="true"></i><span class="on">sign-up_cohort_id</span></div>
-            <div class="join-row"><span>user_id</span><i class="arr" aria-hidden="true"></i><span class="on">activation</span></div><div class="join-row"><span>user_id</span><i class="arr" aria-hidden="true"></i><span class="on">week_4_retention</span></div>
-            <span class="scene-meta">Product events feeds Activation and Week-4 retention. The key is standardised to one sign-up cohort id with a quality check on the way in.</span>
-          </div>
-          <div class="join-view surface">
-            <span class="label-caps">Resulting view · sign-up cohort · month</span>
-            <div class="view-rows inspect">
-              <div class="vh"><span>sign-up cohort</span><span class="on">Activation</span><span class="on">Week-4 retention</span><span class="">Support tickets</span></div>
-              <div class=""><span>May</span><button type="button" class="num on" data-act="metric:0" aria-label="May Activation: 61%. Open the definition" aria-pressed="false">61%</button><button type="button" class="num on" data-act="metric:1" aria-label="May Week-4 retention: 44%. Open the definition" aria-pressed="false">44%</button><button type="button" class="num" data-act="metric:2" aria-label="May Support tickets: 128. Open the definition" aria-pressed="false">128</button></div><div class=""><span>June</span><button type="button" class="num on" data-act="metric:0" aria-label="June Activation: 64%. Open the definition" aria-pressed="false">64%</button><button type="button" class="num on" data-act="metric:1" aria-label="June Week-4 retention: 46%. Open the definition" aria-pressed="false">46%</button><button type="button" class="num" data-act="metric:2" aria-label="June Support tickets: 141. Open the definition" aria-pressed="false">141</button></div><div class="hl"><span>July</span><button type="button" class="num on" data-act="metric:0" aria-label="July Activation: 58%. Open the definition" aria-pressed="false">58%</button><button type="button" class="num on" data-act="metric:1" aria-label="July Week-4 retention: 39%. Open the definition" aria-pressed="false">39%</button><button type="button" class="num" data-act="metric:2" aria-label="July Support tickets: 212. Open the definition" aria-pressed="false">212</button></div><div class=""><span>August</span><button type="button" class="num on" data-act="metric:0" aria-label="August Activation: 66%. Open the definition" aria-pressed="false">66%</button><button type="button" class="num on" data-act="metric:1" aria-label="August Week-4 retention: — (too young). Open the definition" aria-pressed="false">— (too young)</button><button type="button" class="num" data-act="metric:2" aria-label="August Support tickets: 97. Open the definition" aria-pressed="false">97</button></div>
-            </div>
-            <span class="scene-meta">Any figure opens its definition, period, unit, source and owner.</span>
-          </div>
-          
-      <aside class="action-drawer" aria-live="polite">
-        <span class="chip-state ok">Traceable</span>
-        <h4>Which behaviours lead to continued use, and where does the experience break down?</h4>
-        <p>Every figure in the view is calculated from the sample records in these systems, with its definition, period and owner agreed before it goes into a report.</p>
-        <dl class="action-drawer-rows"><div><dt>Sources</dt><dd>Product events · CRM · Billing · Support · Infrastructure</dd></div><div><dt>Agreed first</dt><dd>Definition · period · unit · owner</dd></div></dl>
+      </div>
+      <div class="rp-card" data-act="metric:1">
+        <span class="rp-card-l">Week-4 retention · July</span>
+        <span class="rp-card-v num">39%</span>
+        <span class="rp-card-d ">definition agreed · Product analytics lead</span>
         
+      </div>
+      <div class="rp-card" data-act="metric:2">
+        <span class="rp-card-l">Support tickets · July</span>
+        <span class="rp-card-v num">212</span>
+        <span class="rp-card-d ">definition agreed · Support lead</span>
         
-        
-      </aside>
-        </div></div>
-        <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Source systems → agreed definition → inspectable figure</span><span>Sample data · nothing is sent or saved</span></div>
-      </div></div>
+      </div></div><div class="rp-grid">
+      <div class="rp-visual wide">
+        <div class="rp-visual-t">Sign-up cohort · month · select any figure to open its definition</div>
+        <table class="rp-matrix">
+          <thead><tr><th class="">sign-up cohort</th><th class="num">Activation</th><th class="num">Week-4 retention</th><th class="num">Support tickets</th></tr></thead>
+          <tbody><tr class=""><td class="">May</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="May Activation: 61%. Open the definition">61%</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="May Week-4 retention: 44%. Open the definition">44%</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="May Support tickets: 128. Open the definition">128</button></td></tr><tr class=""><td class="">June</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="June Activation: 64%. Open the definition">64%</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="June Week-4 retention: 46%. Open the definition">46%</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="June Support tickets: 141. Open the definition">141</button></td></tr><tr class="hl"><td class="">July</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="July Activation: 58%. Open the definition">58%</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="July Week-4 retention: 39%. Open the definition">39%</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="July Support tickets: 212. Open the definition">212</button></td></tr><tr class=""><td class="">August</td><td class="num" data-cell="metric:0"><button type="button" data-act="metric:0" aria-label="August Activation: 66%. Open the definition">66%</button></td><td class="num" data-cell="metric:1"><button type="button" data-act="metric:1" aria-label="August Week-4 retention: — (too young). Open the definition">— (too young)</button></td><td class="num" data-cell="metric:2"><button type="button" data-act="metric:2" aria-label="August Support tickets: 97. Open the definition">97</button></td></tr></tbody>
+        </table>
+      </div><aside class="rp-callout"><span class="chip-state ok">Definition</span><b>Activation</b><p>Share of accounts in the sign-up cohort that completed the agreed first-value action (a project created and a report shared) within 7 days of sign-up.</p><dl><div><dt>Period</dt><dd>Sign-up month, 7-day window</dd></div><div><dt>Unit</dt><dd>%</dd></div><div><dt>Source</dt><dd>Product events + CRM</dd></div><div><dt>Owner</dt><dd>Product analytics lead</dd></div></dl></aside></div></div>
+        <div class="rp-tabs" role="tablist" aria-label="Technology · performance pages"><button type="button" role="tab" class="rp-tab" data-act="tab:0" aria-selected="true" tabindex="0">Overview</button><button type="button" role="tab" class="rp-tab" data-act="tab:1" aria-selected="false" tabindex="-1">Sources</button><button type="button" role="tab" class="rp-tab" data-act="tab:2" aria-selected="false" tabindex="-1">Definitions</button></div>
+        <figcaption class="rp-caption">Sample report page · demo data · Which behaviours lead to continued use, and where does the experience break down?</figcaption>
+      </figure></div>
           <p class="small slate" style="max-width:40em;border-top:1px solid var(--rule);padding-top:16px">Checking product-event quality and agreeing what counts as activation and retention is Data Engineering and Business Intelligence work. We only bring in AI for a specific, explained use, such as summarising support demand for review.</p>
         </div>
       </section>
