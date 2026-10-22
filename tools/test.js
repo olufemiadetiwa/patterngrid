@@ -34,7 +34,7 @@ function load(base) {
   };
   win.window = win;
   const ctx = require('vm').createContext(win);
-  ['config', 'content', 'service-content', 'core', 'scenes', 'pages/contact'].forEach((f) => {
+  ['config', 'content', 'service-content', 'local-images', 'core', 'scenes', 'pages/contact'].forEach((f) => {
     require('vm').runInContext(fs.readFileSync(path.join(JS, f + '.js'), 'utf8'), ctx, { filename: f });
   });
   return win.PG;
@@ -174,4 +174,12 @@ test('static post-processing strips rendered tags but keeps the loader that re-c
   assert.ok(!/<link rel="stylesheet" href="http:\/\/localhost:1\/assets\/css\/site\.css">/.test(out), 'rendered stylesheet tag removed');
   assert.ok(!/<script src="\/assets\/js\/core\.js"><\/script>/.test(out), 'rendered script tag removed');
   assert.ok(/data-prerendered/.test(out));
+});
+
+test('local-images.js carries both hero frames and portraits', () => {
+  const src = fs.readFileSync(path.join(JS, 'local-images.js'), 'utf8');
+  assert.ok(/window\.PG\.local = \{/.test(src));
+  assert.ok(/window\.PG\.localPeople = \{/.test(src), 'portrait entries present');
+  const PG = load('');
+  assert.ok(PG.localPeople && PG.localPeople[PG.team.founder.photo], 'founder photo resolvable');
 });
