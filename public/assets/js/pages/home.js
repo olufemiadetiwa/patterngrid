@@ -159,7 +159,7 @@
                     <span class="t">${s.title}</span>
                     <span class="d">${f.text || s.short}</span>
                   </span>
-                  <span class="outs">${each((f.outputs || []).slice(0, 3), function (o) { return html`<span>${o}</span>`; })}</span>
+                  <span class="outs tags">${each((f.outputs || []).slice(0, 3), function (o) { return html`<span class="tag">${o}</span>`; })}</span>
                   <span class="go">${s.link || 'See the service'} <span class="chev" aria-hidden="true">→</span></span>
                 </a>`;
             })}

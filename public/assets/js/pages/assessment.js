@@ -245,7 +245,7 @@
                         <span style="font-weight:600;font-size:17px;color:var(--navy)">${p.title}</span>
                         <span class="small">${p.text}</span>
                         <span class="row" style="gap:6px;margin-top:4px">
-                          ${each(outputs, function (o) { return html`<span class="chip">${o}</span>`; })}
+                          ${each(outputs, function (o) { return html`<span class="tag">${o}</span>`; })}
                         </span>
                         <a href="${p.href}" style="font-size:14px;font-weight:600;margin-top:2px">${p.link} →</a>
                       </div>
