@@ -100,47 +100,66 @@
 
   function founder() {
     var f = (PG.team && PG.team.founder) || {};
-    var D = PG.scene.data;
     return html`
-      <section class="page-intro">
-        <div class="wrap">
-          <nav class="crumbs" aria-label="Breadcrumb">
-            <a href="/">Home</a><span aria-hidden="true">/</span>
-            <a href="/about">About</a><span aria-hidden="true">/</span>
-            <span aria-current="page">Founder</span>
-          </nav>
-          <span class="eyebrow">Founder</span>
-          <h1>Precious Chinenye Celestine.</h1>
-          <p class="lead">Founder and lead consultant, known professionally as Ada Africa. A data and AI professional and business intelligence consultant.</p>
-          <div class="row" style="gap:16px 28px;margin-top:8px"><a class="btn" href="/contact">Discuss your business question</a></div>
+      <div class="hero-unit" data-hero="founder">
+      <section class="founder-intro grid-field" aria-labelledby="founder-h1">
+        <div class="wrap founder-intro-inner">
+          ${when(!!f.photo, function () { return html`<div class="portrait-stage on-dark">${C.cells(4)}${C.portrait(f, { eager: true })}</div>`; })}
+          <div class="founder-copy">
+            <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
+              <a href="/">Home</a><span aria-hidden="true">/</span>
+              <a href="/about">About</a><span aria-hidden="true">/</span>
+              <span aria-current="page">Founder</span>
+            </nav>
+            <span class="hero-eyebrow">Founder &amp; Lead Consultant</span>
+            <h1 id="founder-h1">Precious Chinenye Celestine</h1>
+            <p class="founder-alias">Known professionally as Ada Africa</p>
+            <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
+            <div class="hero-cta">
+              <a class="btn btn-accent" href="/contact">Discuss your business question</a>
+              <a class="secondary" href="/work">See the work <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <section class="bg-paper">
+        <div class="wrap founder-facts-band" data-reveal="rise">
+          <div><span class="label-caps">Role</span><span>Founder &amp; Lead Consultant, Pattern Grid</span></div>
+          <div><span class="label-caps">Disciplines</span><span>Business intelligence · data engineering · data strategy · AI and automation</span></div>
+          <div><span class="label-caps">Sectors</span><span>Financial services · investment technology · FMCG and distribution</span></div>
+          <div><span class="label-caps">Platforms</span><span>Microsoft Fabric and Azure · Power BI · SQL</span></div>
         </div>
       </section>
 
-      <section class="sec-xs">
-        <div class="wrap founder-page" data-reveal="rise">
-          ${when(!!f.photo, function () { return html`<div class="portrait-stage">${C.cells(4)}${C.portrait(f, { eager: true })}</div>`; })}
-          <div class="stack stack-24">
-            <p class="lede">Precious Chinenye Celestine is a data and AI professional and business intelligence consultant. Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution. At Pattern Grid, she brings these disciplines together around the business questions clients need to answer.</p>
-            <dl class="founder-facts">
-              <div><dt>Role</dt><dd>Founder &amp; Lead Consultant, Pattern Grid</dd></div>
-              <div><dt>Known as</dt><dd>Ada Africa</dd></div>
-              <div><dt>Disciplines</dt><dd>Business intelligence · data engineering · data strategy · AI and automation</dd></div>
-              <div><dt>Sectors</dt><dd>Financial services · investment technology · FMCG and distribution</dd></div>
-            </dl>
-            <div class="stack stack-12" style="border-top:1px solid var(--rule);padding-top:24px">
-              <span class="label-caps">Selected experience</span>
-              <p class="body">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses.</p>
-              <p class="small muted">Earlier experience comes from previous roles and personal projects. Pattern Grid's own client engagements are written up under Work &amp; demos.</p>
-            </div>
+      <section class="sec-sm">
+        <div class="wrap founder-cols" data-reveal="rise">
+          <div class="stack stack-16">
+            <span class="eyebrow">Experience</span>
+            <h2 class="h2-sm">Reporting, platforms and decision support, across three sectors.</h2>
+            <p class="body">Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution: analytical models for finance and commercial teams, data platform design and delivery, and decision-support capabilities for investment-technology and distribution businesses.</p>
+            <p class="small muted" style="max-width:36em">Earlier experience comes from previous roles and personal projects. Pattern Grid's own client engagements are written up below and under Work &amp; demos.</p>
           </div>
           <div class="stack stack-16">
-            <span class="label-caps">How she defines a measure</span>
-            ${PG.scene.drawer({ chip: 'Definition', chipTone: 'ok', title: 'Net sales', text: D.definition, rows: [['Period', 'Week 36, by invoice date'], ['Unit', 'sample units (m)'], ['Source', D.ledgers.join(' · ')], ['Owner', D.owner]], note: 'The same row every figure on this site opens to. Sample data.' })}
-            <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:20px">
-              <span class="label-caps">How she works</span>
-              <ul class="ticks">${each(PG.beliefs, function (b) { return html`<li><strong>${b.title}</strong> ${b.copy}</li>`; })}</ul>
-            </div>
+            <span class="eyebrow">How she works</span>
+            <ol class="commit-list">
+              ${each(PG.beliefs, function (b, i) { return html`<li><span class="num-cell">${C.cells(i)}0${i + 1}</span><b>${b.title}</b><span>${b.copy}</span></li>`; })}
+            </ol>
           </div>
+        </div>
+      </section>
+
+      <section class="sec-sm bg-paper" aria-labelledby="founder-work-h2">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="eyebrow">Client engagements</span>
+              <h2 class="h2-sm" id="founder-work-h2">Work delivered by Pattern Grid.</h2>
+            </div>
+            <p class="lead">Two engagements written up from the project records. No figures are claimed that the records do not support.</p>
+          </div>
+          <div class="case-grid">${each(PG.cases || [], PG.caseCard)}</div>
         </div>
       </section>
 

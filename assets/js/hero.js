@@ -140,7 +140,7 @@
     var unit = document.querySelector('[data-hero]');
     var tc = document.head.querySelector('meta[name="theme-color"]');
     if (!unit) { if (tc) tc.setAttribute('content', '#FFFFFF'); window.dispatchEvent(new CustomEvent('pg-hero', { detail: false })); return; }
-    if (tc) tc.setAttribute('content', unit.querySelector('.hero-home') ? '#02203D' : '#07131C');
+    if (tc) tc.setAttribute('content', unit.querySelector('.hero-home, .founder-intro') ? '#02203D' : '#07131C');
     window.dispatchEvent(new CustomEvent('pg-hero', { detail: true }));
 
     var inst = { listeners: [] };
