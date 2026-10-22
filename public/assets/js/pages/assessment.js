@@ -103,11 +103,32 @@
     state.answers = restore();
     var answered = state.answers.filter(function (v) { return v != null; }).length;
     return html`
-      ${PG.hero('assessment')}
-      <section class="bg-paper" style="padding:0 0 clamp(72px,9vw,128px)">
-        <div class="wrap stack stack-16" data-reveal="rise" style="align-items:flex-start">
-          <button type="button" class="btn" data-start>${answered ? 'Continue the assessment' : 'Start the assessment'}</button>
-          <span class="small muted" style="max-width:44em">Eight questions, no email address needed. You get a score out of 100, your weakest areas and up to three suggested next steps. It is a self-assessment, not an audit or an industry benchmark. Your answers stay in this browser unless you choose to send them with an enquiry.</span>
+      <section class="page-intro">
+        <div class="wrap">
+          <span class="eyebrow">Readiness assessment</span>
+          <h1>Find your next priority.</h1>
+          <p class="lead">Eight questions about how your organisation moves, checks and uses its data. About five minutes, no email address, and the result stays in this browser.</p>
+        </div>
+      </section>
+      <section class="sec-xs">
+        <div class="wrap assess-intro" data-reveal="rise">
+          <div class="stack stack-16" style="align-items:flex-start">
+            <button type="button" class="btn" data-start>${answered ? 'Continue the assessment (' + answered + ' of 8 answered)' : 'Start the assessment'}</button>
+            <p class="small muted" style="max-width:40em">You can go back and change any answer. It is a self-assessment based on what you report, not an audit, a certification or an industry benchmark.</p>
+          </div>
+          <div class="scene scene-compact" role="group" aria-label="Sample result — illustrative">
+            <div class="scene-bar"><span class="scene-id">${C.cells(7)}Your result</span><span class="scene-tag">Sample</span></div>
+            <div class="scene-body result-sample">
+              <div class="rs-score"><b>58</b><span>${raw(PG.scene.chip('ok', 'Connected').value)}</span><span class="scene-meta">out of 100 · indicative</span></div>
+              <p class="small slate">Several pieces are in place. The three weakest areas point to the service that usually addresses each.</p>
+              <div class="rs-bars">
+                ${each([['Data quality', 1, true], ['Governance', 2, true], ['AI adoption', 2, true], ['Reporting', 3, false], ['Decision practices', 3, false]], function (r) {
+                  return html`<div class="${r[2] ? 'lo' : ''}"><span>${r[0]}</span><span class="tbar"><i style="--w:${r[1] / 4 * 100}%"></i></span><span class="num" style="text-align:right">${r[1]}/4</span></div>`;
+                })}
+              </div>
+              <span class="scene-meta">Printable, and addable to an enquiry from the contact page, or removed again.</span>
+            </div>
+          </div>
         </div>
       </section>`;
   }
@@ -122,7 +143,7 @@
       <section style="padding:calc(var(--header-h) + clamp(40px,5vw,72px)) 0 clamp(80px,9vw,144px);min-height:70vh">
         <div class="assess-wrap stack stack-32">
           <div class="row between" style="gap:16px">
-            <span class="lbl" style="color:var(--muted)">Question ${state.idx + 1} of 8 · ${q.name}</span>
+            <span class="label-caps" style="color:var(--muted)">Question ${state.idx + 1} of 8 · ${q.name}</span>
             <a href="/" style="font-size:14px;color:var(--muted)">Exit assessment</a>
           </div>
 
@@ -164,10 +185,10 @@
         <div class="wrap stack stack-48" data-reveal="rise">
           <div class="autogrid end" style="--min:380px;--gap:40px;--gap-x:96px">
             <div class="stack stack-20">
-              <p class="eyebrow-caps">Your result (indicative)</p>
+              <p class="label-caps">Your result (indicative)</p>
               <div class="row" style="gap:16px;align-items:baseline">
                 <span class="score">${res.score}</span>
-                <span style="font-size:clamp(24px,2.4vw,36px);font-weight:500;color:var(--navy)">${res.band.label}</span>
+                <span class="h3" style="color:var(--navy)">${res.band.label}</span>
               </div>
               <p style="font-size:19px;line-height:1.5;max-width:34em">${res.band.text}</p>
               ${when(!!res.foundationNote, function () { return html`<p class="callout">${res.foundationNote}</p>`; })}

@@ -11,19 +11,7 @@
   }
 
   function closing(label) {
-    return html`
-      <section style="padding:0 0 clamp(96px,10vw,160px)">
-        <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
-          <div class="stack stack-16">
-            <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">Another data-intensive sector?</h2>
-            <p style="font-size:17px;color:var(--muted);max-width:34em">The decisions matter more than the label. Tell us what you need to improve.</p>
-          </div>
-          <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact">${label}</a>
-            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>`;
+    return PG.closing({ h: 'Another data-intensive sector?', p: 'The decisions matter more than the label. Tell us what you need to improve.', cta: label === 'Book a consultation' ? 'Request a consultation' : label });
   }
 
   function overview() {
@@ -40,7 +28,7 @@
                 ${C.frame(img, { ar: '4 / 3', style: 'order:' + (k % 2 === 0 ? 0 : 1) })}
                 <div class="stack stack-18">
                   <span style="font-weight:500;font-size:12px;color:var(--muted)">0${k + 1}</span>
-                  <h2 style="font-size:clamp(26px,2.6vw,40px);font-weight:600;line-height:1.15;color:var(--navy)">${ind.title}</h2>
+                  <h2 class="h2-sm" style="color:var(--navy)">${ind.title}</h2>
                   <p style="font-size:19px;line-height:1.45;color:var(--navy);font-weight:500">${ind.question}</p>
                   <div class="stack stack-8">
                     <span class="label-caps">Measures we would define</span>
@@ -83,7 +71,7 @@
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px;--gap:48px;--gap-x:96px">
           <div class="stack stack-24">
             <span class="label-caps">The question leaders ask</span>
-            <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:500;line-height:1.15;letter-spacing:-.03em;color:var(--navy);text-wrap:balance">${ind.question}</h2>
+            <h2 class="h2-sm" style="color:var(--navy);text-wrap:balance">${ind.question}</h2>
             <p class="body muted">${ind.note}</p>
           </div>
           <div class="stack stack-16">
@@ -104,7 +92,7 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
           <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
             <div class="stack stack-16">
-              <p class="eyebrow-caps">Your data sources</p>
+              <p class="label-caps">Your data sources</p>
               <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
               <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced back to the system it came from.</p>
             </div>
@@ -126,7 +114,7 @@
           ${when(!!relatedWork, function () {
             return html`
               <div class="stack stack-20">
-                <p class="eyebrow-caps">RELATED WORK</p>
+                <p class="label-caps">RELATED WORK</p>
                 <a href="/work/${relatedWork.slug}" class="stack stack-10"
                    style="color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:24px">
                   <span class="label-caps">ILLUSTRATIVE SCENARIO</span>
@@ -143,6 +131,21 @@
   }
 
   var DEFINITION_NOTE = 'Before this measure goes into a report, we agree its definition, reporting period, owner and source with you.';
+
+  /* Match a listed measure to a defined one in the industry workspace. */
+  function definitionFor(ind, name) {
+    var M = (PG.scene.industries || {})[ind.slug]; if (!M) return null;
+    var n = name.toLowerCase();
+    var hit = M.metrics.find(function (m) { return n.indexOf(m.name.toLowerCase()) >= 0; }) ||
+      M.metrics.find(function (m) { return m.name.toLowerCase().split(/[^a-z0-9-]+/).some(function (w) { return w.length > 3 && n.indexOf(w) >= 0; }); });
+    return hit || null;
+  }
+  function definitionMarkup(ind, name) {
+    var m = definitionFor(ind, name);
+    if (!m) return '<span class="d">' + C.esc(DEFINITION_NOTE) + '</span>';
+    return '<span class="d">' + C.esc(m.definition) + '</span><dl><dt>Period</dt><dd>' + C.esc(m.period) + '</dd><dt>Unit</dt><dd>' + C.esc(m.unit) + '</dd><dt>Source</dt><dd>' + C.esc(m.source) + '</dd><dt>Owner</dt><dd>' + C.esc(m.owner) + '</dd></dl>' +
+      '<a href="#ind-sources" class="arrow" style="font-size:14px">Open in the workspace <span class="chev" aria-hidden="true">→</span></a>';
+  }
 
   PG.pages = PG.pages || {};
 
@@ -174,11 +177,12 @@
     mount: function (root, cleanup) {
       var ind = this._ind;
       C.qsa('[data-scene]', root).forEach(function (host) {
-        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { industry: ind, compact: host.hasAttribute('data-scene-compact') }));
+        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { industry: ind, compact: host.hasAttribute('data-scene-compact'), preview: host.hasAttribute('data-scene-preview') }));
       });
 
       var open = -1;
       var onClick = function (e) {
+        if (e.target.closest('.metric-btn .def a')) return; // the workspace link navigates
         var b = e.target.closest('[data-metric]');
         if (!b) return;
         var i = Number(b.getAttribute('data-metric'));
@@ -191,7 +195,7 @@
           if (isOpen && !def) {
             def = document.createElement('span');
             def.className = 'def';
-            def.textContent = DEFINITION_NOTE;
+            def.innerHTML = definitionMarkup(ind, el.querySelector('.hd > span').textContent);
             el.appendChild(def);
           } else if (!isOpen && def) {
             def.remove();

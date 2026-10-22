@@ -47,7 +47,7 @@
             </div>
             <div class="stack stack-12">
               <span class="label-caps">${feature.category.toUpperCase()} · IN PREPARATION</span>
-              <h2 style="font-size:clamp(26px,2.6vw,40px);font-weight:600;color:var(--navy);line-height:1.15">${feature.title}</h2>
+              <h2 class="h2-sm" style="color:var(--navy)">${feature.title}</h2>
               <p style="font-size:17px;color:var(--muted);line-height:1.55;max-width:36em">${feature.summary}</p>
             </div>
           </article>`;
@@ -89,11 +89,12 @@
       var names = ['All'].concat(Array.from(new Set((PG.articles || []).map(function (a) { return a.category; }))));
 
       return html`
-        ${PG.hero('insights')}
-
-        <section style="padding:0 0 clamp(40px,5vw,64px)">
-          <div class="wrap" data-reveal="rise">
-            <p class="small muted" style="max-width:36em">These articles are being written. None is published yet; each will open as a full article once approved.</p>
+        <section class="page-intro compact">
+          <div class="wrap">
+            <span class="eyebrow">Insights</span>
+            <h1>Articles in preparation.</h1>
+            <p class="lead">Nothing is published yet. The titles below are being written; until they open as full articles, the worked examples on the service pages are the most useful reading on this site.</p>
+            <div class="row" style="gap:16px 28px"><a class="btn btn-ghost" href="/services/business-intelligence#svc-artifact">See a worked example <span class="chev" aria-hidden="true">→</span></a></div>
           </div>
         </section>
 
@@ -110,12 +111,7 @@
           </div>
         </section>
 
-        <section style="padding:0 0 clamp(96px,10vw,160px)">
-          <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
-            <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">Not sure where your data practices stand?</h2>
-            <a class="btn" href="/assessment">Take the readiness assessment</a>
-          </div>
-        </section>`;
+        ${PG.closing({ h: 'Not sure where your data practices stand?' })}`;
     },
 
     mount: function (root, cleanup) {

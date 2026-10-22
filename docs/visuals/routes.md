@@ -35,3 +35,7 @@ Scene repaints settle the body to 40 % for 160 ms, swap, and enter over 240 ms; 
 - `prefers-reduced-motion` is honoured, but the site's own toggle persists in `localStorage`; a visitor who set it on another device will not carry it over (as before).
 - The home preview card is static by design; the interactive versions live on `/services` and each service page.
 - Hero and industry photography were not replaced in this pass (no new licensed assets); the existing art-directed set and crops remain.
+
+---
+
+**Superseded in part by the eighth pass** (19 October 2026): see `docs/ux/handoff.md`. The scenes recorded above remain, with sector-specific industry workspaces, inspectable figures and focus-preserving re-renders; the home preview card described here was replaced by the hero scene and the problem chooser.

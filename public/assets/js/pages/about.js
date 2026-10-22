@@ -7,106 +7,64 @@
   var html = C.html, each = C.each, when = C.when;
 
   function closing(h) {
-    h = h || 'Start with the decision you need to improve.';
-    return html`
-      <section style="padding:clamp(64px,8vw,128px) 0 clamp(96px,10vw,160px)">
-        <div class="wrap row between" data-reveal="rise" style="border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px);gap:32px 64px">
-          <h2 style="font-size:clamp(30px,3.6vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);max-width:18ch;text-wrap:balance">${h}</h2>
-          <div class="row" style="gap:16px 28px">
-            <a class="btn" href="/contact">Book a consultation</a>
-            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>`;
+    return PG.closing({ h: h || 'Start with the decision you need to improve.' });
   }
 
-  /* Founder feature and the team grid. Reserved frames stay until approved
-     photographs and profiles are supplied in PG.team. */
+  /* Founder and team. A portrait appears only once an approved photograph
+     exists in PG.team; until then the layout is text-led, with no reserved
+     frame. Team profiles appear once approved. */
   function peopleSection() {
-    var T = PG.team || { founder: {}, members: [], reservedSlots: 0 };
+    var T = PG.team || { founder: {}, members: [] };
     var f = T.founder;
-    /* Reserved frames stay out of the live page until at least one approved
-       profile exists (master brief: hide unapproved modules). */
     var showTeam = (T.members || []).length > 0;
-    var slots = [];
-    for (var i = 0; showTeam && i < (T.reservedSlots || 0); i++) slots.push(i);
-
     return html`
-      <section id="about-people" style="padding:0 0 clamp(64px,8vw,128px)">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(48px,6vw,80px);border-top:1px solid var(--line);padding-top:clamp(56px,7vw,96px)">
-          <div class="founder-feature">
-            ${C.portrait(f, { label: 'Founder portrait to be supplied' })}
-            <div class="stack stack-20">
-              <p class="eyebrow-caps">LEADERSHIP</p>
-              <h2 class="h2-sm" style="color:var(--navy)">${f.name}</h2>
-              <p style="font-size:16px;color:var(--muted)">${f.role} · Known professionally as ${f.alias}</p>
+      <section id="about-people" class="sec-sm bg-paper">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
+          <div class="founder-block${f.photo ? ' has-photo' : ''}">
+            ${when(!!f.photo, function () { return C.portrait(f); })}
+            <div class="stack stack-16">
+              <span class="eyebrow">Leadership</span>
+              <h2 class="h2-sm">${f.name}</h2>
+              <p class="small muted">${f.role} · Known professionally as ${f.alias}</p>
               <p class="body">${f.bio}</p>
-              <a class="arrow" href="/about/precious-celestine">Meet the Founder <span class="chev" aria-hidden="true">→</span></a>
+              <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
-
           ${when(showTeam, function () { return html`
-          <div class="stack stack-24">
-            <div class="row between end" style="gap:16px 48px">
-              <div class="stack stack-12">
-                <p class="eyebrow-caps">THE TEAM</p>
-                <h2 class="h2-sm" style="color:var(--navy);max-width:18ch">The people behind the work.</h2>
-              </div>
-              <p class="small muted" style="max-width:34em">More profiles will be added as they are approved.</p>
-            </div>
-            <div class="team-grid">
-              ${each(T.members, function (m) {
-                return html`
-                  <div class="person">
-                    ${C.portrait(m, { ar: '3 / 4', label: m.name + ', portrait to be supplied' })}
-                    <span class="nm">${m.name}</span>
-                    <span class="rl">${m.role}</span>
-                  </div>`;
-              })}
-              ${each(slots, function () {
-                return html`
-                  <div class="person" aria-hidden="true">
-                    ${C.portrait(null, { ar: '3 / 4', label: 'Space reserved for a team profile' })}
-                    <span class="rl">Profile to follow</span>
-                  </div>`;
-              })}
-            </div>
+          <div class="team-grid">
+            ${each(T.members, function (m) {
+              return html`<div class="person">${C.portrait(m, { ar: '3 / 4' })}<span class="nm">${m.name}</span><span class="rl">${m.role}</span></div>`;
+            })}
           </div>`; })}
         </div>
       </section>`;
   }
 
   function about() {
-    var photo = PG.img.get('arch-concrete');
-
     return html`
       ${PG.hero('about')}
 
-      <section style="padding:0 0 clamp(56px,7vw,96px)">
+      <section class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:380px;--gap:32px;--gap-x:64px">
           <p class="lede">Every business collects information in its finance, sales, operations and customer systems. The hard part is making those numbers agree, connect and mean something. Pattern Grid exists to help you do that, in the systems and in the way your teams work.</p>
           <p class="body muted">We start with what you need to understand, then work back through the reporting, the data and the systems needed to support it.</p>
         </div>
       </section>
 
-      <section style="padding:0 0 clamp(64px,8vw,128px)">
-        <div class="wrap" data-reveal="rise">
-          ${C.frame(photo, { ar: '21 / 9', sizes: '100vw' })}
-        </div>
-      </section>
 
-      <section class="bg-paper sec-sm">
+      ${peopleSection()}
+      <section class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:64px">
           <div class="stack stack-20">
-            <p class="eyebrow-caps">HOW WE WORK</p>
-            <h2 style="font-size:clamp(30px,3.4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);text-wrap:balance">Four commitments.</h2>
+            <p class="label-caps">HOW WE WORK</p>
+            <h2 class="h2-sm" style="color:var(--navy);text-wrap:balance">Four commitments.</h2>
             <p style="font-size:16px;color:var(--muted);max-width:32em">African-founded, with an international outlook. The work is shaped around the organisation in front of us.</p>
           </div>
           <div class="rows">
             ${each(PG.beliefs, function (b, i) {
               return html`
-                <div style="display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:24px 0">
-                  <span style="font-weight:500;font-size:12px;color:var(--muted);padding-top:6px">0${i + 1}</span>
+                <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:24px 0">
+                  <span class="num-cell" style="padding-top:6px">${C.cells(i)}0${i + 1}</span>
                   <div class="stack stack-6">
                     <h3 style="font-size:22px;font-weight:600;color:var(--navy);line-height:1.25">${b.title}</h3>
                     <p style="font-size:16px;line-height:1.55">${b.copy}</p>
@@ -120,15 +78,15 @@
       <section id="about-path" class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:64px">
           <div class="stack stack-20">
-            <p class="eyebrow-caps">THE DECISION PATH</p>
-            <h2 style="font-size:clamp(30px,3.4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy);text-wrap:balance">Five stages from question to action.</h2>
+            <p class="label-caps">THE DECISION PATH</p>
+            <h2 class="h2-sm" style="color:var(--navy);text-wrap:balance">Five stages from question to action.</h2>
             <a class="arrow" href="/approach">Explore Our Approach <span class="chev" aria-hidden="true">→</span></a>
           </div>
           <div class="path">
             ${each(PG.stages, function (s, i) {
               return html`
                 <div class="path-step">
-                  <span class="n">0${i + 1}</span>
+                  <span class="num-cell">${C.cells(i)}0${i + 1}</span>
                   <span class="t">${s.name}</span>
                   <span class="o">${s.output}</span>
                 </div>`;
@@ -137,36 +95,50 @@
         </div>
       </section>
 
-      ${peopleSection()}
-
       ${closing()}`;
   }
 
   function founder() {
+    var f = (PG.team && PG.team.founder) || {};
+    var D = PG.scene.data;
     return html`
-      ${PG.hero('founder')}
-
-      <section style="padding:24px 0 clamp(64px,8vw,128px)">
-        <div class="wrap stack stack-40" data-reveal="rise">
+      <section class="page-intro">
+        <div class="wrap">
           <nav class="crumbs" aria-label="Breadcrumb">
             <a href="/">Home</a><span aria-hidden="true">/</span>
             <a href="/about">About</a><span aria-hidden="true">/</span>
             <span aria-current="page">Founder</span>
           </nav>
-          <div class="autogrid start" style="--min:360px;--gap:48px;--gap-x:96px">
-            <div class="stack stack-24">
-              ${C.portrait(PG.team && PG.team.founder, { label: 'Founder portrait to be supplied' })}
-              <div class="stack stack-8">
-                <p style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.2">Founder &amp; Lead Consultant, Pattern Grid</p>
-                <p style="font-size:17px;color:var(--muted)">Known professionally as Ada Africa.</p>
-              </div>
+          <span class="eyebrow">Founder</span>
+          <h1>Precious Chinenye Celestine.</h1>
+          <p class="lead">Founder and lead consultant, known professionally as Ada Africa. A data and AI professional and business intelligence consultant.</p>
+          <div class="row" style="gap:16px 28px;margin-top:8px"><a class="btn" href="/contact">Discuss your business question</a></div>
+        </div>
+      </section>
+
+      <section class="sec-xs">
+        <div class="wrap founder-page" data-reveal="rise">
+          ${when(!!f.photo, function () { return C.portrait(f, { eager: true }); })}
+          <div class="stack stack-24">
+            <p class="lede">Precious Chinenye Celestine is a data and AI professional and business intelligence consultant. Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution. At Pattern Grid, she brings these disciplines together around the business questions clients need to answer.</p>
+            <dl class="founder-facts">
+              <div><dt>Role</dt><dd>Founder &amp; Lead Consultant, Pattern Grid</dd></div>
+              <div><dt>Known as</dt><dd>Ada Africa</dd></div>
+              <div><dt>Disciplines</dt><dd>Business intelligence · data engineering · data strategy · AI and automation</dd></div>
+              <div><dt>Sectors</dt><dd>Financial services · investment technology · FMCG and distribution</dd></div>
+            </dl>
+            <div class="stack stack-12" style="border-top:1px solid var(--rule);padding-top:24px">
+              <span class="label-caps">Selected experience</span>
+              <p class="body">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses.</p>
+              <p class="small muted">Earlier experience comes from previous roles and personal projects. Pattern Grid's own client engagements are written up under Work &amp; demos.</p>
             </div>
-            <div class="stack stack-24">
-              <p style="font-size:clamp(17px,1.3vw,19px);line-height:1.6;max-width:34em">Precious Chinenye Celestine is a Data and AI professional and Business Intelligence consultant. Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution. At Pattern Grid, she brings these disciplines together around the business questions clients need to answer.</p>
-              <div class="stack stack-12" style="border-top:1px solid var(--rule);padding-top:24px">
-                <span class="lbl" style="color:var(--muted)">Selected experience</span>
-                <p style="font-size:16px;line-height:1.6;max-width:34em">Reporting systems and analytical models for finance and commercial teams; data platform design and delivery; decision-support capabilities for investment technology and distribution businesses. This experience comes from previous roles and personal projects, not from work delivered by Pattern Grid.</p>
-              </div>
+          </div>
+          <div class="stack stack-16">
+            <span class="label-caps">How she defines a measure</span>
+            ${PG.scene.drawer({ chip: 'Definition', chipTone: 'ok', title: 'Net sales', text: D.definition, rows: [['Period', 'Week 36, by invoice date'], ['Unit', 'sample units (m)'], ['Source', D.ledgers.join(' · ')], ['Owner', D.owner]], note: 'The same row every figure on this site opens to. Sample data.' })}
+            <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:20px">
+              <span class="label-caps">How she works</span>
+              <ul class="ticks">${each(PG.beliefs, function (b) { return html`<li><strong>${b.title}</strong> ${b.copy}</li>`; })}</ul>
             </div>
           </div>
         </div>
@@ -181,20 +153,9 @@
 
       <section class="sec-sm">
         <div class="wrap stack stack-40" data-reveal="rise">
-          <div aria-label="Decision Path, fully labelled" class="bg-navy"
-               style="border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px">
-            ${each(PG.stages, function (s, i, arr) {
-              var last = i === arr.length - 1;
-              var style = last
-                ? 'border:1px solid #FFFFFF;background:#FFFFFF;color:#02203D'
-                : 'border:1px solid ' + (i === 2 ? '#38A0C3' : 'rgba(255,255,255,.3)') + ';color:#FFFFFF';
-              return html`
-                <div style="${style};display:flex;flex-direction:column;gap:10px;border-radius:var(--radius);padding:18px;min-height:200px">
-                  <span class="mono" style="font-weight:500;font-size:10px;letter-spacing:.08em;opacity:.8">STAGE 0${i + 1}</span>
-                  <span style="font-weight:600;font-size:18px">${s.name}</span>
-                  <span style="font-size:13px;line-height:1.5;opacity:.9">${s.copy}</span>
-                  <span class="mono" style="margin-top:auto;font-weight:500;font-size:10px;letter-spacing:.04em;opacity:.75">OUTPUT · ${s.output}</span>
-                </div>`;
+          <div class="path">
+            ${each(PG.stages, function (st, i) {
+              return html`<div class="path-step"><span class="num-cell">${C.cells(i)}0${i + 1}</span><span class="t">${st.name}</span><span class="o">${st.output}</span></div>`;
             })}
           </div>
 
@@ -231,7 +192,7 @@
                   <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="#02203D"
                        stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(s.icon)}"/></svg>
                   <span style="font-weight:600;font-size:16px">${s.title}</span>
-                  <span class="lbl" style="color:var(--muted);line-height:1.6">${(s.approach || []).map(function (a) { return a.name; }).join(' → ')}</span>
+                  <span class="label-caps" style="color:var(--muted);line-height:1.6">${(s.approach || []).map(function (a) { return a.name; }).join(' → ')}</span>
                 </a>`;
             })}
           </div>
@@ -241,7 +202,7 @@
       <section class="bg-paper sec-sm">
         <div class="wrap autogrid" data-reveal="rise" style="--min:320px;--gap:48px;--gap-x:64px;align-items:start">
           <div class="stack stack-20">
-            <p class="eyebrow-caps">THREE RULES WE HOLD TO</p>
+            <p class="label-caps">THREE RULES WE HOLD TO</p>
             <div class="rows">
               <div style="padding:18px 0;font-size:19px;font-weight:600;color:var(--navy)">Agree success measures before delivery.</div>
               <div style="padding:18px 0;font-size:19px;font-weight:600;color:var(--navy)">Make ownership explicit.</div>
@@ -249,7 +210,7 @@
             </div>
           </div>
           <div class="stack stack-20">
-            <p class="eyebrow-caps">PROPOSED ENGAGEMENT FORMATS</p>
+            <p class="label-caps">ENGAGEMENT FORMATS</p>
             <div class="rows">
               ${each(PG.engagements, function (e) {
                 return html`

@@ -1,11 +1,17 @@
 #!/usr/bin/env node
-/* Downloads the first frame of every hero from Unsplash once and writes local,
-   pre-optimised WebP files plus an inline blurred preview, so the opening
-   viewport never depends on a third-party CDN round trip.
-   Output: public/assets/img/hero/<key>-d.webp (desktop, ≤250 KB),
-           public/assets/img/hero/<key>-m.webp (mobile portrait, ≤150 KB),
-           public/assets/js/local-images.js  (paths + base64 LQIP + sizes)
-   Requires python3 with Pillow (WebP). Usage: node tools/build-hero-frames.js */
+/* Builds the hero photographs: downloads each hero's source once from
+   Unsplash, crops it for the frame it is shown in (desktop 16:9 around the
+   desktop focal point, phone 3:4 around the phone focal point), resizes,
+   then encodes WebP at the best quality that fits the byte budget — never
+   below a quality floor, so a crop or resolution change is the fix, not
+   visible compression damage.
+
+   Output: public/assets/img/hero/<key>-d.webp      1920×1080 (≤ 230 KiB)
+           public/assets/img/hero/<key>-d1200.webp  1200×675  (≤ 120 KiB)
+           public/assets/img/hero/<key>-m.webp      900×1200  (≤ 140 KiB)
+           public/assets/js/local-images.js         paths, sizes, inline LQIP
+           docs/assets/manifest.json + manifest.md  provenance and crops
+   Requires python3 with Pillow. Usage: node tools/build-hero-frames.js [--keep] */
 const { execFileSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -14,44 +20,92 @@ global.window = { dispatchEvent() {}, addEventListener() {}, matchMedia: () => (
 global.Event = function () {};
 require(path.join(__dirname, '..', 'public', 'assets', 'js', 'content.js'));
 const PG = global.window.PG;
-const keys = [...new Set(Object.values(PG.heroes).map((h) => h.images[0]))];
-const spec = keys.map((k) => ({ key: k, id: PG.img.reg[k][0], focal: PG.img.reg[k][3], focalM: PG.img.reg[k][4] || PG.img.reg[k][3] }));
+
+/* Every photograph the site shows, with where it is used. */
+const uses = {};
+const use = (key, route, role) => { if (!key) return; (uses[key] = uses[key] || []).push({ route, role }); };
+Object.entries(PG.heroes).forEach(([k, h]) => (h.images || []).forEach((img) => use(img, k === 'home' ? '/' : k === 'founder' ? '/about/precious-celestine' : '/' + k, 'hero')));
+PG.industries.forEach((i) => { use(i.photo, '/industries/' + i.slug, 'section photo (CDN)'); use(i.photo2, '/industries/' + i.slug, 'section photo (CDN)'); });
+
+const heroKeys = [...new Set(Object.values(PG.heroes).flatMap((h) => (h.images || []).slice(0, 1)))];
+const spec = heroKeys.map((k) => ({ key: k, id: PG.img.reg[k][0], focal: PG.img.reg[k][3], focalM: PG.img.reg[k][4] || PG.img.reg[k][3] }));
 
 const py = `
-import json, sys, io, base64, urllib.request
+import json, sys, io, base64, urllib.request, os
 from PIL import Image
-spec=json.loads(sys.argv[1]); outdir=sys.argv[2]; result={}
+spec=json.loads(sys.argv[1]); outdir=sys.argv[2]; keep='--keep' in sys.argv; result={}
 def pct(s): a,b=s.split(); return float(a[:-1])/100, float(b[:-1])/100
-def save(im, path, limit, q):
+def crop_at(im, fx, fy, tw, th):
+    W,H=im.size; scale=max(tw/W, th/H); sw,sh=round(W*scale),round(H*scale)
+    big=im.resize((sw,sh), Image.LANCZOS); cx,cy=fx*sw, fy*sh
+    left=min(max(0,cx-tw/2), sw-tw); top=min(max(0,cy-th/2), sh-th)
+    return big.crop((round(left),round(top),round(left)+tw,round(top)+th))
+def save(im, path, limit, q=82, floor=60):
     while True:
         im.save(path, 'WEBP', quality=q, method=6)
-        if len(open(path,'rb').read()) <= limit or q <= 40: return q
-        q -= 6
+        n=os.path.getsize(path)
+        if n <= limit or q <= floor: return q, n
+        q -= 4
+cache=os.path.join(outdir, '.src'); os.makedirs(cache, exist_ok=True)
 for s in spec:
-    url='https://images.unsplash.com/photo-'+s['id']+'?fit=max&q=90&w=2400&fm=jpg'
-    raw=urllib.request.urlopen(url, timeout=60).read()
-    im=Image.open(io.BytesIO(raw)).convert('RGB')
-    W,H=im.size
-    # desktop: 1920 wide, native aspect
-    d=im.resize((1920, round(H*1920/W)), Image.LANCZOS)
-    qd=save(d, f"{outdir}/{s['key']}-d.webp", 250*1024, 76)
-    # mobile: 3:4 portrait crop around the mobile focal point
-    fx,fy=pct(s['focalM']); tw,th=900,1200
-    scale=max(tw/W, th/H); sw,sh=round(W*scale),round(H*scale)
-    big=im.resize((sw,sh), Image.LANCZOS)
-    cx,cy=fx*sw, fy*sh
-    left=min(max(0,cx-tw/2), sw-tw); top=min(max(0,cy-th/2), sh-th)
-    m=big.crop((round(left),round(top),round(left)+tw,round(top)+th))
-    qm=save(m, f"{outdir}/{s['key']}-m.webp", 150*1024, 74)
-    # lqip: 32px blurred, inlined
-    l=im.resize((32, max(1,round(H*32/W))), Image.LANCZOS); b=io.BytesIO(); l.save(b,'WEBP',quality=35)
-    result[s['key']]={'d':f"/assets/img/hero/{s['key']}-d.webp",'m':f"/assets/img/hero/{s['key']}-m.webp",'w':1920,'h':round(H*1920/W),'lqip':'data:image/webp;base64,'+base64.b64encode(b.getvalue()).decode(),'qd':qd,'qm':qm}
-    print(s['key'], 'd', len(open(f"{outdir}/{s['key']}-d.webp",'rb').read())//1024,'KB q'+str(qd), '| m', len(open(f"{outdir}/{s['key']}-m.webp",'rb').read())//1024,'KB q'+str(qm), file=sys.stderr)
+    src=os.path.join(cache, s['id']+'.jpg')
+    if not os.path.exists(src):
+        url='https://images.unsplash.com/photo-'+s['id']+'?fit=max&q=90&w=2400&fm=jpg'
+        open(src,'wb').write(urllib.request.urlopen(url, timeout=60).read())
+    im=Image.open(src).convert('RGB')
+    fx,fy=pct(s['focal']); mx,my=pct(s['focalM'])
+    d=crop_at(im, fx, fy, 1920, 1080); qd,nd=save(d, f"{outdir}/{s['key']}-d.webp", 230*1024)
+    d12=d.resize((1200,675), Image.LANCZOS); q12,n12=save(d12, f"{outdir}/{s['key']}-d1200.webp", 120*1024)
+    m=crop_at(im, mx, my, 900, 1200); qm,nm=save(m, f"{outdir}/{s['key']}-m.webp", 140*1024)
+    l=d.resize((32,18), Image.LANCZOS); b=io.BytesIO(); l.save(b,'WEBP',quality=35)
+    result[s['key']]={'d':f"/assets/img/hero/{s['key']}-d.webp",'d1200':f"/assets/img/hero/{s['key']}-d1200.webp",'m':f"/assets/img/hero/{s['key']}-m.webp",'w':1920,'h':1080,'mw':900,'mh':1200,
+      'lqip':'data:image/webp;base64,'+base64.b64encode(b.getvalue()).decode(),
+      'bytes':{'d':nd,'d1200':n12,'m':nm},'q':{'d':qd,'d1200':q12,'m':qm},'source':{'w':im.size[0],'h':im.size[1]}}
+    print(s['key'], f"d {nd//1024}KB q{qd} | d1200 {n12//1024}KB q{q12} | m {nm//1024}KB q{qm}", file=sys.stderr)
+if not keep:
+    import shutil; shutil.rmtree(cache, ignore_errors=True)
 print(json.dumps(result))
 `;
 const outdir = path.join(__dirname, '..', 'public', 'assets', 'img', 'hero');
-const json = execFileSync('python3', ['-c', py, JSON.stringify(spec), outdir], { stdio: ['ignore', 'pipe', 'inherit'], maxBuffer: 64 * 1024 * 1024 }).toString();
+fs.mkdirSync(outdir, { recursive: true });
+// Remove frames no hero uses any more.
+for (const f of fs.readdirSync(outdir)) {
+  if (!/\.webp$/.test(f)) continue;
+  const key = f.replace(/-(d|d1200|m)\.webp$/, '');
+  if (!heroKeys.includes(key)) fs.unlinkSync(path.join(outdir, f));
+}
+const json = execFileSync('python3', ['-c', py, JSON.stringify(spec), outdir, ...process.argv.slice(2)], { stdio: ['ignore', 'pipe', 'inherit'], maxBuffer: 64 * 1024 * 1024 }).toString();
 const result = JSON.parse(json);
-const js = '/* Generated by tools/build-hero-frames.js — local first frames for every hero. */\nwindow.PG = window.PG || {};\nwindow.PG.local = ' + JSON.stringify(result) + ';\n';
+const js = '/* Generated by tools/build-hero-frames.js — local, pre-cropped hero frames. */\nwindow.PG = window.PG || {};\nwindow.PG.local = ' + JSON.stringify(result) + ';\n';
 fs.writeFileSync(path.join(__dirname, '..', 'public', 'assets', 'js', 'local-images.js'), js);
-console.log('local-images.js written for', Object.keys(result).length, 'frames');
+
+/* Asset manifest: every photograph, where it is used, where it came from. */
+const manifest = Object.keys(PG.img.reg).filter((k) => uses[k]).map((k) => {
+  const r = PG.img.reg[k];
+  const local = result[k];
+  return {
+    key: k,
+    usedOn: uses[k],
+    source: 'Unsplash photo ' + r[0],
+    creator: r[2],
+    licence: 'Unsplash License (free to use; attribution shown as a photo credit)',
+    approval: 'Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.',
+    alt: r[1],
+    decorative: false,
+    focal: { desktop: r[3], phone: r[4] || r[3] },
+    crops: local ? { desktop: '1920×1080 (16:9) and 1200×675', phone: '900×1200 (3:4)' } : { cdn: 'responsive srcset 800–2400 px, browser-cropped to the frame ratio' },
+    files: local ? local.bytes : null,
+    quality: local ? local.q : null,
+    original: local ? local.source : null
+  };
+});
+const docs = path.join(__dirname, '..', 'docs', 'assets');
+fs.mkdirSync(docs, { recursive: true });
+fs.writeFileSync(path.join(docs, 'manifest.json'), JSON.stringify({ builtAt: new Date().toISOString(), images: manifest }, null, 2));
+const kb = (n) => (n / 1024).toFixed(0) + ' KiB';
+fs.writeFileSync(path.join(docs, 'manifest.md'),
+  '# Image manifest\n\nGenerated by `tools/build-hero-frames.js` (`npm run images`). Hero frames are cropped for their display ratio around the recorded focal point, then encoded to WebP at the best quality within the byte budget (desktop ≤ 230 KiB, 1200 px ≤ 120 KiB, phone ≤ 140 KiB; quality floor 60). Section photographs load from the Unsplash CDN with a responsive srcset.\n\n' +
+  'All photographs are stock imagery used as illustrative context. None shows Pattern Grid staff, premises or client sites. The founder has no published portrait yet; the founder pages use a text-led layout by design.\n\n' +
+  '| Key | Used on | Role | Creator | Alt text | Focal (desktop / phone) | Files |\n|---|---|---|---|---|---|---|\n' +
+  manifest.map((m) => `| \`${m.key}\` | ${[...new Set(m.usedOn.map((u) => u.route))].join(', ')} | ${[...new Set(m.usedOn.map((u) => u.role))].join(', ')} | ${m.creator} | ${m.alt} | ${m.focal.desktop} / ${m.focal.phone} | ${m.files ? `d ${kb(m.files.d)} (q${m.quality.d}) · 1200 ${kb(m.files.d1200)} (q${m.quality.d1200}) · m ${kb(m.files.m)} (q${m.quality.m})` : 'CDN'} |`).join('\n') + '\n');
+console.log('local-images.js written for', Object.keys(result).length, 'frames;', manifest.length, 'images in docs/assets/manifest.md');

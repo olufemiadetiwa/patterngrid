@@ -6,14 +6,6 @@
   var C = PG.core;
   var html = C.html, each = C.each, when = C.when, raw = C.raw;
 
-  var PREVIEW_KICKERS = [
-    'Prioritisation matrix',
-    'Pipeline run with one held record',
-    'Inspectable metric',
-    'Review queue',
-    'Who can do which task'
-  ];
-
   /* The signature four-stage sequence, one consistent sample dataset. */
   var LOCS = [
     { name: 'Ikeja', sales: 100, avail: 92 },
@@ -74,38 +66,7 @@
   }
 
   /* Per-service preview cards shown beside the capability list. */
-  /* The sticky preview beside the service list: one compact workspace scene
-     per service, the same scenes the service pages mount interactively. */
-  var PREVIEW_SCENES = ['strategy', 'engineering', 'bi', 'ai', 'capability'];
-  function previewBody(i) {
-    return PG.scene.render(PREVIEW_SCENES[i], { compact: true, preview: true });
-  }
-
   /* Illustrative record grids beside each work scenario. */
-  var WORK_GRIDS = {
-    'executive-performance': {
-      title: 'metric_dictionary · reconciled',
-      cols: '1.4fr 1fr 1fr 0.8fr',
-      head: ['metric', 'finance', 'sales', 'status'],
-      rows: [['Net sales W36', '9.6m', '9.6m', 'agreed'], ['Gross sales', '10.0m', '10.4m', 'definition'], ['Returns', '0.4m', '—', 'owner: FIN'], ['Active outlets', '412', '418', 'period']],
-      note: 'Two definitions of gross sales surfaced and resolved to one owner and one period rule.'
-    },
-    'distribution-intelligence': {
-      title: 'availability_vs_demand · W36',
-      cols: '1.2fr 0.8fr 0.9fr 1fr',
-      head: ['location', 'sales idx', 'avail', 'exception'],
-      rows: [['Ikeja', '100', '92%', '—'], ['Lekki', '96', '88%', '—'], ['Surulere', '61', '41%', 'review alloc.'], ['Ikorodu', '89', '85%', '—']],
-      note: 'One location shows both lower sales and lower availability; an exception is raised with an owner.'
-    },
-    'reporting-workflow': {
-      title: 'review_log · weekly briefing',
-      cols: '0.7fr 1.2fr 1fr 1fr',
-      head: ['week', 'checks', 'reviewer', 'status'],
-      rows: [['W36', '3/3 passed', 'finance lead', 'pending'], ['W35', '3/3 passed', 'finance lead', 'approved'], ['W34', 'ledger missing', 'finance lead', 'returned'], ['W33', '3/3 passed', 'finance lead', 'approved']],
-      note: 'Every draft is proposed, checked and reviewed by a named person before release. W34 stopped at review.'
-    }
-  };
-
   var WORK_META = {
     'executive-performance': ['Which numbers can leadership take into the meeting?', 'Source reconciliation, a metric dictionary, one management view and a decision brief.', 'Show how three functions can agree on one traceable figure.'],
     'distribution-intelligence': ['Where is outlet demand outpacing available stock?', 'A shared stock and sales model with an exception queue and named owners.', 'Show how availability gaps can be seen earlier by outlet.'],
@@ -163,132 +124,128 @@
         return html`
           <div class="seq-q">
             <span class="eyebrow">Question to investigate</span>
-            <p style="font-size:clamp(20px,1.6vw,24px);font-weight:600;line-height:1.25">Is availability limiting sales here?</p>
+            <p class="h3">Is availability limiting sales here?</p>
             <p class="small muted">Surulere shows both the lowest sales index (61) and the lowest availability (41%). The connected view raises the question; it does not prove the cause or claim a result.</p>
           </div>`;
       })}`;
   }
 
-  function capabilitySection() {
-    var ov = PG.servicesOverview || { features: {} };
-
+  /* Five entry points framed around the visitor's problem. Readable without
+     hover; a sixth card points the undecided at the assessment. */
+  function problemSection() {
+    var ov = PG.servicesOverview || { features: {}, situations: [] };
     return html`
-      <section class="sec" aria-labelledby="cap-h2">
-        <div class="wrap autogrid start" data-reveal="rise" style="--min:440px;--gap:56px">
-          <div class="stack stack-40">
-            <div class="stack stack-16">
-              <span class="eyebrow">Five services</span>
-              <h2 class="h2" id="cap-h2">Start with the problem. Build what solves it.</h2>
+      <section class="sec-sm" aria-labelledby="cap-h2">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <span class="eyebrow">Choose the problem</span>
+              <h2 class="h2-sm" id="cap-h2">Start with what is in front of you.</h2>
             </div>
-            <div class="rows" data-caps>
-              ${each(PG.services, function (s, i) {
-                var f = ov.features[s.slug] || {};
-                return html`
-                  <a class="cap-row" href="/services/${s.slug}" data-cap="${i}"
-                     aria-current="${i === 0 ? 'true' : 'false'}">
-                    <span class="idx num">${s.index}</span>
-                    <span class="stack stack-8">
-                      <span class="t">${s.title}</span>
-                      <span class="d">${f.text || s.short}</span>
-                      <span class="row" style="gap:6px;margin-top:2px">
-                        ${each(f.outputs || [], function (o) { return html`<span class="chip">${o}</span>`; })}
-                      </span>
-                    </span>
-                    <span class="chev" aria-hidden="true">→</span>
-                  </a>`;
-              })}
-            </div>
+            <p class="body muted" style="max-width:34em">Five services that build on each other. Pick the one that matches the problem; we add the next step only if it is needed.</p>
           </div>
-
-          <div class="preview-sticky" aria-hidden="true" inert>
-            <div class="preview-card" data-preview-card>
-              <div data-preview-body>${previewBody(0)}</div>
-            </div>
-            <div class="row between" style="gap:16px;font-size:14px;color:var(--muted)">
-              <span data-preview-title>${PG.services[0].title}</span>
-              <span data-preview-outcome style="font-weight:500;color:var(--ink)">${PG.services[0].outcome}</span>
-            </div>
+          <div class="svc-cards">
+            ${each(PG.services, function (s) {
+              var f = ov.features[s.slug] || {};
+              var sit = (ov.situations || []).find(function (x) { return x.slug === s.slug; });
+              return html`
+                <a class="svc-card" href="/services/${s.slug}">
+                  <span class="row between" style="gap:12px">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(s.icon)}"/></svg>
+                    <span class="num-cell">${C.cells(PG.services.indexOf(s))}${s.index}</span>
+                  </span>
+                  <span class="stack stack-8">
+                    ${when(!!sit, function () { return html`<span class="when">“${sit.situation}”</span>`; })}
+                    <span class="t">${s.title}</span>
+                    <span class="d">${f.text || s.short}</span>
+                  </span>
+                  <span class="outs">${each((f.outputs || []).slice(0, 3), function (o) { return html`<span>${o}</span>`; })}</span>
+                  <span class="go">${s.link || 'See the service'} <span class="chev" aria-hidden="true">→</span></span>
+                </a>`;
+            })}
+            <a class="svc-card is-aside" href="/assessment">
+              <span class="stack stack-8">
+                <span class="when">Not sure which problem comes first?</span>
+                <span class="t">Take the readiness assessment</span>
+                <span class="d">Eight questions, no email needed. You get a score, your weakest areas and up to three suggested next steps.</span>
+              </span>
+              <span class="go">Start the assessment <span class="chev" aria-hidden="true">→</span></span>
+            </a>
           </div>
         </div>
       </section>`;
   }
 
+  /* The signature sequence on paper: the scene full-width, the four stages
+     as a rail, the narrative under the active stage. Replay is user-started
+     and any selection takes over. */
   function sequenceSection() {
     return html`
-      <section class="sec bg-ink" aria-labelledby="seq-h2">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(48px,6vw,80px)">
-          <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
-            <div class="stack stack-16">
-              <span class="eyebrow eyebrow-dark">One question, followed through</span>
-              <h2 class="h2" id="seq-h2">Where is performance slipping?</h2>
+      <section class="sec-sm bg-paper" aria-labelledby="seq-h2">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(28px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="eyebrow">One question, followed through</span>
+              <h2 class="h2-sm" id="seq-h2">Where is performance slipping?</h2>
             </div>
-            <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.78);max-width:34em">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
+            <p class="lead">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
           </div>
 
-          <div class="autogrid start" style="--min:400px;--gap:40px">
-            <div class="seq-sticky">
-              <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
-                <div class="scene-bar">
-                  <span class="scene-id"><span class="scene-glyph" aria-hidden="true"><i></i><i></i><i></i></span>Connected view</span>
-                  <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay style="height:32px">Replay</button></span>
-                </div>
-                <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs>
-                  ${each(STAGES, function (t, i) {
-                    return html`<button type="button" role="tab" class="scene-step"
-                      data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
-                      aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}"><span class="n">${i + 1}</span>${t.name}</button>`;
-                  })}
-                </div>
-                <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body
-                     aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
-                <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · local interactions only</span></div>
+          <div class="seq-wrap">
+            <div class="seq-panel scene" role="group" aria-label="Connected view — illustrative demo">
+              <div class="scene-bar">
+                <span class="scene-id">${C.cells(1)}Connected view</span>
+                <span class="row" style="gap:10px"><span class="scene-tag">Illustrative demo</span><button type="button" class="toggle toggle-sm" data-replay style="height:32px">Replay</button></span>
               </div>
+              <div role="tablist" aria-label="Stages" class="scene-steps" data-stage-tabs>
+                ${each(STAGES, function (t, i) {
+                  return html`<button type="button" role="tab" class="scene-step"
+                    data-stage="${i}" id="seq-tab-${i}" aria-controls="seq-panel"
+                    aria-selected="${i === 0 ? 'true' : 'false'}" tabindex="${i === 0 ? '0' : '-1'}"><span class="n">${i + 1}</span>${t.name}</button>`;
+                })}
+              </div>
+              <div role="tabpanel" id="seq-panel" class="seq-body scene-body stack stack-16" data-seq-body
+                   aria-labelledby="seq-tab-0">${stagePanel(0)}</div>
+              <div class="scene-foot"><span><i class="dot" aria-hidden="true"></i>Sources → aligned → compared → a question with an owner</span><span>Sample data · nothing is sent or saved</span></div>
             </div>
-
-            <div class="stack seq-steps">
+            <div class="seq-narrative" data-seq-narrative>
               ${each(STAGES, function (st, i) {
                 return html`
-                  <div class="seq-step${i === 0 ? ' is-active' : ''}" data-seq-step="${i}">
-                    <span class="eyebrow eyebrow-dark">0${i + 1}</span>
-                    <h3 class="h3">${st.name}</h3>
-                    <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.8);max-width:32em">${st.copy}</p>
-                  </div>`;
+                  <button type="button" class="seq-stage${i === 0 ? ' is-active' : ''}" data-seq-step="${i}">
+                    <span class="num-cell">${C.cells(i)}0${i + 1}</span>
+                    <span class="t">${st.name}</span>
+                    <span class="c">${st.copy}</span>
+                  </button>`;
               })}
-              <a class="arrow" href="/approach" style="color:#fff;padding:24px 0">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
             </div>
+            <a class="arrow" href="/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
   }
 
   function industriesSection() {
-    var spans = [8, 4, 4, 8];
-    var ratios = ['16 / 10', '4 / 5', '1 / 1', '2 / 1'];
-
     return html`
-      <section class="sec bg-paper" aria-labelledby="ind-h2">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
-          <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
-            <div class="stack stack-16">
-              <span class="eyebrow">Industries in context</span>
-              <h2 class="h2" id="ind-h2">Better questions begin with business context.</h2>
+      <section class="sec-sm bg-paper" aria-labelledby="ind-h2">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+            <div class="stack stack-14">
+              <span class="eyebrow">Industries</span>
+              <h2 class="h2-sm" id="ind-h2">Better questions begin with business context.</h2>
             </div>
-            <p style="font-size:18px;line-height:1.6;color:var(--muted);max-width:34em">A distribution business, an investment platform and a digital product measure success differently. We design the reporting around the decisions your sector actually makes.</p>
+            <p class="body muted" style="max-width:34em">A distributor, a bank and a software product measure success differently. Each page shows the sector's own question, measures and source systems.</p>
           </div>
-          <div class="ind-grid">
-            ${each(PG.industries, function (ind, i) {
+          <div class="ind-cards">
+            ${each(PG.industries, function (ind) {
               var img = PG.img.get(ind.photo);
               return html`
-                <a class="ind-cell" href="/industries/${ind.slug}" style="grid-column:span ${spans[i]}">
-                  ${C.frame(img, { ar: ratios[i], sizes: '(min-width: 960px) 66vw, 100vw' })}
-                  <div class="row between" style="gap:16px;align-items:baseline">
-                    <span class="stack stack-6">
-                      <span class="t">${ind.title}</span>
-                      <span class="small muted" style="max-width:40em">${ind.question}</span>
-                      <span class="eyebrow" style="margin-top:4px">${(ind.metrics || []).slice(0, 3).join(' · ')}</span>
-                    </span>
-                    <span class="chev" aria-hidden="true">→</span>
-                  </div>
+                <a class="ind-card" href="/industries/${ind.slug}">
+                  ${C.frame(img, { ar: '3 / 2', sizes: '(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw' })}
+                  <span class="stack stack-6">
+                    <span class="t">${ind.title}</span>
+                    <span class="q">${ind.question}</span>
+                    <span class="m">${(ind.metrics || []).slice(0, 3).join(' · ')}</span>
+                  </span>
                 </a>`;
             })}
           </div>
@@ -296,51 +253,33 @@
       </section>`;
   }
 
+  var WORK_SCENES = { 'executive-performance': 'bi', 'distribution-intelligence': 'engineering', 'reporting-workflow': 'ai' };
+
+  /* The deliverables themselves, rendered small, stand in for stock photography. */
   function workSection() {
     return html`
-      <section class="sec" aria-labelledby="work-h2">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(48px,6vw,96px)">
-          <div class="row between end" style="gap:24px 48px">
-            <div class="stack stack-16" style="max-width:720px">
-              <span class="eyebrow">Illustrative scenarios</span>
-              <h2 class="h2" id="work-h2">Three worked scenarios, built with sample data.</h2>
+      <section class="sec-sm" aria-labelledby="work-h2">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
+          <div class="row between end" style="gap:16px 48px">
+            <div class="stack stack-14" style="max-width:720px">
+              <span class="eyebrow">Work &amp; demos</span>
+              <h2 class="h2-sm" id="work-h2">Two client projects, three worked demos.</h2>
             </div>
-            <a class="arrow" href="/work">Explore our work <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/work">All work <span class="chev" aria-hidden="true">→</span></a>
           </div>
-
-          <div class="stack" style="gap:clamp(48px,6vw,96px)">
-            ${each(PG.work, function (w, i) {
-              var g = WORK_GRIDS[w.slug];
-              var meta = WORK_META[w.slug];
+          <div class="case-grid">${each(PG.cases || [], PG.caseCard)}</div>
+          <div class="work-cards">
+            ${each(PG.work, function (w) {
+              var meta = WORK_META[w.slug] || ['', '', ''];
               return html`
-                <a href="/work/${w.slug}" class="autogrid" style="--min:400px;--gap:32px;--gap-x:clamp(40px,5vw,80px);align-items:center;color:var(--ink)">
-                  <div class="panel-dark" data-reveal="clip" aria-hidden="true"
-                       style="order:${i % 2 === 0 ? 0 : 1};min-height:300px">
-                    <div class="card-head"><span>${g.title}</span><span>Sample data</span></div>
-                    <div class="dgrid" style="grid-template-columns:${g.cols}">
-                      ${each(g.head, function (h) { return html`<span class="th">${h}</span>`; })}
-                      ${each(g.rows, function (row) {
-                        return each(row, function (cell, ci) {
-                          var last = ci === row.length - 1;
-                          var warn = /definition|period|review|returned|pending|missing/.test(cell);
-                          var cls = ci === 0 ? 'key' : '';
-                          if (last) cls += warn ? ' warn' : (cell === '—' ? ' nil' : ' ok');
-                          return html`<span class="td ${cls}">${cell}</span>`;
-                        });
-                      })}
-                    </div>
-                    <span style="margin-top:auto;font-size:13px;color:rgba(255,255,255,.75);line-height:1.5">${g.note}</span>
-                  </div>
-                  <div class="stack stack-18" style="max-width:560px">
-                    <span class="lbl" style="color:var(--muted)">Illustrative demonstration · ${w.sector}</span>
-                    <h3 style="font-size:clamp(26px,2.6vw,40px);font-weight:600;line-height:1.12;letter-spacing:-.02em">${w.title}</h3>
-                    <div class="kv" style="--kv:110px;font-size:15px">
-                      <span class="k">Question</span><span>${meta[0]}</span>
-                      <span class="k">What it includes</span><span>${meta[1]}</span>
-                      <span class="k">What it shows</span><span>${meta[2]}</span>
-                    </div>
-                    <span class="arrow" style="font-size:15px;color:var(--teal)">Explore the scenario <span class="chev" aria-hidden="true">→</span></span>
-                  </div>
+                <a href="/work/${w.slug}" class="work-card">
+                  <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(WORK_SCENES[w.slug] || 'bi', { thumb: true, plainHeading: true })}</span>
+                  <span class="stack stack-8" style="padding:4px 2px 0">
+                    <span class="label-caps">Illustrative · ${w.sector}</span>
+                    <span class="t">${w.title}</span>
+                    <span class="d">${meta[0]}</span>
+                    <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
+                  </span>
                 </a>`;
             })}
           </div>
@@ -348,38 +287,29 @@
       </section>`;
   }
 
+  /* Founder: real name, verified experience, no placeholder frame. A portrait
+     appears here only once an approved photograph exists in PG.team. */
   function founderSection() {
+    var f = (PG.team && PG.team.founder) || {};
+    var hasPhoto = !!f.photo;
     return html`
-      <section class="sec bg-paper" aria-labelledby="founder-h2">
-        <div class="wrap ${PG.team && PG.team.founder && PG.team.founder.photo ? 'founder-feature' : 'autogrid end'}" data-reveal="rise" style="--min:380px">
-          ${when(!!(PG.team && PG.team.founder && PG.team.founder.photo), function () { return C.portrait(PG.team.founder); })}
-          <div class="stack stack-28">
-            <div class="stack stack-20">
-              <span class="eyebrow">Founder</span>
-              <h2 id="founder-h2" style="font-size:clamp(40px,5.2vw,84px);font-weight:650;line-height:.98;letter-spacing:-.035em;color:var(--ink);text-wrap:balance">Precious Chinenye Celestine</h2>
-              <span style="font-size:17px;color:var(--muted)">Founder &amp; Lead Consultant · Known professionally as Ada Africa</span>
-            </div>
-            <div class="stack stack-24" style="border-top:1px solid var(--rule);padding-top:24px">
-              <p class="lede">Precious founded Pattern Grid to help organisations make better use of their data. Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation.</p>
-              <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
-            </div>
+      <section class="sec-sm bg-paper" aria-labelledby="founder-h2">
+        <div class="wrap founder-block${hasPhoto ? ' has-photo' : ''}" data-reveal="rise">
+          ${when(hasPhoto, function () { return C.portrait(f); })}
+          <div class="stack stack-20">
+            <span class="eyebrow">Founder</span>
+            <h2 id="founder-h2" class="h2-sm">${f.name}</h2>
+            <p class="small muted">${f.role} · Known professionally as ${f.alias}</p>
+            <p class="body">${f.bio}</p>
+            <p class="small slate" style="max-width:36em">Her experience covers reporting systems, analytical models and data platforms for finance, commercial, investment-technology and distribution teams. Pattern Grid's client engagements, including Ledrop and Drinks.NG, are written up under Work &amp; demos.</p>
+            <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
   }
 
   function closingSection() {
-    return html`
-      <section aria-labelledby="close-h2" style="padding-block:clamp(96px,12vw,192px)">
-        <div class="wrap stack stack-28" data-reveal="rise" style="align-items:flex-start">
-          <h2 id="close-h2" style="font-size:clamp(40px,6.4vw,104px);font-weight:650;line-height:.98;letter-spacing:-.035em;max-width:14ch;text-wrap:balance">What would you like to understand?</h2>
-          <p style="font-size:clamp(18px,1.4vw,22px);line-height:1.5;max-width:34em;color:var(--muted)">Start a conversation about your data, your decisions and what comes next.</p>
-          <div class="row" style="gap:16px 32px;margin-top:8px">
-            <a class="btn" href="/contact">Book a consultation</a>
-            <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>`;
+    return PG.closing({ h: 'What would you like to understand?', p: 'Tell us the decision you want to improve. We reply to arrange a short conversation, then suggest a sensible next step.' });
   }
 
   /* ------------------------------------------------------------- module */
@@ -398,7 +328,7 @@
     render: function () {
       return html`
         ${PG.hero('home')}
-        ${capabilitySection()}
+        ${problemSection()}
         ${sequenceSection()}
         ${industriesSection()}
         ${workSection()}
@@ -407,54 +337,16 @@
     },
 
     mount: function (root, cleanup) {
-      /* --- capability list drives the preview card ------------------- */
-      var kicker = root.querySelector('[data-preview-kicker]');
-      var body = root.querySelector('[data-preview-body]');
-      var title = root.querySelector('[data-preview-title]');
-      var outcome = root.querySelector('[data-preview-outcome]');
-      var caps = C.qsa('[data-cap]', root);
-      var activeCap = 0;
-
-      var card = root.querySelector('[data-preview-card]');
-      var swapT = null;
-      function selectCap(i) {
-        if (i === activeCap) return;
-        activeCap = i;
-        caps.forEach(function (el, j) { el.setAttribute('aria-current', j === i ? 'true' : 'false'); });
-        if (title) title.textContent = PG.services[i].title;
-        if (outcome) outcome.textContent = PG.services[i].outcome;
-        // Short settle-out, swap, settle-in — 320 ms each way.
-        if (card && !C.motion.reduced) {
-          card.classList.add('is-swapping');
-          clearTimeout(swapT);
-          swapT = setTimeout(function () {
-            if (kicker) kicker.textContent = PREVIEW_KICKERS[i];
-            if (body) body.innerHTML = previewBody(i).value;
-            card.classList.remove('is-swapping');
-          }, 200);
-        } else {
-          if (kicker) kicker.textContent = PREVIEW_KICKERS[i];
-          if (body) body.innerHTML = previewBody(i).value;
-        }
-      }
-
-      caps.forEach(function (el) {
-        var i = Number(el.getAttribute('data-cap'));
-        var pick = function () { selectCap(i); };
-        el.addEventListener('mouseenter', pick);
-        el.addEventListener('focus', pick);
-        cleanup(function () {
-          el.removeEventListener('mouseenter', pick);
-          el.removeEventListener('focus', pick);
-        });
+      /* --- workspace scenes (the hero's decision workspace) ----------- */
+      C.qsa('[data-scene]', root).forEach(function (host) {
+        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { plainHeading: host.classList.contains('hero-scene') }));
       });
 
       /* --- four-stage sequence -------------------------------------- */
       var tabs = C.qsa('[data-stage]', root);
       var seqBody = root.querySelector('[data-seq-body]');
-      var steps = C.qsa('[data-seq-step]', root);
+      var stages = C.qsa('[data-seq-step]', root);
       var stage = 0;
-      var replaying = false;
       var fadeT = null, replayT = null;
 
       function paintStage(i) {
@@ -463,7 +355,7 @@
           t.setAttribute('aria-selected', j === i ? 'true' : 'false');
           t.tabIndex = j === i ? 0 : -1;
         });
-        steps.forEach(function (s, j) { s.classList.toggle('is-active', j === i); });
+        stages.forEach(function (s, j) { s.classList.toggle('is-active', j === i); });
         if (seqBody) {
           seqBody.innerHTML = stagePanel(i).value;
           seqBody.setAttribute('aria-labelledby', 'seq-tab-' + i);
@@ -481,13 +373,15 @@
         }, 220);
       }
 
-      tabs.forEach(function (t) {
-        var click = function () { replaying = false; setStage(Number(t.getAttribute('data-stage'))); };
-        t.addEventListener('click', click);
-        cleanup(function () { t.removeEventListener('click', click); });
-      });
+      var onSeqClick = function (e) {
+        var t = e.target.closest('[data-stage], [data-seq-step]');
+        if (!t || !root.contains(t)) return;
+        clearTimeout(replayT);
+        setStage(Number(t.getAttribute('data-stage') || t.getAttribute('data-seq-step')));
+      };
+      root.addEventListener('click', onSeqClick);
+      cleanup(function () { root.removeEventListener('click', onSeqClick); });
 
-      /* Arrow-key support for the tablist — absent from the prototype. */
       var tablist = root.querySelector('[data-stage-tabs]');
       if (tablist) {
         var onKey = function (e) {
@@ -497,7 +391,7 @@
           e.preventDefault();
           var next = d === -99 ? 0 : d === 99 ? tabs.length - 1 :
             Math.min(tabs.length - 1, Math.max(0, stage + d));
-          replaying = false;
+          clearTimeout(replayT);
           setStage(next);
           tabs[next].focus();
         };
@@ -508,13 +402,12 @@
       var replayBtn = root.querySelector('[data-replay]');
       if (replayBtn) {
         var onReplay = function () {
-          replaying = true;
           clearTimeout(replayT);
           setStage(0);
           var i = 0;
           var step = function () {
             i++;
-            if (i > 3) { replaying = false; return; }
+            if (i > 3) return;
             setStage(i);
             replayT = setTimeout(step, 1800);
           };
@@ -524,18 +417,7 @@
         cleanup(function () { replayBtn.removeEventListener('click', onReplay); });
       }
 
-      /* Scrolling the narrative column advances the panel. */
-      if ('IntersectionObserver' in window && steps.length) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting && !replaying) setStage(Number(e.target.getAttribute('data-seq-step')));
-          });
-        }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-        steps.forEach(function (s) { io.observe(s); });
-        cleanup(function () { io.disconnect(); });
-      }
-
-      cleanup(function () { clearTimeout(fadeT); clearTimeout(replayT); clearTimeout(swapT); });
+      cleanup(function () { clearTimeout(fadeT); clearTimeout(replayT); });
     }
   };
 })();

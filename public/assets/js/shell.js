@@ -8,6 +8,32 @@
 
   var shell = (PG.shell = {});
 
+  /* One closing for every page: the headline from content, the same two
+     actions, and the three steps that follow an enquiry — the last thing a
+     visitor sees is the same low-friction next step everywhere. */
+  var NEXT_STEPS = ['We read your enquiry', 'We reply to arrange a short conversation', 'We suggest a sensible next step'];
+  shell.nextSteps = NEXT_STEPS;
+  PG.closing = function (o) {
+    o = o || {};
+    var href = '/contact' + (o.service ? '?service=' + o.service : '');
+    return html`
+      <section class="closing-band${o.tone === 'dark' ? ' is-dark' : ''}" aria-labelledby="close-h2">
+        <div class="wrap closing-inner" data-reveal="rise">
+          <div class="stack stack-16">
+            <h2 id="close-h2" class="h2-sm" style="max-width:18ch">${o.h || 'What would you like to understand?'}</h2>
+            ${when(!!o.p, function () { return html`<p class="body muted" style="max-width:34em">${o.p}</p>`; })}
+            <div class="row" style="gap:16px 28px;margin-top:8px">
+              <a class="btn" href="${href}">${o.cta || 'Request a consultation'}</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <ol class="next-steps" aria-label="What happens next">
+            ${each(NEXT_STEPS, function (t, i) { return html`<li>${C.cells(i, '')}<span>${t}</span></li>`; })}
+          </ol>
+        </div>
+      </section>`;
+  };
+
   var state = {
     menu: null,          // 'services' | 'industries' | 'about' | null
     drawerOpen: false,
@@ -112,18 +138,18 @@
         <nav class="nav" aria-label="Primary">
           ${navBtn('services', 'Services')}
           ${navBtn('industries', 'Industries')}
-          <a class="nav-item" href="/work" data-close-menu ${raw(sec === 'work' ? 'aria-current="page"' : '')}>Our Work</a>
+          <a class="nav-item" href="/work" data-close-menu ${raw(sec === 'work' ? 'aria-current="page"' : '')}>Work &amp; demos</a>
           ${when(insightsLive(), function () { return html`<a class="nav-item" href="/insights" data-close-menu ${raw(sec === 'insights' ? 'aria-current="page"' : '')}>Insights</a>`; })}
           ${navBtn('about', 'About')}
         </nav>
 
         <div class="header-actions">
           <a class="header-link" href="/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/contact">Book a consultation</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/contact">Book a call</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open aria-label="Open menu"
                   aria-expanded="${state.drawerOpen ? 'true' : 'false'}">Menu</button>
         </div>
@@ -167,7 +193,7 @@
               <a class="hi" href="/industries">All industries</a>
             </div>
           </details>
-          <a href="/work">Our Work</a>
+          <a href="/work">Work &amp; demos</a>
           ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
           <details>
             <summary>About</summary>
@@ -179,7 +205,7 @@
           </details>
           <a href="/assessment">Readiness assessment</a>
         </nav>
-        <a class="drawer-cta" href="/contact">Book a consultation</a>
+        <a class="drawer-cta" href="/contact">Request a consultation</a>
       </div>`;
   }
 
@@ -258,10 +284,10 @@
             <div class="stack stack-10">
               <a href="/about">About</a>
               <a href="/approach">Our Approach</a>
-              <a href="/work">Our Work</a>
+              <a href="/work">Work &amp; demos</a>
               ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
               <a href="/assessment">Readiness assessment</a>
-              <a href="/contact">Book a consultation</a>
+              <a href="/contact">Request a consultation</a>
             </div>
           </div>
         </div>

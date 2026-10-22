@@ -1,36 +1,17 @@
 #!/usr/bin/env node
 /* Regenerates public/sitemap.xml from the content model.
-   Usage: node tools/build-sitemap.js [origin]  (default https://patterngrid.io) */
+   Usage: node tools/build-sitemap.js [origin] [outfile]
+   (default https://patterngrid.io, public/sitemap.xml). The route list is the
+   one the static build uses, so unpublished pages never appear. */
 const fs = require('fs');
 const path = require('path');
 
 const origin = (process.argv[2] || 'https://patterngrid.io').replace(/\/$/, '');
-const jsDir = path.join(__dirname, '..', 'public', 'assets', 'js');
 
-global.window = { dispatchEvent() {}, addEventListener() {}, matchMedia: () => ({ matches: false }) };
-global.Event = function () {};
-global.CustomEvent = function () {};
-require(path.join(jsDir, 'content.js'));
-require(path.join(jsDir, 'service-content.js'));
-const PG = global.window.PG;
-
-const routes = [
-  ['/', 1.0],
-  ['/services', 0.9],
-  ...PG.services.map((s) => [`/services/${s.slug}`, 0.8]),
-  ['/industries', 0.8],
-  ...PG.industries.map((i) => [`/industries/${i.slug}`, 0.7]),
-  ['/work', 0.7],
-  ...PG.work.map((w) => [`/work/${w.slug}`, 0.6]),
-  ['/insights', 0.6],
-  ['/about', 0.6],
-  ['/about/precious-celestine', 0.5],
-  ['/approach', 0.6],
-  ['/assessment', 0.7],
-  ['/contact', 0.8],
-  ['/privacy', 0.2],
-  ['/terms', 0.2],
-];
+const { ROUTES } = require('./build-static.js');
+const PRIORITY = (p) => (p === '/' ? 1.0 : /^\/(services|contact)$/.test(p) ? 0.9 : /^\/(privacy|terms)$/.test(p) ? 0.2 : p.split('/').length > 2 ? 0.7 : 0.8);
+const routes = ROUTES.map((p) => [p, PRIORITY(p)]);
+const outfile = process.argv[3] || path.join(__dirname, '..', 'public', 'sitemap.xml');
 
 const today = new Date().toISOString().slice(0, 10);
 const xml =
@@ -44,5 +25,5 @@ const xml =
     .join('\n') +
   '\n</urlset>\n';
 
-fs.writeFileSync(path.join(__dirname, '..', 'public', 'sitemap.xml'), xml);
-console.log(`sitemap.xml written — ${routes.length} URLs at ${origin}`);
+fs.writeFileSync(outfile, xml);
+console.log(`${path.relative(process.cwd(), outfile)} written — ${routes.length} URLs at ${origin}`);
