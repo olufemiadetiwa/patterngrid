@@ -1,157 +1,157 @@
 {
   "base": "/patterngrid",
   "origin": "https://olufemiadetiwa.github.io",
-  "builtAt": "2026-10-22T09:49:16.000Z",
+  "builtAt": "2026-10-22T11:34:29.769Z",
   "routes": [
     {
       "route": "/",
       "file": "dist/index.html",
       "title": "Pattern Grid — Data, AI and Business Intelligence Consulting",
-      "bytes": 47273
+      "bytes": 3333
     },
     {
       "route": "/services",
       "file": "dist/services/index.html",
       "title": "Services — Pattern Grid",
-      "bytes": 33188
+      "bytes": 33220
     },
     {
       "route": "/services/data-ai-strategy",
       "file": "dist/services/data-ai-strategy/index.html",
       "title": "Data &amp; AI Strategy — Pattern Grid",
-      "bytes": 50657
+      "bytes": 51230
     },
     {
       "route": "/services/data-engineering",
       "file": "dist/services/data-engineering/index.html",
       "title": "Data Engineering &amp; Platforms — Pattern Grid",
-      "bytes": 55138
+      "bytes": 55534
     },
     {
       "route": "/services/business-intelligence",
       "file": "dist/services/business-intelligence/index.html",
       "title": "Business Intelligence — Pattern Grid",
-      "bytes": 53272
+      "bytes": 53741
     },
     {
       "route": "/services/ai-automation",
       "file": "dist/services/ai-automation/index.html",
       "title": "AI &amp; Automation — Pattern Grid",
-      "bytes": 51335
+      "bytes": 51697
     },
     {
       "route": "/services/capability-building",
       "file": "dist/services/capability-building/index.html",
       "title": "Capability Building — Pattern Grid",
-      "bytes": 52802
+      "bytes": 53255
     },
     {
       "route": "/industries",
       "file": "dist/industries/index.html",
       "title": "Industries — Pattern Grid",
-      "bytes": 24710
+      "bytes": 24691
     },
     {
       "route": "/industries/financial-services",
       "file": "dist/industries/financial-services/index.html",
       "title": "Financial Services &amp; Fintech — Pattern Grid",
-      "bytes": 29129
+      "bytes": 29173
     },
     {
       "route": "/industries/fmcg-distribution",
       "file": "dist/industries/fmcg-distribution/index.html",
       "title": "FMCG &amp; Distribution — Pattern Grid",
-      "bytes": 29201
+      "bytes": 29209
     },
     {
       "route": "/industries/retail-ecommerce",
       "file": "dist/industries/retail-ecommerce/index.html",
       "title": "Retail &amp; Ecommerce — Pattern Grid",
-      "bytes": 29279
+      "bytes": 29324
     },
     {
       "route": "/industries/technology",
       "file": "dist/industries/technology/index.html",
       "title": "Technology — Pattern Grid",
-      "bytes": 28955
+      "bytes": 28939
     },
     {
       "route": "/work",
       "file": "dist/work/index.html",
       "title": "Work &amp; demos — Pattern Grid",
-      "bytes": 24895
+      "bytes": 25603
     },
     {
       "route": "/work/ledrop-distribution-visibility",
       "file": "dist/work/ledrop-distribution-visibility/index.html",
       "title": "Ledrop — Connecting sales and field data to improve distribution visibility — Pattern Grid",
-      "bytes": 22475
+      "bytes": 22750
     },
     {
       "route": "/work/party-drinks-connected-reporting",
       "file": "dist/work/party-drinks-connected-reporting/index.html",
       "title": "Drinks.NG — Integrating sales, inventory, fulfilment and marketing reporting — Pattern Grid",
-      "bytes": 22138
+      "bytes": 22416
     },
     {
       "route": "/work/executive-performance",
       "file": "dist/work/executive-performance/index.html",
       "title": "A consistent view of executive performance — Pattern Grid",
-      "bytes": 20042
+      "bytes": 20059
     },
     {
       "route": "/work/distribution-intelligence",
       "file": "dist/work/distribution-intelligence/index.html",
       "title": "Distribution intelligence from warehouse to outlet — Pattern Grid",
-      "bytes": 21547
+      "bytes": 21564
     },
     {
       "route": "/work/reporting-workflow",
       "file": "dist/work/reporting-workflow/index.html",
       "title": "A reporting workflow with human review — Pattern Grid",
-      "bytes": 18961
+      "bytes": 18978
     },
     {
       "route": "/about",
       "file": "dist/about/index.html",
-      "title": "About — Pattern Grid",
-      "bytes": 23068
+      "title": "Pattern Grid — Data, AI and Business Intelligence Consulting",
+      "bytes": 3325
     },
     {
       "route": "/about/precious-celestine",
       "file": "dist/about/precious-celestine/index.html",
-      "title": "Precious Chinenye Celestine — Pattern Grid",
-      "bytes": 15860
+      "title": "Pattern Grid — Data, AI and Business Intelligence Consulting",
+      "bytes": 2973
     },
     {
       "route": "/approach",
       "file": "dist/approach/index.html",
       "title": "Our Approach — Pattern Grid",
-      "bytes": 27157
+      "bytes": 27215
     },
     {
       "route": "/assessment",
       "file": "dist/assessment/index.html",
       "title": "Readiness Assessment — Pattern Grid",
-      "bytes": 11635
+      "bytes": 11652
     },
     {
       "route": "/contact",
       "file": "dist/contact/index.html",
       "title": "Contact — Pattern Grid",
-      "bytes": 11826
+      "bytes": 11843
     },
     {
       "route": "/privacy",
       "file": "dist/privacy/index.html",
       "title": "Privacy Notice — Pattern Grid",
-      "bytes": 10431
+      "bytes": 10448
     },
     {
       "route": "/terms",
       "file": "dist/terms/index.html",
       "title": "Website Terms — Pattern Grid",
-      "bytes": 10020
+      "bytes": 10037
     }
   ]
 }
