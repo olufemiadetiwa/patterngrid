@@ -1492,3 +1492,6 @@ button.portrait:focus-visible { outline: 2px solid var(--focus); outline-offset:
   .founder-cols { grid-template-columns: 1fr; }
 }
 @media (max-width: 599px) { .founder-facts-band { grid-template-columns: 1fr; } }
+.founder-intro.is-section .founder-intro-inner { padding-top: clamp(48px, 6vw, 88px); }
+.founder-intro h2 { font-size: clamp(36px, 4.4vw, 64px); font-weight: 650; letter-spacing: -0.035em; line-height: 0.98; text-wrap: balance; max-width: 12ch; }
+@media (max-width: 959px) { .founder-intro.is-section .founder-intro-inner { padding-top: 48px; } }

@@ -4,7 +4,7 @@
 
   var PG = window.PG;
   var C = PG.core;
-  var html = C.html, each = C.each, when = C.when;
+  var html = C.html, each = C.each, when = C.when, raw = C.raw;
 
   function closing(h) {
     return PG.closing({ h: h || 'Start with the decision you need to improve.' });
@@ -13,31 +13,51 @@
   /* Founder and team. A portrait appears only once an approved photograph
      exists in PG.team; until then the layout is text-led, with no reserved
      frame. Team profiles appear once approved. */
-  function peopleSection() {
-    var T = PG.team || { founder: {}, members: [] };
-    var f = T.founder;
-    var showTeam = (T.members || []).length > 0;
+  /* The founder composition shared by the About page and the founder page:
+     portrait on its stage beside the name, alias, lead and two actions, on the
+     navy grid field. `top` renders it as the page opening (h1); otherwise it
+     is a mid-page section (h2) that links through to the profile. */
+  function founderBanner(top) {
+    var f = (PG.team && PG.team.founder) || {};
+    var Tag = top ? 'h1' : 'h2';
     return html`
-      <section id="about-people" class="sec-sm bg-paper">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
-          <div class="founder-block${f.photo ? ' has-photo' : ''}">
-            <div class="stack stack-16">
-              <span class="eyebrow">Leadership</span>
-              <h2 class="h2-sm">${f.name}</h2>
-              <p class="small muted">${f.role} · Known professionally as ${f.alias}</p>
-              <p class="body">${f.bio}</p>
-              <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
+      <section class="founder-intro grid-field${top ? '' : ' is-section'}" aria-labelledby="founder-h">
+        <div class="wrap founder-intro-inner">
+          ${when(!!f.photo, function () { return html`<div class="portrait-stage on-dark">${C.cells(4)}${C.portrait(f, { eager: top })}</div>`; })}
+          <div class="founder-copy">
+            ${when(top, function () { return html`
+              <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
+                <a href="/">Home</a><span aria-hidden="true">/</span>
+                <a href="/about">About</a><span aria-hidden="true">/</span>
+                <span aria-current="page">Founder</span>
+              </nav>`; })}
+            <span class="hero-eyebrow">${top ? 'Founder &amp; Lead Consultant' : 'Leadership'}</span>
+            ${raw('<' + Tag + ' id="founder-h">' + C.esc(f.name) + '</' + Tag + '>')}
+            <p class="founder-alias">${top ? '' : f.role + ' · '}Known professionally as ${f.alias}</p>
+            <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
+            <div class="hero-cta">
+              ${top
+                ? html`<a class="btn btn-accent" href="/contact">Discuss your business question</a><a class="secondary" href="/work">See the work <span aria-hidden="true">→</span></a>`
+                : html`<a class="btn btn-accent" href="/about/precious-celestine">Meet the founder</a><a class="secondary" href="/work">See the work <span aria-hidden="true">→</span></a>`}
             </div>
-            ${when(!!f.photo, function () { return html`<div class="portrait-stage">${C.cells(4)}${C.portrait(f)}</div>`; })}
           </div>
-          ${when(showTeam, function () { return html`
-          <div class="team-grid">
-            ${each(T.members, function (m) {
-              return html`<div class="person">${C.portrait(m, { ar: '3 / 4' })}<span class="nm">${m.name}</span><span class="rl">${m.role}</span></div>`;
-            })}
-          </div>`; })}
         </div>
       </section>`;
+  }
+
+  function peopleSection() {
+    var T = PG.team || { founder: {}, members: [] };
+    var showTeam = (T.members || []).length > 0;
+    return html`
+      ${founderBanner(false)}
+      ${when(showTeam, function () { return html`
+      <section id="about-people" class="sec-sm bg-paper">
+        <div class="wrap team-grid" data-reveal="rise">
+          ${each(T.members, function (m) {
+            return html`<div class="person">${C.portrait(m, { ar: '3 / 4' })}<span class="nm">${m.name}</span><span class="rl">${m.role}</span></div>`;
+          })}
+        </div>
+      </section>`; })}`;
   }
 
   function about() {
@@ -102,26 +122,7 @@
     var f = (PG.team && PG.team.founder) || {};
     return html`
       <div class="hero-unit" data-hero="founder">
-      <section class="founder-intro grid-field" aria-labelledby="founder-h1">
-        <div class="wrap founder-intro-inner">
-          ${when(!!f.photo, function () { return html`<div class="portrait-stage on-dark">${C.cells(4)}${C.portrait(f, { eager: true })}</div>`; })}
-          <div class="founder-copy">
-            <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
-              <a href="/">Home</a><span aria-hidden="true">/</span>
-              <a href="/about">About</a><span aria-hidden="true">/</span>
-              <span aria-current="page">Founder</span>
-            </nav>
-            <span class="hero-eyebrow">Founder &amp; Lead Consultant</span>
-            <h1 id="founder-h1">Precious Chinenye Celestine</h1>
-            <p class="founder-alias">Known professionally as Ada Africa</p>
-            <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
-            <div class="hero-cta">
-              <a class="btn btn-accent" href="/contact">Discuss your business question</a>
-              <a class="secondary" href="/work">See the work <span aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
+      ${founderBanner(true)}
       </div>
 
       <section class="bg-paper">
