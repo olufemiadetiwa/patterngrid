@@ -31,10 +31,12 @@
         <span class="case-client">${c.client}</span>
         <span class="t">${c.title}</span>
         <span class="d">${c.summary}</span>
-        <span class="case-flow" aria-label="Data flow">
-          ${each(c.sources, function (x) { return html`<span class="node">${x}</span>`; })}
-          <span class="arr" aria-hidden="true">→</span><span class="node etl">${c.pipeline}</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        <span class="pipe" aria-label="Data flow">
+          <span class="pipe-group"><small>Sources</small><span class="tags">${each(c.sources, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">${c.pipeline}</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Reporting</small><span class="tags"><span class="tag is-solid">Power BI</span></span></span>
         </span>
         <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
       </a>`;
@@ -113,11 +115,12 @@
       <section class="sec-xs">
         <div class="wrap stack" data-reveal="rise" style="gap:16px">
           <span class="label-caps">How the data moved</span>
-          <div class="case-flow lg" aria-label="Data flow">
-            ${each(c.sources, function (x) { return html`<span class="node">${x}</span>`; })}
-            <span class="arr" aria-hidden="true">→</span><span class="node etl">${c.pipeline}</span>
-            <span class="arr" aria-hidden="true">→</span>
-            ${each(c.outputs, function (x) { return html`<span class="node out">${x}</span>`; })}
+          <div class="pipe lg" aria-label="Data flow">
+            <span class="pipe-group"><small>Sources</small><span class="tags">${each(c.sources, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">${c.pipeline}</span></span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>Outputs</small><span class="tags">${each(c.outputs, function (x) { return html`<span class="tag is-solid">${x}</span>`; })}</span></span>
           </div>
         </div>
       </section>

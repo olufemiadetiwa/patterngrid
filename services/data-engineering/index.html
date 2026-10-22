@@ -322,11 +322,11 @@
 
           <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
             <span class="label-caps" style="color:rgba(255,255,255,.6)">Governance</span>
-            <span class="band-chip">Access</span><span class="band-chip">Lineage</span><span class="band-chip">Monitoring</span><span class="band-chip">Ownership</span>
+            <span class="tag is-dark">Access</span><span class="tag is-dark">Lineage</span><span class="tag is-dark">Monitoring</span><span class="tag is-dark">Ownership</span>
           </div>
 
-          <div class="flow-strip" aria-label="Flow summary">
-            <span class="node input">ERP</span><span class="node input">CRM</span><span class="node input">Operational files</span><span class="arr" aria-hidden="true">→</span><span class="node process">Data arrives</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Quality checks</span><span class="arr" aria-hidden="true">→</span><span class="node output">Checked, organised data</span><span class="node exception">Exception queue</span><span class="arr" aria-hidden="true">→</span><span class="node use">Business Intelligence</span><span class="node use">AI and operational applications</span>
+          <div class="pipe on-dark" aria-label="Flow summary">
+            <span class="pipe-group"><small>Input</small><span class="tags"><span class="tag">ERP</span><span class="tag">CRM</span><span class="tag">Operational files</span></span></span><i class="pipe-link" aria-hidden="true"></i><span class="pipe-group"><small>Process</small><span class="tags"><span class="tag">Data arrives</span></span></span><i class="pipe-link" aria-hidden="true"></i><span class="pipe-group"><small>Decision</small><span class="tags"><span class="tag is-accent">Quality checks</span></span></span><i class="pipe-link" aria-hidden="true"></i><span class="pipe-group"><small>Output</small><span class="tags"><span class="tag is-solid">Checked, organised data</span><span class="tag is-warn">Exception queue</span></span></span>
           </div>
 
           <details class="flow-details" data-flow-details="">

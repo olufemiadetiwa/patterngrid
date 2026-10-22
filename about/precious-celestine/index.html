@@ -75,22 +75,23 @@
   <main id="main" tabindex="-1">
     <div id="page" data-prerendered>
       <div class="hero-unit" data-hero="founder">
-      <section class="founder-intro grid-field" aria-labelledby="founder-h1">
+      
+      <section class="founder-intro grid-field" aria-labelledby="founder-h">
         <div class="wrap founder-intro-inner">
           <div class="portrait-stage on-dark"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><button type="button" class="portrait is-mono" data-portrait="" aria-pressed="false" aria-label="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio. Shown in black and white; colour on hover" style="--ar:4 / 5;background-image:url('data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYAB4APwFwr1CrJqQisBgIAWAgCWYAyRMsBUgGyaUQlkYoZ5+dNUdaaEM6IAD++up8eB1CNcZ6LNwTrOjRD73egkCxupRx3tdVNFPrbNtNBwzhab8Cd/Dsm3pp6ra3RLY3vYaHtmnP8DwsLDQpWNuM5rkegd7V+UkY6EfHjl2tdDSm2TMKym+4rdy6tm1Wn42sbmB0WkgmMIl4AAA=')"><picture><source media="(max-width: 720px)" srcset="/patterngrid/assets/img/people/founder-2025-m.webp"><img src="/patterngrid/assets/img/people/founder-2025-d.webp" width="1200" height="1500" alt="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio" loading="eager" decoding="async" class="is-loaded"></picture><span class="portrait-hint" aria-hidden="true">Hover for colour</span></button></div>
           <div class="founder-copy">
-            <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
-              <a href="/patterngrid/">Home</a><span aria-hidden="true">/</span>
-              <a href="/patterngrid/about">About</a><span aria-hidden="true">/</span>
-              <span aria-current="page">Founder</span>
-            </nav>
-            <span class="hero-eyebrow">Founder &amp; Lead Consultant</span>
-            <h1 id="founder-h1">Precious Chinenye Celestine</h1>
+            
+              <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
+                <a href="/patterngrid/">Home</a><span aria-hidden="true">/</span>
+                <a href="/patterngrid/about">About</a><span aria-hidden="true">/</span>
+                <span aria-current="page">Founder</span>
+              </nav>
+            <span class="hero-eyebrow">Founder &amp;amp; Lead Consultant</span>
+            <h1 id="founder-h">Precious Chinenye Celestine</h1>
             <p class="founder-alias">Known professionally as Ada Africa</p>
             <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
             <div class="hero-cta">
-              <a class="btn btn-accent" href="/patterngrid/contact">Discuss your business question</a>
-              <a class="secondary" href="/patterngrid/work">See the work <span aria-hidden="true">→</span></a>
+              <a class="btn btn-accent" href="/patterngrid/contact">Discuss your business question</a><a class="secondary" href="/patterngrid/work">See the work <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
@@ -138,10 +139,12 @@
         <span class="case-client">Ledrop</span>
         <span class="t">Connecting sales and field data to improve distribution visibility</span>
         <span class="d">Sales and field data held in two platforms, with inconsistent product and customer names, became one reporting foundation in Power BI, giving Ledrop clearer visibility into sales, distribution gaps, menu listings and reported out-of-stock issues.</span>
-        <span class="case-flow" aria-label="Data flow">
-          <span class="node">Uwanjani (field)</span><span class="node">QuickBooks (sales)</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure Data Factory</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        <span class="pipe" aria-label="Data flow">
+          <span class="pipe-group"><small>Sources</small><span class="tags"><span class="tag">Uwanjani (field)</span><span class="tag">QuickBooks (sales)</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">Azure Data Factory</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Reporting</small><span class="tags"><span class="tag is-solid">Power BI</span></span></span>
         </span>
         <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
       </a>
@@ -150,10 +153,12 @@
         <span class="case-client">Drinks.NG</span>
         <span class="t">Integrating sales, inventory, fulfilment and marketing reporting</span>
         <span class="d">Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Drinks.NG a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.</span>
-        <span class="case-flow" aria-label="Data flow">
-          <span class="node">Cin7 (sales, inventory, orders)</span><span class="node">SENRI (field sales)</span><span class="node">Google Analytics (web)</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure CLI ETL</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        <span class="pipe" aria-label="Data flow">
+          <span class="pipe-group"><small>Sources</small><span class="tags"><span class="tag">Cin7 (sales, inventory, orders)</span><span class="tag">SENRI (field sales)</span><span class="tag">Google Analytics (web)</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">Azure CLI ETL</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Reporting</small><span class="tags"><span class="tag is-solid">Power BI</span></span></span>
         </span>
         <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
       </a></div>

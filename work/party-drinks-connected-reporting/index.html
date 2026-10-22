@@ -96,11 +96,12 @@
       <section class="sec-xs">
         <div class="is-in wrap stack" data-reveal="rise" style="gap:16px">
           <span class="label-caps">How the data moved</span>
-          <div class="case-flow lg" aria-label="Data flow">
-            <span class="node">Cin7 (sales, inventory, orders)</span><span class="node">SENRI (field sales)</span><span class="node">Google Analytics (web)</span>
-            <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure CLI ETL</span>
-            <span class="arr" aria-hidden="true">→</span>
-            <span class="node out">Sales by channel, product, customer</span><span class="node out">Inventory days and value</span><span class="node out">Fulfilment status</span><span class="node out">Marketing KPIs</span>
+          <div class="pipe lg" aria-label="Data flow">
+            <span class="pipe-group"><small>Sources</small><span class="tags"><span class="tag">Cin7 (sales, inventory, orders)</span><span class="tag">SENRI (field sales)</span><span class="tag">Google Analytics (web)</span></span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">Azure CLI ETL</span></span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>Outputs</small><span class="tags"><span class="tag is-solid">Sales by channel, product, customer</span><span class="tag is-solid">Inventory days and value</span><span class="tag is-solid">Fulfilment status</span><span class="tag is-solid">Marketing KPIs</span></span></span>
           </div>
         </div>
       </section>

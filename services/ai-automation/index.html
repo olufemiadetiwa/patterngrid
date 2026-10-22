@@ -301,11 +301,11 @@
 
           <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
             <span class="label-caps" style="color:rgba(255,255,255,.6)">Accountability</span>
-            <span class="band-chip">Process owner</span><span class="band-chip">Reviewer</span><span class="band-chip">Monitoring</span>
+            <span class="tag is-dark">Process owner</span><span class="tag is-dark">Reviewer</span><span class="tag is-dark">Monitoring</span>
           </div>
 
-          <div class="flow-strip" aria-label="Flow summary">
-            <span class="node input">Request or event</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Authorised workflow</span><span class="node input">Approved records and documents</span><span class="arr" aria-hidden="true">→</span><span class="node process">Proposed output</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Validation checks</span><span class="arr" aria-hidden="true">→</span><span class="node gate">Accountable review</span><span class="node exception">Correction path</span><span class="arr" aria-hidden="true">→</span><span class="node use">Approved action · recorded</span>
+          <div class="pipe on-dark" aria-label="Flow summary">
+            <span class="pipe-group"><small>Input</small><span class="tags"><span class="tag">Request or event</span></span></span><i class="pipe-link" aria-hidden="true"></i><span class="pipe-group"><small>Decision</small><span class="tags"><span class="tag is-accent">Authorised workflow</span><span class="tag">Approved records and documents</span></span></span><i class="pipe-link" aria-hidden="true"></i><span class="pipe-group"><small>Process</small><span class="tags"><span class="tag">Proposed output</span></span></span><i class="pipe-link" aria-hidden="true"></i><span class="pipe-group"><small>Decision</small><span class="tags"><span class="tag is-accent">Validation checks</span></span></span>
           </div>
 
           <details class="flow-details" data-flow-details="">

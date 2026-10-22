@@ -126,7 +126,7 @@
                     <span class="t">Data &amp; AI Strategy</span>
                     <span class="d">Decide which data and AI projects to fund first, and in what order. You get a roadmap with an owner for every step.</span>
                   </span>
-                  <span class="outs"><span>Current-state assessment</span><span>Opportunity portfolio</span><span>Delivery roadmap</span></span>
+                  <span class="outs tags"><span class="tag">Current-state assessment</span><span class="tag">Opportunity portfolio</span><span class="tag">Delivery roadmap</span></span>
                   <span class="go">Read about Data &amp; AI Strategy <span class="chev" aria-hidden="true">→</span></span>
                 </a>
                 <a class="svc-card" href="/patterngrid/services/data-engineering">
@@ -139,7 +139,7 @@
                     <span class="t">Data Engineering &amp; Platforms</span>
                     <span class="d">Connect your ERP, CRM, finance and spreadsheet data so it arrives on schedule, is checked, and can be traced back to its source.</span>
                   </span>
-                  <span class="outs"><span>Data pipelines</span><span>Tested data models</span><span>Operating guide</span></span>
+                  <span class="outs tags"><span class="tag">Data pipelines</span><span class="tag">Tested data models</span><span class="tag">Operating guide</span></span>
                   <span class="go">Read about Data Engineering &amp; Platforms <span class="chev" aria-hidden="true">→</span></span>
                 </a>
                 <a class="svc-card" href="/patterngrid/services/business-intelligence">
@@ -152,7 +152,7 @@
                     <span class="t">Business Intelligence</span>
                     <span class="d">Give every important number one definition, one owner and one source, so finance, sales and operations stop arguing about which figure is right.</span>
                   </span>
-                  <span class="outs"><span>KPI dictionary</span><span>Reporting suite</span><span>Where each number comes from</span></span>
+                  <span class="outs tags"><span class="tag">KPI dictionary</span><span class="tag">Reporting suite</span><span class="tag">Where each number comes from</span></span>
                   <span class="go">Read about Business Intelligence <span class="chev" aria-hidden="true">→</span></span>
                 </a>
                 <a class="svc-card" href="/patterngrid/services/ai-automation">
@@ -165,7 +165,7 @@
                     <span class="t">AI &amp; Automation</span>
                     <span class="d">Automate one repetitive task at a time. Every output is checked, anything unusual is held for a person, and someone named signs it off.</span>
                   </span>
-                  <span class="outs"><span>Workflow blueprint</span><span>Tested pilot</span><span>Sign-off rules</span></span>
+                  <span class="outs tags"><span class="tag">Workflow blueprint</span><span class="tag">Tested pilot</span><span class="tag">Sign-off rules</span></span>
                   <span class="go">Read about AI &amp; Automation <span class="chev" aria-hidden="true">→</span></span>
                 </a>
                 <a class="svc-card" href="/patterngrid/services/capability-building">
@@ -178,7 +178,7 @@
                     <span class="t">Capability Building</span>
                     <span class="d">Train your leaders, analysts and technical team on the reports and systems they will actually use, so the work does not depend on us afterwards.</span>
                   </span>
-                  <span class="outs"><span>Skills baseline</span><span>Role-based learning</span><span>Handover to your team</span></span>
+                  <span class="outs tags"><span class="tag">Skills baseline</span><span class="tag">Role-based learning</span><span class="tag">Handover to your team</span></span>
                   <span class="go">Read about Capability Building <span class="chev" aria-hidden="true">→</span></span>
                 </a>
             <a class="svc-card is-aside" href="/patterngrid/assessment">
@@ -329,10 +329,12 @@
         <span class="case-client">Ledrop</span>
         <span class="t">Connecting sales and field data to improve distribution visibility</span>
         <span class="d">Sales and field data held in two platforms, with inconsistent product and customer names, became one reporting foundation in Power BI, giving Ledrop clearer visibility into sales, distribution gaps, menu listings and reported out-of-stock issues.</span>
-        <span class="case-flow" aria-label="Data flow">
-          <span class="node">Uwanjani (field)</span><span class="node">QuickBooks (sales)</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure Data Factory</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        <span class="pipe" aria-label="Data flow">
+          <span class="pipe-group"><small>Sources</small><span class="tags"><span class="tag">Uwanjani (field)</span><span class="tag">QuickBooks (sales)</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">Azure Data Factory</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Reporting</small><span class="tags"><span class="tag is-solid">Power BI</span></span></span>
         </span>
         <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
       </a>
@@ -341,10 +343,12 @@
         <span class="case-client">Drinks.NG</span>
         <span class="t">Integrating sales, inventory, fulfilment and marketing reporting</span>
         <span class="d">Data spread across Cin7, SENRI and Google Analytics became an automated reporting environment in Power BI, giving Drinks.NG a connected view of sales, inventory, fulfilment and marketing across its distribution, retail and e-commerce operations.</span>
-        <span class="case-flow" aria-label="Data flow">
-          <span class="node">Cin7 (sales, inventory, orders)</span><span class="node">SENRI (field sales)</span><span class="node">Google Analytics (web)</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure CLI ETL</span>
-          <span class="arr" aria-hidden="true">→</span><span class="node out">Power BI</span>
+        <span class="pipe" aria-label="Data flow">
+          <span class="pipe-group"><small>Sources</small><span class="tags"><span class="tag">Cin7 (sales, inventory, orders)</span><span class="tag">SENRI (field sales)</span><span class="tag">Google Analytics (web)</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">Azure CLI ETL</span></span></span>
+          <i class="pipe-link" aria-hidden="true"></i>
+          <span class="pipe-group"><small>Reporting</small><span class="tags"><span class="tag is-solid">Power BI</span></span></span>
         </span>
         <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
       </a></div>

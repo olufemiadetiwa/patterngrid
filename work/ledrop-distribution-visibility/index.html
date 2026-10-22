@@ -96,11 +96,12 @@
       <section class="sec-xs">
         <div class="is-in wrap stack" data-reveal="rise" style="gap:16px">
           <span class="label-caps">How the data moved</span>
-          <div class="case-flow lg" aria-label="Data flow">
-            <span class="node">Uwanjani (field)</span><span class="node">QuickBooks (sales)</span>
-            <span class="arr" aria-hidden="true">→</span><span class="node etl">Azure Data Factory</span>
-            <span class="arr" aria-hidden="true">→</span>
-            <span class="node out">Sales by customer, product, period</span><span class="node out">Distribution and menu gaps</span><span class="node out">Out-of-stock reporting</span>
+          <div class="pipe lg" aria-label="Data flow">
+            <span class="pipe-group"><small>Sources</small><span class="tags"><span class="tag">Uwanjani (field)</span><span class="tag">QuickBooks (sales)</span></span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">Azure Data Factory</span></span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>Outputs</small><span class="tags"><span class="tag is-solid">Sales by customer, product, period</span><span class="tag is-solid">Distribution and menu gaps</span><span class="tag is-solid">Out-of-stock reporting</span></span></span>
           </div>
         </div>
       </section>

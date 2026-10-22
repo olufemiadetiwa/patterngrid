@@ -293,13 +293,13 @@
           <div class="row" style="gap:12px 24px;border-top:1px solid rgba(255,255,255,.15);padding-top:20px">
             <span class="label-caps" style="color:rgba(255,255,255,.6)">${svc.flow.bandTitle}</span>
             ${each(svc.flow.band, function (b) {
-              return html`<span class="band-chip">${b}</span>`;
+              return html`<span class="tag is-dark">${b}</span>`;
             })}
           </div>
 
-          <div class="flow-strip" aria-label="Flow summary">
-            ${each(nodes.slice().sort(function (a, b) { return a.col - b.col || a.row - b.row; }), function (n, i, arr) {
-              return html`<span class="node ${n.kind}">${n.label}</span>${when(i < arr.length - 1 && arr[i + 1].col !== n.col, function () { return html`<span class="arr" aria-hidden="true">→</span>`; })}`;
+          <div class="pipe on-dark" aria-label="Flow summary">
+            ${each([1, 2, 3, 4].map(function (c) { return nodes.filter(function (n) { return n.col === c; }); }).filter(function (g) { return g.length; }), function (g, i, arr) {
+              return html`<span class="pipe-group"><small>${KIND_LABEL[g[0].kind] || ''}</small><span class="tags">${each(g, function (n) { return html`<span class="tag${n.kind === 'gate' ? ' is-accent' : n.kind === 'exception' ? ' is-warn' : n.kind === 'output' ? ' is-solid' : ''}">${n.label}</span>`; })}</span></span>${when(i < arr.length - 1, function () { return html`<i class="pipe-link" aria-hidden="true"></i>`; })}`;
             })}
           </div>
 
