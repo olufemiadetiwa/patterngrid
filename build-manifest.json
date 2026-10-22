@@ -1,13 +1,13 @@
 {
   "base": "/patterngrid",
   "origin": "https://olufemiadetiwa.github.io",
-  "builtAt": "2026-10-22T11:34:29.769Z",
+  "builtAt": "2026-10-22T13:13:24.788Z",
   "routes": [
     {
       "route": "/",
       "file": "dist/index.html",
       "title": "Pattern Grid — Data, AI and Business Intelligence Consulting",
-      "bytes": 3333
+      "bytes": 48148
     },
     {
       "route": "/services",
@@ -114,14 +114,14 @@
     {
       "route": "/about",
       "file": "dist/about/index.html",
-      "title": "Pattern Grid — Data, AI and Business Intelligence Consulting",
-      "bytes": 3325
+      "title": "About — Pattern Grid",
+      "bytes": 23528
     },
     {
       "route": "/about/precious-celestine",
       "file": "dist/about/precious-celestine/index.html",
-      "title": "Pattern Grid — Data, AI and Business Intelligence Consulting",
-      "bytes": 2973
+      "title": "Precious Chinenye Celestine — Pattern Grid",
+      "bytes": 19668
     },
     {
       "route": "/approach",
