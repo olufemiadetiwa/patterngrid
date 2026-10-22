@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-22T14:08:08.970Z",
+  "builtAt": "2026-10-22T14:31:00.796Z",
   "images": [
     {
       "key": "lagos-bridge-night",
@@ -305,6 +305,10 @@
       "key": "office-two-women",
       "usedOn": [
         {
+          "route": "/work/reporting-workflow",
+          "role": "hero"
+        },
+        {
           "route": "/industries/technology",
           "role": "section photo (CDN)"
         }
@@ -320,11 +324,23 @@
         "phone": "50% 45%"
       },
       "crops": {
-        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
       },
-      "files": null,
-      "quality": null,
-      "original": null
+      "files": {
+        "d": 92936,
+        "d1200": 51102,
+        "m": 67166
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1600
+      }
     },
     {
       "key": "cafe-pair-laptop",
@@ -540,6 +556,10 @@
       "key": "suit-desk",
       "usedOn": [
         {
+          "route": "/work/executive-performance",
+          "role": "hero"
+        },
+        {
           "route": "/industries/financial-services",
           "role": "section photo (CDN)"
         }
@@ -555,11 +575,23 @@
         "phone": "50% 45%"
       },
       "crops": {
-        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
       },
-      "files": null,
-      "quality": null,
-      "original": null
+      "files": {
+        "d": 165584,
+        "d1200": 77076,
+        "m": 126300
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1832
+      }
     },
     {
       "key": "market-cart",
@@ -664,6 +696,10 @@
       "key": "van-delivery",
       "usedOn": [
         {
+          "route": "/work/distribution-intelligence",
+          "role": "hero"
+        },
+        {
           "route": "/industries/fmcg-distribution",
           "role": "section photo (CDN)"
         }
@@ -679,11 +715,23 @@
         "phone": "50% 50%"
       },
       "crops": {
-        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
       },
-      "files": null,
-      "quality": null,
-      "original": null
+      "files": {
+        "d": 126940,
+        "d1200": 63938,
+        "m": 71922
+      },
+      "quality": {
+        "d": 82,
+        "d1200": 82,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1383
+      }
     },
     {
       "key": "fruit-stand",

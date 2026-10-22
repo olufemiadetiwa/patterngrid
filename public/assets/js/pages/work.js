@@ -9,6 +9,12 @@
   var html = C.html, each = C.each, when = C.when;
 
   var SCENES = { 'executive-performance': 'bi', 'distribution-intelligence': 'engineering', 'reporting-workflow': 'ai' };
+  var SCENE_NAMES = { bi: 'Commercial performance report', engineering: 'Platform monitor', ai: 'Review log' };
+  var ENABLE_NOTES = {
+    'executive-performance': ['Open any executive figure and follow it to the period, the source and the owner.', 'The same definitions and checks every month, so the process does not depend on one person.', 'Disagreements are listed with their cause instead of argued from memory.'],
+    'distribution-intelligence': ['Outlets where demand exceeds available stock appear in the week it happens.', 'Sell-in and sell-out are compared on one agreed basis.', 'Each exception goes to a named reviewer with its evidence attached.'],
+    'reporting-workflow': ['Inputs are checked and assembled by rules, not copied by hand.', 'Every check and approval is on the record of the item.', 'The reader can see which step was automated, which was drafted and which was decided.']
+  };
   var INPUTS = {
     'executive-performance': ['Finance ledger (invoices, credit notes)', 'Sales system (orders by outlet)', 'Product master', 'A KPI dictionary agreed with finance, sales and operations'],
     'distribution-intelligence': ['Warehouse stock file (weekly)', 'Field sales sell-out by outlet', 'Distributor invoices (sell-in)', 'Outlet master with territories and routes'],
@@ -19,6 +25,53 @@
     'distribution-intelligence': 'Availability is only as good as the last count. Outlets not visited in the week are excluded and the exclusion is shown rather than estimated.',
     'reporting-workflow': 'The AI step drafts commentary from checked figures only. A missing source stops the item at review; nothing is released without its evidence.'
   };
+  var TECH = {
+    'executive-performance': ['Power BI', 'SQL Server or Fabric warehouse', 'Azure Data Factory', 'Excel and CSV exports'],
+    'distribution-intelligence': ['Azure Data Factory', 'Fabric Lakehouse', 'Power BI', 'Field sales app exports'],
+    'reporting-workflow': ['Power Automate', 'Azure Functions', 'A labelled AI drafting step', 'Power BI']
+  };
+
+  /* The at-a-glance panel shared by case studies and demos: title and
+     summary, the data flow, then Focus and Tools each with their own block,
+     then scope counts. The client, industry and author are already in the
+     hero, so they are not repeated here. */
+  function glance(o) {
+    return html`
+      <div class="glance grid-field">
+        <div class="glance-head">
+          <span class="label-caps">${o.label}</span>
+          <h2 class="h3">${o.title}</h2>
+        </div>
+        <div class="glance-sum">
+          <p>${o.summary}</p>
+          ${when(!!o.note, function () { return html`<p class="glance-note"><span class="tag is-warn">${o.note[0]}</span>${o.note[1]}</p>`; })}
+        </div>
+        <div class="glance-flow">
+          <div class="pipe lg on-dark" aria-label="Data flow">
+            <span class="pipe-group"><small>${o.rail.inLabel}</small><span class="tags">${each(o.rail.inputs, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>${o.rail.midLabel}</small><span class="tags">${each(o.rail.pipeline, function (x) { return html`<span class="tag is-accent">${x}</span>`; })}</span></span>
+            <i class="pipe-link" aria-hidden="true"></i>
+            <span class="pipe-group"><small>${o.rail.outLabel}</small><span class="tags">${each(o.rail.outputs, function (x) { return html`<span class="tag is-solid">${x}</span>`; })}</span></span>
+          </div>
+        </div>
+        <div class="glance-cols">
+          <div class="glance-col">
+            <span class="label-caps">${o.focus.label}</span>
+            <p class="glance-col-sub">${o.focus.sub}</p>
+            <ul class="glance-tags" aria-label="${o.focus.label}">${each(o.focus.items, function (f) { return html`<li class="tag is-accent">${f}</li>`; })}</ul>
+          </div>
+          <div class="glance-col">
+            <span class="label-caps">${o.tools.label}</span>
+            <p class="glance-col-sub">${o.tools.sub}</p>
+            <ul class="glance-tags" aria-label="${o.tools.label}">${each(o.tools.items, function (t) { return html`<li class="tag is-dark">${t}</li>`; })}</ul>
+          </div>
+        </div>
+        <ol class="glance-nums" aria-label="Scope">
+          ${each(o.nums, function (n) { return html`<li><b class="num">${n[0]}</b><span>${n[1]}</span></li>`; })}
+        </ol>
+      </div>`;
+  }
 
   function closing() {
     return PG.closing({ h: 'Have a similar question in your business?' });
@@ -102,33 +155,13 @@
             <a href="/work">Work &amp; demos</a><span aria-hidden="true">/</span>
             <span aria-current="page">${c.client}</span>
           </nav>
-          <div class="glance grid-field">
-            <div class="glance-main">
-              <span class="label-caps">At a glance</span>
-              <h2 class="h3">${c.title}</h2>
-              <p>${c.summary}</p>
-              <div class="pipe lg on-dark" aria-label="Data flow">
-                <span class="pipe-group"><small>Sources</small><span class="tags">${each(c.sources, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
-                <i class="pipe-link" aria-hidden="true"></i>
-                <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">${c.pipeline}</span></span></span>
-                <i class="pipe-link" aria-hidden="true"></i>
-                <span class="pipe-group"><small>Outputs</small><span class="tags">${each(c.outputs, function (x) { return html`<span class="tag is-solid">${x}</span>`; })}</span></span>
-              </div>
-            </div>
-            <dl class="glance-facts">
-              <div><dt>Client</dt><dd>${c.client}</dd></div>
-              <div><dt>Industry</dt><dd>${c.industry}</dd></div>
-              <div><dt>Delivered by</dt><dd>Pattern Grid · Business Intelligence and Data consulting</dd></div>
-              <div><dt>Focus</dt><dd><span class="tags">${each(c.focus, function (f) { return html`<span class="tag is-dark">${f}</span>`; })}</span></dd></div>
-              <div><dt>Tools and platforms</dt><dd><span class="tags">${each(c.tools, function (t) { return html`<span class="tag is-dark">${t}</span>`; })}</span></dd></div>
-            </dl>
-            <ol class="glance-nums" aria-label="Scope">
-              <li><b class="num">${c.sources.length}</b><span>source platforms connected</span></li>
-              <li><b class="num">${c.challenges.length}</b><span>problems addressed</span></li>
-              <li><b class="num">${c.solution.length}</b><span>things built</span></li>
-              <li><b class="num">${c.outputs.length}</b><span>reporting outputs in Power BI</span></li>
-            </ol>
-          </div>
+          ${glance({
+            label: 'At a glance', title: c.title, summary: c.summary,
+            rail: { inLabel: 'Sources', inputs: c.sources, midLabel: 'Pipeline', pipeline: [c.pipeline], outLabel: 'Outputs', outputs: c.outputs },
+            focus: { label: 'Focus', sub: 'What the engagement set out to fix.', items: c.focus },
+            tools: { label: 'Tools and platforms', sub: 'What the solution runs on.', items: c.tools },
+            nums: [[c.sources.length, 'source platforms connected'], [c.challenges.length, 'problems addressed'], [c.solution.length, 'things built'], [c.outputs.length, 'reporting outputs in Power BI']]
+          })}
         </div>
       </section>
 
@@ -191,69 +224,79 @@
     var relServices = (PG.services || []).filter(function (s) { return s.related === item.slug; });
     var question = item.sections[0];
     var steps = item.sections.slice(1);
+    var inputs = INPUTS[item.slug] || [];
+    var tech = TECH[item.slug] || [];
     return html`
-      <section class="page-intro">
-        <div class="wrap">
+      ${PG.hero('work/' + item.slug)}
+
+      <section class="sec-xs">
+        <div class="wrap stack" data-reveal="rise" style="gap:24px">
           <nav class="crumbs" aria-label="Breadcrumb">
             <a href="/">Home</a><span aria-hidden="true">/</span>
             <a href="/work">Work &amp; demos</a><span aria-hidden="true">/</span>
             <span aria-current="page">${item.title}</span>
           </nav>
-          <span class="eyebrow">Illustrative scenario · ${item.sector}</span>
-          <h1>${item.title}</h1>
-          <p class="lead">${item.summary}</p>
-          <p class="notice" style="align-self:flex-start;max-width:44em">Built with sample data to show how we think. It is not a client engagement and does not claim a business result.</p>
+          ${glance({
+            label: 'At a glance', title: item.title, summary: item.summary,
+            note: ['Sample data', 'Built to show how we think. Not a client engagement; no business result is claimed.'],
+            rail: { inLabel: 'Sample inputs', inputs: inputs, midLabel: 'Approach', pipeline: steps.map(function (st) { return st.h; }), outLabel: 'Deliverable', outputs: [SCENE_NAMES[SCENES[item.slug] || 'bi']] },
+            focus: { label: 'Designed to enable', sub: 'What the system is built to make possible, not a measured result.', items: item.enable },
+            tools: { label: 'Technology', sub: 'Illustrative options; the choice follows the environment.', items: tech },
+            nums: [[inputs.length, 'sample inputs'], [steps.length, 'stages in the approach'], [item.enable.length, 'outcomes designed for'], [1, 'sample report page to explore']]
+          })}
         </div>
       </section>
 
-      <section class="sec-xs" id="work-artifact">
-        <div class="wrap stack" data-reveal="rise" style="gap:24px">
-          <div class="autogrid end" style="--min:360px;--gap:12px;--gap-x:48px">
-            <div class="stack stack-10">
-              <span class="label-caps">The question</span>
-              <h2 class="h3" style="max-width:26ch;text-wrap:balance">${question.p}</h2>
+      <section class="sec-sm" id="work-artifact">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="num-cell">${C.cells(0)}01</span>
+              <h2 class="h2-sm" style="max-width:26ch;text-wrap:balance">${question.p}</h2>
             </div>
-            <p class="small slate" style="max-width:40em">The deliverable as a sample report page on demo data. Use the pages and figures; nothing is sent or saved.</p>
+            <p class="lead">The deliverable as a sample report page on demo data. Use the pages and figures; nothing is sent or saved.</p>
           </div>
           <div data-scene="${SCENES[item.slug] || 'bi'}"></div>
         </div>
       </section>
 
-      <section class="sec-sm">
-        <div class="wrap work-detail" data-reveal="rise">
-          <div class="stack stack-32">
-            <div class="stack stack-12">
-              <span class="label-caps">Sample inputs</span>
-              <ul class="ticks">${each(INPUTS[item.slug] || [], function (i) { return html`<li>${i}</li>`; })}</ul>
+      <section class="sec-sm bg-paper" id="work-approach">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="num-cell">${C.cells(1)}02</span>
+              <h2 class="h2-sm">How it is built</h2>
             </div>
-            <div class="stack stack-12">
-              <span class="label-caps">Approach</span>
-              <ol class="steps-list">${each(steps, function (s) { return html`<li><strong>${s.h}.</strong> ${s.p}</li>`; })}</ol>
-              <p class="small muted">${(item.approach || []).join(' → ')} — the Business Intelligence approach.</p>
-            </div>
-            <div class="stack stack-12">
-              <span class="label-caps">How the data moves</span>
-              <p class="small slate" style="max-width:44em">${item.flow}</p>
+            <p class="lead">Three stages, each leaving something a reader can check: the reconciliation, the definition, the evidence behind the figure.</p>
+          </div>
+          <div class="case-steps stagger">
+            ${each(steps, function (st, i) {
+              return html`<div class="doc-mini"><div class="dm-bar"><span class="scene-id">${C.cells(i + 2)}${st.h}</span>${PG.scene.chip('ok', 'Stage ' + (i + 1))}</div><p class="dm-body">${st.p}</p></div>`;
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-sm" id="work-enable">
+        <div class="wrap case-split" data-reveal="rise">
+          <div class="stack stack-16">
+            <span class="num-cell">${C.cells(2)}03</span>
+            <h2 class="h2-sm">What it is designed to enable</h2>
+            <p class="body">Outcomes the system is built to make possible. Because this scenario runs on sample data, none is a measured result.</p>
+            <div class="stack stack-12" style="padding-top:8px">
+              ${PG.scene.drawer({ chip: 'Limitation', chipTone: 'warn', title: 'What this does not prove', text: LIMITS[item.slug] || '' })}
             </div>
           </div>
-          <aside class="stack stack-24 work-aside">
-            <div class="stack stack-12">
-              <span class="label-caps">Designed to enable</span>
-              <div class="stack stack-8">${each(item.enable, function (e) { return html`<div>${PG.scene.chip('ok', e)}</div>`; })}</div>
-              <p class="fine">What the system is built to make possible, not a measured result.</p>
+          <div class="stack stack-12">
+            <span class="label-caps">Designed to enable</span>
+            <div class="case-list stagger">
+              ${each(item.enable, function (e, i) { return html`<div><b>${e}</b><span>${ENABLE_NOTES[item.slug] && ENABLE_NOTES[item.slug][i] || ''}</span></div>`; })}
             </div>
-            ${PG.scene.drawer({ chip: 'Limitation', chipTone: 'warn', title: 'What this does not prove', text: LIMITS[item.slug] || '' })}
-            <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:16px">
-              <span class="label-caps">Technology (illustrative options)</span>
-              <p class="small slate">${(item.tech || []).join(' · ')}</p>
+            <div class="row" style="gap:8px;border-top:1px solid var(--rule);padding-top:20px;margin-top:8px">
+              <span class="label-caps" style="margin-right:8px">Relevant services</span>
+              ${each(relServices, function (r) { return html`<a class="tag-link" href="/services/${r.slug}">${r.title} →</a>`; })}
             </div>
-            <div class="stack stack-10" style="border-top:1px solid var(--rule);padding-top:16px">
-              <span class="label-caps">Relevant services</span>
-              <div class="row" style="gap:8px">
-                ${each(relServices, function (r) { return html`<a class="tag-link" href="/services/${r.slug}">${r.title} →</a>`; })}
-              </div>
-            </div>
-          </aside>
+          </div>
         </div>
       </section>
 
@@ -293,7 +336,7 @@
       return {
         title: item.title,
         desc: item.summary,
-        heroKey: 'work',
+        heroKey: 'work/' + item.slug,
         crumbs: [{ name: 'Work & demos', path: '/work' }, { name: item.title, path: '/work/' + item.slug }],
         schema: {
           '@context': 'https://schema.org',

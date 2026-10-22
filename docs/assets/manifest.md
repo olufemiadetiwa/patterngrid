@@ -14,18 +14,18 @@ All photographs are stock imagery used as illustrative context. None shows Patte
 | `office-meeting-3` | /about | hero | Ninthgrid | A working session around a white table in a Lagos office | 50% 45% / 50% 45% | d 137 KiB (q82) · 1200 74 KiB (q82) · m 67 KiB (q82) |
 | `office-two-men` | /work | hero | Ninthgrid | Two men in conversation across a desk in a Lagos office | 50% 45% / 42% 45% | d 133 KiB (q82) · 1200 65 KiB (q82) · m 73 KiB (q82) |
 | `office-pair-laptop` | /services/business-intelligence | hero | Ninthgrid | A colleague pointing out something on a laptop screen in a Lagos office | 45% 45% / 40% 45% | d 134 KiB (q82) · 1200 68 KiB (q82) · m 68 KiB (q82) |
-| `office-two-women` | /industries/technology | section photo (CDN) | Ninthgrid | Two women working at a laptop in a Lagos café | 50% 45% / 50% 45% | CDN |
+| `office-two-women` | /work/reporting-workflow, /industries/technology | hero, section photo (CDN) | Ninthgrid | Two women working at a laptop in a Lagos café | 50% 45% / 50% 45% | d 91 KiB (q82) · 1200 50 KiB (q82) · m 66 KiB (q82) |
 | `cafe-pair-laptop` | /industries/technology | hero | Francis Odeyemi | Two founders at a laptop in a Lagos workspace | 50% 45% / 50% 45% | d 209 KiB (q82) · 1200 91 KiB (q82) · m 131 KiB (q82) |
 | `cafe-woman-tablet` | /services/ai-automation | hero | Francis Odeyemi | A woman reviewing work on a tablet in a Lagos office | 50% 40% / 50% 35% | d 53 KiB (q82) · 1200 25 KiB (q82) · m 41 KiB (q82) |
 | `abuja-laptop` | /services/data-engineering | hero | Kagou Dicko | A developer working at a laptop in Abuja | 50% 40% / 50% 35% | d 57 KiB (q82) · 1200 25 KiB (q82) · m 57 KiB (q82) |
 | `dev-stickers` | /industries/technology | section photo (CDN) | Micheal Ogungbe | A developer holding a laptop covered in stickers | 50% 40% / 50% 35% | CDN |
 | `notes-review` | /approach | hero | Emmanuel Ikwuegbu | Colleagues working through notes together, Port Harcourt (black and white) | 50% 50% / 50% 50% | d 106 KiB (q82) · 1200 50 KiB (q82) · m 58 KiB (q82) |
 | `training-table` | /services/capability-building | hero | UK Black Tech | A facilitator explaining a point to a small group around a table | 50% 45% / 50% 45% | d 49 KiB (q82) · 1200 30 KiB (q82) · m 34 KiB (q82) |
-| `suit-desk` | /industries/financial-services | section photo (CDN) | Olorunyomi Solomon | A manager at his desk | 50% 45% / 50% 45% | CDN |
+| `suit-desk` | /work/executive-performance, /industries/financial-services | hero, section photo (CDN) | Olorunyomi Solomon | A manager at his desk | 50% 45% / 50% 45% | d 162 KiB (q82) · 1200 75 KiB (q82) · m 123 KiB (q82) |
 | `market-cart` | /industries/fmcg-distribution | hero | Shedrack Salami | A trader moving goods by cart at Mile 12 International Market, Lagos | 50% 50% / 55% 50% | d 276 KiB (q58) · 1200 117 KiB (q58) · m 142 KiB (q58) |
 | `market-cart-2` | /work/ledrop-distribution-visibility | hero | Shedrack Salami | A trader pushing a loaded cart at Mile 12 market, Lagos | 50% 50% / 50% 50% | d 326 KiB (q58) · 1200 132 KiB (q58) · m 157 KiB (q58) |
 | `boxes-carry` | /industries/fmcg-distribution | section photo (CDN) | Mary | A trader carrying cartons of goods in Lagos | 50% 40% / 50% 40% | CDN |
-| `van-delivery` | /industries/fmcg-distribution | section photo (CDN) | Ayoola Salako | A man loading a yellow delivery van in Lagos | 50% 50% / 50% 50% | CDN |
+| `van-delivery` | /work/distribution-intelligence, /industries/fmcg-distribution | hero, section photo (CDN) | Ayoola Salako | A man loading a yellow delivery van in Lagos | 50% 50% / 50% 50% | d 124 KiB (q82) · 1200 62 KiB (q82) · m 70 KiB (q82) |
 | `fruit-stand` | /industries/retail-ecommerce | section photo (CDN) | owolabi oluwatosin | Customers at a fruit stand in Sango, Nigeria | 50% 50% / 50% 50% | CDN |
 | `supermarket-two` | /industries/retail-ecommerce | hero | Ninthgrid | Two shoppers choosing products in a Lagos supermarket | 50% 45% / 55% 45% | d 221 KiB (q78) · 1200 118 KiB (q78) · m 126 KiB (q78) |
 | `supermarket-store` | /industries/retail-ecommerce | section photo (CDN) | Ninthgrid | Shoppers at the shelves of a Lagos mini mart | 50% 45% / 55% 45% | CDN |
