@@ -23,8 +23,10 @@ All photographs are stock imagery used as illustrative context. None shows Patte
 | `training-table` | /services/capability-building | hero | UK Black Tech | A facilitator explaining a point to a small group around a table | 50% 45% / 50% 45% | d 49 KiB (q82) · 1200 30 KiB (q82) · m 34 KiB (q82) |
 | `suit-desk` | /industries/financial-services | section photo (CDN) | Olorunyomi Solomon | A manager at his desk | 50% 45% / 50% 45% | CDN |
 | `market-cart` | /industries/fmcg-distribution | hero | Shedrack Salami | A trader moving goods by cart at Mile 12 International Market, Lagos | 50% 50% / 55% 50% | d 276 KiB (q58) · 1200 117 KiB (q58) · m 142 KiB (q58) |
+| `market-cart-2` | /work/ledrop-distribution-visibility | hero | Shedrack Salami | A trader pushing a loaded cart at Mile 12 market, Lagos | 50% 50% / 50% 50% | d 326 KiB (q58) · 1200 132 KiB (q58) · m 157 KiB (q58) |
 | `boxes-carry` | /industries/fmcg-distribution | section photo (CDN) | Mary | A trader carrying cartons of goods in Lagos | 50% 40% / 50% 40% | CDN |
 | `van-delivery` | /industries/fmcg-distribution | section photo (CDN) | Ayoola Salako | A man loading a yellow delivery van in Lagos | 50% 50% / 50% 50% | CDN |
 | `fruit-stand` | /industries/retail-ecommerce | section photo (CDN) | owolabi oluwatosin | Customers at a fruit stand in Sango, Nigeria | 50% 50% / 50% 50% | CDN |
 | `supermarket-two` | /industries/retail-ecommerce | hero | Ninthgrid | Two shoppers choosing products in a Lagos supermarket | 50% 45% / 55% 45% | d 221 KiB (q78) · 1200 118 KiB (q78) · m 126 KiB (q78) |
 | `supermarket-store` | /industries/retail-ecommerce | section photo (CDN) | Ninthgrid | Shoppers at the shelves of a Lagos mini mart | 50% 45% / 55% 45% | CDN |
+| `supermarket-cart` | /work/party-drinks-connected-reporting | hero | Ninthgrid | A shopper with a trolley in a Lagos supermarket aisle | 50% 45% / 50% 45% | d 208 KiB (q78) · 1200 113 KiB (q78) · m 136 KiB (q82) |

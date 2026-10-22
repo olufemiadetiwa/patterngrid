@@ -149,3 +149,16 @@ The founder's reaction to the scenes: "screenshots of a SaaS tool that does not 
 Rebuilt `scenes.js` as report canvases (same `PG.scene` API, same data): dark ink canvas, title line with the demo dataset named, slicer chips, KPI cards with sparklines, one large chart or a dense matrix on a 7:3 grid with a callout, page tabs along the bottom, caption outside. Pages: **Commercial performance** (Overview · Variance · Actions · Definitions), **Delivery roadmap**, **Platform monitor** (Loads · Mapping · Resulting view), **Review log** (Queue · Item), **Capability baseline**, and per-industry **performance** pages (Overview · Sources · Definitions); the home sequence is the same canvas with four pages. Interaction is report interaction (tabs, bars, matrix cells, rows); the readiness toggle, the held-record trace, approve/return and assign are kept; thumbnails show head, cards and the first visual. Walkthrough rescripted for the new pages. Verified: all routes, no console errors, no overflow at 390, keyboard tabs keep focus, tests 13/13.
 
 When client screenshots arrive: add them to the two case-study pages full-bleed with "Shown with client permission; figures redacted"; the rendered canvases stay for the illustrative scenarios and industries.
+
+
+---
+
+## Pass 13 — case-study pages (22 October 2026)
+
+Founder's read of the Ledrop page: the hero should carry an industry photograph, the client-facts block under it was "poorly done", and the page as a whole felt static.
+
+- **Hero.** Each case study now has its own `PG.heroes` entry (`work/<slug>`), so the detail page opens like every other page: industry photograph (Ledrop: trader moving stock at a Lagos market; Drinks.NG: shoppers in a Lagos supermarket), eyebrow "Pattern Grid engagement · <industry>", the client name as the H1, the one-line lead, two actions, then the centred scroll-animated statement summarising what the engagement became.
+- **At a glance.** The old grey label stack is replaced by one navy panel on the grid-field texture: title and summary, the sources → pipeline → outputs rail (`.pipe.lg.on-dark`, wrapping inside the panel), the client facts as a definition list with focus and tool tags, and four scope counts (source platforms, problems addressed, things built, reporting outputs) derived from the records — no invented figures.
+- **Alive.** Problem, solution and outcome sections use `.stagger` (children fade and lift as the section enters the viewport; off under reduced motion and in the static build). Solution steps are the `.doc-mini` cards used on the service pages.
+
+Verified at 1363 and 390 px: no horizontal overflow, headings in order, no console errors, tests 13/13. Both heroes built through `npm run images` (17 frames). Client screenshots, when they arrive, slot in full-bleed between the solution and outcome sections.

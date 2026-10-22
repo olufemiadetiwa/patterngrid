@@ -93,34 +93,41 @@
   function caseDetail(c) {
     var svcs = c.services.map(function (slug) { return (PG.services || []).find(function (s) { return s.slug === slug; }); }).filter(Boolean);
     return html`
-      <section class="page-intro">
-        <div class="wrap">
+      ${PG.hero('work/' + c.slug)}
+
+      <section class="sec-xs">
+        <div class="wrap stack" data-reveal="rise" style="gap:24px">
           <nav class="crumbs" aria-label="Breadcrumb">
             <a href="/">Home</a><span aria-hidden="true">/</span>
             <a href="/work">Work &amp; demos</a><span aria-hidden="true">/</span>
             <span aria-current="page">${c.client}</span>
           </nav>
-          <span class="eyebrow">Pattern Grid engagement · ${c.industry}</span>
-          <h1 class="case-h1"><span class="client">${c.client}</span><span class="sub">${c.title}</span></h1>
-          <p class="lead">${c.summary}</p>
-          <dl class="case-facts">
-            <div><dt>Client</dt><dd>${c.client}</dd></div>
-            <div><dt>Delivered by</dt><dd>${c.role}</dd></div>
-            <div><dt>Focus</dt><dd>${c.focus.join(' · ')}</dd></div>
-            <div><dt>Tools and platforms</dt><dd>${c.tools.join(' · ')}</dd></div>
-          </dl>
-        </div>
-      </section>
-
-      <section class="sec-xs">
-        <div class="wrap stack" data-reveal="rise" style="gap:16px">
-          <span class="label-caps">How the data moved</span>
-          <div class="pipe lg" aria-label="Data flow">
-            <span class="pipe-group"><small>Sources</small><span class="tags">${each(c.sources, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
-            <i class="pipe-link" aria-hidden="true"></i>
-            <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">${c.pipeline}</span></span></span>
-            <i class="pipe-link" aria-hidden="true"></i>
-            <span class="pipe-group"><small>Outputs</small><span class="tags">${each(c.outputs, function (x) { return html`<span class="tag is-solid">${x}</span>`; })}</span></span>
+          <div class="glance grid-field">
+            <div class="glance-main">
+              <span class="label-caps">At a glance</span>
+              <h2 class="h3">${c.title}</h2>
+              <p>${c.summary}</p>
+              <div class="pipe lg on-dark" aria-label="Data flow">
+                <span class="pipe-group"><small>Sources</small><span class="tags">${each(c.sources, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
+                <i class="pipe-link" aria-hidden="true"></i>
+                <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">${c.pipeline}</span></span></span>
+                <i class="pipe-link" aria-hidden="true"></i>
+                <span class="pipe-group"><small>Outputs</small><span class="tags">${each(c.outputs, function (x) { return html`<span class="tag is-solid">${x}</span>`; })}</span></span>
+              </div>
+            </div>
+            <dl class="glance-facts">
+              <div><dt>Client</dt><dd>${c.client}</dd></div>
+              <div><dt>Industry</dt><dd>${c.industry}</dd></div>
+              <div><dt>Delivered by</dt><dd>Pattern Grid · Business Intelligence and Data consulting</dd></div>
+              <div><dt>Focus</dt><dd><span class="tags">${each(c.focus, function (f) { return html`<span class="tag is-dark">${f}</span>`; })}</span></dd></div>
+              <div><dt>Tools and platforms</dt><dd><span class="tags">${each(c.tools, function (t) { return html`<span class="tag is-dark">${t}</span>`; })}</span></dd></div>
+            </dl>
+            <ol class="glance-nums" aria-label="Scope">
+              <li><b class="num">${c.sources.length}</b><span>source platforms connected</span></li>
+              <li><b class="num">${c.challenges.length}</b><span>problems addressed</span></li>
+              <li><b class="num">${c.solution.length}</b><span>things built</span></li>
+              <li><b class="num">${c.outputs.length}</b><span>reporting outputs in Power BI</span></li>
+            </ol>
           </div>
         </div>
       </section>
@@ -134,7 +141,7 @@
           </div>
           <div class="stack stack-12">
             <span class="label-caps">The main challenges</span>
-            <div class="case-list">
+            <div class="case-list stagger">
               ${each(c.challenges, function (ch) { return html`<div><b>${ch[0]}</b><span>${ch[1]}</span></div>`; })}
             </div>
           </div>
@@ -150,7 +157,7 @@
             </div>
             <p class="lead">${c.solutionIntro}</p>
           </div>
-          <div class="case-steps">
+          <div class="case-steps stagger">
             ${each(c.solution, function (st, i) {
               return html`<div class="doc-mini"><div class="dm-bar"><span class="scene-id">${C.cells(i + 2)}${st[0]}</span>${PG.scene.chip('ok', 'Delivered')}</div><p class="dm-body">${st[1]}</p></div>`;
             })}
@@ -167,7 +174,7 @@
             </div>
             <p class="lead">Outcomes as recorded in the project notes; no performance figures are claimed.</p>
           </div>
-          <div class="case-list cols">
+          <div class="case-list cols stagger">
             ${each(c.achieved, function (a) { return html`<div><b>${a[0]}</b><span>${a[1]}</span></div>`; })}
           </div>
           <div class="row" style="gap:8px;border-top:1px solid var(--rule);padding-top:20px">
@@ -269,7 +276,7 @@
         return {
           title: c.client + ' — ' + c.title,
           desc: c.summary,
-          heroKey: 'work',
+          heroKey: 'work/' + c.slug,
           crumbs: [{ name: 'Work & demos', path: '/work' }, { name: c.client, path: '/work/' + c.slug }],
           schema: { '@context': 'https://schema.org', '@type': 'CreativeWork', name: c.client + ': ' + c.title, abstract: c.summary, about: c.industry, creator: { '@type': 'Organization', name: 'Pattern Grid' } }
         };

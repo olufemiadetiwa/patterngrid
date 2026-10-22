@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-22T11:34:06.225Z",
+  "builtAt": "2026-10-22T14:08:08.970Z",
   "images": [
     {
       "key": "lagos-bridge-night",
@@ -599,6 +599,43 @@
       }
     },
     {
+      "key": "market-cart-2",
+      "usedOn": [
+        {
+          "route": "/work/ledrop-distribution-visibility",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1658402834638-c6f65944b551",
+      "creator": "Shedrack Salami",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A trader pushing a loaded cart at Mile 12 market, Lagos",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 50%",
+        "phone": "50% 50%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 334178,
+        "d1200": 134976,
+        "m": 160306
+      },
+      "quality": {
+        "d": 58,
+        "d1200": 58,
+        "m": 58
+      },
+      "original": {
+        "w": 2250,
+        "h": 2812
+      }
+    },
+    {
       "key": "boxes-carry",
       "usedOn": [
         {
@@ -734,6 +771,43 @@
       "files": null,
       "quality": null,
       "original": null
+    },
+    {
+      "key": "supermarket-cart",
+      "usedOn": [
+        {
+          "route": "/work/party-drinks-connected-reporting",
+          "role": "hero"
+        }
+      ],
+      "source": "Unsplash photo 1739300293398-468ba82fd418",
+      "creator": "Ninthgrid",
+      "licence": "Unsplash License (free to use; attribution shown as a photo credit)",
+      "approval": "Stock photograph. Illustrative context only — not Pattern Grid staff, premises or client sites.",
+      "alt": "A shopper with a trolley in a Lagos supermarket aisle",
+      "decorative": false,
+      "focal": {
+        "desktop": "50% 45%",
+        "phone": "50% 45%"
+      },
+      "crops": {
+        "desktop": "1920×1080 (16:9) and 1200×675",
+        "phone": "900×1200 (3:4)"
+      },
+      "files": {
+        "d": 212620,
+        "d1200": 116102,
+        "m": 139426
+      },
+      "quality": {
+        "d": 78,
+        "d1200": 78,
+        "m": 82
+      },
+      "original": {
+        "w": 2400,
+        "h": 1600
+      }
     }
   ]
 }

@@ -1450,3 +1450,28 @@ button.portrait:focus-visible { outline: 2px solid var(--focus); outline-offset:
 .work-aside .chip-state.ok { background: var(--ok-soft); color: var(--ok-ink); }
 .work-aside .rp-callout { --rp-text: var(--ink); --rp-muted: var(--slate); --rp-line: var(--surface-line); --rp-warn: var(--amber-ink); background: var(--surface-1); }
 .work-aside .rp-callout .chip-state.warn { background: var(--amber-soft); color: var(--amber-ink); }
+
+/* ------------------------------------------------- case study: at a glance -- */
+.glance { display: grid; grid-template-columns: minmax(0, 7fr) minmax(260px, 4fr); gap: 32px clamp(32px, 5vw, 64px); padding: clamp(24px, 3vw, 40px); background: var(--navy); color: var(--white); border-radius: var(--radius-lg); }
+.glance-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.glance-main .label-caps { color: var(--accent); }
+.glance-main h2 { color: var(--white); max-width: 22ch; }
+.glance-main p { font-size: 15.5px; line-height: 1.55; color: rgba(255, 255, 255, 0.82); max-width: 44em; }
+.glance-main .pipe { margin-top: 8px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.glance-main .pipe.on-dark { flex-wrap: wrap; overflow: visible; padding-bottom: 0; }
+.glance-main .pipe.on-dark .tags { flex-wrap: wrap; }
+.glance-facts { display: flex; flex-direction: column; gap: 12px; border-left: 1px solid rgba(255, 255, 255, 0.14); padding-left: clamp(20px, 3vw, 40px); }
+.glance-facts > div { display: flex; flex-direction: column; gap: 4px; }
+.glance-facts dt { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); }
+.glance-facts dd { font-size: 14.5px; line-height: 1.45; color: var(--white); }
+.glance-nums { grid-column: 1 / -1; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.glance-nums li { display: flex; flex-direction: column; gap: 2px; }
+.glance-nums b { font-size: clamp(28px, 2.6vw, 40px); font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--white); }
+.glance-nums span { font-size: 13px; color: rgba(255, 255, 255, 0.72); }
+@media (max-width: 959px) { .glance { grid-template-columns: 1fr; } .glance-facts { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 20px; } .glance-nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* staggered reveals: children rise in turn once the container is in view */
+.stagger > * { opacity: 0; transform: translateY(10px); transition: opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease); }
+.is-in .stagger > *, .is-static .stagger > *, .reduce-motion .stagger > * { opacity: 1; transform: none; }
+.stagger > :nth-child(1) { transition-delay: 0ms; } .stagger > :nth-child(2) { transition-delay: 70ms; } .stagger > :nth-child(3) { transition-delay: 140ms; } .stagger > :nth-child(4) { transition-delay: 210ms; } .stagger > :nth-child(5) { transition-delay: 280ms; } .stagger > :nth-child(6) { transition-delay: 350ms; }
+.reduce-motion .stagger > *, .is-static .stagger > * { transition: none; }
