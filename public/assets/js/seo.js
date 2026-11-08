@@ -111,7 +111,6 @@
       founder: {
         '@type': 'Person',
         name: 'Precious Chinenye Celestine',
-        alternateName: 'Ada Africa',
         jobTitle: 'Founder & Lead Consultant'
       }
     });

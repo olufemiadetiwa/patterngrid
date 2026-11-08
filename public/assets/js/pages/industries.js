@@ -50,7 +50,7 @@
     var caps = (ind.capabilities || [])
       .map(function (c) { return (PG.services || []).find(function (s) { return s.slug === c; }); })
       .filter(Boolean);
-    var relatedWork = (PG.work || []).find(function (w) { return w.slug === ind.related; });
+    var relatedCase = (PG.cases || []).find(function (c) { return c.industrySlug === ind.slug; });
     var ph2 = PG.img.get(ind.photo2);
     var grid = ind.grid || { head: [], rows: [] };
 
@@ -111,16 +111,16 @@
       <section class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:380px;--gap:40px;--gap-x:64px">
           ${C.frame(ph2)}
-          ${when(!!relatedWork, function () {
+          ${when(!!relatedCase, function () {
             return html`
               <div class="stack stack-20">
-                <p class="label-caps">RELATED WORK</p>
-                <a href="/work/${relatedWork.slug}" class="stack stack-10"
+                <p class="label-caps">Related work</p>
+                <a href="/work/${relatedCase.slug}" class="stack stack-10"
                    style="color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:24px">
-                  <span class="label-caps">ILLUSTRATIVE SCENARIO</span>
-                  <span style="font-size:22px;font-weight:600;color:var(--navy);line-height:1.25">${relatedWork.title}</span>
-                  <span class="small muted">${relatedWork.summary}</span>
-                  <span style="font-weight:600;font-size:15px;color:var(--teal);margin-top:6px">Explore the scenario →</span>
+                  <span class="label-caps" style="color:var(--accent-2-ink)">Pattern Grid engagement · ${relatedCase.client}</span>
+                  <span style="font-size:22px;font-weight:600;color:var(--navy);line-height:1.25">${relatedCase.title}</span>
+                  <span class="small muted">${relatedCase.summary}</span>
+                  <span style="font-weight:600;font-size:15px;color:var(--teal);margin-top:6px">Read the case study →</span>
                 </a>
               </div>`;
           })}

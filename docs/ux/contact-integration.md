@@ -35,6 +35,8 @@ Responses the client understands: `200 { "ok": true, "id": "ENQ-0001" }`, `422 {
 
 GitHub Pages cannot run a server, so one of:
 
+0. **A verified business mailbox** (quickest, no third party): set `contactEmail` in `public/assets/js/config.js`. The form then renders and, on send, opens the visitor's mail app with the enquiry drafted to that address (subject, name, organisation, message, optional context and the assessment summary). Nothing is discarded, and no service is involved; the trade-off is that delivery depends on the visitor having a mail app configured, so the success message also shows the address as a plain link. Added 8 November 2026 along with a **Contact** item in the primary navigation, drawer and footer.
+
 1. **A form service** (Formspree, Basin, Web3Forms or similar): create the form, enable JSON submissions, set the public endpoint URL as `formEndpoint` in `public/assets/js/config.js`, and confirm the service's success/validation status codes match the contract above (most return 200 on success; map any custom validation response to 422 if offered).
 2. **A small serverless function** (Cloudflare Worker, Netlify/Vercel function) that validates the payload, relays it to a mailbox or CRM, and answers with the contract. Keep any API key in that function's environment, never in the frontend.
 

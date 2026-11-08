@@ -188,3 +188,16 @@ test('local-images.js carries both hero frames and portraits', () => {
   const PG = load('');
   assert.ok(PG.localPeople && PG.localPeople[PG.team.founder.photo], 'founder photo resolvable');
 });
+
+test('the site carries no illustrative scenarios and no founder alias; the primary nav reaches Contact', () => {
+  const PG = load('');
+  assert.equal(PG.work, undefined, 'PG.work (the demo scenarios) is gone');
+  for (const k of Object.keys(PG.heroes)) assert.ok(!/^work\//.test(k) || PG.cases.some((c) => 'work/' + c.slug === k), k + ' is a case-study hero');
+  assert.equal(PG.team.founder.alias, undefined, 'no alias on the founder');
+  const src = ['content.js', 'service-content.js', 'seo.js', 'shell.js', 'pages/home.js', 'pages/about.js', 'pages/work.js', 'pages/services.js', 'pages/industries.js']
+    .map((f) => fs.readFileSync(path.join(JS, f), 'utf8')).join('\n');
+  assert.ok(!/Ada Africa/.test(src), 'no "Ada Africa" in the site source');
+  assert.ok(!/Illustrative scenario|worked demos|PG\.work\b/.test(src), 'no scenario wording or PG.work in page modules');
+  const shell = fs.readFileSync(path.join(JS, 'shell.js'), 'utf8');
+  assert.ok(/class="nav-item" href="\/contact"/.test(shell), 'Contact is a primary nav item');
+});

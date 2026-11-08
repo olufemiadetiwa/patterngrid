@@ -130,7 +130,7 @@ Work through implementation and verification. Do not stop after a plan, a moodbo
 - `design-source/` is reference material. Implement the production experience in the actual production files.
 - Keep the current stack unless you identify a specific limitation that cannot be resolved simply. Do not introduce React, Next.js, Tailwind, shadcn, WebGL or a large animation stack merely to achieve a fashionable appearance.
 - Pattern Grid offers Data & AI Strategy, Data Engineering & Platforms, Business Intelligence, AI & Automation, and Capability Building.
-- The current founder is **Precious Chinenye Celestine**, professionally known as **Ada Africa**. Do not replace her identity with the repository owner's identity.
+- The current founder is **Precious Chinenye Celestine** (the professional alias was removed from the site on 8 November 2026 at the founder's request). Do not replace her identity with the repository owner's identity.
 - Existing work examples are illustrative. Do not fabricate clients, testimonials, revenue improvements, certifications, team members or finished engagements.
 
 #### 2. Read and use the relevant skills and tools

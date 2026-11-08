@@ -19,7 +19,7 @@
  *   const PG = window.PG;
  *   const routes = ['/', '/services', ...PG.services.map((s) => '/services/' + s.slug),
  *     '/industries', ...PG.industries.map((i) => '/industries/' + i.slug),
- *     '/work', ...PG.work.map((w) => '/work/' + w.slug), '/insights', '/about',
+ *     '/work', ...PG.cases.map((c) => '/work/' + c.slug), '/insights', '/about',
  *     '/about/precious-celestine', '/approach', '/assessment', '/contact',
  *     '/privacy', '/terms'];
  *   const out = {};

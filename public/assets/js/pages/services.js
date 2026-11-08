@@ -168,7 +168,7 @@
     var maxCol = Math.max.apply(null, nodes.map(function (n) { return n.col; }));
     var jumps = [['Overview', 'svc-overview'], ['Example', 'svc-artifact'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
     var related = svc.relatedServices.map(find).filter(Boolean);
-    var relatedWork = (PG.work || []).find(function (w) { return w.slug === svc.related; }) || {};
+    var relatedCase = (PG.cases || []).find(function (c) { return c.leadService === svc.slug; });
 
     return html`
       ${PG.hero('services/' + svc.slug)}
@@ -405,12 +405,12 @@
                     <span aria-hidden="true" style="color:var(--teal)">→</span>
                   </a>`;
               })}
-              ${when(!!relatedWork.slug, function () {
+              ${when(!!relatedCase, function () {
                 return html`
-                  <a class="stack stack-4" href="/work/${relatedWork.slug}"
+                  <a class="stack stack-4" href="/work/${relatedCase.slug}"
                      style="padding:16px 18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
-                    <span class="label-caps" style="color:var(--muted)">Illustrative scenario</span>
-                    <span style="font-weight:600;font-size:16px">${relatedWork.title}</span>
+                    <span class="label-caps" style="color:var(--accent-2-ink)">Pattern Grid engagement · ${relatedCase.client}</span>
+                    <span style="font-weight:600;font-size:16px">${relatedCase.title}</span>
                   </a>`;
               })}
             </div>

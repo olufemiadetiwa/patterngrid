@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-22T14:31:00.796Z",
+  "builtAt": "2026-11-08T14:33:25.478Z",
   "images": [
     {
       "key": "lagos-bridge-night",
@@ -61,9 +61,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 234728,
-        "d1200": 119462,
-        "m": 126856
+        "d": 234398,
+        "d1200": 119548,
+        "m": 126420
       },
       "quality": {
         "d": 74,
@@ -305,10 +305,6 @@
       "key": "office-two-women",
       "usedOn": [
         {
-          "route": "/work/reporting-workflow",
-          "role": "hero"
-        },
-        {
           "route": "/industries/technology",
           "role": "section photo (CDN)"
         }
@@ -324,23 +320,11 @@
         "phone": "50% 45%"
       },
       "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
       },
-      "files": {
-        "d": 92936,
-        "d1200": 51102,
-        "m": 67166
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1600
-      }
+      "files": null,
+      "quality": null,
+      "original": null
     },
     {
       "key": "cafe-pair-laptop",
@@ -402,9 +386,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 53906,
-        "d1200": 25406,
-        "m": 42146
+        "d": 54098,
+        "d1200": 25312,
+        "m": 42022
       },
       "quality": {
         "d": 82,
@@ -538,9 +522,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 49880,
-        "d1200": 30284,
-        "m": 35086
+        "d": 49806,
+        "d1200": 30320,
+        "m": 35078
       },
       "quality": {
         "d": 82,
@@ -555,10 +539,6 @@
     {
       "key": "suit-desk",
       "usedOn": [
-        {
-          "route": "/work/executive-performance",
-          "role": "hero"
-        },
         {
           "route": "/industries/financial-services",
           "role": "section photo (CDN)"
@@ -575,23 +555,11 @@
         "phone": "50% 45%"
       },
       "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
       },
-      "files": {
-        "d": 165584,
-        "d1200": 77076,
-        "m": 126300
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1832
-      }
+      "files": null,
+      "quality": null,
+      "original": null
     },
     {
       "key": "market-cart",
@@ -616,9 +584,9 @@
         "phone": "900×1200 (3:4)"
       },
       "files": {
-        "d": 282448,
-        "d1200": 119516,
-        "m": 145516
+        "d": 282530,
+        "d1200": 117846,
+        "m": 144996
       },
       "quality": {
         "d": 58,
@@ -696,10 +664,6 @@
       "key": "van-delivery",
       "usedOn": [
         {
-          "route": "/work/distribution-intelligence",
-          "role": "hero"
-        },
-        {
           "route": "/industries/fmcg-distribution",
           "role": "section photo (CDN)"
         }
@@ -715,23 +679,11 @@
         "phone": "50% 50%"
       },
       "crops": {
-        "desktop": "1920×1080 (16:9) and 1200×675",
-        "phone": "900×1200 (3:4)"
+        "cdn": "responsive srcset 800–2400 px, browser-cropped to the frame ratio"
       },
-      "files": {
-        "d": 126940,
-        "d1200": 63938,
-        "m": 71922
-      },
-      "quality": {
-        "d": 82,
-        "d1200": 82,
-        "m": 82
-      },
-      "original": {
-        "w": 2400,
-        "h": 1383
-      }
+      "files": null,
+      "quality": null,
+      "original": null
     },
     {
       "key": "fruit-stand",

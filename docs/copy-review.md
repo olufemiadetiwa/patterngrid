@@ -57,7 +57,7 @@ Location column gives the file and the field or a short quote. "Approved" means 
 | home.js WORK_META key labels | "Question / Designed / Purpose" | "Question / What it includes / What it shows" | "Designed" as a row label reads as a verb without an object. |
 | home.js founder eyebrow | "Founder and perspective" | "Founder" | There is no perspective content on the page. |
 | home.js founder paragraph | "Pattern Grid was founded to help organisations make better use of their data. Her work spans business intelligence…" | "Precious founded Pattern Grid to help organisations make better use of their data. Her work spans business intelligence, reporting systems, data platforms and practical applications of AI and automation." | "Her" has no antecedent in the paragraph (the name is in the heading). |
-| home.js founder role line | "Founder & Lead Consultant · Known professionally as Ada Africa" | Keep. | Fine. Identical line also appears on About; that is acceptable repetition. |
+| home.js founder role line | "Founder & Lead Consultant" (the alias was removed site-wide on 8 November 2026) | Keep. | Fine. Identical line also appears on About; that is acceptable repetition. |
 | home.js closing (Visual brief §07) | "What would you like to understand?" / "Start a conversation about your data, your decisions and what comes next." | Keep. Buttons: "Book a consultation" / "Take the readiness assessment". | Body copy is from the brief. Only the secondary link changes for S4/S5. |
 
 ### 2.2 Services index (`pages/services.js` overview, `service-content.js` servicesOverview, `shell.js` mega menu)

@@ -16,6 +16,23 @@
     var cfg = window.PG_CONFIG || {};
     return (cfg.formEndpoint || document.body.getAttribute('data-form-endpoint') || '').trim();
   }
+  /* Fallback transport: a verified mailbox. The form composes the enquiry
+     and hands it to the visitor's mail app, so nothing is discarded. */
+  function mailbox() {
+    var cfg = window.PG_CONFIG || {};
+    return (cfg.contactEmail || document.body.getAttribute('data-contact-email') || '').trim();
+  }
+  function mailtoFor(v) {
+    var lines = [
+      'Name: ' + v.name, 'Work email: ' + v.email, 'Organisation: ' + v.organisation,
+      v.role ? 'Role: ' + v.role : '', v.service ? 'Service: ' + v.service : '',
+      '', 'What I would like to improve:', v.message,
+      v.process ? '\nHow it works today:\n' + v.process : '',
+      v.time ? '\nGood times for a call: ' + v.time : '',
+      v.assessment ? '\n' + v.assessment : ''
+    ].filter(function (l) { return l !== ''; });
+    return 'mailto:' + mailbox() + '?subject=' + encodeURIComponent('Consultation enquiry from ' + v.organisation) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
 
   /* One name per service, from the content model, so the form never drifts from the navigation. */
   var SERVICE_NAMES = {};
@@ -155,7 +172,7 @@
     render: function (params, ctx) {
       var preset = SERVICE_NAMES[(ctx && ctx.query.get('service')) || ''] || '';
       var sum = summary();
-      var live = !!endpoint();
+      var live = !!(endpoint() || mailbox());
       return html`
         <section class="page-intro compact">
           <div class="wrap">
@@ -285,10 +302,15 @@
         }
 
         var url = endpoint();
-        if (!url) { status('error', '<strong>The enquiry form is not connected yet.</strong> Your details are still in the form. Please try again later.'); return; }
-
         var sum = summary();
         if (sum) v.assessment = sum;
+        if (!url && mailbox()) {
+          window.location.href = mailtoFor(v);
+          status('ok', '<strong>Your mail app should now open with the enquiry drafted.</strong> Press send there and we will reply to ' + C.esc(v.email.trim()) + '. If nothing opened, email us directly at <a href="mailto:' + C.esc(mailbox()) + '">' + C.esc(mailbox()) + '</a>.');
+          return;
+        }
+        if (!url) { status('error', '<strong>The enquiry form is not connected yet.</strong> Your details are still in the form. Please try again later.'); return; }
+
         busy(true);
         status('', '');
         controller = ('AbortController' in window) ? new AbortController() : null;
