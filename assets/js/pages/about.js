@@ -14,10 +14,11 @@
      exists in PG.team; until then the layout is text-led, with no reserved
      frame. Team profiles appear once approved. */
   /* The founder composition shared by the About page and the founder page:
-     portrait on its stage beside the name, alias, lead and two actions, on the
+     portrait on its stage beside the name, role, lead and two actions, on the
      navy grid field. `top` renders it as the page opening (h1); otherwise it
      is a mid-page section (h2) that links through to the profile. */
-  function founderBanner(top) {
+  function founderBanner(top, opts) {
+    opts = opts || {};
     var f = (PG.team && PG.team.founder) || {};
     var Tag = top ? 'h1' : 'h2';
     return html`
@@ -31,9 +32,9 @@
                 <a href="/about">About</a><span aria-hidden="true">/</span>
                 <span aria-current="page">Founder</span>
               </nav>`; })}
-            <span class="hero-eyebrow">${top ? 'Founder &amp; Lead Consultant' : 'Leadership'}</span>
+            <span class="hero-eyebrow">${raw(opts.eyebrow || (top ? 'Founder &amp; Lead Consultant' : 'Leadership'))}</span>
             ${raw('<' + Tag + ' id="founder-h">' + C.esc(f.name) + '</' + Tag + '>')}
-            <p class="founder-alias">${top ? '' : f.role + ' · '}Known professionally as ${f.alias}</p>
+            ${when(!top, function () { return html`<p class="founder-alias">${f.role}</p>`; })}
             <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
             <div class="hero-cta">
               ${top
@@ -44,6 +45,8 @@
         </div>
       </section>`;
   }
+
+  PG.founderBanner = founderBanner;
 
   function peopleSection() {
     var T = PG.team || { founder: {}, members: [] };
@@ -140,7 +143,7 @@
             <span class="eyebrow">Experience</span>
             <h2 class="h2-sm">Reporting, platforms and decision support, across three sectors.</h2>
             <p class="body">Her experience spans reporting systems, analytics solutions, data platforms and decision-support capabilities, with exposure to financial services, investment technology and FMCG and distribution: analytical models for finance and commercial teams, data platform design and delivery, and decision-support capabilities for investment-technology and distribution businesses.</p>
-            <p class="small muted" style="max-width:36em">Earlier experience comes from previous roles and personal projects. Pattern Grid's own client engagements are written up below and under Work &amp; demos.</p>
+            <p class="small muted" style="max-width:36em">Earlier experience comes from previous roles and personal projects. Pattern Grid's own client engagements are written up below and under Work.</p>
           </div>
           <div class="stack stack-16">
             <span class="eyebrow">How she works</span>
@@ -257,14 +260,13 @@
     },
     founder: {
       title: 'Precious Chinenye Celestine',
-      desc: 'Meet Precious Chinenye Celestine, professionally known as Ada Africa, the founder of Pattern Grid.',
+      desc: 'Meet Precious Chinenye Celestine, founder and lead consultant of Pattern Grid.',
       heroKey: 'founder',
       crumbs: [{ name: 'About', path: '/about' }, { name: 'Founder', path: '/about/precious-celestine' }],
       schema: {
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Precious Chinenye Celestine',
-        alternateName: 'Ada Africa',
         jobTitle: 'Founder & Lead Consultant',
         worksFor: { '@type': 'Organization', name: 'Pattern Grid' },
         knowsAbout: ['Business intelligence', 'Data engineering', 'Data strategy', 'AI and automation']

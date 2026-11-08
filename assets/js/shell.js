@@ -138,9 +138,10 @@
         <nav class="nav" aria-label="Primary">
           ${navBtn('services', 'Services')}
           ${navBtn('industries', 'Industries')}
-          <a class="nav-item" href="/work" data-close-menu ${raw(sec === 'work' ? 'aria-current="page"' : '')}>Work &amp; demos</a>
+          <a class="nav-item" href="/work" data-close-menu ${raw(sec === 'work' ? 'aria-current="page"' : '')}>Work</a>
           ${when(insightsLive(), function () { return html`<a class="nav-item" href="/insights" data-close-menu ${raw(sec === 'insights' ? 'aria-current="page"' : '')}>Insights</a>`; })}
           ${navBtn('about', 'About')}
+          <a class="nav-item" href="/contact" data-close-menu ${raw(sec === 'contact' ? 'aria-current="page"' : '')}>Contact</a>
         </nav>
 
         <div class="header-actions">
@@ -193,7 +194,7 @@
               <a class="hi" href="/industries">All industries</a>
             </div>
           </details>
-          <a href="/work">Work &amp; demos</a>
+          <a href="/work">Work</a>
           ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
           <details>
             <summary>About</summary>
@@ -204,6 +205,7 @@
             </div>
           </details>
           <a href="/assessment">Readiness assessment</a>
+          <a href="/contact">Contact</a>
         </nav>
         <a class="drawer-cta" href="/contact">Request a consultation</a>
       </div>`;
@@ -284,10 +286,10 @@
             <div class="stack stack-10">
               <a href="/about">About</a>
               <a href="/approach">Our Approach</a>
-              <a href="/work">Work &amp; demos</a>
+              <a href="/work">Work</a>
               ${when(insightsLive(), function () { return html`<a href="/insights">Insights</a>`; })}
               <a href="/assessment">Readiness assessment</a>
-              <a href="/contact">Request a consultation</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>

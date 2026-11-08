@@ -67,11 +67,6 @@
 
   /* Per-service preview cards shown beside the capability list. */
   /* Illustrative record grids beside each work scenario. */
-  var WORK_META = {
-    'executive-performance': ['Which numbers can leadership take into the meeting?', 'Source reconciliation, a metric dictionary, one management view and a decision brief.', 'Show how three functions can agree on one traceable figure.'],
-    'distribution-intelligence': ['Where is outlet demand outpacing available stock?', 'A shared stock and sales model with an exception queue and named owners.', 'Show how availability gaps can be seen earlier by outlet.'],
-    'reporting-workflow': ['Can a recurring report be prepared with less manual effort and a person still in control?', 'Deterministic checks, a labelled AI-assisted summary and a human review state.', 'Show the separation of automated, assisted and human steps.']
-  };
 
   /* ------------------------------------------------------------ markup */
 
@@ -223,59 +218,28 @@
       </section>`;
   }
 
-  var WORK_SCENES = { 'executive-performance': 'bi', 'distribution-intelligence': 'engineering', 'reporting-workflow': 'ai' };
-
-  /* The deliverables themselves, rendered small, stand in for stock photography. */
+  /* Client engagements: the two case studies, rendered as the same cards
+     the Work page uses. */
   function workSection() {
     return html`
       <section class="sec-sm" aria-labelledby="work-h2">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
           <div class="row between end" style="gap:16px 48px">
             <div class="stack stack-14" style="max-width:720px">
-              <span class="eyebrow">Work &amp; demos</span>
-              <h2 class="h2-sm" id="work-h2">Two client projects, three worked demos.</h2>
+              <span class="eyebrow">Work</span>
+              <h2 class="h2-sm" id="work-h2">Client engagements, written from the records.</h2>
             </div>
             <a class="arrow" href="/work">All work <span class="chev" aria-hidden="true">→</span></a>
           </div>
           <div class="case-grid">${each(PG.cases || [], PG.caseCard)}</div>
-          <div class="work-cards">
-            ${each(PG.work, function (w) {
-              var meta = WORK_META[w.slug] || ['', '', ''];
-              return html`
-                <a href="/work/${w.slug}" class="work-card">
-                  <span class="work-preview" aria-hidden="true" inert>${PG.scene.render(WORK_SCENES[w.slug] || 'bi', { thumb: true, plainHeading: true })}</span>
-                  <span class="stack stack-8" style="padding:4px 2px 0">
-                    <span class="label-caps">Illustrative · ${w.sector}</span>
-                    <span class="t">${w.title}</span>
-                    <span class="d">${meta[0]}</span>
-                    <span class="go">Open the scenario <span class="chev" aria-hidden="true">→</span></span>
-                  </span>
-                </a>`;
-            })}
-          </div>
         </div>
       </section>`;
   }
 
-  /* Founder: real name, verified experience, no placeholder frame. A portrait
-     appears here only once an approved photograph exists in PG.team. */
+  /* Founder: the same portrait-on-navy composition as the About and founder
+     pages, so the person reads the same way everywhere. */
   function founderSection() {
-    var f = (PG.team && PG.team.founder) || {};
-    var hasPhoto = !!f.photo;
-    return html`
-      <section class="sec-sm bg-paper" aria-labelledby="founder-h2">
-        <div class="wrap founder-block${hasPhoto ? ' has-photo' : ''}" data-reveal="rise">
-          <div class="stack stack-20">
-            <span class="eyebrow">Founder</span>
-            <h2 id="founder-h2" class="h2-sm">${f.name}</h2>
-            <p class="small muted">${f.role} · Known professionally as ${f.alias}</p>
-            <p class="body">${f.bio}</p>
-            <p class="small slate" style="max-width:36em">Her experience covers reporting systems, analytical models and data platforms for finance, commercial, investment-technology and distribution teams. Pattern Grid's client engagements, including Ledrop and Drinks.NG, are written up under Work &amp; demos.</p>
-            <a class="arrow" href="/about/precious-celestine">Meet the founder <span class="chev" aria-hidden="true">→</span></a>
-          </div>
-          ${when(hasPhoto, function () { return html`<div class="portrait-stage">${C.cells(4)}${C.portrait(f)}</div>`; })}
-        </div>
-      </section>`;
+    return PG.founderBanner(false, { eyebrow: 'Founder' });
   }
 
   function closingSection() {

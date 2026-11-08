@@ -5,7 +5,12 @@
      or another status for failure. Leave empty until an approved destination
      exists: the contact page then shows an honest "not open yet" state instead
      of a form that discards enquiries. See docs/ux/contact-integration.md.
+   contactEmail: a verified business mailbox. With no formEndpoint, the form
+     opens the visitor's mail app with the enquiry drafted to this address
+     (no server needed). Leave both empty and the page says the form is not
+     open yet.
    The dev server (tools/serve.js) overrides this file with a local mock. */
 window.PG_CONFIG = {
-  formEndpoint: ''
+  formEndpoint: '',
+  contactEmail: ''
 };

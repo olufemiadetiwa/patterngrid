@@ -263,12 +263,6 @@
     'technology': 'Checking product-event quality and agreeing what counts as activation and retention is Data Engineering and Business Intelligence work. We only bring in AI for a specific, explained use, such as summarising support demand for review.'
   };
   PG.industries.forEach(i => { i.serviceNote = indNotes[i.slug]; });
-  const workExt = {
-    'executive-performance': { deliverables: ['Metric dictionary', 'Reconciled source model', 'Management view', 'Decision brief template'], approach: ['Define', 'Model', 'Design', 'Validate', 'Embed'], flow: 'Finance, sales and operations records → shared definitions → one management view → review → assigned action.', tech: ['SQL for reconciliation rules', 'Power BI semantic model and reporting', 'Excel for the working metric dictionary'] },
-    'distribution-intelligence': { deliverables: ['Stock and sales data model', 'Availability vs demand view', 'Exception queue with owners', 'Operating runbook'], approach: ['Discover', 'Design', 'Build', 'Validate', 'Hand over'], flow: 'Sales, inventory and outlet sources → integration → quality gate → curated model → availability view → exception queue.', tech: ['SQL and a lakehouse-style curated model', 'Power BI for the investigation view', 'Scheduled pipelines with exception handling'] },
-    'reporting-workflow': { deliverables: ['Workflow blueprint', 'Deterministic check set', 'Labelled AI-assisted draft step', 'Review and release log'], approach: ['Select', 'Design', 'Prototype', 'Evaluate', 'Integrate'], flow: 'Scheduled trigger → approved metrics → checks → proposed draft → accountable review → approved release, recorded.', tech: ['Rule-based checks in SQL', 'An approved model service for the labelled drafting step (option)', 'Power Automate-style approval routing (option)'] }
-  };
-  PG.work.forEach(w => Object.assign(w, workExt[w.slug]));
   const artLinks = [['business-intelligence', 'Which of our KPIs has more than one definition in use?'], ['data-ai-strategy', 'Which decision would this dashboard change?'], ['ai-automation', 'Where does a person need to review before an output is used?'], ['data-engineering', 'Which report still depends on a manual export?'], ['data-engineering', 'What must the existing environment support before a platform decision?'], ['business-intelligence', 'Where are sell-in and sell-out being compared as if they were the same?']];
   PG.articles.forEach((a, i) => { a.service = artLinks[i][0]; a.next = artLinks[i][1]; });
 
