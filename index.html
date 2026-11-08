@@ -201,91 +201,12 @@
               <span class="eyebrow">One question, followed through</span>
               <h2 class="h2-sm" id="seq-h2">Where is performance slipping?</h2>
             </div>
-            <p class="lead">One illustrative question, followed through four stages with sample data. Connecting the data does not prove a cause; it shows where to look next.</p>
+            <p class="lead">One question, followed through four stages. Connecting the data does not prove a cause; it shows where to look next, and who should look.</p>
           </div>
-
-          <div class="seq-wrap">
-            <figure class="report seq-panel" role="group" aria-label="Connected view — sample report">
-              <div class="rp-head">
-                <div class="rp-title"><b>Connected view</b><span>Product 4471 · W36 · demo data: a Lagos FMCG distributor</span></div>
-                <div class="rp-slicers"><span class="rp-slicer">Week <b>36</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Product <b>4471</b><i aria-hidden="true">▾</i></span></div>
-              </div>
-              <div role="tabpanel" id="seq-panel" class="seq-body rp-body" data-seq-body="" aria-labelledby="seq-tab-0"><div class="rp-cards">
-      <div class="rp-card">
-        <span class="rp-card-l">Sources</span>
-        <span class="rp-card-v num">3</span>
-        <span class="rp-card-d ">Sales · Stock · Distribution</span>
-        
-      </div>
-      <div class="rp-card">
-        <span class="rp-card-l">Keys that differ</span>
-        <span class="rp-card-v num">3</span>
-        <span class="rp-card-d warn">outlet code · location code · drop code</span>
-        
-      </div>
-      <div class="rp-card">
-        <span class="rp-card-l">Records · W36 · SKU 4471</span>
-        <span class="rp-card-v num">12</span>
-        <span class="rp-card-d ">4 locations</span>
-        
-      </div></div>
-        <div class="rp-grid three">
-          
-      <div class="rp-visual">
-        <div class="rp-visual-t">Sales · rep sell-out app</div>
-        <table class="rp-matrix">
-          <thead><tr><th class="">Outlet</th><th class="num">Units</th></tr></thead>
-          <tbody><tr class=""><td class="">OUT-0031</td><td class="num">312</td></tr><tr class=""><td class="">OUT-0207</td><td class="num">299</td></tr><tr class="hl"><td class="">OUT-0118</td><td class="num">190</td></tr><tr class=""><td class="">OUT-0342</td><td class="num">278</td></tr></tbody>
-        </table>
-      </div>
-          
-      <div class="rp-visual">
-        <div class="rp-visual-t">Stock · warehouse file</div>
-        <table class="rp-matrix">
-          <thead><tr><th class="">Location</th><th class="num">Availability</th></tr></thead>
-          <tbody><tr class=""><td class="">LOC-E-0031</td><td class="num" style="--s:0.07999999999999996">92%</td></tr><tr class=""><td class="">LOC-E-0207</td><td class="num" style="--s:0.12">88%</td></tr><tr class="hl"><td class="">LOC-E-0118</td><td class="num" style="--s:0.5900000000000001">41%</td></tr><tr class=""><td class="">LOC-E-0342</td><td class="num" style="--s:0.15000000000000002">85%</td></tr></tbody>
-        </table>
-      </div>
-          
-      <div class="rp-visual">
-        <div class="rp-visual-t">Distribution · route planner</div>
-        <table class="rp-matrix">
-          <thead><tr><th class="">Drop</th><th class="num">Deliveries</th></tr></thead>
-          <tbody><tr class=""><td class="">DROP-0031</td><td class="num">3</td></tr><tr class=""><td class="">DROP-0207</td><td class="num">3</td></tr><tr class="hl"><td class="">DROP-0118</td><td class="num">1</td></tr><tr class=""><td class="">DROP-0342</td><td class="num">3</td></tr></tbody>
-        </table>
-      </div>
-        </div></div>
-              <div role="tablist" aria-label="Stages" class="rp-tabs" data-stage-tabs="">
-                <button type="button" role="tab" class="rp-tab" data-stage="0" id="seq-tab-0" aria-controls="seq-panel" aria-selected="true" tabindex="0">1 · Sources</button><button type="button" role="tab" class="rp-tab" data-stage="1" id="seq-tab-1" aria-controls="seq-panel" aria-selected="false" tabindex="-1">2 · Align</button><button type="button" role="tab" class="rp-tab" data-stage="2" id="seq-tab-2" aria-controls="seq-panel" aria-selected="false" tabindex="-1">3 · Compare</button><button type="button" role="tab" class="rp-tab" data-stage="3" id="seq-tab-3" aria-controls="seq-panel" aria-selected="false" tabindex="-1">4 · Question</button>
-                <button type="button" class="rp-tab rp-replay" data-replay="">Replay</button>
-              </div>
-              <figcaption class="rp-caption">Sample report pages · demo data · connecting the data does not prove a cause; it shows where to look next</figcaption>
-            </figure>
-            <div class="seq-narrative" data-seq-narrative="">
-              
-                  <button type="button" class="seq-stage is-active" data-seq-step="0">
-                    <span class="num-cell"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>01</span>
-                    <span class="t">Sources</span>
-                    <span class="c">Three systems describe the same business in three different ways. Sales counts units by outlet code, Stock reports availability by location, Distribution logs deliveries by route.</span>
-                  </button>
-                  <button type="button" class="seq-stage" data-seq-step="1">
-                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>02</span>
-                    <span class="t">Align</span>
-                    <span class="c">Each record is mapped to a common product and location. Outlet 0118, location E-0118 and drop 0118 become one place: Surulere.</span>
-                  </button>
-                  <button type="button" class="seq-stage" data-seq-step="2">
-                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>03</span>
-                    <span class="t">Compare</span>
-                    <span class="c">With one model, sales and availability can sit side by side. One location has both lower sales and lower availability.</span>
-                  </button>
-                  <button type="button" class="seq-stage" data-seq-step="3">
-                    <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>04</span>
-                    <span class="t">Question</span>
-                    <span class="c">The connected view shows where to look next. Whether low availability is causing low sales is for the team to investigate. It is not a conclusion.</span>
-                  </button>
-            </div>
-            <a class="arrow" href="/patterngrid/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
+          <div class="case-steps stagger">
+            <div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>01 · Sources</span></div><p class="dm-body">Three systems describe the same business in three different ways. Sales counts units by outlet code, Stock reports availability by location, Distribution logs deliveries by route.</p></div><div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>02 · Align</span></div><p class="dm-body">Each record is mapped to a common product and location. Outlet 0118, location E-0118 and drop 0118 become one place: Surulere.</p></div><div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>03 · Compare</span></div><p class="dm-body">With one model, sales and availability can sit side by side. One location has both lower sales and lower availability.</p></div><div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>04 · Question</span></div><p class="dm-body">The connected view shows where to look next. Whether low availability is causing low sales is for the team to investigate. It is not a conclusion.</p></div>
           </div>
+          <a class="arrow" href="/patterngrid/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
         </div>
       </section>
         

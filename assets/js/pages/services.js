@@ -14,13 +14,6 @@
 
   /* Each service is explained by one workspace scene from scenes.js; the
      overview mounts the compact form, the detail page the full one. */
-  var SCENE_OF = {
-    'data-ai-strategy': 'strategy',
-    'data-engineering': 'engineering',
-    'business-intelligence': 'bi',
-    'ai-automation': 'ai',
-    'capability-building': 'capability'
-  };
 
   function overview() {
     var ov = PG.servicesOverview || { situations: [], features: {}, closing: {} };
@@ -73,29 +66,11 @@
                   <dl class="compare-rows">
                     <div><dt>Ideal when</dt><dd>${(s.situations || []).slice(0, 2).join(' · ')}</dd></div>
                     <div><dt>You receive</dt><dd>${(s.deliverables || []).slice(0, 3).map(function (d) { return d.title; }).join(' · ')}</dd></div>
-                    <div><dt>Output preview</dt><dd>${SCENE_TITLES[s.slug]}</dd></div>
                   </dl>
                   <a class="arrow" href="/services/${s.slug}">${s.link} <span class="chev" aria-hidden="true">→</span></a>
                 </article>`;
             })}
           </div>
-        </div>
-      </section>
-
-      <section class="sec-sm" id="svc-featured">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
-          <div class="autogrid end" style="--min:380px;--gap:12px;--gap-x:64px">
-            <div class="stack stack-14">
-              <span class="eyebrow">One worked example</span>
-              <h2 class="h2-sm">From a trusted measure to an accountable action.</h2>
-            </div>
-            <div class="stack stack-12">
-              <p class="body muted" style="max-width:34em">A sample report page on demo data. Open the variance page, read the agreed definition behind the figure, then assign a follow-up with an owner. Every service page has its own example.</p>
-              <button type="button" class="walk-btn on-light" data-walkthrough data-walk-label="Watch how it works · 20 s" aria-pressed="false"><span class="play" aria-hidden="true">▶</span>Watch how it works · 20 s</button>
-              <div class="walk-progress on-light" data-walk-progress hidden aria-hidden="true"><i></i></div>
-            </div>
-          </div>
-          <div data-scene="bi" data-walk-host></div>
         </div>
       </section>
 
@@ -121,13 +96,6 @@
 
   var KIND_LABEL = { input: 'Input', process: 'Process', gate: 'Decision', output: 'Output', exception: 'Exception', use: 'Used by' };
 
-  var SCENE_TITLES = {
-    'data-ai-strategy': 'delivery roadmap',
-    'data-engineering': 'platform monitor',
-    'business-intelligence': 'commercial performance report',
-    'ai-automation': 'review log',
-    'capability-building': 'capability baseline'
-  };
 
   /* ------------------------------------------------------- stage / flow */
 
@@ -166,7 +134,7 @@
   function detail(svc, s) {
     var nodes = svc.flow.nodes;
     var maxCol = Math.max.apply(null, nodes.map(function (n) { return n.col; }));
-    var jumps = [['Overview', 'svc-overview'], ['Example', 'svc-artifact'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
+    var jumps = [['Overview', 'svc-overview'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
     var related = svc.relatedServices.map(find).filter(Boolean);
     var relatedCase = (PG.cases || []).find(function (c) { return c.leadService === svc.slug; });
 
@@ -205,29 +173,6 @@
               <p style="font-size:18px;line-height:1.45;font-weight:500">${svc.outcomeText}</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section id="svc-artifact" class="sec-sm" style="padding-top:0">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
-          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
-            <div class="stack stack-16">
-              <span class="eyebrow">Worked example</span>
-              <h2 class="h2-sm" style="text-wrap:balance">${svc.example.question}</h2>
-            </div>
-            <div class="stack stack-14">
-              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
-                ${each(svc.example.steps, function (t, i) {
-                  return html`
-                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
-                      <span class="label-caps" style="color:var(--muted);padding-top:3px">0${i + 1}</span><span>${t}</span>
-                    </li>`;
-                })}
-              </ol>
-              <p class="fine">Below: a sample ${SCENE_TITLES[svc.slug]} on demo data, rendered the way we build them. Not a client result; the pages and figures respond, nothing is sent anywhere.</p>
-            </div>
-          </div>
-          <div data-scene="${SCENE_OF[svc.slug]}"></div>
         </div>
       </section>
 
@@ -462,13 +407,6 @@
     mount: function (root, cleanup) {
       var svc = this._svc;
       var s = this._state;
-
-      /* --- workspace scenes ------------------------------------------ */
-      var walkBtn = root.querySelector('[data-walkthrough]');
-      if (walkBtn) cleanup(PG.scene.walk(root.querySelector('[data-walk-host]'), walkBtn, root.querySelector('[data-walk-progress]'), PG.scene.BI_WALK.script, PG.scene.BI_WALK.total));
-      C.qsa('[data-scene]', root).forEach(function (host) {
-        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { compact: host.hasAttribute('data-scene-compact'), preview: host.hasAttribute('data-scene-preview'), plainHeading: host.classList.contains('hero-scene') }));
-      });
 
       /* Jump links and the deliverables button scroll to a section. */
       var onJump = function (e) {

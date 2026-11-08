@@ -94,7 +94,7 @@
           <div class="hero-cta">
             <a class="btn btn-accent" href="/patterngrid/contact?service=ai-automation">Discuss an automation idea</a>
             
-            <a class="secondary" href="#svc-artifact">See the review workflow <span aria-hidden="true">→</span></a>
+            <a class="secondary" href="#svc-deliverables">What you receive <span aria-hidden="true">→</span></a>
           </div>
           </div>
         </section>
@@ -114,7 +114,7 @@
             <span aria-current="page">AI &amp; Automation</span>
           </div>
           <div class="row" style="gap:4px;flex-wrap:nowrap">
-            <button type="button" class="subnav-jump" data-jump="svc-overview">Overview</button><button type="button" class="subnav-jump" data-jump="svc-artifact">Example</button><button type="button" class="subnav-jump" data-jump="svc-deliverables">Deliverables</button><button type="button" class="subnav-jump" data-jump="svc-approach">Approach</button><button type="button" class="subnav-jump" data-jump="svc-technology">Technology</button><button type="button" class="subnav-jump" data-jump="svc-questions">Questions</button>
+            <button type="button" class="subnav-jump" data-jump="svc-overview">Overview</button><button type="button" class="subnav-jump" data-jump="svc-deliverables">Deliverables</button><button type="button" class="subnav-jump" data-jump="svc-approach">Approach</button><button type="button" class="subnav-jump" data-jump="svc-technology">Technology</button><button type="button" class="subnav-jump" data-jump="svc-questions">Questions</button>
           </div>
         </div>
       </nav>
@@ -136,78 +136,6 @@
               <p style="font-size:18px;line-height:1.45;font-weight:500">A workflow that saves real time, has a named owner, shows you anything it could not handle, and has been tested before it goes live.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section id="svc-artifact" class="sec-sm" style="padding-top:0">
-        <div class="is-in wrap stack is-in" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
-          <div class="autogrid start" style="--min:380px;--gap:24px;--gap-x:clamp(40px,6vw,96px)">
-            <div class="stack stack-16">
-              <span class="eyebrow">Worked example</span>
-              <h2 class="h2-sm" style="text-wrap:balance">Can a weekly performance briefing be assembled with less repeated preparation?</h2>
-            </div>
-            <div class="stack stack-14">
-              <ol class="stack stack-12" style="list-style:none;border-top:1px solid var(--rule);padding-top:18px">
-                
-                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
-                      <span class="label-caps" style="color:var(--muted);padding-top:3px">01</span><span>A scheduled process collects approved metrics and checks that every figure belongs to the same reporting period.</span>
-                    </li>
-                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
-                      <span class="label-caps" style="color:var(--muted);padding-top:3px">02</span><span>A draft briefing links each statement to the measure it describes. Where a figure is missing, the statement is flagged rather than written around.</span>
-                    </li>
-                    <li style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.55">
-                      <span class="label-caps" style="color:var(--muted);padding-top:3px">03</span><span>The business owner reviews the draft. The missing-data example stops at review; it does not become a polished but unsupported answer.</span>
-                    </li>
-              </ol>
-              <p class="fine">Below: a sample review log on demo data, rendered the way we build them. Not a client result; the pages and figures respond, nothing is sent anywhere.</p>
-            </div>
-          </div>
-          <div data-scene="ai">
-      <figure class="report" data-scene-frame="" role="group" aria-label="Review log">
-        <div class="rp-head">
-          <div class="rp-title"><b>Review log</b><span>W36 · demo data</span></div>
-          <div class="rp-slicers"><span class="rp-slicer">Week <b>36</b><i aria-hidden="true">▾</i></span><span class="rp-slicer">Workflow <b>Weekly briefing</b><i aria-hidden="true">▾</i></span></div>
-        </div>
-        <div class="rp-body" data-scene-body=""><div class="rp-cards">
-          
-      <div class="rp-card">
-        <span class="rp-card-l">Items this week</span>
-        <span class="rp-card-v num">4</span>
-        <span class="rp-card-d ">2 briefings · 1 alert · 1 held</span>
-        
-      </div>
-          
-      <div class="rp-card">
-        <span class="rp-card-l">Checks passed</span>
-        <span class="rp-card-v num">10 / 11</span>
-        <span class="rp-card-d warn">1 source missing</span>
-        
-      </div>
-          
-      <div class="rp-card">
-        <span class="rp-card-l">Decided by a person</span>
-        <span class="rp-card-v num">4 / 4</span>
-        <span class="rp-card-d ok">reviewer recorded on every item</span>
-        
-      </div>
-          
-      <div class="rp-card">
-        <span class="rp-card-l">Released without review</span>
-        <span class="rp-card-v num">0</span>
-        <span class="rp-card-d ok">by design</span>
-        
-      </div>
-        </div>
-      <div class="rp-visual wide">
-        <div class="rp-visual-t">Weekly briefings · proposed by automation, checked by rules, decided by a person</div>
-        <table class="rp-matrix">
-          <thead><tr><th class="">Item</th><th class="num">Sources</th><th class="num">Checks</th><th class="num">Reviewer</th><th class="num">Status</th></tr></thead>
-          <tbody><tr class="hl"><td class="" data-cell="item:w36"><button type="button" data-act="item:w36" aria-label="Weekly briefing · W36">Weekly briefing · W36</button></td><td class="num">Sales · Stock · Ledger</td><td class="num">3/3 passed</td><td class="num">Commercial finance lead</td><td class="num neutral">Awaiting reviewer decision</td></tr><tr class=""><td class="" data-cell="item:w36b"><button type="button" data-act="item:w36b" aria-label="Weekly briefing · W36 (ledger late)">Weekly briefing · W36 (ledger late)</button></td><td class="num">Sales · Stock · —</td><td class="num">2/3 · ledger missing</td><td class="num">Commercial finance lead</td><td class="num warn">Stopped at review</td></tr><tr class=""><td class="">Weekly briefing · W35</td><td class="num">Sales · Stock · Ledger</td><td class="num">3/3 passed</td><td class="num">Commercial finance lead</td><td class="num ok">Approved · Mon 09:12</td></tr><tr class=""><td class="">Stock alert · Territory East</td><td class="num">Stock · Outlets</td><td class="num">2/2 passed</td><td class="num">Supply chain data owner</td><td class="num ok">Sent · owner assigned</td></tr></tbody>
-        </table>
-      </div></div>
-        <div class="rp-tabs" role="tablist" aria-label="Review log pages"><button type="button" role="tab" class="rp-tab" data-act="tab:0" aria-selected="true" tabindex="0">Queue</button><button type="button" role="tab" class="rp-tab" data-act="tab:1" aria-selected="false" tabindex="-1">Item</button></div>
-        <figcaption class="rp-caption">Sample review log · demo data · automation proposes, rules check, a named person decides</figcaption>
-      </figure></div>
         </div>
       </section>
 

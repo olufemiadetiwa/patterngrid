@@ -67,7 +67,7 @@
         </div>
       </section>
 
-      <section class="sec-sm">
+      <section class="sec-sm" id="ind-measures">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px;--gap:48px;--gap-x:96px">
           <div class="stack stack-24">
             <span class="label-caps">The question leaders ask</span>
@@ -94,7 +94,7 @@
             <div class="stack stack-16">
               <p class="label-caps">Your data sources</p>
               <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from. Below, a sample page for this sector on demo data.</p>
+              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from.</p>
             </div>
             <div class="stack stack-14">
               <p class="small slate" style="max-width:36em">${grid.note || ind.serviceNote}</p>
@@ -103,8 +103,6 @@
               </div>
             </div>
           </div>
-          <div data-scene="lineage" data-scene-industry="${ind.slug}"></div>
-          <p class="small slate" style="max-width:40em;border-top:1px solid var(--rule);padding-top:16px">${ind.serviceNote}</p>
         </div>
       </section>
 
@@ -143,8 +141,7 @@
   function definitionMarkup(ind, name) {
     var m = definitionFor(ind, name);
     if (!m) return '<span class="d">' + C.esc(DEFINITION_NOTE) + '</span>';
-    return '<span class="d">' + C.esc(m.definition) + '</span><dl><dt>Period</dt><dd>' + C.esc(m.period) + '</dd><dt>Unit</dt><dd>' + C.esc(m.unit) + '</dd><dt>Source</dt><dd>' + C.esc(m.source) + '</dd><dt>Owner</dt><dd>' + C.esc(m.owner) + '</dd></dl>' +
-      '<a href="#ind-sources" class="arrow" style="font-size:14px">Open in the workspace <span class="chev" aria-hidden="true">→</span></a>';
+    return '<span class="d">' + C.esc(m.definition) + '</span><dl><dt>Period</dt><dd>' + C.esc(m.period) + '</dd><dt>Unit</dt><dd>' + C.esc(m.unit) + '</dd><dt>Source</dt><dd>' + C.esc(m.source) + '</dd><dt>Owner</dt><dd>' + C.esc(m.owner) + '</dd></dl>';
   }
 
   PG.pages = PG.pages || {};
@@ -176,9 +173,6 @@
 
     mount: function (root, cleanup) {
       var ind = this._ind;
-      C.qsa('[data-scene]', root).forEach(function (host) {
-        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { industry: ind, compact: host.hasAttribute('data-scene-compact'), preview: host.hasAttribute('data-scene-preview') }));
-      });
 
       var open = -1;
       var onClick = function (e) {

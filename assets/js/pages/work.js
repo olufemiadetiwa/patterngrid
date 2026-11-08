@@ -200,10 +200,6 @@
       return c ? caseDetail(c) : overview();
     },
 
-    mount: function (root, cleanup) {
-      C.qsa('[data-scene]', root).forEach(function (host) {
-        cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), {}));
-      });
-    }
+    mount: function () {}
   };
 })();
