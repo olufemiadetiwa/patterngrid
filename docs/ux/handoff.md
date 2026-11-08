@@ -177,3 +177,12 @@ Verified at 1363 and 390 px: no horizontal overflow, headings in order, no conso
 5. **Secondary accent.** Tokens `--accent-2 #E3A23A`, `--accent-2-hi #F7C26A` (on navy, ink and photographs), `--accent-2-ink #8A5A12` (text on light grounds), `--accent-2-soft`. The old amber tokens alias to these so every warning tint is the same family. Rule: **teal for data and controls; gold for people, client work and decisions.** Applied to the lit cell of the brand mark and the nine-cell device, hero eyebrows over photographs, the founder role line, "Pattern Grid engagement" and "At a glance" labels on navy, step numbers in the contact and closing lists, and the report canvases' attention tone. Contrast: gold-hi on navy 9.6:1; gold-ink on white 6.6:1; the mid gold is used only for non-text marks.
 
 Verified locally at 1363 and 390 px, fresh-tab console clean, tests 14/14.
+
+
+---
+
+## Pass 15 — report canvases removed; brand files (8 November 2026)
+
+The founder extended the Pass 14 decision to the remaining rendered reports: the "worked example" sections on the five service pages and the services index, the four-stage "Connected view" on the home page, and the industry source-lineage canvas. All are gone, with their walkthrough and tab logic. What replaced them: the home sequence keeps its question and the four stages as document-style stage cards (`.doc-mini`, staggered); the industry "sources" section keeps its copy and service links; service heroes' secondary action now goes to **What you receive**, industry heroes' to **See the measures**. `scenes.js` stays loaded only for the small primitives still in use (status chips in the approach stage cards and the assessment sample result, and the per-industry measure definitions that feed the accordion). Rule going forward, recorded in the skill: **no rendered or illustrative tool imagery anywhere; the only acceptable report imagery is an anonymised client screenshot shown with permission.**
+
+Brand files added under `design-source/brand/`: `pattern-grid-lockup-navy.png` and `-white.png` (4639 × 1156, transparent), `pattern-grid-mark-navy.png`, `-white.png` and `-mono-navy.png` (1478 × 1478, transparent). Rendered from the site's own mark and Geist wordmark at the header proportions (cell 6 : gap 2 : wordmark 19 : gap 12), centre cell in the secondary gold.
