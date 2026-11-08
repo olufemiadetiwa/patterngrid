@@ -9,6 +9,7 @@
     "build:pages": "node tools/build-static.js --base /patterngrid --origin https://olufemiadetiwa.github.io",
     "serve:dist": "node tools/serve.js 8790 --dist",
     "test": "node --test tools/test.js",
+    "audit": "node tools/build-static.js --base /patterngrid --origin https://olufemiadetiwa.github.io && node tools/audit.js dist /patterngrid",
     "deploy": "tools/deploy.sh",
     "sitemap": "node tools/build-sitemap.js",
     "images": "node tools/build-hero-frames.js",

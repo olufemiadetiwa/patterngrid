@@ -13,6 +13,17 @@ No build step, no dependencies. `public/` is the deployable artifact.
 
 ---
 
+## Release checklist
+
+Before `npm run deploy`:
+
+1. `npm test` (unit and build-contract tests) and `npm run audit` (builds `dist/` and checks every page for one `<h1>`, heading order, unique title and description, canonical and social tags, valid JSON-LD, duplicate ids, image alt and dimensions, and that every internal link, asset and sitemap URL resolves to a built file).
+2. Open the dev server at 320, 390, 768, 1024 and 1440 px: no horizontal overflow, controls at least 44 px tall on phones, keyboard reaches the menus, drawer and forms, visible focus everywhere.
+3. Walk the readiness assessment: eight questions, Back, Change answers, Print, and the hand-off into the enquiry.
+4. Deploy, wait for Pages, then reload a deep link (for example `/work/ledrop-distribution-visibility/`) and a non-existent path (`/404.html` redirects into the app).
+
+Phase 2 items (decided 8 November 2026, not blockers): enquiry destination (`contactEmail` or `formEndpoint` in `config.js`), client-approved Power BI screenshots and drinks-distribution photography for the case studies, device QA on iOS Safari and Android Chrome.
+
 ## Deployment
 
 The site is a static build. `npm run build:pages` renders every route into

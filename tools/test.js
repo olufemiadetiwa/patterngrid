@@ -68,7 +68,7 @@ test('content carries no legacy hash routes', () => {
   assert.ok(!/href: '#\//.test(src), 'hero actions must be real paths');
 });
 
-test('sample data reconciles across the scenes', () => {
+test('sample data and industry definitions reconcile', () => {
   const PG = load('');
   const D = PG.scene.data;
   const round = (n) => Math.round(n * 10) / 10;
@@ -94,26 +94,6 @@ test('retail conversion is orders over sessions for the same period', () => {
   assert.equal(row.conversion, Math.round(row.orders / row.sessions * 1000) / 10, 'conversion derived, not typed');
 });
 
-test('AI review blocks approval without evidence', () => {
-  const PG = load('');
-  const def = PG.scene.defs.ai;
-  const s = def.init();
-  def.act(s, 'item', 'w36b');
-  const out = def.render(s, {}).value;
-  assert.ok(!/data-act="decide:approve"/.test(out), 'no approve control when a source is missing');
-  assert.ok(/Stopped at review/.test(out));
-});
-
-test('strategy readiness cascades only through real dependencies', () => {
-  const PG = load('');
-  const def = PG.scene.defs.strategy;
-  const s = def.init();
-  const chips = (o) => [...o.matchAll(/class="chip-state (ok|warn)">([^<]+)</g)].map((m) => m[2]).filter((t) => /Complete|Ready|Foundation/.test(t));
-  assert.deepEqual(chips(def.render(s, {}).value).slice(0, 4), ['Complete', 'Ready to sequence', 'Foundation needed', 'Foundation needed']);
-  def.act(s, 'toggle', 'src', { checked: true });
-  assert.deepEqual(chips(def.render(s, {}).value).slice(0, 4), ['Complete', 'Complete', 'Ready to sequence', 'Foundation needed'], 'reporting unlocks; the assistant still waits for reporting');
-});
-
 test('contact validation', () => {
   const PG = load('');
   const v = PG.contact.validate;
@@ -136,26 +116,14 @@ test('static route list matches the router and excludes unpublished pages', () =
   assert.equal(new Set(ROUTES).size, ROUTES.length, 'no duplicates');
 });
 
-test('every scene has a thumbnail form; heroes are photographic with a statement', () => {
+test('heroes are photographic with a statement', () => {
   const PG = load('');
-  for (const name of ['bi', 'strategy', 'engineering', 'ai', 'capability']) {
-    const out = PG.scene.render(name, { thumb: true, plainHeading: true }).value;
-    assert.ok(/scene-thumb/.test(out), name + ' renders as a thumbnail');
-    assert.ok(!/role="tablist"/.test(out) && !/rp-caption/.test(out), name + ' thumbnail has no page tabs or caption');
-    assert.ok(!/<h[1-6]/.test(out), name + ' thumbnail carries no headings');
-  }
-  for (const name of ['bi', 'strategy', 'engineering', 'ai', 'capability']) {
-    const full = PG.scene.render(name, {}).value;
-    assert.ok(/class="report/.test(full) && /rp-caption/.test(full), name + ' renders as a captioned report canvas');
-    assert.ok(!/Illustrative demo/i.test(full) && !/scene-bar/.test(full), name + ' has no app chrome');
-  }
   for (const s of PG.services) {
     const h = PG.heroes['services/' + s.slug];
     assert.ok(!h.scene, s.slug + ' hero is photographic, not a product screenshot');
     assert.ok(h.images.length === 1 && PG.img.reg[h.images[0]], s.slug + ' hero has one registered photograph');
     assert.ok(h.statement && /\*\*/.test(h.statement), s.slug + ' carries a statement with an emphasised phrase');
   }
-  assert.ok(PG.scene.BI_WALK.total > 0, 'the walkthrough script exists');
 });
 
 test('the nine-cell device lights one cell and carries no text for assistive tech', () => {

@@ -214,3 +214,20 @@ The founder shared an external review and redesign brief. Status of each item ag
 | Field performance, device QA, screen-reader audit | **Not done.** Lab figures only (below); no field data exists yet. |
 
 Lab measurements (headless Chrome, dev server, no throttling; not field results): see the summary message of this pass. Verified at 320, 390, 1440 and the pane; tests 14/14.
+
+
+---
+
+## Pass 17 — production readiness (8 November 2026)
+
+Founder's decisions: the enquiry destination, client screenshots and photography are **phase 2** (client approval pending); device QA skipped for now. This pass makes the current site production-ready as it stands.
+
+Audit tool added: `tools/audit.js` (`npm run audit`) checks every built page (see README release checklist). First run found: a second `<h1>` on every page (the `<noscript>` fallback, now a paragraph), missing `og:image` on pages whose hero has no photograph (now falls back to the home photograph), and the 404 shim correctly `noindex`. After fixes: 23 pages, 22 sitemap URLs, no findings.
+
+Browser checks at 320 px across all 22 routes and the 404 route: no horizontal overflow, no console errors, one `<h1>` each. Touch targets under 44 px were the service sub-navigation jumps (36 px), `tag-link` pills (36 px) and the contact form's "Add context" summary (22 px); all are 44 px on screens under 960 px now. The readiness assessment was walked end to end: eight questions, Back, result (score, band, eight scores, three priorities), Change answers, Print, enquiry hand-off; answers persist in session storage so a reload resumes. The service links on the result page no longer lowercase the service names.
+
+Weight: the unused report-canvas code and styles are gone. `scenes.js` 54 KB → 14 KB (sample data, status chip and industry measure definitions only); `site.css` 119 KB → 99 KB. Tests 12/12 (the four canvas-only tests were retired with the code they covered).
+
+Lab figures on the dev server, home page, uncompressed, no throttling (not field data): LCP 0.70 s (hero image), CLS 0, 30 requests. GitHub Pages serves the static build with compression.
+
+Still open for phase 2 or a later pass: enquiry delivery, client evidence on the case studies, field performance data, screen-reader audit and physical-device QA.
