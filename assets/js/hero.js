@@ -115,11 +115,13 @@
 
     return html`
       <div class="hero-unit" data-hero="${key}">
-        <section class="hero hero-photo${images.length ? '' : ' grid-field'}" aria-label="${(h.lines || []).join(' ') || 'Page introduction'}"
+        <section class="hero hero-photo${images.length ? '' : ' grid-field'}${size !== 'home' && images.length ? ' hero-split grid-field' : ''}" aria-label="${(h.lines || []).join(' ') || 'Page introduction'}"
                  style="--hero-h:${SIZES[size] || SIZES.marketing};--hero-h1:${H1[size] || H1.marketing}">
-          ${when(images.length > 0, function () { return slide(images[0]); })}
-          <div class="hero-scrim" aria-hidden="true"></div>
+          ${when(size === 'home' || !images.length, function () { return html`${when(images.length > 0, function () { return slide(images[0]); })}<div class="hero-scrim" aria-hidden="true"></div>`; })}
           <div class="hero-inner">${copy(h, rm, opts)}</div>
+          ${when(size !== 'home' && images.length > 0, function () {
+            return html`<div class="hero-media">${slide(images[0])}${when(!!h.caption, function () { return html`<p class="hero-note">${h.caption}</p>`; })}</div>`;
+          })}
         </section>
         ${when(!!h.statement, function () {
           var words = C.tokenise(h.statement);
@@ -164,14 +166,14 @@
       window.dispatchEvent(new CustomEvent(a.getAttribute('data-hero-event')));
     });
 
-    /* The statement fills in word by word as it passes through the viewport;
-       complete at once under reduced motion. */
+    /* The statement is readable at once; its words deepen in colour as it
+       passes through the viewport. Complete immediately under reduced motion. */
     var stEl = unit.querySelector('[data-statement]');
     if (stEl) {
       var h = heroFor(unit.getAttribute('data-hero'));
       var spans = C.qsa('[data-w]', stEl);
       var dark = h.tone === 'dark';
-      var startC = dark ? '#9AA4AC' : '#646B70';
+      var startC = dark ? '#B9C2C9' : '#4A555C';
       var endC = dark ? '#FFFFFF' : '#07131C';
       var emC = dark ? '#38A0C3' : '#17647D';
       var N = spans.length;
@@ -196,17 +198,7 @@
       };
       var repaint = function () { lastP = -1; if (C.motion.reduced || document.documentElement.classList.contains('is-static')) paint(1); else measure(); };
       repaint();
-      /* Words rise into place, staggered, the first time the statement is seen. */
-      var reveal = function () { requestAnimationFrame(function () { requestAnimationFrame(function () { stEl.classList.add('is-in'); }); }); };
-      if (C.motion.reduced || document.documentElement.classList.contains('is-static') || !('IntersectionObserver' in window)) stEl.classList.add('is-in');
-      else {
-        stEl.classList.add('is-armed');
-        /* Armed first, revealed on a later frame, so the stagger plays even when the statement is already on screen. */
-        var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { reveal(); io.disconnect(); } }, { threshold: 0.15 });
-        io.observe(stEl);
-        inst.observers = [io];
-        inst.timers = [setTimeout(reveal, 3000)];
-      }
+      stEl.classList.add('is-in');
       on(window, 'scroll', measure, { passive: true });
       on(window, 'resize', measure);
       on(window, 'pg-motion', repaint);
