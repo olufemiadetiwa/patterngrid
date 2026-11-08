@@ -42,9 +42,9 @@
             <ul class="glance-tags" aria-label="${o.tools.label}">${each(o.tools.items, function (t) { return html`<li class="tag is-dark">${t}</li>`; })}</ul>
           </div>
         </div>
-        <ol class="glance-nums" aria-label="Scope">
+        ${when(!!(o.nums && o.nums.length), function () { return html`<ol class="glance-nums" aria-label="Scope">
           ${each(o.nums, function (n) { return html`<li><b class="num">${n[0]}</b><span>${n[1]}</span></li>`; })}
-        </ol>
+        </ol>`; })}
       </div>`;
   }
 
@@ -52,39 +52,77 @@
     return PG.closing({ h: 'Have a similar question in your business?' });
   }
 
+  /* The case photograph: the local hero frame when it exists, else the CDN. */
+  function casePhoto(c) {
+    var h = PG.heroes['work/' + c.slug] || {};
+    var key = (h.images || [])[0];
+    if (!key) return '';
+    var img = PG.img.get(key);
+    var local = PG.local && PG.local[key];
+    if (!local) return C.frame(img, { ar: '16 / 10', cls: 'case-img', sizes: '(min-width: 960px) 50vw, 100vw' });
+    return html`<span class="frame case-img" style="--ar:16 / 10;--focal:${img.focal};background-image:url('${local.lqip}')"><img src="${C.href(local.d1200)}" srcset="${C.href(local.d1200)} 1200w, ${C.href(local.d)} ${local.w}w" sizes="(min-width: 960px) 50vw, 100vw" width="${local.w}" height="${local.h}" alt="${img.alt}" loading="lazy" decoding="async"></span>`;
+  }
+
   function caseCard(c) {
+    var problem = (c.challenges && c.challenges[0]) ? c.challenges[0][0] : '';
+    var outcome = (c.achieved && c.achieved[0]) ? c.achieved[0][0] : '';
     return html`
       <a href="/work/${c.slug}" class="case-card">
-        <span class="label-caps">Pattern Grid engagement · ${c.industry}</span>
-        <span class="case-client">${c.client}</span>
-        <span class="t">${c.title}</span>
-        <span class="d">${c.summary}</span>
-        <span class="pipe" aria-label="Data flow">
-          <span class="pipe-group"><small>Sources</small><span class="tags">${each(c.sources, function (x) { return html`<span class="tag">${x}</span>`; })}</span></span>
-          <i class="pipe-link" aria-hidden="true"></i>
-          <span class="pipe-group"><small>Pipeline</small><span class="tags"><span class="tag is-accent">${c.pipeline}</span></span></span>
-          <i class="pipe-link" aria-hidden="true"></i>
-          <span class="pipe-group"><small>Reporting</small><span class="tags"><span class="tag is-solid">Power BI</span></span></span>
+        ${casePhoto(c)}
+        <span class="case-body">
+          <span class="label-caps">Pattern Grid engagement · ${c.industry}</span>
+          <span class="case-client">${c.client}</span>
+          <span class="t">${c.title}</span>
+          <span class="case-lines">
+            <span><small>Problem</small>${problem}</span>
+            <span><small>Outcome</small>${outcome}</span>
+          </span>
+          <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
         </span>
-        <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
       </a>`;
   }
+
+  /* The system as described in the records: sources, the pipeline, the
+     reporting outputs. Built as HTML so the labels stay readable on phones. */
+  function systemMap(c) {
+    var src = function (x) { var m = /^(.*?)\s*\((.*)\)\s*$/.exec(x); return m ? [m[1], m[2]] : [x, '']; };
+    return html`
+      <div class="sysmap" role="img" aria-label="${c.sources.join(' and ')} feed ${c.pipeline}, which loads Power BI reporting: ${c.outputs.join(', ')}.">
+        <div class="sys-col">
+          <span class="label-caps">Sources</span>
+          ${each(c.sources, function (x) { var p = src(x); return html`<span class="sys-node"><b>${p[0]}</b>${when(!!p[1], function () { return html`<small>${p[1]}</small>`; })}</span>`; })}
+        </div>
+        <i class="sys-link" aria-hidden="true"><span>standardise</span></i>
+        <div class="sys-col">
+          <span class="label-caps">Pipeline</span>
+          <span class="sys-node is-accent"><b>${c.pipeline}</b><small>${c.focus.slice(0, 2).join(' · ')}</small></span>
+        </div>
+        <i class="sys-link" aria-hidden="true"><span>load</span></i>
+        <div class="sys-col">
+          <span class="label-caps">Reporting</span>
+          <span class="sys-node is-solid"><b>Power BI</b><small>${c.outputs.length} report ${c.outputs.length === 1 ? 'area' : 'areas'}</small></span>
+          <span class="sys-outs">${each(c.outputs, function (o) { return html`<span>${o}</span>`; })}</span>
+        </div>
+      </div>`;
+  }
+
   PG.caseCard = caseCard;
 
   function overview() {
     return html`
-      ${PG.hero('work')}
+      <section class="page-intro">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Work</span></nav>
+          <span class="eyebrow">Selected work</span>
+          <h1>Client engagements, written from the records.</h1>
+          <p class="lead">Each case study follows the same line: the problem as the client described it, the system Pattern Grid built, and what it made possible.</p>
+        </div>
+      </section>
 
-      <section class="sec-sm" id="work-cases">
+      <section class="sec-xs" id="work-cases">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
-          <div class="section-head">
-            <div class="stack stack-14">
-              <span class="eyebrow">Client engagements</span>
-              <h2 class="h2-sm">Work delivered by Pattern Grid.</h2>
-            </div>
-            <p class="lead">Two engagements written up from the project records: the problem, what was built, and what it made possible. No figures are claimed that the records do not support.</p>
-          </div>
           <div class="case-grid">${each(PG.cases || [], caseCard)}</div>
+          <p class="fine" style="max-width:48em">Written from the project records. Outcomes are capabilities the client gained; no performance figure is quoted unless the records support it.</p>
         </div>
       </section>
 
@@ -108,8 +146,7 @@
             label: 'At a glance', title: c.title, summary: c.summary,
             rail: { inLabel: 'Sources', inputs: c.sources, midLabel: 'Pipeline', pipeline: [c.pipeline], outLabel: 'Outputs', outputs: c.outputs },
             focus: { label: 'Focus', sub: 'What the engagement set out to fix.', items: c.focus },
-            tools: { label: 'Tools and platforms', sub: 'What the solution runs on.', items: c.tools },
-            nums: [[c.sources.length, 'source platforms connected'], [c.challenges.length, 'problems addressed'], [c.solution.length, 'things built'], [c.outputs.length, 'reporting outputs in Power BI']]
+            tools: { label: 'Tools and platforms', sub: 'What the solution runs on.', items: c.tools }
           })}
         </div>
       </section>
@@ -130,11 +167,24 @@
         </div>
       </section>
 
-      <section class="sec-sm bg-paper" id="case-solution">
+      <section class="sec-sm bg-paper" id="case-system">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
           <div class="section-head">
             <div class="stack stack-14">
               <span class="num-cell">${C.cells(1)}02</span>
+              <h2 class="h2-sm">The system</h2>
+            </div>
+            <p class="lead">${c.sources.length === 2 ? 'Two' : c.sources.length === 3 ? 'Three' : c.sources.length} source platforms, one pipeline, one reporting environment. Names are standardised on the way in, so every figure in Power BI traces back to the system it came from.</p>
+          </div>
+          ${systemMap(c)}
+        </div>
+      </section>
+
+      <section class="sec-sm" id="case-solution">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head">
+            <div class="stack stack-14">
+              <span class="num-cell">${C.cells(2)}03</span>
               <h2 class="h2-sm">What was built</h2>
             </div>
             <p class="lead">${c.solutionIntro}</p>
@@ -147,14 +197,14 @@
         </div>
       </section>
 
-      <section class="sec-sm" id="case-achieved">
+      <section class="sec-sm bg-paper" id="case-achieved">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(24px,3vw,40px)">
           <div class="section-head">
             <div class="stack stack-14">
-              <span class="num-cell">${C.cells(2)}03</span>
-              <h2 class="h2-sm">What it made possible</h2>
+              <span class="num-cell">${C.cells(3)}04</span>
+              <h2 class="h2-sm">What changed</h2>
             </div>
-            <p class="lead">Outcomes as recorded in the project notes; no performance figures are claimed.</p>
+            <p class="lead">The capabilities ${c.client} gained, as recorded in the project notes.</p>
           </div>
           <div class="case-list cols stagger">
             ${each(c.achieved, function (a) { return html`<div><b>${a[0]}</b><span>${a[1]}</span></div>`; })}
@@ -163,6 +213,7 @@
             <span class="label-caps" style="margin-right:8px">Relevant services</span>
             ${each(svcs, function (r) { return html`<a class="tag-link" href="/services/${r.slug}">${r.title} →</a>`; })}
           </div>
+          <p class="fine">Written from the project records. No performance figure is quoted unless the records support it.</p>
         </div>
       </section>
 
@@ -190,7 +241,7 @@
       return {
         title: 'Work',
         desc: 'Client engagements delivered by Pattern Grid, written up from the project records: the problem, what was built and what it made possible.',
-        heroKey: 'work',
+        heroKey: 'home',
         crumbs: [{ name: 'Work', path: '/work' }]
       };
     },

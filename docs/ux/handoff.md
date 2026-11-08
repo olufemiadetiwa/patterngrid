@@ -186,3 +186,31 @@ Verified locally at 1363 and 390 px, fresh-tab console clean, tests 14/14.
 The founder extended the Pass 14 decision to the remaining rendered reports: the "worked example" sections on the five service pages and the services index, the four-stage "Connected view" on the home page, and the industry source-lineage canvas. All are gone, with their walkthrough and tab logic. What replaced them: the home sequence keeps its question and the four stages as document-style stage cards (`.doc-mini`, staggered); the industry "sources" section keeps its copy and service links; service heroes' secondary action now goes to **What you receive**, industry heroes' to **See the measures**. `scenes.js` stays loaded only for the small primitives still in use (status chips in the approach stage cards and the assessment sample result, and the per-industry measure definitions that feed the accordion). Rule going forward, recorded in the skill: **no rendered or illustrative tool imagery anywhere; the only acceptable report imagery is an anonymised client screenshot shown with permission.**
 
 Brand files added under `design-source/brand/`: `pattern-grid-lockup-navy.png` and `-white.png` (4639 × 1156, transparent), `pattern-grid-mark-navy.png`, `-white.png` and `-mono-navy.png` (1478 × 1478, transparent). Rendered from the site's own mark and Geist wordmark at the header proportions (cell 6 : gap 2 : wordmark 19 : gap 12), centre cell in the secondary gold.
+
+
+---
+
+## Pass 16 — redesign brief of 8 November 2026 (8 November 2026)
+
+The founder shared an external review and redesign brief. Status of each item against this commit:
+
+| Brief item | Status |
+|---|---|
+| P0 Contact: verified destination, visible email fallback | **Needs the founder.** Code is ready for either `formEndpoint` or `contactEmail` (Pass 14); no address has been invented. |
+| P1 Repeated photo hero + statement on every page | **Done.** Three openings now: home keeps the full-bleed photograph and the statement (readable immediately; words only deepen in colour on scroll). Inner marketing pages use a **split hero**: copy on the navy grid field at the left, photograph at the right, so type never sits on a face; their statement stays because it carries the page proposition. Work index opens with a typographic intro; case studies use the split hero with a context caption and no statement (the panel below carries the summary). |
+| P1 Client work after the hero | **Done.** Home order: hero → Selected work → One question (stage cards) → Five services (rows) → Industries → Founder → Enquiry. |
+| P1 Work previews need visual evidence | **Partly.** Case cards now carry the engagement photograph, a one-line problem and a verified outcome from the records. Case pages gain a **system map** (sources → pipeline → Power BI outputs, from the records). Still needed from the founder: approved anonymised Power BI crops, a factual before/after record example. |
+| P1 Contextual photographs mistaken for client sites | **Done** for the case heroes (caption: "Photograph for context … Not a client site"). No free Nigerian drinks-distribution photograph exists on Unsplash (four searches, 8 November); a commissioned or client-supplied image is the real fix. |
+| P1 Fake selectors, dead bars, unfinished narrative buttons, BI caption, 118-credit-notes callout | **Closed in Pass 15** by removing every report canvas. |
+| P2 Service-card wall | **Done.** Five numbered rows: title, the problem in the client's words, what you receive, three deliverable tags, arrow. Stacks on phones. |
+| P2 Headlines over faces | **Done** via the split hero (desktop) and image-above-copy (phone). |
+| P2 Repeated caveats on Work | **Done.** One evidence note per page, in the fine print. |
+| P2 Mobile report tables | **Moot** (canvases removed). |
+| Case studies: replace "6 things built" | **Done.** Scope counts removed; "What changed" lists the capabilities gained; tools stay as supporting information in the panel. |
+| Hero copy proposal | **Applied** as drafted: "Connected data. Clear reporting. Practical AI for the decisions your business needs to make." Actions: Discuss your project / Explore our work. |
+| Motion rules | **Applied.** Statement entrance removed; reveals remain short and reduced-motion aware. |
+| Image register stale founder note | **Fixed** in the manifest text and its generator. |
+| Photography commission, client report images, data-standardisation visual, report walkthrough | **Founder-owned.** Slots exist on the case pages. |
+| Field performance, device QA, screen-reader audit | **Not done.** Lab figures only (below); no field data exists yet. |
+
+Lab measurements (headless Chrome, dev server, no throttling; not field results): see the summary message of this pass. Verified at 320, 390, 1440 and the pane; tests 14/14.

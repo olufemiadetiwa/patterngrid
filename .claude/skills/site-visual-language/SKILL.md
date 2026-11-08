@@ -73,3 +73,10 @@ Vary section layouts deliberately: scene-wide, text-left/scene-right, scene-left
 3. Check the sample arithmetic.
 4. Run the site (`npm run dev`), view at 1440, 768 and 390 px; test the controls by keyboard; toggle reduced motion.
 5. Record the route in `docs/visuals/routes.md` with what changed and a screenshot in `docs/visuals/after/`.
+
+
+## Page openings (Pass 16)
+
+Three openings, no more: **home** = full-bleed photograph, eyebrow, two-line H1, one-line lead, primary + work link, then the statement (readable at once; words deepen on scroll). **Inner marketing pages** (services, industries, about, approach, case studies) = `hero-split`: copy on the navy grid field at the left, photograph in the right half (phone: photograph above, 16:10, square under 720 px), so headlines never sit on faces; a `caption` on the hero renders a context note over the photograph (use it whenever stock could be mistaken for a client site). **Utility and index pages** (work index, contact, assessment, legal) = `page-intro` typography, no photograph. Statements stay only where they carry a proposition (home, services, industries, about, approach); never on work or case pages.
+
+Home order: hero → selected work (case cards with photograph, one-line problem, verified outcome) → one question (four `.doc-mini` stage cards) → five service rows (`.svc-rows`: number, title, the problem in the client's words, what you receive, three tags) → industries → founder banner → closing. Case pages: split hero → at-a-glance panel (no scope counts) → 01 problem → 02 the system (`.sysmap`, from the records) → 03 what was built → 04 what changed → one evidence note.

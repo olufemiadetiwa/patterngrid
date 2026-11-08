@@ -30,55 +30,50 @@
     }
   ];
 
-  /* Five entry points framed around the visitor's problem. Readable without
-     hover; a sixth card points the undecided at the assessment. */
-  function problemSection() {
+  /* Five services as numbered rows: the problem in the client's words, what
+     they receive, and the link. The nine-cell device is the only ornament. */
+  function serviceRows() {
     var ov = PG.servicesOverview || { features: {}, situations: [] };
     return html`
       <section class="sec-sm" aria-labelledby="cap-h2">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
-          <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
+        <div class="wrap stack" data-reveal="rise" style="gap:clamp(28px,3vw,40px)">
+          <div class="section-head">
             <div class="stack stack-14">
-              <span class="eyebrow">Choose the problem</span>
+              <span class="eyebrow">Five services</span>
               <h2 class="h2-sm" id="cap-h2">Start with what is in front of you.</h2>
             </div>
-            <p class="body muted" style="max-width:34em">Five services that build on each other. Pick the one that matches the problem; we add the next step only if it is needed.</p>
+            <p class="lead">Each service is a complete piece of work on its own. Pick the one that matches the problem; we add the next step only if it is needed.</p>
           </div>
-          <div class="svc-cards">
-            ${each(PG.services, function (s) {
+          <ol class="svc-rows stagger">
+            ${each(PG.services, function (s, i) {
               var f = ov.features[s.slug] || {};
-              var sit = (ov.situations || []).find(function (x) { return x.slug === s.slug; });
+              var sit = (ov.situations || []).find(function (x) { return x.slug === s.slug; }) || {};
               return html`
-                <a class="svc-card" href="/services/${s.slug}">
-                  <span class="row between" style="gap:12px">
-                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(s.icon)}"/></svg>
-                    <span class="num-cell">${C.cells(PG.services.indexOf(s))}${s.index}</span>
-                  </span>
-                  <span class="stack stack-8">
-                    ${when(!!sit, function () { return html`<span class="when">“${sit.situation}”</span>`; })}
-                    <span class="t">${s.title}</span>
-                    <span class="d">${f.text || s.short}</span>
-                  </span>
-                  <span class="outs tags">${each((f.outputs || []).slice(0, 3), function (o) { return html`<span class="tag">${o}</span>`; })}</span>
-                  <span class="go">${s.link || 'See the service'} <span class="chev" aria-hidden="true">→</span></span>
-                </a>`;
+                <li>
+                  <a class="svc-row" href="/services/${s.slug}">
+                    <span class="num-cell">${C.cells(i)}${s.index}</span>
+                    <span class="svc-row-main">
+                      <span class="t">${s.title}</span>
+                      ${when(!!sit.situation, function () { return html`<span class="when">“${sit.situation}”</span>`; })}
+                    </span>
+                    <span class="svc-row-out">
+                      <span class="label-caps">You receive</span>
+                      <span class="d">${sit.expect || f.text || s.short}</span>
+                    </span>
+                    <span class="svc-row-tags tags">${each((f.outputs || []).slice(0, 3), function (o) { return html`<span class="tag">${o}</span>`; })}</span>
+                    <span class="chev" aria-hidden="true"></span>
+                  </a>
+                </li>`;
             })}
-            <a class="svc-card is-aside" href="/assessment">
-              <span class="stack stack-8">
-                <span class="when">Not sure which problem comes first?</span>
-                <span class="t">Take the readiness assessment</span>
-                <span class="d">Eight questions, no email needed. You get a score, your weakest areas and up to three suggested next steps.</span>
-              </span>
-              <span class="go">Start the assessment <span class="chev" aria-hidden="true">→</span></span>
-            </a>
+          </ol>
+          <div class="row between" style="gap:16px;flex-wrap:wrap">
+            <a class="arrow" href="/services">Compare the five services <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/assessment">Not sure which comes first? Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>`;
   }
 
-  /* The signature sequence on paper: the scene full-width, the four stages
-     as a rail, the narrative under the active stage. Replay is user-started
-     and any selection takes over. */
   function sequenceSection() {
     return html`
       <section class="sec-sm bg-paper" aria-labelledby="seq-h2">
@@ -137,8 +132,8 @@
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
           <div class="row between end" style="gap:16px 48px">
             <div class="stack stack-14" style="max-width:720px">
-              <span class="eyebrow">Work</span>
-              <h2 class="h2-sm" id="work-h2">Client engagements, written from the records.</h2>
+              <span class="eyebrow">Selected work</span>
+              <h2 class="h2-sm" id="work-h2">Two engagements, written from the records.</h2>
             </div>
             <a class="arrow" href="/work">All work <span class="chev" aria-hidden="true">→</span></a>
           </div>
@@ -173,10 +168,10 @@
     render: function () {
       return html`
         ${PG.hero('home')}
-        ${problemSection()}
-        ${sequenceSection()}
-        ${industriesSection()}
         ${workSection()}
+        ${sequenceSection()}
+        ${serviceRows()}
+        ${industriesSection()}
         ${founderSection()}
         ${closingSection()}`;
     },
