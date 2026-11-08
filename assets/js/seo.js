@@ -60,6 +60,7 @@
   /* The hero image for a route doubles as its social card. */
   function socialImage(heroKey) {
     var hero = (PG.heroes && (PG.heroes[heroKey] || PG.heroes.home)) || null;
+    if (!hero || !hero.images || !hero.images.length) hero = PG.heroes && PG.heroes.home;
     if (!hero || !hero.images || !hero.images.length) return null;
     try { return PG.img.get(hero.images[0]).src; } catch (e) { return null; }
   }

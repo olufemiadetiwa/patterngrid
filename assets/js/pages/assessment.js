@@ -76,7 +76,7 @@
           title: d.name + ', addressed by ' + svcTitle(m.service),
           text: m.text,
           href: '/services/' + m.service,
-          link: 'Explore ' + svcTitle(m.service).toLowerCase()
+          link: 'Explore ' + svcTitle(m.service)
         };
       });
       var adoption = (byKey.reporting >= 3 || byKey.infrastructure >= 3) &&
