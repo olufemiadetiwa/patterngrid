@@ -131,4 +131,15 @@
 
   /* Content files announce themselves; re-render if they land late. */
   window.addEventListener('pg-content', function () { C.render(); });
+
+  /* Staging copies carry a small badge so nobody mistakes them for the live site. */
+  (function () {
+    var st = (window.PG_CONFIG || {}).staging;
+    if (!st) return;
+    var b = document.createElement('div');
+    b.className = 'staging-badge';
+    b.setAttribute('role', 'note');
+    b.textContent = 'Staging' + (st.branch ? ' \u00b7 ' + st.branch : '') + (st.commit ? ' @ ' + st.commit : '');
+    document.body.appendChild(b);
+  })();
 })();

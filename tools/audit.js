@@ -23,7 +23,8 @@ for (const p of pages) {
   for (const m of main.matchAll(/\s(?:href|src)="([^"]+)"/g)) { const u = m[1]; if (/^(https?:|mailto:|tel:|data:|#|javascript:)/.test(u)) continue; if (!exists(u)) note('broken link/asset: ' + u); }
   for (const m of main.matchAll(/srcset="([^"]+)"/g)) for (const part of m[1].split(',')) { const u = part.trim().split(/\s+/)[0]; if (u && !/^https?:/.test(u) && !exists(u)) note('broken srcset: ' + u); }
 }
-const sm = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8'); const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+const smPath = path.join(dist, 'sitemap.xml'); const sm = fs.existsSync(smPath) ? fs.readFileSync(smPath, 'utf8') : ''; const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 for (const l of locs) { const u = new URL(l).pathname; if (!exists(u)) findings.push('sitemap: ' + u + ' not built'); }
+if (!sm) console.log('no sitemap (staging build)');
 console.log(pages.length + ' pages, ' + locs.length + ' sitemap URLs');
 if (findings.length) { console.log(findings.join('\n')); process.exitCode = 1; } else console.log('no findings');

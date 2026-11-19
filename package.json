@@ -11,6 +11,7 @@
     "test": "node --test tools/test.js",
     "audit": "node tools/build-static.js --base \"\" --origin https://patterngrid.ng && node tools/audit.js dist \"\"",
     "deploy": "tools/deploy.sh",
+    "deploy:staging": "tools/deploy.sh --staging",
     "sitemap": "node tools/build-sitemap.js",
     "images": "node tools/build-hero-frames.js",
     "capture": "tools/capture-visuals.sh",
