@@ -238,3 +238,10 @@ Still open for phase 2 or a later pass: enquiry delivery, client evidence on the
 ## Domain live (19 November 2026)
 
 The site is served at https://patterngrid.ng. DNS zone created at HostAfrica with the GitHub Pages records, `www` pointed at GitHub, and SPF/DMARC deny-all records until a mail provider is chosen (see README, "Domain"). The build, sitemap, audit and deploy defaults now target the domain root. GitHub issued the certificate for the apex and `www`; HTTPS is enforced. Verified: home, work, a case study, a service page, founder, contact, assessment, sitemap, robots, stylesheet and a hero image return 200 on the domain; unknown paths return the 404 shim; `www` and the old project-page address redirect to the domain; canonical URLs use the domain.
+
+
+---
+
+## Redesign v2 (19 November 2026, staging only)
+
+A premium-technology redesign brief was implemented on the `staging` branch. Audit, creative direction, plan, design system, QA and summary are in `docs/redesign/` (`01` to `06`). Production (`main`, patterngrid.ng) is unchanged until the founder approves the staging result.

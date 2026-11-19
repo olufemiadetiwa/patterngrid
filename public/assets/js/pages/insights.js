@@ -41,9 +41,9 @@
         return html`
           <article style="grid-column:1 / -1" class="autogrid" data-reveal="rise">
             <div class="article-mark feature" aria-hidden="true">
-              <i style="left:12.5%;top:25%;width:25%;height:2px;background:#38A0C3"></i>
-              <i style="left:37.5%;top:25%;width:2px;height:50%;background:#38A0C3"></i>
-              <i style="left:37.5%;top:75%;width:50%;height:2px;background:#38A0C3"></i>
+              <i style="left:12.5%;top:25%;width:25%;height:2px;background:#5965EF"></i>
+              <i style="left:37.5%;top:25%;width:2px;height:50%;background:#5965EF"></i>
+              <i style="left:37.5%;top:75%;width:50%;height:2px;background:#5965EF"></i>
             </div>
             <div class="stack stack-12">
               <span class="label-caps">${feature.category.toUpperCase()} · IN PREPARATION</span>
@@ -59,8 +59,8 @@
         return html`
           <article class="stack stack-14" style="border-top:1px solid var(--line);padding-top:20px">
             <div class="article-mark" aria-hidden="true">
-              <i style="left:${g.x}%;top:${g.y}%;width:30%;height:2px;background:#38A0C3"></i>
-              <i style="left:${g.x2}%;top:${g.y}%;width:2px;height:40%;background:#02203D"></i>
+              <i style="left:${g.x}%;top:${g.y}%;width:30%;height:2px;background:#5965EF"></i>
+              <i style="left:${g.x2}%;top:${g.y}%;width:2px;height:40%;background:#101114"></i>
             </div>
             <span class="label-caps">${a.category.toUpperCase()} · IN PREPARATION</span>
             <h2 style="font-size:22px;font-weight:600;color:var(--navy);line-height:1.25">${a.title}</h2>

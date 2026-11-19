@@ -77,6 +77,7 @@
             <span><small>Problem</small>${problem}</span>
             <span><small>Outcome</small>${outcome}</span>
           </span>
+          <span class="case-arch">${c.sources.map(function (x) { return x.replace(/\s*\(.*\)$/, ''); }).join(' + ')} \u2192 <b>${c.pipeline}</b> \u2192 Power BI</span>
           <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
         </span>
       </a>`;
@@ -107,6 +108,20 @@
   }
 
   PG.caseCard = caseCard;
+
+  /* The shape of the reporting, from the records: one tile per report area
+     with the dimensions it is read by. A schematic, never a screenshot. */
+  function reportSchematic(c) {
+    return html`
+      <figure class="rs-fig" aria-label="Schematic of the report areas delivered">
+        <div class="rs-areas">
+          ${each(c.outputs, function (o, i) {
+            return html`<div class="rs-area"><span class="num-cell">${C.cells(i + 3)}0${i + 1}</span><b>${o}</b><span class="rs-wire" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>`;
+          })}
+        </div>
+        <figcaption class="fig-note">Schematic of the report structure in Power BI. Not a screenshot; client report pages appear here only with the client's permission.</figcaption>
+      </figure>`;
+  }
 
   function overview() {
     return html`
@@ -177,6 +192,7 @@
             <p class="lead">${c.sources.length === 2 ? 'Two' : c.sources.length === 3 ? 'Three' : c.sources.length} source platforms, one pipeline, one reporting environment. Names are standardised on the way in, so every figure in Power BI traces back to the system it came from.</p>
           </div>
           ${systemMap(c)}
+          ${reportSchematic(c)}
         </div>
       </section>
 

@@ -131,23 +131,59 @@
     return 'layers';
   }
 
+  var SCENE_OF = { 'data-ai-strategy': 'strategy', 'data-engineering': 'engineering', 'business-intelligence': 'bi', 'ai-automation': 'ai', 'capability-building': 'capability' };
+  var DEMO_TITLE = {
+    'data-ai-strategy': 'A delivery roadmap whose readiness follows its prerequisites',
+    'data-engineering': 'A morning load, its checks and one held record',
+    'business-intelligence': 'A weekly performance page that explains its own variance',
+    'ai-automation': 'A review log where automation proposes and a person decides',
+    'capability-building': 'A capability baseline by role and task'
+  };
+  /* Measures to agree at the start; none is a promised result. */
+  var MEASURES = {
+    'data-ai-strategy': ['Funded initiatives that name the decision they improve, an owner and a prerequisite', 'How often the roadmap is reviewed and re-ranked', 'Whether leadership can say what comes first, and why, in a sentence', 'Initiatives started before their prerequisite was ready'],
+    'data-engineering': ['Loads that arrive on schedule, each one logged', 'Records held by a quality check, and how quickly they are resolved', 'Figures that can be traced to a source system', 'Pipelines with a named person responsible for running them'],
+    'business-intelligence': ['Headline measures with one agreed definition and one owner', 'Time taken to prepare the regular management pack', 'Disagreements about a figure raised in review meetings', 'Actions from each review that leave with a named owner'],
+    'ai-automation': ['Items that pass the rule checks first time', 'Items returned by the reviewer, with the reason recorded', 'Time from request to approved output', 'Outputs released without a recorded approval (the target is none)'],
+    'capability-building': ['Tasks each role can complete without help', 'Reports maintained by your own team', 'Handover checklist items signed off', 'Requests that still need us after handover']
+  };
+
+  /* Service hero (v2): the outcome, the offer and the service's own figure.
+     No photograph; the diagram is the image. */
+  function svcHero(svc) {
+    var h = (PG.heroes || {})['services/' + svc.slug] || {};
+    var i = PG.services.indexOf(svc);
+    return html`
+      <section class="page-hero" aria-labelledby="svc-h1">
+        <div class="wrap page-hero-inner">
+          <div class="stack stack-20">
+            <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/services">Services</a><span aria-hidden="true">/</span><span aria-current="page">${svc.title}</span></nav>
+            <span class="eyebrow">${C.cells(i)} Service ${svc.index} \u00b7 ${svc.title}</span>
+            <h1 id="svc-h1">${(h.lines || [svc.title]).join(' ')}</h1>
+            <p class="lead">${h.lead || svc.lead}</p>
+            <div class="row" style="gap:14px 26px">
+              <a class="btn btn-accent" href="/contact?service=${svc.slug}" data-track="cta:service-hero">${(h.action && h.action.label) || 'Discuss this service'}</a>
+              <a class="arrow" href="#svc-demo" data-jump="svc-demo">See a demonstration <span class="chev" aria-hidden="true">\u2193</span></a>
+            </div>
+          </div>
+          <figure class="page-hero-fig">${PG.viz.mini(svc.slug)}<figcaption class="fig-note">Schematic</figcaption></figure>
+        </div>
+      </section>`;
+  }
+
   function detail(svc, s) {
     var nodes = svc.flow.nodes;
     var maxCol = Math.max.apply(null, nodes.map(function (n) { return n.col; }));
-    var jumps = [['Overview', 'svc-overview'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
+    var jumps = [['Challenge', 'svc-overview'], ['Demonstration', 'svc-demo'], ['Deliverables', 'svc-deliverables'], ['Approach', 'svc-approach'], ['Technology', 'svc-technology'], ['Questions', 'svc-questions']];
     var related = svc.relatedServices.map(find).filter(Boolean);
     var relatedCase = (PG.cases || []).find(function (c) { return c.leadService === svc.slug; });
 
     return html`
-      ${PG.hero('services/' + svc.slug)}
+      ${svcHero(svc)}
 
       <nav class="subnav" aria-label="On this page">
         <div class="subnav-inner">
-          <div class="crumbs">
-            <a href="/">Home</a><span aria-hidden="true">/</span>
-            <a href="/services">Services</a><span aria-hidden="true">/</span>
-            <span aria-current="page">${svc.title}</span>
-          </div>
+          <div class="crumbs"><span aria-hidden="true">${svc.title}</span></div>
           <div class="row" style="gap:4px;flex-wrap:nowrap">
             ${each(jumps, function (j) {
               return html`<button type="button" class="subnav-jump" data-jump="${j[1]}">${j[0]}</button>`;
@@ -159,7 +195,7 @@
       <section id="svc-overview" class="sec-sm">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px">
           <div class="stack stack-20">
-            <span class="eyebrow">What this is</span>
+            <span class="eyebrow">The challenge</span>
             <h2 class="h2" style="text-wrap:balance">${svc.heading}</h2>
             ${each(svc.intro, function (p) { return html`<p class="body">${p}</p>`; })}
           </div>
@@ -176,6 +212,23 @@
         </div>
       </section>
 
+      <section id="svc-demo" class="sec-sm bg-ink">
+        <div class="wrap stack" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head" data-reveal="rise">
+            <div class="stack stack-14">
+              <span class="eyebrow eyebrow-dark">Demonstration</span>
+              <h2 class="h2" style="max-width:18ch">${DEMO_TITLE[svc.slug] || svc.example.question}</h2>
+            </div>
+            <div class="stack stack-12">
+              <p class="lead">${svc.example.question}</p>
+              <ol class="demo-steps">${each(svc.example.steps, function (t, i) { return html`<li><i aria-hidden="true">0${i + 1}</i>${t}</li>`; })}</ol>
+            </div>
+          </div>
+          <div data-scene="${SCENE_OF[svc.slug]}"></div>
+          <p class="fig-note on-dark">Illustrative. Built on sample data to show how we design the work; it is not a product and not a client's report.</p>
+        </div>
+      </section>
+
       <section id="svc-deliverables" class="bg-paper sec-sm">
         <div class="wrap stack" data-reveal="rise" style="gap:clamp(40px,5vw,64px)">
           <div class="autogrid end" style="--min:380px;--gap:16px;--gap-x:64px">
@@ -188,7 +241,7 @@
             ${each(svc.deliverables, function (d) {
               return html`
                 <div class="deliverable">
-                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#02203D"
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" fill="none" stroke="#101114"
                        stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(d.icon)}"/></svg>
                   <h3 style="font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em">${d.title}</h3>
                   <p class="small slate" style="line-height:1.55">${d.desc}</p>
@@ -255,8 +308,8 @@
               <svg class="flow-svg" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" data-flow-svg>
                 <defs>
                   <marker id="pg-arr-n" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="rgba(255,255,255,0.7)"/></marker>
-                  <marker id="pg-arr-e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#FFD08A"/></marker>
-                  <marker id="pg-arr-f" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#38A0C3"/></marker>
+                  <marker id="pg-arr-e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#F2C063"/></marker>
+                  <marker id="pg-arr-f" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8z" fill="#5965EF"/></marker>
                 </defs>
                 <g data-flow-edges></g>
               </svg>
@@ -294,6 +347,17 @@
         </div>
       </section>
 
+      <section id="svc-measures" class="sec-sm">
+        <div class="wrap section-head start" data-reveal="rise">
+          <div class="stack stack-14">
+            <span class="eyebrow">Measures of success</span>
+            <h2 class="h2" style="max-width:15ch">How you will know it is working.</h2>
+            <p class="body muted">We agree the measures and take the baseline together at the start. No result is promised in advance.</p>
+          </div>
+          <ul class="measure-list">${each(MEASURES[svc.slug] || [], function (m, i) { return html`<li><span class="num-cell">${C.cells(i)}0${i + 1}</span><span>${m}</span></li>`; })}</ul>
+        </div>
+      </section>
+
       <section id="svc-technology" class="bg-paper" style="padding:clamp(56px,7vw,112px) 0">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:340px;--gap:32px">
           <div class="stack stack-14">
@@ -308,7 +372,7 @@
             ${each(svc.tech.filter(function (t) { return t.status === 'public'; }), function (t) {
               return html`
                 <div style="display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.6fr);gap:8px 16px;padding:16px 0;border-bottom:1px solid var(--rule-strong);align-items:start">
-                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#02203D"
+                  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="#101114"
                        stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px"><path d="${PG.icon(techIcon(svc, t))}"/></svg>
                   <span style="font-weight:600;font-size:16px;line-height:1.35">${t.name}</span>
                   <span class="small slate">${t.role}</span>
@@ -341,7 +405,7 @@
               ${each(related, function (r) {
                 return html`
                   <a class="related-link" href="/services/${r.slug}">
-                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D"
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#101114"
                          stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(r.icon)}"/></svg>
                     <span class="stack" style="gap:2px">
                       <span style="font-weight:600;font-size:16px">${r.title}</span>
@@ -408,12 +472,15 @@
       var svc = this._svc;
       var s = this._state;
 
+      C.qsa('[data-scene]', root).forEach(function (host) { cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), {})); });
+
       /* Jump links and the deliverables button scroll to a section. */
       var onJump = function (e) {
         var b = e.target.closest('[data-jump]');
         if (!b) return;
         var el = document.getElementById(b.getAttribute('data-jump'));
         if (!el) return;
+        e.preventDefault();
         el.scrollIntoView({ behavior: C.motion.reduced ? 'auto' : 'smooth', block: 'start' });
       };
       root.addEventListener('click', onJump);
@@ -545,7 +612,7 @@
           var hi = s.node && (e.from === s.node || e.to === s.node);
           var dimmed = s.node && !hi;
           var fb = e.type === 'feedback';
-          var stroke = e.type === 'exception' ? '#FFD08A' : (fb ? '#38A0C3' : 'rgba(255,255,255,0.7)');
+          var stroke = e.type === 'exception' ? '#F2C063' : (fb ? '#5965EF' : 'rgba(255,255,255,0.7)');
           var marker = e.type === 'exception' ? 'url(#pg-arr-e)' : (fb ? 'url(#pg-arr-f)' : 'url(#pg-arr-n)');
           var run = animate && !C.motion.reduced;
           var opacity = dimmed ? 0.25 : ((!played && !C.motion.reduced) ? 0 : 1);
@@ -562,8 +629,8 @@
           if (e.label) {
             out += '<text x="' + lx + '" y="' + ly + '" text-anchor="middle" font-size="11"' +
               ' font-family="IBM Plex Mono, monospace" fill="' +
-              (e.type === 'exception' ? '#FFD08A' : (fb ? '#38A0C3' : 'rgba(255,255,255,0.8)')) +
-              '" stroke="#07131C" stroke-width="4" paint-order="stroke" style="opacity:' + opacity + '">' +
+              (e.type === 'exception' ? '#F2C063' : (fb ? '#5965EF' : 'rgba(255,255,255,0.8)')) +
+              '" stroke="#101114" stroke-width="4" paint-order="stroke" style="opacity:' + opacity + '">' +
               C.esc(e.label) + '</text>';
           }
         });

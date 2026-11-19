@@ -212,7 +212,7 @@
               return html`
                 <a href="/services/${s.slug}" class="stack stack-10"
                    style="padding:18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
-                  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="#02203D"
+                  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="#101114"
                        stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="${PG.icon(s.icon)}"/></svg>
                   <span style="font-weight:600;font-size:16px">${s.title}</span>
                   <span class="label-caps" style="color:var(--muted);line-height:1.6">${(s.approach || []).map(function (a) { return a.name; }).join(' → ')}</span>

@@ -38,7 +38,9 @@
     menu: null,          // 'services' | 'industries' | 'about' | null
     drawerOpen: false,
     scrolled: false,
-    hasHero: true
+    /* Start from what is on the page: pre-rendered routes already contain
+       their hero, so the header never flashes the wrong tone. */
+    hasHero: !!document.querySelector('[data-hero]')
   };
 
   function glyph(lightOnDark) {

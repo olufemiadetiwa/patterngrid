@@ -46,6 +46,23 @@
       ${closing('Book a consultation')}`;
   }
 
+  /* Sector story (v2): the decisions that matter and where the information
+     fragments. Representative of the sector, not a client's situation. */
+  var STORY = {
+    'financial-services': {
+      decisions: ['Which customers are active, and which are drifting away?', 'Where is revenue by product moving apart from transaction volume?', 'Which reconciliation exceptions need a person today?'],
+      fragments: 'Core banking, the payment processor and the CRM each identify a customer differently, so activity, revenue and service history rarely sit in one view.' },
+    'fmcg-distribution': {
+      decisions: ['Which outlets are short of the stock that is selling?', 'Where is sell-in running ahead of sell-out?', 'Which routes justify their delivery cost?'],
+      fragments: 'Sell-in lives in distributor invoices, sell-out in a field app and stock in a warehouse file. Each uses its own outlet and product names.' },
+    'retail-ecommerce': {
+      decisions: ['Which products earn their shelf or page space?', 'Where do customers come back, and where do they not?', 'What will run out before demand does?'],
+      fragments: 'The till, the web shop and the stock system disagree on what a product is, so sales, margin and availability cannot be read together.' },
+    'technology': {
+      decisions: ['Which behaviours predict that a user stays?', 'Where does onboarding lose people?', 'Which features earn their running cost?'],
+      fragments: 'Product events, billing and support tickets sit in three tools with three user identifiers, so adoption and revenue are analysed apart.' }
+  };
+
   function detail(ind) {
     var caps = (ind.capabilities || [])
       .map(function (c) { return (PG.services || []).find(function (s) { return s.slug === c; }); })
@@ -67,11 +84,24 @@
         </div>
       </section>
 
-      <section class="sec-sm" id="ind-measures">
+      <section class="sec-sm" id="ind-decisions">
+        <div class="wrap section-head start" data-reveal="rise">
+          <div class="stack stack-14">
+            <span class="eyebrow">Decisions that matter</span>
+            <h2 class="h2-sm" style="max-width:20ch">${ind.question}</h2>
+          </div>
+          <div class="stack stack-20">
+            <ul class="measure-list">${each(((STORY[ind.slug] || {}).decisions) || [], function (d, i) { return html`<li><span class="num-cell">${C.cells(i)}0${i + 1}</span><span>${d}</span></li>`; })}</ul>
+            <div class="note-block"><span class="label-caps">Where the information fragments</span><p>${(STORY[ind.slug] || {}).fragments || ''}</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-sm bg-paper" id="ind-measures">
         <div class="wrap autogrid start" data-reveal="rise" style="--min:400px;--gap:48px;--gap-x:96px">
           <div class="stack stack-24">
-            <span class="label-caps">The question leaders ask</span>
-            <h2 class="h2-sm" style="color:var(--navy);text-wrap:balance">${ind.question}</h2>
+            <span class="eyebrow">Measures</span>
+            <h2 class="h2-sm" style="text-wrap:balance">The measures, each with one definition.</h2>
             <p class="body muted">${ind.note}</p>
           </div>
           <div class="stack stack-16">
@@ -88,20 +118,23 @@
         </div>
       </section>
 
-      <section class="bg-paper sec-sm" id="ind-sources">
-        <div class="wrap stack" data-reveal="rise" style="gap:clamp(32px,4vw,48px)">
-          <div class="autogrid end" style="--min:380px;--gap:24px;--gap-x:64px">
-            <div class="stack stack-16">
-              <p class="label-caps">Your data sources</p>
-              <h2 class="h2-sm" style="color:var(--navy)">How the sources connect into one view.</h2>
-              <p class="body">Each system stays as it is. A shared model links them around the things you measure, so any figure on a report page can be traced back to the system it came from.</p>
+      <section class="sec-sm bg-ink" id="ind-sources">
+        <div class="wrap stack" style="gap:clamp(24px,3vw,40px)">
+          <div class="section-head" data-reveal="rise">
+            <div class="stack stack-14">
+              <span class="eyebrow eyebrow-dark">A representative view</span>
+              <h2 class="h2" style="max-width:16ch">How the sources connect into one page.</h2>
             </div>
             <div class="stack stack-14">
-              <p class="small slate" style="max-width:36em">${grid.note || ind.serviceNote}</p>
-              <div class="row" style="gap:8px">
-                ${each(caps, function (c) { return html`<a class="tag-link" href="/services/${c.slug}">${c.title} →</a>`; })}
-              </div>
+              <p class="lead">Each system stays as it is. A shared model links them around the things you measure, so any figure can be traced to the system it came from.</p>
+              <p class="small" style="color:var(--slate-dark);max-width:36em">${grid.note || ind.serviceNote}</p>
             </div>
+          </div>
+          <div data-scene="lineage"></div>
+          <p class="fig-note on-dark">Illustrative. Sample data for a representative business in this sector; not a client's figures.</p>
+          <div class="row" style="gap:8px">
+            <span class="label-caps" style="color:var(--slate-dark);margin-right:8px">Services that apply</span>
+            ${each(caps, function (c) { return html`<a class="tag-link on-dark" href="/services/${c.slug}">${c.title} \u2192</a>`; })}
           </div>
         </div>
       </section>
@@ -173,6 +206,7 @@
 
     mount: function (root, cleanup) {
       var ind = this._ind;
+      C.qsa('[data-scene]', root).forEach(function (host) { cleanup(PG.scene.mount(host, host.getAttribute('data-scene'), { industry: ind })); });
 
       var open = -1;
       var onClick = function (e) {

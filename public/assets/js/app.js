@@ -132,6 +132,19 @@
   /* Content files announce themselves; re-render if they land late. */
   window.addEventListener('pg-content', function () { C.render(); });
 
+  /* Conversion events, vendor-neutral: PG.track(name, data) raises a
+     `pg-track` DOM event and, if an analytics layer is present, pushes to
+     window.dataLayer. Elements with data-track="name" report their clicks. */
+  PG.track = function (name, data) {
+    var detail = Object.assign({ event: name, path: location.pathname }, data || {});
+    try { window.dispatchEvent(new CustomEvent('pg-track', { detail: detail })); } catch (e) { /* older browsers */ }
+    if (Array.isArray(window.dataLayer)) window.dataLayer.push(detail);
+  };
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-track]');
+    if (t) PG.track(t.getAttribute('data-track'));
+  });
+
   /* Staging copies carry a small badge so nobody mistakes them for the live site. */
   (function () {
     var st = (window.PG_CONFIG || {}).staging;

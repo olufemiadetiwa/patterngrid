@@ -336,6 +336,7 @@
             try { sessionStorage.removeItem(KEY_SUMMARY); } catch (err) { /* ignore */ }
             var row = form.querySelector('[data-summary-row]'); if (row) row.remove();
             form.classList.add('is-sent');
+            if (PG.track) PG.track('enquiry:sent', { service: v.service || '' });
             status('ok', '<strong>Thank you, ' + C.esc(v.name.trim().split(/\s+/)[0]) + '. Your enquiry has been received.</strong>' + id +
               ' We will reply to ' + C.esc(v.email.trim()) + ' to arrange a short conversation. <button type="button" class="btn-link" data-another>Send another enquiry</button>');
           });

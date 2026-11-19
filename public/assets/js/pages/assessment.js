@@ -323,7 +323,7 @@
 
         if (t.closest('[data-next]')) {
           if (state.answers[state.idx] == null) return;
-          if (state.idx === 7) state.phase = 'result';
+          if (state.idx === 7) { state.phase = 'result'; if (PG.track) PG.track('assessment:completed'); }
           else state.idx += 1;
           repaint();
           focusQuestion();

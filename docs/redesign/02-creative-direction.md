@@ -20,16 +20,16 @@ No grid wallpaper, no decorative dots.
 |---|---|---|
 | Obsidian | `#101114` | text, dark technical sections |
 | Obsidian 2 | `#191B20` | panels on obsidian |
-| Porcelain | `#F6F7F4` | page ground |
+| Porcelain | `#F6F7F4` | page ground, alternating with white |
 | White | `#FFFFFF` | cards and figures on porcelain |
 | Signal Indigo | `#5965EF` | the single accent: actions, selection, the lit cell on light |
-| Indigo ink | `#3F49C9` | indigo text on light grounds (7.0:1 on porcelain; `#5965EF` is 4.3:1 and is used only for large text and marks) |
+| Indigo ink | `#3F49C9` | indigo text on light grounds (6.5:1 on porcelain; `#5965EF` is 4.3:1 there and is used only for large text, marks and button fills) |
 | Soft Mint | `#C5F2D6` | signal on dark: lit cell, connected state, positive status |
 | Mint ink | `#1B6B45` | positive text on light |
 | Slate | `#A9AFB9` | secondary text on dark |
-| Slate ink | `#5B616B` | secondary text on light (5.9:1) |
+| Slate ink | `#5B616B` | secondary text on light (5.8:1) |
 | Line | `rgba(16,17,20,.10)` | hairlines |
-| Amber | `#B26A00` on `#FFF4DF` | attention and held states only |
+| Amber | `#8A5300` on `#FFF4DF` (5.8:1); `#F2C063` on dark | attention and held states only |
 
 Rule: one accent per view. Indigo is interaction, mint is signal, amber is exception. Everything else is obsidian, porcelain and slate.
 

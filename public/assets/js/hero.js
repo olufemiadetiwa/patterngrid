@@ -142,7 +142,7 @@
     var unit = document.querySelector('[data-hero]');
     var tc = document.head.querySelector('meta[name="theme-color"]');
     if (!unit) { if (tc) tc.setAttribute('content', '#FFFFFF'); window.dispatchEvent(new CustomEvent('pg-hero', { detail: false })); return; }
-    if (tc) tc.setAttribute('content', unit.querySelector('.hero-home, .founder-intro') ? '#02203D' : '#07131C');
+    if (tc) tc.setAttribute('content', unit.querySelector('.hero-home, .founder-intro') ? '#101114' : '#101114');
     window.dispatchEvent(new CustomEvent('pg-hero', { detail: true }));
 
     var inst = { listeners: [] };
@@ -173,9 +173,9 @@
       var h = heroFor(unit.getAttribute('data-hero'));
       var spans = C.qsa('[data-w]', stEl);
       var dark = h.tone === 'dark';
-      var startC = dark ? '#B9C2C9' : '#4A555C';
-      var endC = dark ? '#FFFFFF' : '#07131C';
-      var emC = dark ? '#38A0C3' : '#17647D';
+      var startC = dark ? '#A9AFB9' : '#5B616B';
+      var endC = dark ? '#FFFFFF' : '#101114';
+      var emC = dark ? '#C5F2D6' : '#3F49C9';
       var N = spans.length;
       var lastP = -1;
       var paint = function (p) {

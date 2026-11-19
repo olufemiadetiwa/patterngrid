@@ -34,7 +34,7 @@ function load(base) {
   };
   win.window = win;
   const ctx = require('vm').createContext(win);
-  ['config', 'content', 'service-content', 'local-images', 'core', 'scenes', 'pages/contact'].forEach((f) => {
+  ['config', 'content', 'service-content', 'local-images', 'core', 'scenes', 'viz', 'pages/contact'].forEach((f) => {
     require('vm').runInContext(fs.readFileSync(path.join(JS, f + '.js'), 'utf8'), ctx, { filename: f });
   });
   return win.PG;
@@ -157,16 +157,51 @@ test('local-images.js carries both hero frames and portraits', () => {
   assert.ok(PG.localPeople && PG.localPeople[PG.team.founder.photo], 'founder photo resolvable');
 });
 
-test('no illustrative scenarios, no report canvases, no founder alias; the primary nav reaches Contact', () => {
+test('no demo pages, no founder alias; every page that mounts a sample view labels it illustrative; nav reaches Contact', () => {
   const PG = load('');
-  assert.equal(PG.work, undefined, 'PG.work (the demo scenarios) is gone');
+  assert.equal(PG.work, undefined, 'PG.work (the demo scenario pages) stays gone');
   for (const k of Object.keys(PG.heroes)) assert.ok(!/^work\//.test(k) || PG.cases.some((c) => 'work/' + c.slug === k), k + ' is a case-study hero');
   assert.equal(PG.team.founder.alias, undefined, 'no alias on the founder');
-  const src = ['content.js', 'service-content.js', 'seo.js', 'shell.js', 'pages/home.js', 'pages/about.js', 'pages/work.js', 'pages/services.js', 'pages/industries.js']
-    .map((f) => fs.readFileSync(path.join(JS, f), 'utf8')).join('\n');
+  const read = (f) => fs.readFileSync(path.join(JS, f), 'utf8');
+  const src = ['content.js', 'service-content.js', 'seo.js', 'shell.js', 'pages/home.js', 'pages/about.js', 'pages/work.js', 'pages/services.js', 'pages/industries.js'].map(read).join('\n');
   assert.ok(!/Ada Africa/.test(src), 'no "Ada Africa" in the site source');
-  assert.ok(!/Illustrative scenario|worked demos|PG\.work\b/.test(src), 'no scenario wording or PG.work in page modules');
-  for (const f of ['pages/home.js', 'pages/services.js', 'pages/industries.js', 'pages/work.js', 'pages/about.js', 'pages/contact.js', 'pages/assessment.js']) assert.ok(!/data-scene|PG\.scene\.(mount|render|walk)/.test(fs.readFileSync(path.join(JS, f), 'utf8')), f + ' renders no report canvas');
-  const shell = fs.readFileSync(path.join(JS, 'shell.js'), 'utf8');
-  assert.ok(/class="nav-item" href="\/contact"/.test(shell), 'Contact is a primary nav item');
+  assert.ok(!/PG\.work\b/.test(src), 'no PG.work in page modules');
+  for (const f of ['pages/services.js', 'pages/industries.js']) {
+    const t = read(f);
+    if (/data-scene=/.test(t)) assert.ok(/Illustrative\./.test(t), f + ' labels its sample view as illustrative');
+  }
+  assert.ok(!/data-scene=/.test(read('pages/work.js')), 'case studies never mount a sample view: only records and schematics');
+  assert.ok(/class="nav-item" href="\/contact"/.test(read('shell.js')), 'Contact is a primary nav item');
+});
+
+test('sample views: no fake dropdowns, buttons only where they act, callouts derived from the data', () => {
+  const PG = load('');
+  const bi = PG.scene.defs.bi;
+  const s = bi.init();
+  const overview = bi.render(s, {}).value;
+  assert.ok(!/▾/.test(overview), 'scope labels carry no dropdown arrow');
+  assert.ok(/Illustrative/.test(overview), 'the caption says illustrative');
+  assert.ok(/<button[^>]*class="rp-card is-act/.test(overview), 'headline figures that open a definition are buttons');
+  assert.ok(!/<button[^>]*data-act=""/.test(overview), 'no button without an action');
+  bi.act(s, 'line', '0');
+  const bev = bi.render(s, {}).value;
+  assert.ok(/22 credit notes/.test(bev) && !/118 credit notes posted/.test(bev), 'the Beverages callout quotes its own credit notes');
+  assert.ok(/Below plan/.test(bev) && !/Largest driver/.test(bev), 'only the largest negative line is called the largest driver');
+  bi.act(s, 'line', '1');
+  assert.ok(/Largest driver/.test(bi.render(s, {}).value) && /118 credit notes posted/.test(bi.render(s, {}).value));
+  const ai = PG.scene.defs.ai; const a = ai.init(); ai.act(a, 'item', 'w36b');
+  const out = ai.render(a, {}).value;
+  assert.ok(!/data-act="decide:approve"/.test(out) && /Stopped at review/.test(out), 'no approve control when a source is missing');
+});
+
+test('diagrams render and agree with the shared sample data', () => {
+  const PG = load('');
+  const sys = PG.viz.system().value;
+  for (const k of ['Sources', 'Integration', 'Trusted model', 'Intelligence', 'Decisions', 'Human review']) assert.ok(sys.includes(k), 'system map shows ' + k);
+  const cv = PG.viz.canvas().value;
+  const s = PG.scene.data.locations.find((l) => l.hl);
+  assert.ok(cv.includes('OUT-' + s.outlet) && cv.includes(s.avail + '%'), 'canvas uses the shared sample record');
+  assert.ok(/Illustrative/.test(cv), 'canvas is labelled illustrative');
+  assert.equal((cv.match(/role="tab"/g) || []).length, 5, 'five stages');
+  for (const svc of PG.services) assert.ok(/<svg/.test(PG.viz.mini(svc.slug).value), svc.slug + ' has a figure');
 });
