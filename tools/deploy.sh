@@ -4,16 +4,18 @@
 # committed on main.  Usage: [PG_DOMAIN=example.com] tools/deploy.sh [--dry-run]
 set -euo pipefail
 cd "$(dirname "$0")/.."
-# Custom domain: PG_DOMAIN=example.com tools/deploy.sh builds for the domain
-# root (no base path), sets the canonical origin and writes the CNAME file
-# GitHub Pages needs. Without it the build targets the project page.
-if [ -n "${PG_DOMAIN:-}" ]; then
+# The site is served at https://patterngrid.ng (GitHub Pages custom domain).
+# The build targets the domain root, sets the canonical origin and writes the
+# CNAME file GitHub Pages needs. PG_DOMAIN=other.tld overrides the domain;
+# PG_DOMAIN="" builds for the old project page (and removes the CNAME).
+PG_DOMAIN="${PG_DOMAIN-patterngrid.ng}"
+if [ -n "$PG_DOMAIN" ]; then
   BASE=""; ORIGIN="https://$PG_DOMAIN"
 else
   BASE="${PG_BASE-/patterngrid}"; ORIGIN="${PG_ORIGIN:-https://olufemiadetiwa.github.io}"
 fi
 node tools/build-static.js --base "$BASE" --origin "$ORIGIN"
-[ -n "${PG_DOMAIN:-}" ] && printf '%s\n' "$PG_DOMAIN" > dist/CNAME
+[ -n "$PG_DOMAIN" ] && printf '%s\n' "$PG_DOMAIN" > dist/CNAME
 [ "${1:-}" = "--dry-run" ] && { echo "dry run: dist/ built, nothing pushed"; exit 0; }
 WT="$(mktemp -d)"
 git worktree add -q "$WT" gh-pages

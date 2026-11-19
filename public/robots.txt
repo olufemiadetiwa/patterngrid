@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://olufemiadetiwa.github.io/patterngrid/sitemap.xml
+Sitemap: https://patterngrid.ng/sitemap.xml

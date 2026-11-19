@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /* Regenerates public/sitemap.xml from the content model.
    Usage: node tools/build-sitemap.js [origin] [outfile]
-   (default https://patterngrid.io, public/sitemap.xml). The route list is the
+   (default https://patterngrid.ng, public/sitemap.xml). The route list is the
    one the static build uses, so unpublished pages never appear. */
 const fs = require('fs');
 const path = require('path');
 
-const origin = (process.argv[2] || 'https://patterngrid.io').replace(/\/$/, '');
+const origin = (process.argv[2] || 'https://patterngrid.ng').replace(/\/$/, '');
 
 const { ROUTES } = require('./build-static.js');
 const PRIORITY = (p) => (p === '/' ? 1.0 : /^\/(services|contact)$/.test(p) ? 0.9 : /^\/(privacy|terms)$/.test(p) ? 0.2 : p.split('/').length > 2 ? 0.7 : 0.8);

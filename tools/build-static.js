@@ -13,7 +13,7 @@
    by the public one.
 
    Usage: node tools/build-static.js [--base /patterngrid] [--origin https://olufemiadetiwa.github.io]
-   Env:   PG_BASE, PG_ORIGIN (same meaning). Default: root hosting at https://patterngrid.io. */
+   Env:   PG_BASE, PG_ORIGIN (same meaning). Default: root hosting at https://patterngrid.ng. */
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
@@ -29,7 +29,7 @@ function arg(name, fallback) {
   return i >= 0 ? process.argv[i + 1] : fallback;
 }
 const BASE = (arg('base', process.env.PG_BASE || '') || '').replace(/\/$/, '');
-const ORIGIN = (arg('origin', process.env.PG_ORIGIN || 'https://patterngrid.io') || '').replace(/\/$/, '');
+const ORIGIN = (arg('origin', process.env.PG_ORIGIN || 'https://patterngrid.ng') || '').replace(/\/$/, '');
 
 /* ---------------------------------------------------------------- routes */
 global.window = { dispatchEvent() {}, addEventListener() {}, matchMedia: () => ({ matches: false }) };

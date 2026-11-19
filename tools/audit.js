@@ -4,7 +4,7 @@
    JSON-LD, duplicate ids, images with alt and dimensions, and internal links
    and assets that resolve to a built file. Usage: node tools/audit.js [dist] [base] */
 const fs = require('fs'); const path = require('path');
-const dist = path.resolve(process.argv[2] || 'dist'); const base = process.argv[3] || '/patterngrid';
+const dist = path.resolve(process.argv[2] || 'dist'); const base = process.argv[3] == null ? '' : process.argv[3];
 const pages = []; (function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); if (fs.statSync(p).isDirectory()) walk(p); else if (f === 'index.html' || f === '404.html') pages.push(p); } })(dist);
 const findings = []; const titles = {}; const descs = {};
 const exists = (url) => { let u = url.split('#')[0].split('?')[0]; if (u.startsWith(base + '/')) u = u.slice(base.length); else if (u === base) u = '/'; if (!u.startsWith('/')) return true; const p = path.join(dist, u); return fs.existsSync(p) && (fs.statSync(p).isFile() || fs.existsSync(path.join(p, 'index.html'))); };
