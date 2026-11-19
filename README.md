@@ -32,6 +32,20 @@ DNS is hosted at HostAfrica (client area → DNS Management → patterngrid.ng):
 
 `PG_DOMAIN=""` builds for the old project page and removes the `CNAME`; do not use it while the domain is live.
 
+## Staging
+
+UI changes are tried on staging before they reach the live site.
+
+| | Production | Staging |
+|---|---|---|
+| URL | https://patterngrid.ng | https://olufemiadetiwa.github.io/patterngrid-staging/ |
+| Source branch | `main` | `staging` (or any branch) |
+| Command | `npm run deploy` (refuses to run off `main`) | `npm run deploy:staging` |
+| Published to | this repo, `gh-pages` | `olufemiadetiwa/patterngrid-staging`, `gh-pages` (built output only) |
+| Search engines | indexed | `noindex` on every page, `robots.txt` disallows all, no sitemap |
+
+Staging shows a small "Staging · branch @ commit" badge in the corner so it is never mistaken for the live site. Workflow: work on `staging`, `npm run deploy:staging`, review at the staging URL; when approved, merge `staging` into `main` and `npm run deploy`. Staging runs under a path prefix while production runs at the domain root; the same code handles both, and `npm run audit` checks the production build.
+
 ## Deployment
 
 The site is a static build. `npm run build:pages` renders every route into
