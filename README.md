@@ -24,6 +24,15 @@ Before `npm run deploy`:
 
 Phase 2 items (decided 8 November 2026, not blockers): enquiry destination (`contactEmail` or `formEndpoint` in `config.js`), client-approved Power BI screenshots and drinks-distribution photography for the case studies, device QA on iOS Safari and Android Chrome.
 
+## Custom domain
+
+The site runs at a domain root with no code change (the base path is detected at runtime). To move from the project page to a domain:
+
+1. DNS at the registrar: apex `A` records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, and `www` as a `CNAME` to `olufemiadetiwa.github.io`.
+2. `PG_DOMAIN=yourdomain.com npm run deploy` builds for the root, sets canonical URLs and the sitemap to the domain, and writes the `CNAME` file.
+3. In the repository's Pages settings, confirm the custom domain and enable "Enforce HTTPS" once the certificate is issued.
+4. Keep using `PG_DOMAIN=…` on every later deploy, otherwise the build targets the project page again and removes the `CNAME`.
+
 ## Deployment
 
 The site is a static build. `npm run build:pages` renders every route into
