@@ -22,16 +22,15 @@ Before `npm run deploy`:
 3. Walk the readiness assessment: eight questions, Back, Change answers, Print, and the hand-off into the enquiry.
 4. Deploy, wait for Pages, then reload a deep link (for example `/work/ledrop-distribution-visibility/`) and a non-existent path (`/404.html` redirects into the app).
 
-Phase 2 items (decided 8 November 2026, not blockers): enquiry destination (`contactEmail` or `formEndpoint` in `config.js`), client-approved Power BI screenshots and drinks-distribution photography for the case studies, device QA on iOS Safari and Android Chrome.
+Phase 2 items (decided 8 November 2026, not blockers): email on the domain and the enquiry destination (`contactEmail` or `formEndpoint` in `config.js`), client-approved Power BI screenshots and drinks-distribution photography for the case studies, device QA on iOS Safari and Android Chrome.
 
-## Custom domain
+## Domain
 
-The site runs at a domain root with no code change (the base path is detected at runtime). To move from the project page to a domain:
+The site is served at **https://patterngrid.ng** from GitHub Pages. `npm run deploy` builds for the domain root, sets canonical URLs and the sitemap to the domain, and writes the `CNAME` file. HTTPS is enforced; `www` and the old project-page address redirect to the domain.
 
-1. DNS at the registrar: apex `A` records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, and `www` as a `CNAME` to `olufemiadetiwa.github.io`.
-2. `PG_DOMAIN=yourdomain.com npm run deploy` builds for the root, sets canonical URLs and the sitemap to the domain, and writes the `CNAME` file.
-3. In the repository's Pages settings, confirm the custom domain and enable "Enforce HTTPS" once the certificate is issued.
-4. Keep using `PG_DOMAIN=…` on every later deploy, otherwise the build targets the project page again and removes the `CNAME`.
+DNS is hosted at HostAfrica (client area → DNS Management → patterngrid.ng): four apex `A` records to GitHub Pages (`185.199.108.153` to `185.199.111.153`), `www` as a `CNAME` to `olufemiadetiwa.github.io`, and two `TXT` records (`v=spf1 -all` at the apex, `v=DMARC1; p=reject;` at `_dmarc`) that declare the domain sends no mail. **When a mail provider is chosen, replace the default `MX`, the `mail` CNAME and both TXT records with the provider's values.**
+
+`PG_DOMAIN=""` builds for the old project page and removes the `CNAME`; do not use it while the domain is live.
 
 ## Deployment
 

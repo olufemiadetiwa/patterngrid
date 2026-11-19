@@ -231,3 +231,10 @@ Weight: the unused report-canvas code and styles are gone. `scenes.js` 54 KB →
 Lab figures on the dev server, home page, uncompressed, no throttling (not field data): LCP 0.70 s (hero image), CLS 0, 30 requests. GitHub Pages serves the static build with compression.
 
 Still open for phase 2 or a later pass: enquiry delivery, client evidence on the case studies, field performance data, screen-reader audit and physical-device QA.
+
+
+---
+
+## Domain live (19 November 2026)
+
+The site is served at https://patterngrid.ng. DNS zone created at HostAfrica with the GitHub Pages records, `www` pointed at GitHub, and SPF/DMARC deny-all records until a mail provider is chosen (see README, "Domain"). The build, sitemap, audit and deploy defaults now target the domain root. GitHub issued the certificate for the apex and `www`; HTTPS is enforced. Verified: home, work, a case study, a service page, founder, contact, assessment, sitemap, robots, stylesheet and a hero image return 200 on the domain; unknown paths return the 404 shim; `www` and the old project-page address redirect to the domain; canonical URLs use the domain.
