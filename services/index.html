@@ -12,7 +12,7 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = "/patterngrid";
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
     if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-<link rel="preload" as="image" href="/patterngrid/assets/img/hero/office-meeting-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="office-meeting"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/office-meeting-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="office-meeting"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/services"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Services — Pattern Grid"><meta property="og:description" content="You may need a clearer plan, data you can rely on, reporting people trust, or one repetitive task automated. We help you pick the right starting point and…"><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/services"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Services — Pattern Grid"><meta name="twitter:description" content="You may need a clearer plan, data you can rely on, reporting people trust, or one repetitive task automated. We help you pick the right starting point and…"><meta property="og:image" content="https://images.unsplash.com/photo-1739287088753-73a9b8b771bc?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1739287088753-73a9b8b771bc?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Services"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://olufemiadetiwa.github.io/patterngrid/services"}]}</script></head>
+<link rel="preload" as="image" href="/assets/img/hero/office-meeting-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="office-meeting"><link rel="preload" as="image" href="/assets/img/hero/office-meeting-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="office-meeting"><link rel="canonical" href="https://patterngrid.ng/services"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Services — Pattern Grid"><meta property="og:description" content="You may need a clearer plan, data you can rely on, reporting people trust, or one repetitive task automated. We help you pick the right starting point and…"><meta property="og:url" content="https://patterngrid.ng/services"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Services — Pattern Grid"><meta name="twitter:description" content="You may need a clearer plan, data you can rely on, reporting people trust, or one repetitive task automated. We help you pick the right starting point and…"><meta property="og:image" content="https://images.unsplash.com/photo-1739287088753-73a9b8b771bc?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1739287088753-73a9b8b771bc?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Services"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://patterngrid.ng","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://patterngrid.ng/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://patterngrid.ng/services"}]}</script></head>
 <body>
 
 <div class="app">
@@ -36,7 +36,7 @@
 
   <header class="site-header" id="header">
       <div class="header-inner">
-        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+        <a class="brand" href="/" aria-label="Pattern Grid home">
           <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
         </a>
 
@@ -49,22 +49,22 @@
         <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
           Industries <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work</a>
+          <a class="nav-item" href="/work" data-close-menu="">Work</a>
           
           
         <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
           About <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/contact" data-close-menu="">Contact</a>
+          <a class="nav-item" href="/contact" data-close-menu="">Contact</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
         </div>
       </div>
@@ -85,16 +85,16 @@
       <p class="hero-lead">Five services that build on each other: a clear plan, data you can rely on, reporting people trust, automation with a person in control, and a team that can run it.</p>
       
           <div class="hero-cta">
-            <a class="btn btn-accent" href="/patterngrid/contact">Request a consultation</a>
+            <a class="btn btn-accent" href="/contact">Request a consultation</a>
             
-            <a class="secondary" href="/patterngrid/assessment">Take the readiness assessment <span aria-hidden="true">→</span></a>
+            <a class="secondary" href="/assessment">Take the readiness assessment <span aria-hidden="true">→</span></a>
           </div>
           </div>
           <div class="hero-media">
         <div class="hero-slide" data-slide="" style="--focal:50% 45%;--focal-m:50% 45%;background-image:url('data:image/webp;base64,UklGRgQBAABXRUJQVlA4IPgAAABQBgCdASogABIAPwFwtFGrJiUiqAqpYCAJYwDI9OZqQPcyLKI6o/i/2OTEqIO98IKx1NsA6rGT2nvjkAD+kaj+TQhFvWERmr6ZdTJAUbb7rGoL2wL0rYL++/TtfVVV+rmPkC5v0UaHKqUc0AKb35nLHgL948rv62ZAimsaaMC0BlHfSDUHpAVlP3vDllo6vuNpboo9VLDUh2pcwszTynA+aZrXHaCIlkhRuo+UdEmCqV8LyMxj1RRMb6II3nD44+jCLE+YNONqogsqYxY2/EDfSaxDEN0uB4eHiQ2izYtTkJzhwalt7KpyrP7qF4p00J0xV766Wy8AAA==')">
           <picture>
-            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/office-meeting-m.webp" width="900" height="1200">
-            <img src="/patterngrid/assets/img/hero/office-meeting-d.webp" srcset="/patterngrid/assets/img/hero/office-meeting-d1200.webp 1200w, /patterngrid/assets/img/hero/office-meeting-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A team meeting around a white table in a Lagos office" decoding="async" fetchpriority="high" class="is-loaded">
+            <source media="(max-width: 720px)" srcset="/assets/img/hero/office-meeting-m.webp" width="900" height="1200">
+            <img src="/assets/img/hero/office-meeting-d.webp" srcset="/assets/img/hero/office-meeting-d1200.webp 1200w, /assets/img/hero/office-meeting-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A team meeting around a white table in a Lagos office" decoding="async" fetchpriority="high" class="is-loaded">
           </picture>
         </div></div>
         </section>
@@ -113,35 +113,35 @@
             <h2 class="h2-sm">Start with the problem you need to solve.</h2>
             <div class="rows">
               
-                  <a href="/patterngrid/services/data-ai-strategy" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
+                  <a href="/services/data-ai-strategy" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
                     <span style="font-weight:600;font-size:17px;line-height:1.3">“We have initiatives but no shared priorities”</span>
                     <span class="stack stack-4">
                       <span class="eyebrow">Data &amp; AI Strategy →</span>
                       <span class="small muted">An honest picture of where you are, a ranked list of what to build and a roadmap in order.</span>
                     </span>
                   </a>
-                  <a href="/patterngrid/services/data-engineering" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
+                  <a href="/services/data-engineering" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
                     <span style="font-weight:600;font-size:17px;line-height:1.3">“Our systems are disconnected”</span>
                     <span class="stack stack-4">
                       <span class="eyebrow">Data Engineering &amp; Platforms →</span>
                       <span class="small muted">Data that arrives on schedule, can be traced to its source and has someone responsible for keeping it running.</span>
                     </span>
                   </a>
-                  <a href="/patterngrid/services/business-intelligence" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
+                  <a href="/services/business-intelligence" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
                     <span style="font-weight:600;font-size:17px;line-height:1.3">“Teams report different numbers”</span>
                     <span class="stack stack-4">
                       <span class="eyebrow">Business Intelligence →</span>
                       <span class="small muted">Shared metric definitions, useful reporting and a way to investigate differences.</span>
                     </span>
                   </a>
-                  <a href="/patterngrid/services/ai-automation" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
+                  <a href="/services/ai-automation" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
                     <span style="font-weight:600;font-size:17px;line-height:1.3">“Repetitive work consumes the team”</span>
                     <span class="stack stack-4">
                       <span class="eyebrow">AI &amp; Automation →</span>
                       <span class="small muted">A bounded workflow, appropriate controls and evidence from a tested pilot.</span>
                     </span>
                   </a>
-                  <a href="/patterngrid/services/capability-building" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
+                  <a href="/services/capability-building" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 24px;padding:18px 0;color:var(--ink)">
                     <span style="font-weight:600;font-size:17px;line-height:1.3">“Our teams cannot sustain what has been built”</span>
                     <span class="stack stack-4">
                       <span class="eyebrow">Capability Building →</span>
@@ -175,7 +175,7 @@
                     <div><dt>Ideal when</dt><dd>Departments are pursuing disconnected initiatives · A platform purchase is being considered before requirements are clear</dd></div>
                     <div><dt>You receive</dt><dd>Current-state assessment · Decision and KPI map · Ranked list of opportunities</dd></div>
                   </dl>
-                  <a class="arrow" href="/patterngrid/services/data-ai-strategy">Read about Data &amp; AI Strategy <span class="chev" aria-hidden="true">→</span></a>
+                  <a class="arrow" href="/services/data-ai-strategy">Read about Data &amp; AI Strategy <span class="chev" aria-hidden="true">→</span></a>
                 </article>
                 <article class="compare-card">
                   <div class="row between" style="gap:12px">
@@ -188,7 +188,7 @@
                     <div><dt>Ideal when</dt><dd>ERP, CRM and finance data remain separate · Reporting relies on repeated file handling</dd></div>
                     <div><dt>You receive</dt><dd>Source and integration blueprint · Implemented data pipelines · Data warehouse or lakehouse</dd></div>
                   </dl>
-                  <a class="arrow" href="/patterngrid/services/data-engineering">Read about Data Engineering &amp; Platforms <span class="chev" aria-hidden="true">→</span></a>
+                  <a class="arrow" href="/services/data-engineering">Read about Data Engineering &amp; Platforms <span class="chev" aria-hidden="true">→</span></a>
                 </article>
                 <article class="compare-card">
                   <div class="row between" style="gap:12px">
@@ -201,7 +201,7 @@
                     <div><dt>Ideal when</dt><dd>Departments disagree on the same KPI · Executive reports require extensive manual preparation</dd></div>
                     <div><dt>You receive</dt><dd>KPI dictionary · Shared calculation model · Reporting suite</dd></div>
                   </dl>
-                  <a class="arrow" href="/patterngrid/services/business-intelligence">Read about Business Intelligence <span class="chev" aria-hidden="true">→</span></a>
+                  <a class="arrow" href="/services/business-intelligence">Read about Business Intelligence <span class="chev" aria-hidden="true">→</span></a>
                 </article>
                 <article class="compare-card">
                   <div class="row between" style="gap:12px">
@@ -214,7 +214,7 @@
                     <div><dt>Ideal when</dt><dd>Reporting involves repeated manual steps · Teams re-enter information between systems</dd></div>
                     <div><dt>You receive</dt><dd>Opportunity and process assessment · Workflow and control blueprint · Pilot with agreed limits</dd></div>
                   </dl>
-                  <a class="arrow" href="/patterngrid/services/ai-automation">Read about AI &amp; Automation <span class="chev" aria-hidden="true">→</span></a>
+                  <a class="arrow" href="/services/ai-automation">Read about AI &amp; Automation <span class="chev" aria-hidden="true">→</span></a>
                 </article>
                 <article class="compare-card">
                   <div class="row between" style="gap:12px">
@@ -227,7 +227,7 @@
                     <div><dt>Ideal when</dt><dd>Reports are widely available but poorly understood · Knowledge sits with one specialist</dd></div>
                     <div><dt>You receive</dt><dd>Role and skills baseline · Tailored learning pathways · Guided practical labs</dd></div>
                   </dl>
-                  <a class="arrow" href="/patterngrid/services/capability-building">Read about Capability Building <span class="chev" aria-hidden="true">→</span></a>
+                  <a class="arrow" href="/services/capability-building">Read about Capability Building <span class="chev" aria-hidden="true">→</span></a>
                 </article>
           </div>
         </div>
@@ -241,11 +241,11 @@
             <p class="small muted" style="max-width:36em">Strategy sets the order. Engineering supplies the checked data that reporting and automation depend on. Capability Building keeps your own team able to run all of it.</p>
           </div>
           <div class="svc-map">
-            <a class="wide lead" href="/patterngrid/services/data-ai-strategy"><span>Data &amp; AI Strategy</span><span class="note mono">sets the order</span></a>
-            <a href="/patterngrid/services/data-engineering">Data Engineering<span class="note">supplies the checked data</span></a>
-            <a href="/patterngrid/services/business-intelligence">Business Intelligence</a>
-            <a href="/patterngrid/services/ai-automation">AI &amp; Automation</a>
-            <a class="wide support" href="/patterngrid/services/capability-building"><span>Capability Building</span><span class="note mono" style="color:var(--teal)">keeps your team able to run all of it</span></a>
+            <a class="wide lead" href="/services/data-ai-strategy"><span>Data &amp; AI Strategy</span><span class="note mono">sets the order</span></a>
+            <a href="/services/data-engineering">Data Engineering<span class="note">supplies the checked data</span></a>
+            <a href="/services/business-intelligence">Business Intelligence</a>
+            <a href="/services/ai-automation">AI &amp; Automation</a>
+            <a class="wide support" href="/services/capability-building"><span>Capability Building</span><span class="note mono" style="color:var(--teal)">keeps your team able to run all of it</span></a>
           </div>
         </div>
       </section>
@@ -255,8 +255,8 @@
             <h2 id="close-h2" class="h2-sm" style="max-width:18ch">What needs to work better?</h2>
             <p class="body muted" style="max-width:34em">Bring a question, an unreliable report or a task you want to hand over. We will suggest a sensible place to begin.</p>
             <div class="row" style="gap:16px 28px;margin-top:8px">
-              <a class="btn" href="/patterngrid/contact">Send us your question</a>
-              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+              <a class="btn" href="/contact">Send us your question</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
           <ol class="next-steps" aria-label="What happens next">
@@ -277,32 +277,32 @@
           <div>
             <p class="footer-head">SERVICES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+              <a href="/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/services/business-intelligence">Business Intelligence</a><a href="/services/ai-automation">AI &amp; Automation</a><a href="/services/capability-building">Capability Building</a>
             </div>
           </div>
           <div>
             <p class="footer-head">INDUSTRIES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+              <a href="/industries/financial-services">Financial Services &amp; Fintech</a><a href="/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/industries/technology">Technology</a>
             </div>
           </div>
           <div>
             <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/about">About</a>
-              <a href="/patterngrid/approach">Our Approach</a>
-              <a href="/patterngrid/work">Work</a>
+              <a href="/about">About</a>
+              <a href="/approach">Our Approach</a>
+              <a href="/work">Work</a>
               
-              <a href="/patterngrid/assessment">Readiness assessment</a>
-              <a href="/patterngrid/contact">Contact</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/patterngrid/privacy">Privacy</a>
-            <a href="/patterngrid/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
               <span class="sw" aria-hidden="true"></span>Reduce motion: off
             </button>

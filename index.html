@@ -12,7 +12,7 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = "/patterngrid";
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
     if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-<link rel="preload" as="image" href="/patterngrid/assets/img/hero/lagos-bridge-night-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="lagos-bridge-night"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/lagos-bridge-night-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="lagos-bridge-night"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Pattern Grid — Data, AI and Business Intelligence Consulting"><meta property="og:description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Pattern Grid — Data, AI and Business Intelligence Consulting"><meta name="twitter:description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions."><meta property="og:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Pattern Grid"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script></head>
+<link rel="preload" as="image" href="/assets/img/hero/lagos-bridge-night-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="lagos-bridge-night"><link rel="preload" as="image" href="/assets/img/hero/lagos-bridge-night-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="lagos-bridge-night"><link rel="canonical" href="https://patterngrid.ng/"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Pattern Grid — Data, AI and Business Intelligence Consulting"><meta property="og:description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions."><meta property="og:url" content="https://patterngrid.ng/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Pattern Grid — Data, AI and Business Intelligence Consulting"><meta name="twitter:description" content="Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions."><meta property="og:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Pattern Grid"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://patterngrid.ng","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script></head>
 <body>
 
 <div class="app">
@@ -36,7 +36,7 @@
 
   <header class="site-header" id="header">
       <div class="header-inner">
-        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+        <a class="brand" href="/" aria-label="Pattern Grid home">
           <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
         </a>
 
@@ -49,22 +49,22 @@
         <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
           Industries <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work</a>
+          <a class="nav-item" href="/work" data-close-menu="">Work</a>
           
           
         <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
           About <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/contact" data-close-menu="">Contact</a>
+          <a class="nav-item" href="/contact" data-close-menu="">Contact</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
         </div>
       </div>
@@ -81,8 +81,8 @@
           
         <div class="hero-slide" data-slide="" style="--focal:50% 50%;--focal-m:62% 50%;background-image:url('data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACwAwCdASogABIAPvVmqU6qpaOiMAwBUB6JaQAAccSSw+J+cYHgAAD+8LaxOzs4hNCXQ0ERher8dQwdVCCgVhw+QTbFQl6pMfR1d6bHYYAAAA==')">
           <picture>
-            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/lagos-bridge-night-m.webp" width="900" height="1200">
-            <img src="/patterngrid/assets/img/hero/lagos-bridge-night-d.webp" srcset="/patterngrid/assets/img/hero/lagos-bridge-night-d1200.webp 1200w, /patterngrid/assets/img/hero/lagos-bridge-night-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Lagos, Nigeria: the Lekki-Ikoyi bridge over the lagoon at night with the city lit behind it" decoding="async" fetchpriority="high" class="is-loaded">
+            <source media="(max-width: 720px)" srcset="/assets/img/hero/lagos-bridge-night-m.webp" width="900" height="1200">
+            <img src="/assets/img/hero/lagos-bridge-night-d.webp" srcset="/assets/img/hero/lagos-bridge-night-d1200.webp 1200w, /assets/img/hero/lagos-bridge-night-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Lagos, Nigeria: the Lekki-Ikoyi bridge over the lagoon at night with the city lit behind it" decoding="async" fetchpriority="high" class="is-loaded">
           </picture>
         </div><div class="hero-scrim" aria-hidden="true"></div>
           <div class="hero-inner">
@@ -91,9 +91,9 @@
       <p class="hero-lead">Connected data. Clear reporting. Practical AI for the decisions your business needs to make.</p>
       
           <div class="hero-cta">
-            <a class="btn btn-accent" href="/patterngrid/contact">Discuss your project</a>
+            <a class="btn btn-accent" href="/contact">Discuss your project</a>
             
-            <a class="secondary" href="/patterngrid/work">Explore our work <span aria-hidden="true">→</span></a>
+            <a class="secondary" href="/work">Explore our work <span aria-hidden="true">→</span></a>
           </div>
           </div>
           
@@ -113,11 +113,11 @@
               <span class="eyebrow">Selected work</span>
               <h2 class="h2-sm" id="work-h2">Two engagements, written from the records.</h2>
             </div>
-            <a class="arrow" href="/patterngrid/work">All work <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/work">All work <span class="chev" aria-hidden="true">→</span></a>
           </div>
           <div class="case-grid">
-      <a href="/patterngrid/work/ledrop-distribution-visibility" class="case-card">
-        <span class="frame case-img" style="--ar:16 / 10;--focal:50% 50%;background-image:url('data:image/webp;base64,UklGRgABAABXRUJQVlA4IPQAAADwBQCdASogABIAPwForE6rJaQiMAgBYCAJagCdM5QpBMsvGjo7Gt+pOGHC9/E4VV9/gs6AMtZvAADLOfqbyxhdtryGomA5uTjtbDGfnDOy2ExAopv8VYHiAozeeKWoTxWBQ92uAurPDVnhc8A4VcUzBcBowiUUNgfhCQVy+ppaQIlcOAypznDeQOKzahvV+BK6+hmsRbKBduCF1ABW84KjLkBHUB5iDCCXDLN/IqkuUfOYn5XdReYVo9+dcnLJeJPoP0hdrnkbS5Phti9LhlhHan6fJP77NJ2VOWpdjCJGYATh9e4OLidEAV6I1oWBv5MhAAAA')"><img src="/patterngrid/assets/img/hero/market-cart-2-d1200.webp" srcset="/patterngrid/assets/img/hero/market-cart-2-d1200.webp 1200w, /patterngrid/assets/img/hero/market-cart-2-d.webp 1920w" sizes="(min-width: 960px) 50vw, 100vw" width="1920" height="1080" alt="A trader pushing a loaded cart at Mile 12 market, Lagos" loading="lazy" decoding="async" class="is-loaded"></span>
+      <a href="/work/ledrop-distribution-visibility" class="case-card">
+        <span class="frame case-img" style="--ar:16 / 10;--focal:50% 50%;background-image:url('data:image/webp;base64,UklGRgABAABXRUJQVlA4IPQAAADwBQCdASogABIAPwForE6rJaQiMAgBYCAJagCdM5QpBMsvGjo7Gt+pOGHC9/E4VV9/gs6AMtZvAADLOfqbyxhdtryGomA5uTjtbDGfnDOy2ExAopv8VYHiAozeeKWoTxWBQ92uAurPDVnhc8A4VcUzBcBowiUUNgfhCQVy+ppaQIlcOAypznDeQOKzahvV+BK6+hmsRbKBduCF1ABW84KjLkBHUB5iDCCXDLN/IqkuUfOYn5XdReYVo9+dcnLJeJPoP0hdrnkbS5Phti9LhlhHan6fJP77NJ2VOWpdjCJGYATh9e4OLidEAV6I1oWBv5MhAAAA')"><img src="/assets/img/hero/market-cart-2-d1200.webp" srcset="/assets/img/hero/market-cart-2-d1200.webp 1200w, /assets/img/hero/market-cart-2-d.webp 1920w" sizes="(min-width: 960px) 50vw, 100vw" width="1920" height="1080" alt="A trader pushing a loaded cart at Mile 12 market, Lagos" loading="lazy" decoding="async" class="is-loaded"></span>
         <span class="case-body">
           <span class="label-caps">Pattern Grid engagement · Drinks importation and distribution</span>
           <span class="case-client">Ledrop</span>
@@ -129,8 +129,8 @@
           <span class="go">Read the case study <span class="chev" aria-hidden="true">→</span></span>
         </span>
       </a>
-      <a href="/patterngrid/work/party-drinks-connected-reporting" class="case-card">
-        <span class="frame case-img" style="--ar:16 / 10;--focal:50% 45%;background-image:url('data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAABwBgCdASogABIAPwFoq08rJaOiMAgBYCAJaACdM2c85YEg6OMk0gVpiVUs0mbUT5N5r8d0O/Hse57Ba+AA/HSf/i6ULuQU4dGUiG6wZgVkgfrg5e8imxfGfW2M52LKLcoPGNowqFwAAzXjJUGjTdTq/n/pWY8cjzIa3YIfsj0zNQHim12P5S2gXPihyM1DLfs5WBqQoAuid8/zaf2MDI1dONA8TkY3vyMqwfEii2oxlnpKG3w+6UMfh6Xe0rjxB/p+sJpoBdz9u0XQzwtLeL16qgz6xki97kKLWHDV8nfVX1Y9Ck3MdWkiiHh876WLz70tZmR7AcMTrh8eZFvRpuL5x58U3m+YAAA=')"><img src="/patterngrid/assets/img/hero/supermarket-cart-d1200.webp" srcset="/patterngrid/assets/img/hero/supermarket-cart-d1200.webp 1200w, /patterngrid/assets/img/hero/supermarket-cart-d.webp 1920w" sizes="(min-width: 960px) 50vw, 100vw" width="1920" height="1080" alt="A shopper with a trolley in a Lagos supermarket aisle" loading="lazy" decoding="async" class="is-loaded"></span>
+      <a href="/work/party-drinks-connected-reporting" class="case-card">
+        <span class="frame case-img" style="--ar:16 / 10;--focal:50% 45%;background-image:url('data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAABwBgCdASogABIAPwFoq08rJaOiMAgBYCAJaACdM2c85YEg6OMk0gVpiVUs0mbUT5N5r8d0O/Hse57Ba+AA/HSf/i6ULuQU4dGUiG6wZgVkgfrg5e8imxfGfW2M52LKLcoPGNowqFwAAzXjJUGjTdTq/n/pWY8cjzIa3YIfsj0zNQHim12P5S2gXPihyM1DLfs5WBqQoAuid8/zaf2MDI1dONA8TkY3vyMqwfEii2oxlnpKG3w+6UMfh6Xe0rjxB/p+sJpoBdz9u0XQzwtLeL16qgz6xki97kKLWHDV8nfVX1Y9Ck3MdWkiiHh876WLz70tZmR7AcMTrh8eZFvRpuL5x58U3m+YAAA=')"><img src="/assets/img/hero/supermarket-cart-d1200.webp" srcset="/assets/img/hero/supermarket-cart-d1200.webp 1200w, /assets/img/hero/supermarket-cart-d.webp 1920w" sizes="(min-width: 960px) 50vw, 100vw" width="1920" height="1080" alt="A shopper with a trolley in a Lagos supermarket aisle" loading="lazy" decoding="async" class="is-loaded"></span>
         <span class="case-body">
           <span class="label-caps">Pattern Grid engagement · Drinks retail, distribution and e-commerce</span>
           <span class="case-client">Drinks.NG</span>
@@ -157,7 +157,7 @@
           <div class="case-steps stagger">
             <div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>01 · Sources</span></div><p class="dm-body">Three systems describe the same business in three different ways. Sales counts units by outlet code, Stock reports availability by location, Distribution logs deliveries by route.</p></div><div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>02 · Align</span></div><p class="dm-body">Each record is mapped to a common product and location. Outlet 0118, location E-0118 and drop 0118 become one place: Surulere.</p></div><div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>03 · Compare</span></div><p class="dm-body">With one model, sales and availability can sit side by side. One location has both lower sales and lower availability.</p></div><div class="doc-mini"><div class="dm-bar"><span class="scene-id"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>04 · Question</span></div><p class="dm-body">The connected view shows where to look next. Whether low availability is causing low sales is for the team to investigate. It is not a conclusion.</p></div>
           </div>
-          <a class="arrow" href="/patterngrid/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
+          <a class="arrow" href="/approach">How we work, in five stages <span class="chev" aria-hidden="true">→</span></a>
         </div>
       </section>
         
@@ -173,7 +173,7 @@
           <ol class="svc-rows stagger">
             
                 <li>
-                  <a class="svc-row" href="/patterngrid/services/data-ai-strategy">
+                  <a class="svc-row" href="/services/data-ai-strategy">
                     <span class="num-cell"><span class="cells" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>01</span>
                     <span class="svc-row-main">
                       <span class="t">Data &amp; AI Strategy</span>
@@ -188,7 +188,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="svc-row" href="/patterngrid/services/data-engineering">
+                  <a class="svc-row" href="/services/data-engineering">
                     <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>02</span>
                     <span class="svc-row-main">
                       <span class="t">Data Engineering &amp; Platforms</span>
@@ -203,7 +203,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="svc-row" href="/patterngrid/services/business-intelligence">
+                  <a class="svc-row" href="/services/business-intelligence">
                     <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>03</span>
                     <span class="svc-row-main">
                       <span class="t">Business Intelligence</span>
@@ -218,7 +218,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="svc-row" href="/patterngrid/services/ai-automation">
+                  <a class="svc-row" href="/services/ai-automation">
                     <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>04</span>
                     <span class="svc-row-main">
                       <span class="t">AI &amp; Automation</span>
@@ -233,7 +233,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="svc-row" href="/patterngrid/services/capability-building">
+                  <a class="svc-row" href="/services/capability-building">
                     <span class="num-cell"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>05</span>
                     <span class="svc-row-main">
                       <span class="t">Capability Building</span>
@@ -249,8 +249,8 @@
                 </li>
           </ol>
           <div class="row between" style="gap:16px;flex-wrap:wrap">
-            <a class="arrow" href="/patterngrid/services">Compare the five services <span class="chev" aria-hidden="true">→</span></a>
-            <a class="arrow" href="/patterngrid/assessment">Not sure which comes first? Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/services">Compare the five services <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/assessment">Not sure which comes first? Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
@@ -266,7 +266,7 @@
           </div>
           <div class="ind-cards">
             
-                <a class="ind-card" href="/patterngrid/industries/financial-services">
+                <a class="ind-card" href="/industries/financial-services">
                   <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 50%;--focal-m:50% 50%;background-image:url('https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1618828665347-d870c38c95c7?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="Civic Towers, Lekki, Lagos under a blue sky" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Nupo Deyon Daniel</span></div>
                   <span class="stack stack-6">
                     <span class="t">Financial Services &amp; Fintech</span>
@@ -274,7 +274,7 @@
                     <span class="m">Active customers · Transaction value and volume · Revenue by product</span>
                   </span>
                 </a>
-                <a class="ind-card" href="/patterngrid/industries/fmcg-distribution">
+                <a class="ind-card" href="/industries/fmcg-distribution">
                   <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 40%;--focal-m:50% 40%;background-image:url('https://images.unsplash.com/photo-1579998120084-16688be7b6d1?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1579998120084-16688be7b6d1?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1579998120084-16688be7b6d1?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1579998120084-16688be7b6d1?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1579998120084-16688be7b6d1?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1579998120084-16688be7b6d1?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="A trader carrying cartons of goods in Lagos" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Mary</span></div>
                   <span class="stack stack-6">
                     <span class="t">FMCG &amp; Distribution</span>
@@ -282,7 +282,7 @@
                     <span class="m">Sales by channel and territory · Active outlets · Stock availability</span>
                   </span>
                 </a>
-                <a class="ind-card" href="/patterngrid/industries/retail-ecommerce">
+                <a class="ind-card" href="/industries/retail-ecommerce">
                   <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 45%;--focal-m:55% 45%;background-image:url('https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="Shoppers at the shelves of a Lagos mini mart" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Ninthgrid</span></div>
                   <span class="stack stack-6">
                     <span class="t">Retail &amp; Ecommerce</span>
@@ -290,7 +290,7 @@
                     <span class="m">Conversion · Average order value · Repeat purchase</span>
                   </span>
                 </a>
-                <a class="ind-card" href="/patterngrid/industries/technology">
+                <a class="ind-card" href="/industries/technology">
                   <div class="is-in frame is-in" data-reveal="clip" style="--ar:3 / 2;--focal:50% 40%;--focal-m:50% 35%;background-image:url('https://images.unsplash.com/photo-1684337399050-0412ebed8005?auto=format&amp;fit=crop&amp;q=30&amp;w=32&amp;blur=40')"><img src="https://images.unsplash.com/photo-1684337399050-0412ebed8005?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" srcset="https://images.unsplash.com/photo-1684337399050-0412ebed8005?auto=format&amp;fit=crop&amp;q=72&amp;w=800 800w, https://images.unsplash.com/photo-1684337399050-0412ebed8005?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1684337399050-0412ebed8005?auto=format&amp;fit=crop&amp;q=70&amp;w=1800 1800w, https://images.unsplash.com/photo-1684337399050-0412ebed8005?auto=format&amp;fit=crop&amp;q=65&amp;w=2400 2400w" sizes="(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw" width="2400" height="1600" alt="A developer holding a laptop covered in stickers" loading="lazy" decoding="async" class="is-loaded"><span class="credit" aria-hidden="true">Photo: Micheal Ogungbe</span></div>
                   <span class="stack stack-6">
                     <span class="t">Technology</span>
@@ -304,7 +304,7 @@
         
       <section class="founder-intro grid-field is-section" aria-labelledby="founder-h">
         <div class="wrap founder-intro-inner">
-          <div class="portrait-stage on-dark"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><button type="button" class="portrait is-mono" data-portrait="" aria-pressed="false" aria-label="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio. Shown in black and white; colour on hover" style="--ar:4 / 5;background-image:url('data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYAB4APwFwr1CrJqQisBgIAWAgCWYAyRMsBUgGyaUQlkYoZ5+dNUdaaEM6IAD++up8eB1CNcZ6LNwTrOjRD73egkCxupRx3tdVNFPrbNtNBwzhab8Cd/Dsm3pp6ra3RLY3vYaHtmnP8DwsLDQpWNuM5rkegd7V+UkY6EfHjl2tdDSm2TMKym+4rdy6tm1Wn42sbmB0WkgmMIl4AAA=')"><picture><source media="(max-width: 720px)" srcset="/patterngrid/assets/img/people/founder-2025-m.webp"><img src="/patterngrid/assets/img/people/founder-2025-d.webp" width="1200" height="1500" alt="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio" loading="lazy" decoding="async" class="is-loaded"></picture><span class="portrait-hint" aria-hidden="true">Hover for colour</span></button></div>
+          <div class="portrait-stage on-dark"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><button type="button" class="portrait is-mono" data-portrait="" aria-pressed="false" aria-label="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio. Shown in black and white; colour on hover" style="--ar:4 / 5;background-image:url('data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYAB4APwFwr1CrJqQisBgIAWAgCWYAyRMsBUgGyaUQlkYoZ5+dNUdaaEM6IAD++up8eB1CNcZ6LNwTrOjRD73egkCxupRx3tdVNFPrbNtNBwzhab8Cd/Dsm3pp6ra3RLY3vYaHtmnP8DwsLDQpWNuM5rkegd7V+UkY6EfHjl2tdDSm2TMKym+4rdy6tm1Wn42sbmB0WkgmMIl4AAA=')"><picture><source media="(max-width: 720px)" srcset="/assets/img/people/founder-2025-m.webp"><img src="/assets/img/people/founder-2025-d.webp" width="1200" height="1500" alt="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio" loading="lazy" decoding="async" class="is-loaded"></picture><span class="portrait-hint" aria-hidden="true">Hover for colour</span></button></div>
           <div class="founder-copy">
             
             <span class="hero-eyebrow">Founder</span>
@@ -312,7 +312,7 @@
             <p class="founder-alias">Founder &amp; Lead Consultant</p>
             <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
             <div class="hero-cta">
-              <a class="btn btn-accent" href="/patterngrid/about/precious-celestine">Meet the founder</a><a class="secondary" href="/patterngrid/work">See the work <span aria-hidden="true">→</span></a>
+              <a class="btn btn-accent" href="/about/precious-celestine">Meet the founder</a><a class="secondary" href="/work">See the work <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
@@ -324,8 +324,8 @@
             <h2 id="close-h2" class="h2-sm" style="max-width:18ch">What would you like to understand?</h2>
             <p class="body muted" style="max-width:34em">Tell us the decision you want to improve. We reply to arrange a short conversation, then suggest a sensible next step.</p>
             <div class="row" style="gap:16px 28px;margin-top:8px">
-              <a class="btn" href="/patterngrid/contact">Request a consultation</a>
-              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+              <a class="btn" href="/contact">Request a consultation</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
           <ol class="next-steps" aria-label="What happens next">
@@ -346,32 +346,32 @@
           <div>
             <p class="footer-head">SERVICES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+              <a href="/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/services/business-intelligence">Business Intelligence</a><a href="/services/ai-automation">AI &amp; Automation</a><a href="/services/capability-building">Capability Building</a>
             </div>
           </div>
           <div>
             <p class="footer-head">INDUSTRIES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+              <a href="/industries/financial-services">Financial Services &amp; Fintech</a><a href="/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/industries/technology">Technology</a>
             </div>
           </div>
           <div>
             <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/about">About</a>
-              <a href="/patterngrid/approach">Our Approach</a>
-              <a href="/patterngrid/work">Work</a>
+              <a href="/about">About</a>
+              <a href="/approach">Our Approach</a>
+              <a href="/work">Work</a>
               
-              <a href="/patterngrid/assessment">Readiness assessment</a>
-              <a href="/patterngrid/contact">Contact</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/patterngrid/privacy">Privacy</a>
-            <a href="/patterngrid/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
               <span class="sw" aria-hidden="true"></span>Reduce motion: off
             </button>

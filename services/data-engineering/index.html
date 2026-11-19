@@ -12,7 +12,7 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = "/patterngrid";
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
     if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-<link rel="preload" as="image" href="/patterngrid/assets/img/hero/abuja-laptop-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="abuja-laptop"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/abuja-laptop-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="abuja-laptop"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/services/data-engineering"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Data Engineering &amp; Platforms — Pattern Grid"><meta property="og:description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/services/data-engineering"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Data Engineering &amp; Platforms — Pattern Grid"><meta name="twitter:description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI."><meta property="og:image" content="https://images.unsplash.com/photo-1646300291345-e7f3f97986ed?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1646300291345-e7f3f97986ed?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Data Engineering &amp; Platforms"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://olufemiadetiwa.github.io/patterngrid/services"},{"@type":"ListItem","position":3,"name":"Data Engineering & Platforms","item":"https://olufemiadetiwa.github.io/patterngrid/services/data-engineering"}]}</script><script type="application/ld+json" id="ld-page">{"@context":"https://schema.org","@type":"Service","name":"Data Engineering & Platforms","serviceType":"Data Engineering & Platforms","description":"Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI.","provider":{"@type":"Organization","name":"Pattern Grid","url":"https://olufemiadetiwa.github.io/patterngrid"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Data Engineering & Platforms deliverables","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Source and integration blueprint","description":"A documented view of the systems, data interfaces and refresh requirements, including access dependencies and the rules for bringing information together."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Implemented data pipelines","description":"Repeatable ingestion and transformation workflows for the agreed sources, with scheduling, failure handling and clear ownership of the operating process."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Data warehouse or lakehouse","description":"Data structures designed around the required analysis, with consistent keys, documented transformations and a clear path from raw inputs to usable outputs."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Data quality controls","description":"Checks for agreed completeness, validity and reconciliation rules, with exceptions recorded visibly and routed to an owner for investigation and resolution."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Who can see what, and where each number comes from","description":"A view of who can access which information and how important outputs connect to their source data, transformations and agreed ownership responsibilities."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Operating guide and runbooks","description":"Deployment guidance, monitoring definitions and practical runbooks so the operating team can understand routine tasks, investigate failures and manage agreed changes."}}]}}</script></head>
+<link rel="preload" as="image" href="/assets/img/hero/abuja-laptop-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="abuja-laptop"><link rel="preload" as="image" href="/assets/img/hero/abuja-laptop-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="abuja-laptop"><link rel="canonical" href="https://patterngrid.ng/services/data-engineering"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Data Engineering &amp; Platforms — Pattern Grid"><meta property="og:description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI."><meta property="og:url" content="https://patterngrid.ng/services/data-engineering"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Data Engineering &amp; Platforms — Pattern Grid"><meta name="twitter:description" content="Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI."><meta property="og:image" content="https://images.unsplash.com/photo-1646300291345-e7f3f97986ed?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1646300291345-e7f3f97986ed?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Data Engineering &amp; Platforms"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://patterngrid.ng","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://patterngrid.ng/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://patterngrid.ng/services"},{"@type":"ListItem","position":3,"name":"Data Engineering & Platforms","item":"https://patterngrid.ng/services/data-engineering"}]}</script><script type="application/ld+json" id="ld-page">{"@context":"https://schema.org","@type":"Service","name":"Data Engineering & Platforms","serviceType":"Data Engineering & Platforms","description":"Connect the systems you already use and build dependable pipelines, models and platforms for reporting, analytics and AI.","provider":{"@type":"Organization","name":"Pattern Grid","url":"https://patterngrid.ng"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Data Engineering & Platforms deliverables","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Source and integration blueprint","description":"A documented view of the systems, data interfaces and refresh requirements, including access dependencies and the rules for bringing information together."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Implemented data pipelines","description":"Repeatable ingestion and transformation workflows for the agreed sources, with scheduling, failure handling and clear ownership of the operating process."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Data warehouse or lakehouse","description":"Data structures designed around the required analysis, with consistent keys, documented transformations and a clear path from raw inputs to usable outputs."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Data quality controls","description":"Checks for agreed completeness, validity and reconciliation rules, with exceptions recorded visibly and routed to an owner for investigation and resolution."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Who can see what, and where each number comes from","description":"A view of who can access which information and how important outputs connect to their source data, transformations and agreed ownership responsibilities."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Operating guide and runbooks","description":"Deployment guidance, monitoring definitions and practical runbooks so the operating team can understand routine tasks, investigate failures and manage agreed changes."}}]}}</script></head>
 <body>
 
 <div class="app">
@@ -36,7 +36,7 @@
 
   <header class="site-header" id="header">
       <div class="header-inner">
-        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+        <a class="brand" href="/" aria-label="Pattern Grid home">
           <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
         </a>
 
@@ -49,22 +49,22 @@
         <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
           Industries <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work</a>
+          <a class="nav-item" href="/work" data-close-menu="">Work</a>
           
           
         <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
           About <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/contact" data-close-menu="">Contact</a>
+          <a class="nav-item" href="/contact" data-close-menu="">Contact</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
         </div>
       </div>
@@ -85,7 +85,7 @@
       <p class="hero-lead">Connect your ERP, CRM, finance and spreadsheet data so it arrives on schedule, is checked, and can be traced back to its source by the people who use it.</p>
       
           <div class="hero-cta">
-            <a class="btn btn-accent" href="/patterngrid/contact?service=data-engineering">Discuss your data platform</a>
+            <a class="btn btn-accent" href="/contact?service=data-engineering">Discuss your data platform</a>
             
             <a class="secondary" href="#svc-deliverables">What you receive <span aria-hidden="true">→</span></a>
           </div>
@@ -93,8 +93,8 @@
           <div class="hero-media">
         <div class="hero-slide" data-slide="" style="--focal:50% 40%;--focal-m:50% 35%;background-image:url('data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADwBACdASogABIAPwFyrVCrJyQisBgIAWAgCWYAsR+TQUhBI6/IrP/bC795qXkRW5QA/t6I4hjBRIzKXOrAZrvPuvpu0IH9gqH0gC4U25e1Jfku0isT9n30WELxFcoXcEtPJjOPmQpdR1lOkebIrnUKPIZ8AAAA')">
           <picture>
-            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/abuja-laptop-m.webp" width="900" height="1200">
-            <img src="/patterngrid/assets/img/hero/abuja-laptop-d.webp" srcset="/patterngrid/assets/img/hero/abuja-laptop-d1200.webp 1200w, /patterngrid/assets/img/hero/abuja-laptop-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A developer working at a laptop in Abuja" decoding="async" fetchpriority="high" class="is-loaded">
+            <source media="(max-width: 720px)" srcset="/assets/img/hero/abuja-laptop-m.webp" width="900" height="1200">
+            <img src="/assets/img/hero/abuja-laptop-d.webp" srcset="/assets/img/hero/abuja-laptop-d1200.webp 1200w, /assets/img/hero/abuja-laptop-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A developer working at a laptop in Abuja" decoding="async" fetchpriority="high" class="is-loaded">
           </picture>
         </div></div>
         </section>
@@ -109,8 +109,8 @@
       <nav class="subnav" aria-label="On this page">
         <div class="subnav-inner">
           <div class="crumbs">
-            <a href="/patterngrid/">Home</a><span aria-hidden="true">/</span>
-            <a href="/patterngrid/services">Services</a><span aria-hidden="true">/</span>
+            <a href="/">Home</a><span aria-hidden="true">/</span>
+            <a href="/services">Services</a><span aria-hidden="true">/</span>
             <span aria-current="page">Data Engineering &amp; Platforms</span>
           </div>
           <div class="row" style="gap:4px;flex-wrap:nowrap">
@@ -384,7 +384,7 @@
             <span class="eyebrow">Related services</span>
             <div class="stack stack-10">
               
-                  <a class="related-link" href="/patterngrid/services/business-intelligence">
+                  <a class="related-link" href="/services/business-intelligence">
                     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16 M7 16v-5 M12 16V7 M17 16v-8"></path></svg>
                     <span class="stack" style="gap:2px">
                       <span style="font-weight:600;font-size:16px">Business Intelligence</span>
@@ -392,7 +392,7 @@
                     </span>
                     <span aria-hidden="true" style="color:var(--teal)">→</span>
                   </a>
-                  <a class="related-link" href="/patterngrid/services/ai-automation">
+                  <a class="related-link" href="/services/ai-automation">
                     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5v4H4Z M15 14h5v4h-5Z M9 8h3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h-1 M4 14h5v4H4Z"></path></svg>
                     <span class="stack" style="gap:2px">
                       <span style="font-weight:600;font-size:16px">AI &amp; Automation</span>
@@ -401,7 +401,7 @@
                     <span aria-hidden="true" style="color:var(--teal)">→</span>
                   </a>
               
-                  <a class="stack stack-4" href="/patterngrid/work/party-drinks-connected-reporting" style="padding:16px 18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
+                  <a class="stack stack-4" href="/work/party-drinks-connected-reporting" style="padding:16px 18px;border:1px solid rgba(7,19,28,.15);border-radius:var(--radius);color:var(--ink)">
                     <span class="label-caps" style="color:var(--accent-2-ink)">Pattern Grid engagement · Drinks.NG</span>
                     <span style="font-weight:600;font-size:16px">Integrating sales, inventory, fulfilment and marketing reporting</span>
                   </a>
@@ -415,8 +415,8 @@
             <h2 id="close-h2" class="h2-sm" style="max-width:18ch">Build a foundation your teams can rely on.</h2>
             
             <div class="row" style="gap:16px 28px;margin-top:8px">
-              <a class="btn" href="/patterngrid/contact?service=data-engineering">Discuss your data platform with us</a>
-              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+              <a class="btn" href="/contact?service=data-engineering">Discuss your data platform with us</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
           <ol class="next-steps" aria-label="What happens next">
@@ -437,32 +437,32 @@
           <div>
             <p class="footer-head">SERVICES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+              <a href="/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/services/business-intelligence">Business Intelligence</a><a href="/services/ai-automation">AI &amp; Automation</a><a href="/services/capability-building">Capability Building</a>
             </div>
           </div>
           <div>
             <p class="footer-head">INDUSTRIES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+              <a href="/industries/financial-services">Financial Services &amp; Fintech</a><a href="/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/industries/technology">Technology</a>
             </div>
           </div>
           <div>
             <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/about">About</a>
-              <a href="/patterngrid/approach">Our Approach</a>
-              <a href="/patterngrid/work">Work</a>
+              <a href="/about">About</a>
+              <a href="/approach">Our Approach</a>
+              <a href="/work">Work</a>
               
-              <a href="/patterngrid/assessment">Readiness assessment</a>
-              <a href="/patterngrid/contact">Contact</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/patterngrid/privacy">Privacy</a>
-            <a href="/patterngrid/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
               <span class="sw" aria-hidden="true"></span>Reduce motion: off
             </button>

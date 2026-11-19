@@ -12,7 +12,7 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = "/patterngrid";
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
     if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-<link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/assessment"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Readiness Assessment — Pattern Grid"><meta property="og:description" content="Take a structured look at your data, systems and ways of working. Identify practical priorities and the questions worth exploring with your team."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/assessment"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Readiness Assessment — Pattern Grid"><meta name="twitter:description" content="Take a structured look at your data, systems and ways of working. Identify practical priorities and the questions worth exploring with your team."><meta property="og:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Readiness Assessment"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"Readiness Assessment","item":"https://olufemiadetiwa.github.io/patterngrid/assessment"}]}</script></head>
+<link rel="canonical" href="https://patterngrid.ng/assessment"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Readiness Assessment — Pattern Grid"><meta property="og:description" content="Take a structured look at your data, systems and ways of working. Identify practical priorities and the questions worth exploring with your team."><meta property="og:url" content="https://patterngrid.ng/assessment"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Readiness Assessment — Pattern Grid"><meta name="twitter:description" content="Take a structured look at your data, systems and ways of working. Identify practical priorities and the questions worth exploring with your team."><meta property="og:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1648023200201-8fcede127835?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Readiness Assessment"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://patterngrid.ng","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://patterngrid.ng/"},{"@type":"ListItem","position":2,"name":"Readiness Assessment","item":"https://patterngrid.ng/assessment"}]}</script></head>
 <body>
 
 <div class="app">
@@ -36,7 +36,7 @@
 
   <header class="site-header is-solid" id="header">
       <div class="header-inner">
-        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+        <a class="brand" href="/" aria-label="Pattern Grid home">
           <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
         </a>
 
@@ -49,22 +49,22 @@
         <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
           Industries <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work</a>
+          <a class="nav-item" href="/work" data-close-menu="">Work</a>
           
           
         <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
           About <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/contact" data-close-menu="">Contact</a>
+          <a class="nav-item" href="/contact" data-close-menu="">Contact</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
         </div>
       </div>
@@ -114,32 +114,32 @@
           <div>
             <p class="footer-head">SERVICES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+              <a href="/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/services/business-intelligence">Business Intelligence</a><a href="/services/ai-automation">AI &amp; Automation</a><a href="/services/capability-building">Capability Building</a>
             </div>
           </div>
           <div>
             <p class="footer-head">INDUSTRIES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+              <a href="/industries/financial-services">Financial Services &amp; Fintech</a><a href="/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/industries/technology">Technology</a>
             </div>
           </div>
           <div>
             <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/about">About</a>
-              <a href="/patterngrid/approach">Our Approach</a>
-              <a href="/patterngrid/work">Work</a>
+              <a href="/about">About</a>
+              <a href="/approach">Our Approach</a>
+              <a href="/work">Work</a>
               
-              <a href="/patterngrid/assessment">Readiness assessment</a>
-              <a href="/patterngrid/contact">Contact</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/patterngrid/privacy">Privacy</a>
-            <a href="/patterngrid/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
               <span class="sw" aria-hidden="true"></span>Reduce motion: off
             </button>

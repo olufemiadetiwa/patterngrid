@@ -12,7 +12,7 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = "/patterngrid";
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
     if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-<link rel="preload" as="image" href="/patterngrid/assets/img/hero/office-meeting-2-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="office-meeting-2"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/office-meeting-2-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="office-meeting-2"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/services/data-ai-strategy"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Data &amp; AI Strategy — Pattern Grid"><meta property="og:description" content="Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment."><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/services/data-ai-strategy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Data &amp; AI Strategy — Pattern Grid"><meta name="twitter:description" content="Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment."><meta property="og:image" content="https://images.unsplash.com/photo-1739298061707-cefee19941b7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1739298061707-cefee19941b7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Data &amp; AI Strategy"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://olufemiadetiwa.github.io/patterngrid/services"},{"@type":"ListItem","position":3,"name":"Data & AI Strategy","item":"https://olufemiadetiwa.github.io/patterngrid/services/data-ai-strategy"}]}</script><script type="application/ld+json" id="ld-page">{"@context":"https://schema.org","@type":"Service","name":"Data & AI Strategy","serviceType":"Data & AI Strategy","description":"Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment.","provider":{"@type":"Organization","name":"Pattern Grid","url":"https://olufemiadetiwa.github.io/patterngrid"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Data & AI Strategy deliverables","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Current-state assessment","description":"A structured view of your data sources, reporting, people and operating practices, showing the gaps that matter to your business priorities."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Decision and KPI map","description":"A shared map of the decisions to improve, the measures needed to support them and the owners responsible for definitions and use."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Ranked list of opportunities","description":"A considered set of data and AI opportunities assessed against business value, feasibility, data readiness and the effort required to deliver them."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Target architecture","description":"A picture of the systems and data flows you would need, with each option weighed against what you already run and can support."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Governance and ownership model","description":"Defined responsibilities for data, metrics and decisions, including how issues are escalated and changes to important definitions are agreed."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Phased delivery roadmap","description":"A sequenced plan that connects initiatives, dependencies, a named owner for each step and a review point before each phase starts, with the assumptions and cost considerations written down."}}]}}</script></head>
+<link rel="preload" as="image" href="/assets/img/hero/office-meeting-2-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="office-meeting-2"><link rel="preload" as="image" href="/assets/img/hero/office-meeting-2-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="office-meeting-2"><link rel="canonical" href="https://patterngrid.ng/services/data-ai-strategy"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="Data &amp; AI Strategy — Pattern Grid"><meta property="og:description" content="Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment."><meta property="og:url" content="https://patterngrid.ng/services/data-ai-strategy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Data &amp; AI Strategy — Pattern Grid"><meta name="twitter:description" content="Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment."><meta property="og:image" content="https://images.unsplash.com/photo-1739298061707-cefee19941b7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1739298061707-cefee19941b7?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="Data &amp; AI Strategy"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://patterngrid.ng","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://patterngrid.ng/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://patterngrid.ng/services"},{"@type":"ListItem","position":3,"name":"Data & AI Strategy","item":"https://patterngrid.ng/services/data-ai-strategy"}]}</script><script type="application/ld+json" id="ld-page">{"@context":"https://schema.org","@type":"Service","name":"Data & AI Strategy","serviceType":"Data & AI Strategy","description":"Define the decisions your business needs to improve, the data capabilities required and a practical sequence for investment.","provider":{"@type":"Organization","name":"Pattern Grid","url":"https://patterngrid.ng"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Data & AI Strategy deliverables","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Current-state assessment","description":"A structured view of your data sources, reporting, people and operating practices, showing the gaps that matter to your business priorities."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Decision and KPI map","description":"A shared map of the decisions to improve, the measures needed to support them and the owners responsible for definitions and use."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Ranked list of opportunities","description":"A considered set of data and AI opportunities assessed against business value, feasibility, data readiness and the effort required to deliver them."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Target architecture","description":"A picture of the systems and data flows you would need, with each option weighed against what you already run and can support."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Governance and ownership model","description":"Defined responsibilities for data, metrics and decisions, including how issues are escalated and changes to important definitions are agreed."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Phased delivery roadmap","description":"A sequenced plan that connects initiatives, dependencies, a named owner for each step and a review point before each phase starts, with the assumptions and cost considerations written down."}}]}}</script></head>
 <body>
 
 <div class="app">
@@ -36,7 +36,7 @@
 
   <header class="site-header" id="header">
       <div class="header-inner">
-        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+        <a class="brand" href="/" aria-label="Pattern Grid home">
           <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
         </a>
 
@@ -49,22 +49,22 @@
         <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
           Industries <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work</a>
+          <a class="nav-item" href="/work" data-close-menu="">Work</a>
           
           
         <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true">
           About <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/contact" data-close-menu="">Contact</a>
+          <a class="nav-item" href="/contact" data-close-menu="">Contact</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
         </div>
       </div>
@@ -85,7 +85,7 @@
       <p class="hero-lead">Decide which data and AI projects to fund first, and in what order. You get a roadmap with an owner, a prerequisite and an acceptance test for every step.</p>
       
           <div class="hero-cta">
-            <a class="btn btn-accent" href="/patterngrid/contact?service=data-ai-strategy">Discuss your data strategy</a>
+            <a class="btn btn-accent" href="/contact?service=data-ai-strategy">Discuss your data strategy</a>
             
             <a class="secondary" href="#svc-deliverables">What you receive <span aria-hidden="true">→</span></a>
           </div>
@@ -93,8 +93,8 @@
           <div class="hero-media">
         <div class="hero-slide" data-slide="" style="--focal:50% 45%;--focal-m:50% 45%;background-image:url('data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAACQBgCdASogABIAPwFur1CrJiQisBgIAWAgCWMAwqFNA/5pgVOQW2WYjDV7En50tfRQEgh78IZfg8BCNbwcAP60JKZ6qkBiC+/9vFWh8RMsz6m2oBKEDUn/BnHe7tFlddtEbiK1LPfSBOEFAK8X2ndRif1xopXDwa8w7574I75ExXp3T+iXrkx2L+Qr9XGuSU07ft/gLto8eXzGQBI/k3D5XnD/UMQd7hAWr3/zvkYLY59vKtCWzwNsTiKnqBGwD9ezI0NxBUx1o9G5kHNT3zI3c6e77JHoyzP8nYrflcY8c5ujAr1s6ucp9gGDYGyREaMxZe+00UdRMWu+J0p4tg6dcbi3v6CxkOEZ+Ayd+VlAAA==')">
           <picture>
-            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/office-meeting-2-m.webp" width="900" height="1200">
-            <img src="/patterngrid/assets/img/hero/office-meeting-2-d.webp" srcset="/patterngrid/assets/img/hero/office-meeting-2-d1200.webp 1200w, /patterngrid/assets/img/hero/office-meeting-2-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Colleagues discussing work around a table in a Lagos office" decoding="async" fetchpriority="high" class="is-loaded">
+            <source media="(max-width: 720px)" srcset="/assets/img/hero/office-meeting-2-m.webp" width="900" height="1200">
+            <img src="/assets/img/hero/office-meeting-2-d.webp" srcset="/assets/img/hero/office-meeting-2-d1200.webp 1200w, /assets/img/hero/office-meeting-2-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Colleagues discussing work around a table in a Lagos office" decoding="async" fetchpriority="high" class="is-loaded">
           </picture>
         </div></div>
         </section>
@@ -109,8 +109,8 @@
       <nav class="subnav" aria-label="On this page">
         <div class="subnav-inner">
           <div class="crumbs">
-            <a href="/patterngrid/">Home</a><span aria-hidden="true">/</span>
-            <a href="/patterngrid/services">Services</a><span aria-hidden="true">/</span>
+            <a href="/">Home</a><span aria-hidden="true">/</span>
+            <a href="/services">Services</a><span aria-hidden="true">/</span>
             <span aria-current="page">Data &amp; AI Strategy</span>
           </div>
           <div class="row" style="gap:4px;flex-wrap:nowrap">
@@ -364,7 +364,7 @@
             <span class="eyebrow">Related services</span>
             <div class="stack stack-10">
               
-                  <a class="related-link" href="/patterngrid/services/data-engineering">
+                  <a class="related-link" href="/services/data-engineering">
                     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
                     <span class="stack" style="gap:2px">
                       <span style="font-weight:600;font-size:16px">Data Engineering &amp; Platforms</span>
@@ -372,7 +372,7 @@
                     </span>
                     <span aria-hidden="true" style="color:var(--teal)">→</span>
                   </a>
-                  <a class="related-link" href="/patterngrid/services/business-intelligence">
+                  <a class="related-link" href="/services/business-intelligence">
                     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="#02203D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16 M7 16v-5 M12 16V7 M17 16v-8"></path></svg>
                     <span class="stack" style="gap:2px">
                       <span style="font-weight:600;font-size:16px">Business Intelligence</span>
@@ -391,8 +391,8 @@
             <h2 id="close-h2" class="h2-sm" style="max-width:18ch">Give your next investment a clear purpose.</h2>
             
             <div class="row" style="gap:16px 28px;margin-top:8px">
-              <a class="btn" href="/patterngrid/contact?service=data-ai-strategy">Discuss your data strategy with us</a>
-              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+              <a class="btn" href="/contact?service=data-ai-strategy">Discuss your data strategy with us</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
           <ol class="next-steps" aria-label="What happens next">
@@ -413,32 +413,32 @@
           <div>
             <p class="footer-head">SERVICES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+              <a href="/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/services/business-intelligence">Business Intelligence</a><a href="/services/ai-automation">AI &amp; Automation</a><a href="/services/capability-building">Capability Building</a>
             </div>
           </div>
           <div>
             <p class="footer-head">INDUSTRIES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+              <a href="/industries/financial-services">Financial Services &amp; Fintech</a><a href="/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/industries/technology">Technology</a>
             </div>
           </div>
           <div>
             <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/about">About</a>
-              <a href="/patterngrid/approach">Our Approach</a>
-              <a href="/patterngrid/work">Work</a>
+              <a href="/about">About</a>
+              <a href="/approach">Our Approach</a>
+              <a href="/work">Work</a>
               
-              <a href="/patterngrid/assessment">Readiness assessment</a>
-              <a href="/patterngrid/contact">Contact</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/patterngrid/privacy">Privacy</a>
-            <a href="/patterngrid/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
               <span class="sw" aria-hidden="true"></span>Reduce motion: off
             </button>

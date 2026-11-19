@@ -12,7 +12,7 @@
      because the preload scanner resolves relative URLs before any <base>
      exists and would request them under a deep link's own path. */
   (function () {
-    var base = "/patterngrid";
+    var base = /\.github\.io$/.test(location.hostname) ? '/' + (location.pathname.split('/')[1] || '') : '';
     if (base === '/') base = '';
     window.PG_BASE = base;
     if (/[?&]pgstatic=1/.test(location.search)) document.documentElement.className += ' is-static';
@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin="">
 
-<link rel="preload" as="image" href="/patterngrid/assets/img/hero/office-meeting-3-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="office-meeting-3"><link rel="preload" as="image" href="/patterngrid/assets/img/hero/office-meeting-3-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="office-meeting-3"><link rel="canonical" href="https://olufemiadetiwa.github.io/patterngrid/about"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="About — Pattern Grid"><meta property="og:description" content="Pattern Grid helps organisations build the foundations for better decisions, bringing business understanding, technical care and practical thinking to the…"><meta property="og:url" content="https://olufemiadetiwa.github.io/patterngrid/about"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="About — Pattern Grid"><meta name="twitter:description" content="Pattern Grid helps organisations build the foundations for better decisions, bringing business understanding, technical care and practical thinking to the…"><meta property="og:image" content="https://images.unsplash.com/photo-1739298061740-5ed03045b280?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1739298061740-5ed03045b280?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="About"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://olufemiadetiwa.github.io/patterngrid","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olufemiadetiwa.github.io/patterngrid/"},{"@type":"ListItem","position":2,"name":"About","item":"https://olufemiadetiwa.github.io/patterngrid/about"}]}</script></head>
+<link rel="preload" as="image" href="/assets/img/hero/office-meeting-3-m.webp" media="(max-width: 720px)" fetchpriority="high" data-hero-preload="office-meeting-3"><link rel="preload" as="image" href="/assets/img/hero/office-meeting-3-d.webp" media="(min-width: 721px)" fetchpriority="high" data-hero-preload="office-meeting-3"><link rel="canonical" href="https://patterngrid.ng/about"><meta property="og:type" content="website"><meta property="og:site_name" content="Pattern Grid"><meta property="og:locale" content="en_GB"><meta property="og:title" content="About — Pattern Grid"><meta property="og:description" content="Pattern Grid helps organisations build the foundations for better decisions, bringing business understanding, technical care and practical thinking to the…"><meta property="og:url" content="https://patterngrid.ng/about"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="About — Pattern Grid"><meta name="twitter:description" content="Pattern Grid helps organisations build the foundations for better decisions, bringing business understanding, technical care and practical thinking to the…"><meta property="og:image" content="https://images.unsplash.com/photo-1739298061740-5ed03045b280?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta name="twitter:image" content="https://images.unsplash.com/photo-1739298061740-5ed03045b280?auto=format&amp;fit=crop&amp;q=70&amp;w=1800"><meta property="og:image:alt" content="About"><script type="application/ld+json" id="ld-org">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Pattern Grid","description":"Pattern Grid helps organisations connect data, build trusted reporting and apply practical AI to improve business decisions.","url":"https://patterngrid.ng","areaServed":["NG","Africa","Worldwide"],"knowsAbout":["Data & AI Strategy","Data Engineering & Platforms","Business Intelligence","AI & Automation","Capability Building"],"founder":{"@type":"Person","name":"Precious Chinenye Celestine","jobTitle":"Founder & Lead Consultant"}}</script><script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://patterngrid.ng/"},{"@type":"ListItem","position":2,"name":"About","item":"https://patterngrid.ng/about"}]}</script></head>
 <body>
 
 <div class="app">
@@ -36,7 +36,7 @@
 
   <header class="site-header" id="header">
       <div class="header-inner">
-        <a class="brand" href="/patterngrid/" aria-label="Pattern Grid home">
+        <a class="brand" href="/" aria-label="Pattern Grid home">
           <span class="glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span>Pattern Grid</span>
         </a>
 
@@ -49,22 +49,22 @@
         <button type="button" class="nav-item" data-menu="industries" aria-expanded="false" aria-haspopup="true">
           Industries <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/work" data-close-menu="">Work</a>
+          <a class="nav-item" href="/work" data-close-menu="">Work</a>
           
           
         <button type="button" class="nav-item" data-menu="about" aria-expanded="false" aria-haspopup="true" aria-current="page">
           About <span class="caret" aria-hidden="true">▾</span>
         </button>
-          <a class="nav-item" href="/patterngrid/contact" data-close-menu="">Contact</a>
+          <a class="nav-item" href="/contact" data-close-menu="">Contact</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-link" href="/patterngrid/assessment">Readiness assessment</a>
-          <a class="header-cta" href="/patterngrid/contact">Request a consultation</a>
+          <a class="header-link" href="/assessment">Readiness assessment</a>
+          <a class="header-cta" href="/contact">Request a consultation</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="mobile-cta" href="/patterngrid/contact">Enquire</a>
+          <a class="mobile-cta" href="/contact">Enquire</a>
           <button type="button" class="menu-btn" data-drawer-open="" aria-label="Open menu" aria-expanded="false">Menu</button>
         </div>
       </div>
@@ -85,16 +85,16 @@
       <p class="hero-lead">An African-founded data and AI consultancy with an international outlook, led by Precious Chinenye Celestine. We help organisations build the foundations for better decisions.</p>
       
           <div class="hero-cta">
-            <a class="btn btn-accent" href="/patterngrid/about/precious-celestine">Meet the founder</a>
+            <a class="btn btn-accent" href="/about/precious-celestine">Meet the founder</a>
             
-            <a class="secondary" href="/patterngrid/approach">Our approach <span aria-hidden="true">→</span></a>
+            <a class="secondary" href="/approach">Our approach <span aria-hidden="true">→</span></a>
           </div>
           </div>
           <div class="hero-media">
         <div class="hero-slide" data-slide="" style="--focal:50% 45%;--focal-m:50% 45%;background-image:url('data:image/webp;base64,UklGRgYBAABXRUJQVlA4IPoAAADwBQCdASogABIAPwFsrU8rJiQiMAgBYCAJYwDDRf/7oAlQHKfOs2NH182qod3O05IH30U0VO774AD88A+vEplP65n1sxaOqfFrePUBTJNOUbX247lZLSo8v/06DtnLVF/8595ZRCjhp9CruiIbos1wPaT5A8ajB+rtJ7VFqpHgzMPxeq/goBgpL12sQfcDrL33n9fnJbXaFbFLwb6buTG08NH32ZMQ1XtbIToJmueiczsFgp6AopWUe0b2iiNkLKowKe8EGvaG6hfzCbVCOZlbvn2R8k7y9ECe/ApRQS/TwSAgQln0qnhCKrGgCyzDiAUyeCeB2ytKEAAA')">
           <picture>
-            <source media="(max-width: 720px)" srcset="/patterngrid/assets/img/hero/office-meeting-3-m.webp" width="900" height="1200">
-            <img src="/patterngrid/assets/img/hero/office-meeting-3-d.webp" srcset="/patterngrid/assets/img/hero/office-meeting-3-d1200.webp 1200w, /patterngrid/assets/img/hero/office-meeting-3-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A working session around a white table in a Lagos office" decoding="async" fetchpriority="high" class="is-loaded">
+            <source media="(max-width: 720px)" srcset="/assets/img/hero/office-meeting-3-m.webp" width="900" height="1200">
+            <img src="/assets/img/hero/office-meeting-3-d.webp" srcset="/assets/img/hero/office-meeting-3-d1200.webp 1200w, /assets/img/hero/office-meeting-3-d.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A working session around a white table in a Lagos office" decoding="async" fetchpriority="high" class="is-loaded">
           </picture>
         </div></div>
         </section>
@@ -118,7 +118,7 @@
       
       <section class="founder-intro grid-field is-section" aria-labelledby="founder-h">
         <div class="wrap founder-intro-inner">
-          <div class="portrait-stage on-dark"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><button type="button" class="portrait is-mono" data-portrait="" aria-pressed="false" aria-label="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio. Shown in black and white; colour on hover" style="--ar:4 / 5;background-image:url('data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYAB4APwFwr1CrJqQisBgIAWAgCWYAyRMsBUgGyaUQlkYoZ5+dNUdaaEM6IAD++up8eB1CNcZ6LNwTrOjRD73egkCxupRx3tdVNFPrbNtNBwzhab8Cd/Dsm3pp6ra3RLY3vYaHtmnP8DwsLDQpWNuM5rkegd7V+UkY6EfHjl2tdDSm2TMKym+4rdy6tm1Wn42sbmB0WkgmMIl4AAA=')"><picture><source media="(max-width: 720px)" srcset="/patterngrid/assets/img/people/founder-2025-m.webp"><img src="/patterngrid/assets/img/people/founder-2025-d.webp" width="1200" height="1500" alt="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio" loading="lazy" decoding="async" class="is-loaded"></picture><span class="portrait-hint" aria-hidden="true">Hover for colour</span></button></div>
+          <div class="portrait-stage on-dark"><span class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><button type="button" class="portrait is-mono" data-portrait="" aria-pressed="false" aria-label="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio. Shown in black and white; colour on hover" style="--ar:4 / 5;background-image:url('data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYAB4APwFwr1CrJqQisBgIAWAgCWYAyRMsBUgGyaUQlkYoZ5+dNUdaaEM6IAD++up8eB1CNcZ6LNwTrOjRD73egkCxupRx3tdVNFPrbNtNBwzhab8Cd/Dsm3pp6ra3RLY3vYaHtmnP8DwsLDQpWNuM5rkegd7V+UkY6EfHjl2tdDSm2TMKym+4rdy6tm1Wn42sbmB0WkgmMIl4AAA=')"><picture><source media="(max-width: 720px)" srcset="/assets/img/people/founder-2025-m.webp"><img src="/assets/img/people/founder-2025-d.webp" width="1200" height="1500" alt="Precious Chinenye Celestine, founder of Pattern Grid, photographed in a studio" loading="lazy" decoding="async" class="is-loaded"></picture><span class="portrait-hint" aria-hidden="true">Hover for colour</span></button></div>
           <div class="founder-copy">
             
             <span class="hero-eyebrow">Leadership</span>
@@ -126,7 +126,7 @@
             <p class="founder-alias">Founder &amp; Lead Consultant</p>
             <p class="hero-lead">A data and AI professional and business intelligence consultant. She brings reporting systems, analytics, data platforms and decision support together around the business questions clients need to answer.</p>
             <div class="hero-cta">
-              <a class="btn btn-accent" href="/patterngrid/about/precious-celestine">Meet the founder</a><a class="secondary" href="/patterngrid/work">See the work <span aria-hidden="true">→</span></a>
+              <a class="btn btn-accent" href="/about/precious-celestine">Meet the founder</a><a class="secondary" href="/work">See the work <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
@@ -178,7 +178,7 @@
           <div class="stack stack-20">
             <p class="label-caps">THE DECISION PATH</p>
             <h2 class="h2-sm" style="color:var(--navy);text-wrap:balance">Five stages from question to action.</h2>
-            <a class="arrow" href="/patterngrid/approach">Explore Our Approach <span class="chev" aria-hidden="true">→</span></a>
+            <a class="arrow" href="/approach">Explore Our Approach <span class="chev" aria-hidden="true">→</span></a>
           </div>
           <div class="path">
             
@@ -218,8 +218,8 @@
             <h2 id="close-h2" class="h2-sm" style="max-width:18ch">Start with the decision you need to improve.</h2>
             
             <div class="row" style="gap:16px 28px;margin-top:8px">
-              <a class="btn" href="/patterngrid/contact">Request a consultation</a>
-              <a class="arrow" href="/patterngrid/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
+              <a class="btn" href="/contact">Request a consultation</a>
+              <a class="arrow" href="/assessment">Take the readiness assessment <span class="chev" aria-hidden="true">→</span></a>
             </div>
           </div>
           <ol class="next-steps" aria-label="What happens next">
@@ -240,32 +240,32 @@
           <div>
             <p class="footer-head">SERVICES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/patterngrid/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/patterngrid/services/business-intelligence">Business Intelligence</a><a href="/patterngrid/services/ai-automation">AI &amp; Automation</a><a href="/patterngrid/services/capability-building">Capability Building</a>
+              <a href="/services/data-ai-strategy">Data &amp; AI Strategy</a><a href="/services/data-engineering">Data Engineering &amp; Platforms</a><a href="/services/business-intelligence">Business Intelligence</a><a href="/services/ai-automation">AI &amp; Automation</a><a href="/services/capability-building">Capability Building</a>
             </div>
           </div>
           <div>
             <p class="footer-head">INDUSTRIES</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/industries/financial-services">Financial Services &amp; Fintech</a><a href="/patterngrid/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/patterngrid/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/patterngrid/industries/technology">Technology</a>
+              <a href="/industries/financial-services">Financial Services &amp; Fintech</a><a href="/industries/fmcg-distribution">FMCG &amp; Distribution</a><a href="/industries/retail-ecommerce">Retail &amp; Ecommerce</a><a href="/industries/technology">Technology</a>
             </div>
           </div>
           <div>
             <p class="footer-head">ABOUT</p>
             <div class="stack stack-10">
-              <a href="/patterngrid/about">About</a>
-              <a href="/patterngrid/approach">Our Approach</a>
-              <a href="/patterngrid/work">Work</a>
+              <a href="/about">About</a>
+              <a href="/approach">Our Approach</a>
+              <a href="/work">Work</a>
               
-              <a href="/patterngrid/assessment">Readiness assessment</a>
-              <a href="/patterngrid/contact">Contact</a>
+              <a href="/assessment">Readiness assessment</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Pattern Grid</span>
           <div class="row" style="gap:24px">
-            <a href="/patterngrid/privacy">Privacy</a>
-            <a href="/patterngrid/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
             <button type="button" class="motion-btn" data-motion="" aria-pressed="false">
               <span class="sw" aria-hidden="true"></span>Reduce motion: off
             </button>
